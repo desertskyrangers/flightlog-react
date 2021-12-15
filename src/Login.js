@@ -1,7 +1,7 @@
 
 function Login() {
     return (
-        <div className='login'>
+        <div className='login-form'>
             <form>
             <label htmlFor='username'>Username:</label>
             <input id='username' name='username' type='text'/>

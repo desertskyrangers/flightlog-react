@@ -1,13 +1,130 @@
+:root {
+	--primary-color: #d0c8c0;
+
+	--primary-background: #404040;
+	--secondary-background: #504840;
+
+
+	/* cactus green */
+	/*
+	--primary-link-color: #9fbfa6;
+	--primary-link-hover: #b4d9bd;
+	 */
+	/* mountain wheat */
+	--primary-link-color: #9C916D;
+	--primary-link-hover: #B5AD92;
+
+	--primary-black: #2a332c;
+	--primary-gray: #b0b0b0;
+	--primary-white: #e0e0e0;
+
+	--secondary-black: #3f4d42;
+	--secondary-gray: #c0c0c0;
+	--secondary-white: #f0f0f0;
+
+	--text-black: var(--primary-black);
+	--text-white: var(--primary-white);
+
+	/*
+	cactus: A0C0A8
+
+	80%: #a9ccb1
+	75%: #a0c0a8
+	70%: #92b399
+	50%: #6a806f
+	30%: #3f4d42
+	20%: #2a332c
+	 */
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	color: var(--primary-color);
+	background-color: var(--primary-background);
+	margin: 0;
+	padding: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.login-container {
+	display: flex;
+	flex-flow: column nowrap;
+	/* along the main axis */
+	justify-content: flex-start;
+	/* along the cross axis */
+	align-items: center;
+	gap: 1em;
+}
+
+.login-banner {
+	display: flex;
+	flex-flow: row nowrap;
+	/* along the main axis */
+	justify-content: center;
+	/* along the cross axis */
+	align-items: center;
+}
+
+.login-banner img {
+	width: 4em;
+	height: 4em;
+}
+
+.login-flash {
+
+}
+
+.login-body {
+	width: 20rem;
+}
+
+.login-label {
+	margin-top: 1rem;
+}
+
+.login-form {
+	margin: 1em;
+	border: 2px solid var(--primary-color);
+	border-radius: 1em;
+	padding: 1em;
+	background-color: var(--secondary-background);
+
+	display: flex;
+	flex-flow: column nowrap;
+	/* along the main axis */
+	justify-content: flex-start;
+	/* along the cross axis */
+	align-items: flex-start;
+}
+
+.login-field {
+	font-size: 1.25em;
+
+	color: var(--primary-color);
+	background: var(--primary-background);
+
+	width: 100%;
+	padding: 0.5em 1em;
+	box-sizing: border-box;
+
+	border-radius: 5px;
+	border: 1px solid var(--primary-color);
+}
+
+.login-submit {
+	font-size: 1.25em;
+
+	width: 100%;
+	box-sizing: border-box;
+
+	margin-top: 1rem;
+}
+
+/*.full-width {*/
+/*	width: 100%;*/
+/*}*/
