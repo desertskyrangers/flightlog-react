@@ -1,0 +1,79 @@
+.login-container {
+	display: flex;
+	flex-flow: column nowrap;
+	/* along the main axis */
+	justify-content: flex-start;
+	/* along the cross axis */
+	align-items: center;
+	gap: 1em;
+}
+
+.login-banner {
+	display: flex;
+	flex-flow: row nowrap;
+	/* along the main axis */
+	justify-content: center;
+	/* along the cross axis */
+	align-items: center;
+}
+
+.login-banner img {
+	width: 4em;
+	height: 4em;
+}
+
+.login-body {
+	width: 20rem;
+
+	display: flex;
+	flex-flow: column nowrap;
+	/* along the main axis */
+	justify-content: flex-start;
+	/* along the cross axis */
+	align-items: center;
+}
+
+.login-form {
+	margin: 1em;
+	border: 2px solid var(--primary-color);
+	border-radius: 1em;
+	padding: 1em;
+	background-color: var(--secondary-background);
+
+	display: flex;
+	flex-flow: column nowrap;
+	/* along the main axis */
+	justify-content: flex-start;
+	/* along the cross axis */
+	align-items: flex-start;
+	gap: 1em;
+}
+
+.login-label {
+	font-size: 0.9rem;
+}
+
+.login-field {
+	font-size: 1rem;
+
+	color: var(--primary-color);
+	background: var(--primary-background);
+
+	border-radius: 5px;
+	border: 1px solid var(--primary-color);
+	padding: 0.5rem 1rem;
+	margin-top: 0.5rem;
+
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.login-submit {
+	font-size: 1rem;
+
+	width: 100%;
+	box-sizing: border-box;
+
+	padding: 0.5rem 1rem;
+}
+

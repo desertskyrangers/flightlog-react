@@ -1,20 +1,20 @@
 import {render, screen} from '@testing-library/react';
-import App from './App';
+import Home from './Home';
 import Login from "./Login";
 
 test('renders DSR FlightLog text', () => {
-    render(<App/>);
+    render(<Home/>);
     expect(screen.getByText(/FlightLog/i)).toBeInTheDocument();
 });
 
-// test('renders Sign Up link', () => {
-//     render(<App/>);
-//     const element = screen.getByText(/sign up/i);
-//     expect(element).toBeInTheDocument();
-// });
+test('renders Sign Up link', () => {
+    render(<Home/>);
+    const element = screen.getByText(/sign up/i);
+    expect(element).toBeInTheDocument();
+});
 
 test('renders Sign In link', () => {
-    render(<App/>);
+    render(<Home/>);
     const element = screen.getByText(/sign in/i);
     expect(element).toBeInTheDocument();
 });
