@@ -1,18 +1,18 @@
 :root {
-	--primary-color: #d0c8c0;
+	--color-primary: #d0c8c0;
 
-	--primary-background: #404040;
-	--secondary-background: #504840;
+	--background-primary: #404040;
+	--background-secondary: #504840;
 
+	--border-primary: #9C916D;
+	--border-secondary: #B5AD92;
 
-	/* cactus green */
-	/*
-	--primary-link-color: #9fbfa6;
-	--primary-link-hover: #b4d9bd;
-	 */
+	--button-background-color: #344037;
+	--button-background-hover: #3e4d42;
+
 	/* mountain wheat */
-	--primary-link-color: #9C916D;
-	--primary-link-hover: #B5AD92;
+	--link-color-primary: #9C916D;
+	--link-hover-primary: #B5AD92;
 
 	--primary-black: #2a332c;
 	--primary-gray: #b0b0b0;
@@ -38,8 +38,8 @@
 }
 
 body {
-	color: var(--primary-color);
-	background-color: var(--primary-background);
+	color: var(--color-primary);
+	background-color: var(--background-primary);
 	margin: 0;
 	padding: 0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -48,19 +48,23 @@ body {
 }
 
 a {
-	color: var(--primary-link-color);
+	color: var(--link-color-primary);
 	text-decoration: none;
 }
 
 a:hover {
-	color: var(--primary-link-hover);
+	color: var(--link-hover-primary);
 }
 
 a.button  {
 	margin: 0.25rem;
-	border: 2px solid var(--primary-link-color);
+	border: 1px solid var(--link-color-primary);
 	border-radius: 5px;
 	padding: 0.25rem;
+}
+
+a.button:hover {
+	border: 1px solid var(--link-hover-primary);
 }
 
 code {
@@ -68,7 +72,7 @@ code {
 }
 
 .app {
-	background-color: var(--primary-background);
+	background-color: var(--background-primary);
 	min-height: 100vh;
 
 	display: flex;
@@ -78,7 +82,7 @@ code {
 
 .header {
 	padding: 0.5rem;
-	background-color: var(--secondary-background);
+	background-color: var(--background-secondary);
 
 	align-self: stretch;
 
@@ -106,7 +110,7 @@ code {
 
 .footer {
 	padding: 0.5rem;
-	background-color: var(--secondary-background);
+	background-color: var(--background-secondary);
 
 	align-self: stretch;
 
