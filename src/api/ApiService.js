@@ -22,7 +22,7 @@ export default class ApiService {
 
 		// Setting Authorization header
 		// Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
-		if (TokenService.loggedIn()) headers['Authorization'] = 'Bearer ' + TokenService.getToken();
+		if (TokenService.isAuthenticated()) headers['Authorization'] = 'Bearer ' + TokenService.getToken();
 
 		//console.log("headers=" + JSON.stringify(headers));
 
@@ -43,7 +43,7 @@ export default class ApiService {
 
 		// Setting Authorization header
 		// Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
-		if (TokenService.loggedIn()) headers['Authorization'] = 'Bearer ' + TokenService.getToken();
+		if (TokenService.isAuthenticated()) headers['Authorization'] = 'Bearer ' + TokenService.getToken();
 
 		//console.log("headers=" + JSON.stringify(headers));
 		return fetch(url, {

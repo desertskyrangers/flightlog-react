@@ -40,7 +40,7 @@ function App() {
 }
 
 function Protect({children}) {
-	let isAuthenticated = TokenService.loggedIn();
+	let isAuthenticated = TokenService.isAuthenticated();
 	return isAuthenticated ? children : <Navigate to='/login'/>;
 }
 

@@ -19,7 +19,7 @@ export class AuthService extends ApiService {
 	};
 
 	loggedIn() {
-		return TokenService.loggedIn();
+		return TokenService.isAuthenticated();
 	}
 
 	reauthenticate() {

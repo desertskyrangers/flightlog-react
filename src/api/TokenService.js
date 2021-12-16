@@ -4,7 +4,7 @@ const TOKEN_KEY = 'id_token';
 
 class TokenService {
 
-	loggedIn() {
+	isAuthenticated() {
 		// Check if there is a saved token, and that it is still valid
 		const token = this.getToken();
 		return token !== 'undefined' && !!token && !this.isTokenExpired(token);
