@@ -1,5 +1,9 @@
-function Header() {
-	return null;
-}
+import React from "react";
 
-export default Header;
+export default class Header extends React.Component {
+
+	render() {
+		return null;
+	}
+
+}

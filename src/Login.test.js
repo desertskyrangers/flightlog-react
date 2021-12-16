@@ -1,6 +1,11 @@
 import {render, screen} from '@testing-library/react';
 import Login from './Login';
 
+test('renders DSR FlightLog text', () => {
+	render(<Login/>);
+	expect(screen.getByText(/FlightLog/i)).toBeInTheDocument();
+});
+
 test('renders username field', () => {
 	render(<Login/>);
 	const element = screen.getByLabelText(/username/i);
@@ -29,3 +34,5 @@ test('renders sign up button', () => {
 	expect(element.nodeName).toBe('A');
 	expect(element).toHaveClass('button');
 });
+
+// TODO What about the notice???

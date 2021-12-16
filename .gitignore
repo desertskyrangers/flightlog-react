@@ -2,6 +2,7 @@
 
 # IDEs
 *.iml
+/.idea
 
 # dependencies
 /node_modules

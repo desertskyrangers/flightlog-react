@@ -1,45 +1,47 @@
 import './css/app.css';
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
+import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
 
-import Header from "./Header";
 import Home from "./Home";
+import Header from "./Header";
 import Footer from "./Footer";
 import Legal from "./Legal";
 import Login from "./Login";
 import Signup from "./Signup";
+import NotFound from "./NotFound";
+
+import TokenService from "./api/TokenService";
 
 function App() {
 
-	//const atHome = window.location.pathname === '/';
+	//const atRoot = window.location.pathname === '/';
 
 	return (
 
 		<div className="app">
 			<Header/>
-			{/*{atHome?<Header/>:<HeaderThin/>}*/}
+			{/*{atRoot?<Header/>:<HeaderThin/>}*/}
 			<div className='content'>
 				<Router>
-					<Switch>
-						<Route exact path="/" component={Home}/>
-						{/*<Route exact path="/about" component={About}/>*/}
-						{/*<Route exact path="/activities" component={Activities}/>*/}
-						<Route exact path="/legal" component={Legal}/>
-						{/*<Route exact path="/members" component={Members}/>*/}
+					<Routes>
+						<Route exact path='/legal' element={<Legal/>}/>
+						<Route exact path='/login' element={<Login/>}/>
+						<Route exact path="/signup" element={<Signup/>}/>
 
-						<Route exact path="/signup" component={Signup}/>
-						{/*<Route exact path="/articles" component={Articles}/>*/}
-						{/*<Route exact path="/articles/northern-utah-flying-season-2021-01" component={NorthernUtahFlyingSeason}/>*/}
-						{/*<Route exact path="/articles/aa-transmitter-battery-study-2021-01" component={AaTransmitterBatteryStudy}/>*/}
+						<Route exact path='/' element={<Protect> <Home/> </Protect>}/>
 
-						{/*/!* Default route *!/*/}
-						{/*<Route component={NotFound}/>*/}
-					</Switch>
+						<Route path='*' element={<NotFound/>}/>
+					</Routes>
 				</Router>
 			</div>
 			<Footer/>
 		</div>
 	);
 
+}
+
+function Protect({children}) {
+	let isAuthenticated = TokenService.loggedIn();
+	return isAuthenticated ? children : <Navigate to='/login'/>;
 }
 
 export default App;

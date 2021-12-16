@@ -1,11 +1,13 @@
-import Login from "./Login";
+import React from "react";
 
-function Home() {
-	return (
-		<div>
-			<Login/>
-		</div>
-	);
+export default class Home extends React.Component {
+
+	render() {
+		return (
+			<div>
+				<h1>Home</h1>
+			</div>
+		);
+	}
+
 }
-
-export default Home;
