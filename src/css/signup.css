@@ -1,0 +1,88 @@
+.signup-container {
+	display: flex;
+	flex-flow: column nowrap;
+	/* along the main axis */
+	justify-content: flex-start;
+	/* along the cross axis */
+	align-items: center;
+	gap: 1em;
+}
+
+.signup-banner {
+	display: flex;
+	flex-flow: row nowrap;
+	/* along the main axis */
+	justify-content: center;
+	/* along the cross axis */
+	align-items: center;
+}
+
+.signup-banner img {
+	width: 4em;
+	height: 4em;
+}
+
+.signup-body {
+	width: 20rem;
+
+	display: flex;
+	flex-flow: column nowrap;
+	/* along the main axis */
+	justify-content: flex-start;
+	/* along the cross axis */
+	align-items: center;
+}
+
+.signup-form {
+	margin: 1em;
+	border: 1px solid var(--border-primary);
+	border-radius: 1em;
+	padding: 1em;
+	background-color: var(--background-secondary);
+
+	display: flex;
+	flex-flow: column nowrap;
+	/* along the main axis */
+	justify-content: flex-start;
+	/* along the cross axis */
+	align-items: flex-start;
+	gap: 1em;
+}
+
+.signup-label {
+	font-size: 0.9rem;
+}
+
+.signup-field {
+	font-size: 1rem;
+
+	color: var(--color-primary);
+	background: var(--background-primary);
+
+	border-radius: 5px;
+	border: 1px solid var(--border-primary);
+	padding: 0.5rem 1rem;
+	margin-top: 0.5rem;
+
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.signup-submit {
+	font-size: 1rem;
+
+	color: var(--link-color-primary);
+	background: var(--button-background-color);
+
+	width: 100%;
+	box-sizing: border-box;
+
+	border-radius: 5px;
+	border: 1px solid var(--border-primary);
+	padding: 0.5rem 1rem;
+}
+
+.signup-submit:hover {
+	color: var(--link-hover-primary);
+	background: var(--button-background-hover);
+}

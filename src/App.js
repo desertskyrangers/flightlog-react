@@ -5,6 +5,8 @@ import Header from "./Header";
 import Home from "./Home";
 import Footer from "./Footer";
 import Legal from "./Legal";
+import Login from "./Login";
+import Signup from "./Signup";
 
 function App() {
 
@@ -24,6 +26,7 @@ function App() {
 						<Route exact path="/legal" component={Legal}/>
 						{/*<Route exact path="/members" component={Members}/>*/}
 
+						<Route exact path="/signup" component={Signup}/>
 						{/*<Route exact path="/articles" component={Articles}/>*/}
 						{/*<Route exact path="/articles/northern-utah-flying-season-2021-01" component={NorthernUtahFlyingSeason}/>*/}
 						{/*<Route exact path="/articles/aa-transmitter-battery-study-2021-01" component={AaTransmitterBatteryStudy}/>*/}
