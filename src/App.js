@@ -23,6 +23,7 @@ function App() {
 			<div className='content'>
 				<Router>
 					<Routes>
+
 						<Route exact path='/legal' element={<Legal/>}/>
 						<Route exact path='/login' element={<Login/>}/>
 						<Route exact path="/signup" element={<Signup/>}/>
