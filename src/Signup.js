@@ -6,18 +6,19 @@ import AuthService from "./api/AuthService";
 export default class Signup extends React.Component {
 
 	state = {
-		username: 'username',
-		password: 'password',
+		username: 'ranger-rae',
+		password: 'password-for-rae',
 		email: 'noreply@email.com',
 		message: ''
 	}
 
 	signup = (event) => {
 		AuthService.signup(this.state.username, this.state.password, this.state.email, () => {
+			console.log("signup success");
 			// Redirect to wait/verify page...
 			window.location.assign("/verify");
 		}, (error) => {
-			console.log(JSON.stringify(error))
+			console.log("error=" + JSON.stringify(error))
 			//this.setState({message: error.message})
 		});
 		event.preventDefault();
