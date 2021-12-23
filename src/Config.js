@@ -1,11 +1,25 @@
 // https://daveceddia.com/multiple-environments-with-react/
 
+import app from "./App";
+
 const HOSTNAME = window && window.location && window.location.hostname;
+console.log("HOSTNAME=" + HOSTNAME)
+
 let backendUri;
-if (HOSTNAME === 'flightlog.desertskyrangers.com') {
-	backendUri = 'https://flightlog.desertskyrangers.com';
+if( HOSTNAME === 'localhost' ) {
+	backendUri = 'http://localhost:8050';
+	// app.use(function (req, res, next) {
+	// 	res.header("Access-Control-Allow-Origin", "*");
+	// 	res.header('Access-Control-Allow-Methods', 'DELETE, PUT');
+	// 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	// 	if ('OPTIONS' === req.method) {
+	// 		res.sendStatus(200);
+	// 	} else {
+	// 		next();
+	// 	}
+	// });
 } else {
-	backendUri = 'http://localhost:8090';
+	backendUri = 'https://flightlog.desertskyrangers.com';
 }
 
 export const API_URL = backendUri;

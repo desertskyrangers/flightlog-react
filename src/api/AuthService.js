@@ -3,8 +3,23 @@ import TokenService from "./TokenService";
 
 export class AuthService extends ApiService {
 
+	signup( username, password, email, successCallback, failureCallback ) {
+		this.fetch(`${this.uri}/api/auth/signup`, {
+			method: 'POST',
+			body: JSON.stringify({
+				username,
+				password,
+				email
+			})
+		}).then(response => {
+			setTimeout(successCallback, 100);
+		}).catch((error) => {
+			setTimeout(failureCallback(error), 100);
+		});
+	};
+
 	login(username, password, successCallback, failureCallback) {
-		this.fetch(`${this.uri}/auth/login`, {
+		this.fetch(`${this.uri}/api/auth/login`, {
 			method: 'POST',
 			body: JSON.stringify({
 				username,

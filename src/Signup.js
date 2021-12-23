@@ -1,35 +1,40 @@
 import './css/signup.css';
 
 import React from "react";
+import AuthService from "./api/AuthService";
 
 export default class Signup extends React.Component {
 
 	state = {
 		username: 'username',
 		password: 'password',
-		email:'noreply@email.com'
+		email: 'noreply@email.com',
+		message: ''
 	}
 
 	signup = (event) => {
-		//const username = this.state.username;
-
-		console.log("Signup clicked!")
+		AuthService.signup(this.state.username, this.state.password, this.state.email, () => {
+			// Redirect to wait/verify page...
+			window.location.assign("/verify");
+		}, (error) => {
+			console.log(JSON.stringify(error))
+			//this.setState({message: error.message})
+		});
 		event.preventDefault();
 	}
 
 	updateUsername = (event) => {
-		console.log("Username updated!")
+		this.setState({username: event.target.value})
 		event.preventDefault();
 	}
 
 	updatePassword = (event) => {
-		console.log("Password updated!")
+		this.setState({password: event.target.value})
 		event.preventDefault();
 	}
 
 	updateEmail = (event) => {
-		this.setState( {email: event.target.value })
-		console.log("Email updated!")
+		this.setState({email: event.target.value})
 		event.preventDefault();
 	}
 
