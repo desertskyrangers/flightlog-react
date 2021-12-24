@@ -24,9 +24,10 @@ export default class Signup extends React.Component {
 			console.log("signup success");
 			// Redirect to wait/verify page...
 			window.location.assign("/verify");
-		}, (error) => {
-			console.log("error=" + JSON.stringify(error))
-			//this.setState({message: error.message})
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			this.setState({messages: messages})
 		});
 		event.preventDefault();
 	}

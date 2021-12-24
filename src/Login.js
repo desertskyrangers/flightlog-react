@@ -17,7 +17,9 @@ export default class Login extends React.Component {
 		AuthService.login(this.state.username, this.state.password, (success) => {
 			window.location.replace('/');
 		}, (failure) => {
-			this.setState({messages: failure.messages})
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			this.setState({messages: messages})
 		});
 	}
 
