@@ -48,11 +48,20 @@ export default class ApiService {
 		//Error condition
 
 		return response.text().then(text => {
-			if ('' === text) text = '{}'
-			const json = JSON.parse(text)
 			const error = new Error()
 			error.status = response.status
-			error.messages = json.messages
+
+			let messages
+			try {
+				messages = JSON.parse(text).messages
+			} catch( error ) {
+				// Intentionally do nothing
+			}
+			if (!!!messages) messages = [text]
+			if (!!!messages) messages = [response.statusText]
+			if (!!!messages) messages = []
+
+			error.messages = messages
 			throw error
 		})
 	}
