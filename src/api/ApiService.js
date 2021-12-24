@@ -51,15 +51,18 @@ export default class ApiService {
 			const error = new Error()
 			error.status = response.status
 
-			let messages
+			let messages = []
+
+			let jsonParseMessage
 			try {
 				messages = JSON.parse(text).messages
 			} catch( error ) {
-				// Intentionally do nothing
+				jsonParseMessage = error.message
 			}
-			if (!!!messages) messages = [text]
-			if (!!!messages) messages = [response.statusText]
-			if (!!!messages) messages = []
+
+			if (messages.length === 0 && !!text && text !== '') messages = [text]
+			if (messages.length === 0 && !!response.statusText && response.statusText !== '') messages = [response.statusText]
+			if (messages.length === 0 && !!jsonParseMessage && jsonParseMessage !== '') messages = [jsonParseMessage]
 
 			error.messages = messages
 			throw error
