@@ -48,10 +48,14 @@ export default class ApiService {
 		}
 
 		//Error condition
-		const error = new Error()
-		error.message = 'An error occurred'
-		error.status = response.status
-		throw error
+		throw response.text().then( text => {
+			console.log( "response text=" + text )
+			const error = new Error()
+			error.status = response.status
+			error.message = text
+			return error
+		})
+		//throw error
 	}
 
 	saveAs(blob, filename) {
