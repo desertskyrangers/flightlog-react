@@ -36,8 +36,6 @@ export default class ApiService {
 	 * Throw an error in case the response status is not a success
 	 */
 	checkStatus(auth, response) {
-		console.log( response )
-
 		// Success status is between 200 and 299
 		if (response.ok) return response
 
@@ -48,14 +46,15 @@ export default class ApiService {
 		}
 
 		//Error condition
-		throw response.text().then( text => {
-			console.log( "response text=" + text )
+
+		return response.text().then(text => {
+			if ('' === text) text = '{}'
+			const json = JSON.parse(text)
 			const error = new Error()
 			error.status = response.status
-			error.message = text
-			return error
+			error.messages = json.messages
+			throw error
 		})
-		//throw error
 	}
 
 	saveAs(blob, filename) {

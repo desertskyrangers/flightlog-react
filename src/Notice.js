@@ -15,7 +15,6 @@ class NoticeElement extends React.Component {
 
 	render() {
 		const priorityClass = 'notice-' + this.props.priority;
-		console.log("messages=" + this.props.messages)
 		return (
 			<div className={'notice ' + priorityClass} hidden='hidden'>
 				<div className='notice-messages'>

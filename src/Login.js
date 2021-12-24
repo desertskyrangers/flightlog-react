@@ -13,12 +13,11 @@ export default class Login extends React.Component {
 	}
 
 	doLogin = () => {
-		console.log("doLogin")
+		this.setState({messages: []})
 		AuthService.login(this.state.username, this.state.password, (success) => {
-			//window.location.replace('/');
+			window.location.replace('/');
 		}, (failure) => {
-			console.log("failure message=" + failure.message)
-			this.setState({messages: [failure.message]})
+			this.setState({messages: failure.messages})
 		});
 	}
 
@@ -31,7 +30,7 @@ export default class Login extends React.Component {
 	}
 
 	clearMessages = () => {
-		this.setState({messages: [] })
+		this.setState({messages: []})
 	}
 
 	render() {

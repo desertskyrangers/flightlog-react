@@ -13,11 +13,9 @@ export class AuthService extends ApiService {
 				email
 			})
 		}).then((response) => {
-			setTimeout(successCallback(response), 100)
+			successCallback(response)
 		}).catch((error) => {
-			console.log(error)
-			//setTimeout(failureCallback(error), 100)
-			//failureCallback(error)
+			failureCallback(error)
 		})
 	}
 
@@ -30,10 +28,9 @@ export class AuthService extends ApiService {
 			})
 		}).then(response => {
 			TokenService.setToken(response.token)
-			setTimeout(successCallback, 100)
+			successCallback(response)
 		}).catch((error) => {
-			console.log(JSON.stringify(error))
-			setTimeout(failureCallback(error), 100)
+			failureCallback(error)
 		})
 	}
 
