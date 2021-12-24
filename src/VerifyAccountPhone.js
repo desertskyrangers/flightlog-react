@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class EmailVerify extends React.Component {
+export default class VerifyAccountPhone extends React.Component {
 
 	render() {
 		return (
@@ -10,8 +10,8 @@ export default class EmailVerify extends React.Component {
 					<h1>FlightLog</h1>
 				</div>
 				<div className='signup-body'>
-					<div>Verifying email address...</div>
-					<div>This functionality is not complete and does not create an account yet!</div>
+					<div>Verifying phone number...</div>
+					<div>This functionality is not complete!</div>
 				</div>
 			</div>
 		)
