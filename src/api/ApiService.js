@@ -14,17 +14,12 @@ export default class ApiService {
 	 * Perform the api call and return the JSON object or Error if an error occurs.
 	 */
 	doFetch(auth, url, options) {
-		// performs api calls sending the required authentication headers
 		let headers = {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
 		}
 
-		// Setting Authorization header
-		// Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
 		if (TokenService.isAuthenticated()) headers['Authorization'] = 'Bearer ' + TokenService.getToken()
-
-		//console.log("headers=" + JSON.stringify(headers))
 
 		return fetch(url, {
 			headers,
@@ -41,6 +36,8 @@ export default class ApiService {
 	 * Throw an error in case the response status is not a success
 	 */
 	checkStatus(auth, response) {
+		console.log( response )
+
 		// Success status is between 200 and 299
 		if (response.ok) return response
 
@@ -51,7 +48,8 @@ export default class ApiService {
 		}
 
 		//Error condition
-		const error = new Error(response.message)
+		const error = new Error()
+		error.message = 'An error occurred'
 		error.status = response.status
 		throw error
 	}
@@ -74,17 +72,13 @@ export default class ApiService {
 	}
 
 	download(url, mediaType, options) {
-		// performs api calls sending the required authentication headers
 		let headers = {
 			'Accept': mediaType,
 			'Content-Type': mediaType,
 		}
 
-		// Setting Authorization header
-		// Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
 		if (TokenService.isAuthenticated()) headers['Authorization'] = 'Bearer ' + TokenService.getToken()
 
-		//console.log("headers=" + JSON.stringify(headers))
 		return fetch(url, {
 			headers,
 			...options

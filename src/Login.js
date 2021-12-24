@@ -2,23 +2,37 @@ import './css/login.css';
 import Notice from "./Notice";
 
 import React from 'react';
-//import AuthService from "./api/AuthService";
+import AuthService from "./api/AuthService";
 
 
 export default class Login extends React.Component {
 
 	state = {
-		errorCode: false,
-		errorText: ""
+		username: '',
+		password: '',
+		messages: []
 	}
 
 	doLogin = () => {
 		console.log("doLogin")
-		// AuthService.login("username", "password", (success) => {
-		// 	window.location.replace('/');
-		// }, (failure) => {
-		// 	// Show the error message
-		// });
+		AuthService.login(this.state.username, this.state.password, (success) => {
+			//window.location.replace('/');
+		}, (failure) => {
+			console.log(failure.message)
+			this.setState({messages: [failure.message]})
+		});
+	}
+
+	updateUsername = (event) => {
+		this.setState({username: event.target.value})
+	}
+
+	updatePassword = (event) => {
+		this.setState({password: event.target.value})
+	}
+
+	clearMessages = () => {
+		this.setState({messages: [] })
 	}
 
 	render() {
@@ -30,10 +44,10 @@ export default class Login extends React.Component {
 				</div>
 				<div className='login-body'>
 					<form action='/login' method='post' className='login-form'>
-						<Username/>
-						<Password/>
-						<Notice message='Incorrect credentials' priority='error' visible={this.state.error}/>
+						<Username onChange={this.updateUsername}/>
+						<Password onChange={this.updatePassword}/>
 						<input id='login' type='button' value='Sign In' className='login-submit' onClick={this.doLogin}/>
+						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
 					</form>
 				</div>
 				<div className='login-body'>
@@ -45,24 +59,28 @@ export default class Login extends React.Component {
 
 }
 
-function Username() {
+class Username extends React.Component {
 
-	return (
-		<div>
-			<label htmlFor='username' className='login-label'>Username or email address</label>
-			<input id='username' name='username' type='text' autoCapitalize='none' autoCorrect='off' autoComplete='username' autoFocus='autofocus' className='login-field'/>
-		</div>
-	);
+	render() {
+		return (
+			<div>
+				<label htmlFor='username' className='login-label'>Username or email address</label>
+				<input id='username' name='username' type='text' autoCapitalize='none' autoCorrect='off' autoComplete='username' autoFocus='autofocus' className='login-field' onChange={this.props.onChange}/>
+			</div>
+		);
+	}
 
 }
 
-function Password() {
+class Password extends React.Component {
 
-	return (
-		<div>
-			<label htmlFor='password' className='login-label'>Password</label>
-			<input id='password' name='password' type='password' autoComplete='current-password' className='login-field'/>
-		</div>
-	);
+	render() {
+		return (
+			<div>
+				<label htmlFor='password' className='login-label'>Password</label>
+				<input id='password' name='password' type='password' autoComplete='current-password' className='login-field' onChange={this.props.onChange}/>
+			</div>
+		);
+	}
 
 }

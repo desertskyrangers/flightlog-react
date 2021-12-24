@@ -1,14 +1,17 @@
 :root {
 	--color-primary: #d0c8c0;
+	--color-disabled: #808080;
 
 	--background-primary: #404040;
 	--background-secondary: #504840;
 
 	--border-primary: #9C916D;
 	--border-secondary: #B5AD92;
+	--border-disabled: #808080;
 
 	--button-background-color: #344037;
 	--button-background-hover: #3e4d42;
+	--button-background-disabled: #404040;
 
 	/* mountain wheat */
 	--link-color-primary: #9C916D;

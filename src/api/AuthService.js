@@ -32,6 +32,7 @@ export class AuthService extends ApiService {
 			TokenService.setToken(response.token)
 			setTimeout(successCallback, 100)
 		}).catch((error) => {
+			console.log(JSON.stringify(error))
 			setTimeout(failureCallback(error), 100)
 		})
 	}

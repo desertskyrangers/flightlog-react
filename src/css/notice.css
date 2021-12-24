@@ -1,6 +1,9 @@
 .notice {
 	width: 100%;
 
+	color: lightgrey;
+	background: #404040;
+	border: 1px solid #b8b8b8;
 	border-radius: 5px;
 	padding: 0.5rem;
 
@@ -10,6 +13,10 @@
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	align-items: flex-start;
+}
+
+.notice .icon {
+	color: lightgrey;
 }
 
 .notice-error {
@@ -38,6 +45,14 @@
 
 .notice-warn .icon:hover {
 	color: #c0c000;
+}
+
+.notice-messages {
+	background: transparent;
+
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: flex-start;
 }
 
 .notice-message {
