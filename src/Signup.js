@@ -1,9 +1,10 @@
 import './css/signup.css';
 
-import React from "react";
 import AuthService from "./api/AuthService";
-import {EMAIL_PATTERN, USERNAME_PATTERN} from "./Config";
+import Config from "./Config";
 import Notice from "./Notice";
+
+import React from "react";
 import {isEqual} from "lodash";
 
 export default class Signup extends React.Component {
@@ -47,13 +48,13 @@ export default class Signup extends React.Component {
 	}
 
 	clearMessages = () => {
-		this.setState({messages: [] })
+		this.setState({messages: []})
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const validUsername = !!this.state.username && this.state.username.match(USERNAME_PATTERN)
+		const validUsername = !!this.state.username && this.state.username.match(Config.USERNAME_PATTERN)
 		const validPassword = !!this.state.password && this.state.password === this.state.verifyPassword
-		const validEmail = !!this.state.email && this.state.email.match(EMAIL_PATTERN)
+		const validEmail = !!this.state.email && this.state.email.match(Config.EMAIL_PATTERN)
 
 		let messages = [];
 		if (!validUsername) messages.push('Invalid username')

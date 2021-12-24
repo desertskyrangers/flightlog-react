@@ -1,11 +1,11 @@
 import ApiService from "./ApiService"
 import TokenService from "./TokenService"
-import {API_URL} from "../Config";
+import Config from "../Config";
 
 export class AuthService extends ApiService {
 
 	signup(username, password, email, successCallback, failureCallback) {
-		this.fetchNoAuth(`${API_URL}/api/auth/signup`, {
+		this.fetchNoAuth(Config.API_URL + '/api/auth/signup', {
 			method: 'POST',
 			body: JSON.stringify({
 				username,
@@ -22,7 +22,7 @@ export class AuthService extends ApiService {
 	}
 
 	login(username, password, successCallback, failureCallback) {
-		this.fetchNoAuth(`${API_URL}/api/auth/login`, {
+		this.fetchNoAuth(Config.API_URL + '/api/auth/login', {
 			method: 'POST',
 			body: JSON.stringify({
 				username,
@@ -49,7 +49,7 @@ export class AuthService extends ApiService {
 
 	logout(callback) {
 		this.expire()
-		this.fetch(`${API_URL}/auth/logout`, {
+		this.fetch(Config.API_URL + '/api/auth/logout', {
 			method: 'GET'
 		}).then(response => {
 			//this.props.history.push('/login')

@@ -4,7 +4,6 @@ import Notice from "./Notice";
 import React from 'react';
 import AuthService from "./api/AuthService";
 
-
 export default class Login extends React.Component {
 
 	state = {
