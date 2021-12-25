@@ -14,17 +14,14 @@ export default class ApiService {
 	 * Perform the api call and return the JSON object or Error if an error occurs.
 	 */
 	doFetch(auth, url, options) {
-		let headers = {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json',
-		}
+		if( !!!options.headers) options.headers = {}
+		options.headers['Accept'] = 'application/json'
+		options.headers['Content-Type'] = 'application/json'
+		if (TokenService.isAuthenticated()) options.headers['Authorization'] = 'Bearer ' + TokenService.getToken()
 
-		if (TokenService.isAuthenticated()) headers['Authorization'] = 'Bearer ' + TokenService.getToken()
-
-		return fetch(url, {
-			headers,
-			...options
-		})
+		return fetch(url,
+			options
+		)
 			.then(response => this.checkStatus(auth, response))
 			.then(response => response.text().then(text => {
 				if ('' === text) text = '{}'
@@ -56,7 +53,7 @@ export default class ApiService {
 			let jsonParseMessage
 			try {
 				messages = JSON.parse(text).messages
-			} catch( error ) {
+			} catch (error) {
 				jsonParseMessage = error.message
 			}
 
@@ -127,6 +124,18 @@ export default class ApiService {
 			request.setRequestHeader('Authorization', 'Bearer ' + TokenService.getToken())
 			request.send(formData)
 		})
+	}
+
+	static getMeta(metaName) {
+		const metas = document.getElementsByTagName('meta');
+
+		for (let i = 0; i < metas.length; i++) {
+			if (metas[i].getAttribute('name') === metaName) {
+				return metas[i].getAttribute('content');
+			}
+		}
+
+		return '';
 	}
 
 }
