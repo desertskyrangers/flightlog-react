@@ -1,51 +1,96 @@
-import {API_URL} from "../Config";
-import TokenService from "./TokenService";
+import TokenService from "./TokenService"
 
 export default class ApiService {
 
-	// Initializing important variables
-	constructor() {
-		// API server domain
-		this.uri = `${API_URL}`;
-
-		// React bindings
-		this.fetch = this.fetch.bind(this);
-		this.upload = this.upload.bind(this);
+	fetch(url, options) {
+		return this.doFetch(true, url, options)
 	}
 
-	fetch(url, options) {
-		// performs api calls sending the required authentication headers
-		let headers = {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json',
-		};
+	fetchNoAuth(url, options) {
+		return this.doFetch(false, url, options)
+	}
 
-		// Setting Authorization header
-		// Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
-		if (TokenService.isAuthenticated()) headers['Authorization'] = 'Bearer ' + TokenService.getToken();
+	/*
+	 * Perform the api call and return the JSON object or Error if an error occurs.
+	 */
+	doFetch(auth, url, options) {
+		if( !!!options.headers) options.headers = {}
+		options.headers['Accept'] = 'application/json'
+		options.headers['Content-Type'] = 'application/json'
+		if (TokenService.isAuthenticated()) options.headers['Authorization'] = 'Bearer ' + TokenService.getToken()
 
-		//console.log("headers=" + JSON.stringify(headers));
+		return fetch(url,
+			options
+		)
+			.then(response => this.checkStatus(auth, response))
+			.then(response => response.text().then(text => {
+				if ('' === text) text = '{}'
+				return JSON.parse(text)
+			}))
+	}
 
-		return fetch(url, {
-			headers,
-			...options
+	/*
+	 * Throw an error in case the response status is not a success
+	 */
+	checkStatus(auth, response) {
+		// Success status is between 200 and 299
+		if (response.ok) return response
+
+		if (auth && response.status === 403) {
+			console.log("HTTP 403 - " + response.url)
+			//AuthService.reauthenticate()
+			return response
+		}
+
+		//Error condition
+
+		return response.text().then(text => {
+			const error = new Error()
+			error.status = response.status
+
+			let messages = []
+
+			let jsonParseMessage
+			try {
+				messages = JSON.parse(text).messages
+			} catch (error) {
+				jsonParseMessage = error.message
+			}
+
+			if (messages.length === 0 && !!text && text !== '') messages = [text]
+			if (messages.length === 0 && !!response.statusText && response.statusText !== '') messages = [response.statusText]
+			if (messages.length === 0 && !!jsonParseMessage && jsonParseMessage !== '') messages = [jsonParseMessage]
+
+			error.messages = messages
+			throw error
 		})
-			.then(this.checkStatus)
-			.then(response => response.json())
+	}
+
+	saveAs(blob, filename) {
+		const anchor = document.createElement('a')
+		const url = URL.createObjectURL(blob)
+		anchor.href = url
+		anchor.download = filename || 'download'
+
+		const blobUrlRevokeHandler = () => {
+			setTimeout(() => {
+				URL.revokeObjectURL(url)
+				anchor.removeEventListener('click', blobUrlRevokeHandler)
+			}, 150)
+		}
+
+		anchor.addEventListener('click', blobUrlRevokeHandler, false)
+		anchor.click()
 	}
 
 	download(url, mediaType, options) {
-		// performs api calls sending the required authentication headers
 		let headers = {
 			'Accept': mediaType,
 			'Content-Type': mediaType,
-		};
+		}
 
-		// Setting Authorization header
-		// Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
-		if (TokenService.isAuthenticated()) headers['Authorization'] = 'Bearer ' + TokenService.getToken();
+		if (TokenService.isAuthenticated()) headers['Authorization'] = 'Bearer ' + TokenService.getToken()
 
-		//console.log("headers=" + JSON.stringify(headers));
 		return fetch(url, {
 			headers,
 			...options
@@ -54,68 +99,43 @@ export default class ApiService {
 			.then(response => response.blob())
 	}
 
-	saveAs(blob, filename) {
-		const a = document.createElement('a');
-		const url = URL.createObjectURL(blob);
-		a.href = url;
-		a.download = filename || 'download';
-
-		const blobUrlRevokeHandler = () => {
-			setTimeout(() => {
-				URL.revokeObjectURL(url);
-				a.removeEventListener('click', blobUrlRevokeHandler);
-			}, 150);
-		};
-
-		a.addEventListener('click', blobUrlRevokeHandler, false);
-		a.click();
-	}
-
-	// Raises an error in case response status is not a success
-	checkStatus(response) {
-		//console.log("Response: " + response.status + response.statusText);
-
-		// Success status lies between 200 to 300
-		if (response.ok) return response;
-
-		if (response.status === 403) {
-			console.log("HTTP 403 - " + response.url);
-			//AuthService.reauthenticate();
-			return response;
-		}
-
-		//Error condition
-		const error = new Error(response.status);
-		error.message = response.message;
-		//error.response = response;
-		throw error
-	}
-
 	upload(url, file, progress, load, error) {
 		return new Promise((resolve, reject) => {
-			const request = new XMLHttpRequest();
+			const request = new XMLHttpRequest()
 
 			request.upload.addEventListener("progress", event => {
-				progress( event );
-			});
+				progress(event)
+			})
 
 			request.upload.addEventListener("load", event => {
-				resolve(request.response);
-				load( event );
-			});
+				resolve(request.response)
+				load(event)
+			})
 
 			request.upload.addEventListener("error", event => {
-				reject(request.response);
-				error( event );
-			});
+				reject(request.response)
+				error(event)
+			})
 
-			const formData = new FormData();
-			formData.append("file", file, file.name);
+			const formData = new FormData()
+			formData.append("file", file, file.name)
 
-			request.open("POST", url);
-			request.setRequestHeader('Authorization', 'Bearer ' + TokenService.getToken() );
-			request.send(formData);
-		});
+			request.open("POST", url)
+			request.setRequestHeader('Authorization', 'Bearer ' + TokenService.getToken())
+			request.send(formData)
+		})
+	}
+
+	static getMeta(metaName) {
+		const metas = document.getElementsByTagName('meta');
+
+		for (let i = 0; i < metas.length; i++) {
+			if (metas[i].getAttribute('name') === metaName) {
+				return metas[i].getAttribute('content');
+			}
+		}
+
+		return '';
 	}
 
 }

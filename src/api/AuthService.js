@@ -1,49 +1,67 @@
-import ApiService from "./ApiService";
-import TokenService from "./TokenService";
+import ApiService from "./ApiService"
+import TokenService from "./TokenService"
+import Config from "../Config";
 
 export class AuthService extends ApiService {
 
+	signup(username, password, email, successCallback, failureCallback) {
+		this.fetchNoAuth(Config.API_URL + '/api/auth/signup', {
+			method: 'POST',
+			body: JSON.stringify({
+				username,
+				password,
+				email
+			})
+		}).then((response) => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 	login(username, password, successCallback, failureCallback) {
-		this.fetch(`${this.uri}/auth/login`, {
+		this.fetchNoAuth(Config.API_URL + '/api/auth/login', {
 			method: 'POST',
 			body: JSON.stringify({
 				username,
 				password
 			})
 		}).then(response => {
-			TokenService.setToken(response.token);
-			setTimeout(successCallback, 100);
+			TokenService.setToken(response.token)
+			successCallback(response)
 		}).catch((error) => {
-			setTimeout(failureCallback(error), 100);
-		});
-	};
+			failureCallback(error)
+		})
+	}
 
 	loggedIn() {
-		return TokenService.isAuthenticated();
+		return TokenService.isAuthenticated()
 	}
 
 	reauthenticate() {
-		window.location.replace('/login');
+		this.logout(() => {
+			window.location.replace('/login')
+		})
 	}
 
 	logout(callback) {
-		this.expire();
-		this.fetch(`${this.uri}/auth/logout`, {
+		this.expire()
+		this.fetch(Config.API_URL + '/api/auth/logout', {
 			method: 'GET'
 		}).then(response => {
-			//this.props.history.push('/login');
-			window.location.replace('/home');
-			setTimeout(callback, 100);
-		});
+			//this.props.history.push('/login')
+			window.location.replace('/home')
+			setTimeout(callback, 100)
+		})
 	}
 
 	// getProfile() {
 	// 	// Using jwt-decode npm package to decode the token
-	// 	return decode(this.getToken());
+	// 	return decode(this.getToken())
 	// }
 
 }
 
-const instance = new AuthService();
-Object.freeze(instance);
-export default instance;
+const instance = new AuthService()
+Object.freeze(instance)
+export default instance

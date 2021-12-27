@@ -86,3 +86,9 @@
 	color: var(--link-hover-primary);
 	background: var(--button-background-hover);
 }
+
+.signup-submit:disabled {
+	color: var(--color-disabled);
+	background: var(--button-background-disabled);
+	border: 1px solid var(--border-disabled);
+}

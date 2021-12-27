@@ -7,8 +7,9 @@ import Footer from "./Footer";
 import Legal from "./Legal";
 import Login from "./Login";
 import Signup from "./Signup";
-import NotFound from "./NotFound";
+import VerifyAccountEmail from "./VerifyAccountEmail";
 
+import NotFound from "./NotFound";
 import TokenService from "./api/TokenService";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
 						<Route exact path='/legal' element={<Legal/>}/>
 						<Route exact path='/login' element={<Login/>}/>
 						<Route exact path="/signup" element={<Signup/>}/>
+						<Route exact path="/verify" element={<VerifyAccountEmail/>}/>
 
 						<Route exact path='/' element={<Protect> <Home/> </Protect>}/>
 

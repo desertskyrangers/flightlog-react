@@ -5,21 +5,9 @@ import React from 'react';
 
 export default class Notice extends React.Component {
 
-	state = {
-		visible: this.props.visible
-	}
-
-	closeNotice = () => {
-		console.log("Close notice")
-		this.setState(prevState => (
-			{
-				visible: !prevState.visible
-			}
-		));
-	}
-
 	render() {
-		return this.state.visible ? <NoticeElement message={this.props.message} priority={this.props.priority} onClick={this.closeNotice}/> : null;
+		const visible = this.props.messages.length > 0
+		return visible ? <NoticeElement messages={this.props.messages} priority={this.props.priority} onClick={this.props.clearMessages}/> : null;
 	}
 }
 
@@ -29,7 +17,11 @@ class NoticeElement extends React.Component {
 		const priorityClass = 'notice-' + this.props.priority;
 		return (
 			<div className={'notice ' + priorityClass} hidden='hidden'>
-				<div className='notice-message'>{this.props.message}</div>
+				<div className='notice-messages'>
+					{this.props.messages.map((message, index) => {
+						return (<div key={index} className='notice-message'>{message}</div>)
+					})}
+				</div>
 				<CloseButton onClick={this.props.onClick}/>
 			</div>
 		);
