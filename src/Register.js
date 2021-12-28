@@ -7,7 +7,7 @@ import Notice from "./Notice";
 import React from "react";
 import {isEqual} from "lodash";
 
-export default class Signup extends React.Component {
+export default class Register extends React.Component {
 
 	state = {
 		username: '',
@@ -54,12 +54,18 @@ export default class Signup extends React.Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		const validUsername = !!this.state.username && this.state.username.match(Config.USERNAME_PATTERN)
-		const validPassword = !!this.state.password && this.state.password === this.state.verifyPassword
+		const validPassword = !!this.state.password
+		const passwordTooShort = !!this.state.password && this.state.password.length < 8;
+		const passwordTooLong = !!this.state.password && this.state.password.length >= 128;
+		const passwordsMatch = this.state.password === this.state.verifyPassword
 		const validEmail = !!this.state.email && this.state.email.match(Config.EMAIL_PATTERN)
 
 		let messages = [];
 		if (!validUsername) messages.push('Invalid username')
-		if (!validPassword) messages.push('Passwords do not match')
+		if (!validPassword) messages.push('Invalid password')
+		if (passwordTooShort) messages.push('Password too short')
+		if (passwordTooLong) messages.push('Password too long')
+		if (!passwordsMatch) messages.push('Passwords do not match')
 		if (!validEmail) messages.push('Invalid email address')
 		if (!isEqual(messages, prevState.messages)) this.setState({messages: messages})
 	}

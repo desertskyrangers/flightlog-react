@@ -5,7 +5,7 @@ import Config from "../Config";
 export class AuthService extends ApiService {
 
 	signup(username, password, email, successCallback, failureCallback) {
-		this.fetchNoAuth(Config.API_URL + '/api/auth/signup', {
+		this.fetchNoAuth(Config.API_URL + '/api/auth/register', {
 			method: 'POST',
 			body: JSON.stringify({
 				username,

@@ -6,7 +6,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Legal from "./Legal";
 import Login from "./Login";
-import Signup from "./Signup";
+import Register from "./Register";
 import VerifyAccountEmail from "./VerifyAccountEmail";
 
 import NotFound from "./NotFound";
@@ -26,7 +26,7 @@ function App() {
 					<Routes>
 						<Route exact path='/legal' element={<Legal/>}/>
 						<Route exact path='/login' element={<Login/>}/>
-						<Route exact path="/signup" element={<Signup/>}/>
+						<Route exact path="/register" element={<Register/>}/>
 						<Route exact path="/verify" element={<VerifyAccountEmail/>}/>
 
 						<Route exact path='/' element={<Protect> <Home/> </Protect>}/>
