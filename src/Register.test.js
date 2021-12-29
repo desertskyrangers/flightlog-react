@@ -26,5 +26,6 @@ test('renders sign in button', () => {
 	render(<Register/>);
 	const element = screen.getByText('Sign Up');
 	expect(element).toBeInTheDocument();
-	expect(element).toHaveAttribute('type', 'button');
+	expect(element.nodeName).toBe('BUTTON');
+	expect(element).toHaveClass('login-submit');
 });

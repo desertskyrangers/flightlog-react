@@ -25,7 +25,8 @@ test('renders sign in button', () => {
 	render(<BrowserRouter><Login/></BrowserRouter>);
 	const element = screen.getByText(/sign in/i);
 	expect(element).toBeInTheDocument();
-	expect(element).toHaveAttribute('type', 'button');
+	expect(element.nodeName).toBe('BUTTON');
+	expect(element).toHaveClass('login-submit');
 });
 
 test('renders sign up button', () => {
@@ -33,7 +34,6 @@ test('renders sign up button', () => {
 	const element = screen.getByText(/sign up/i);
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('BUTTON');
-	//expect(element).toHaveClass('button');
 });
 
 // TODO What about the notice???

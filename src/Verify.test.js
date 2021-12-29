@@ -14,11 +14,12 @@ test('renders verify field', () => {
 	expect(element).toHaveAttribute('type', 'text');
 });
 
-test('renders sign in button', () => {
+test('renders verify button', () => {
 	render(<BrowserRouter><Verify/></BrowserRouter>);
 	const element = screen.getByText(/verify/i);
 	expect(element).toBeInTheDocument();
-	expect(element).toHaveAttribute('type', 'button');
+	expect(element.nodeName).toBe('BUTTON');
+	expect(element).toHaveClass('login-submit');
 });
 
 test('renders resend button', () => {
