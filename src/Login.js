@@ -68,7 +68,7 @@ class LoginComponent extends React.Component {
 					<div className='login-form'>
 						<Username onChange={this.updateUsername}/>
 						<Password onChange={this.updatePassword}/>
-						<input id='login' type='button' value='Sign In' className='login-submit' onClick={this.login} onKeyDown={this.onKeyDown}/>
+						<button className='login-submit' onClick={this.login}>Sign In</button>
 						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
 					</div>
 				</div>

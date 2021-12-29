@@ -80,14 +80,14 @@ export default class Register extends React.Component {
 					<h1>FlightLog</h1>
 				</div>
 				<div className='login-body'>
-					<form className='login-form'>
+					<div className='login-form'>
 						<SignupField id='username' text='Username' type='text' autoFocus='autofocus' value={this.state.username} onChange={this.updateUsername} onKeyDown={this.onKeyDown}/>
 						<SignupField id='password' text='Password' type='password' value={this.state.password} onChange={this.updatePassword} onKeyDown={this.onKeyDown}/>
 						<SignupField id='verify-password' text='Verify Password' type='password' value={this.state.verifyPassword} onChange={this.updateVerifyPassword} onKeyDown={this.onKeyDown}/>
 						<SignupField id='email' text='Email Address' type='text' value={this.state.email} onChange={this.updateEmail} onKeyDown={this.onKeyDown}/>
-						<input id='login' type='button' value='Sign Up' disabled={this.state.messages.length > 0} className='login-submit' onClick={this.register} onKeyDown={this.onKeyDown}/>
+						<button disabled={this.state.messages.length > 0} className='login-submit' onClick={this.register}>Sign Up</button>
 						<Notice priority='error' messages={this.state.messages} clearMessages={this.clearMessages}/>
-					</form>
+					</div>
 				</div>
 			</div>
 		);

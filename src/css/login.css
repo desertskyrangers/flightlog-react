@@ -86,3 +86,9 @@
 	color: var(--link-hover-primary);
 	background: var(--button-background-hover);
 }
+
+.login-submit:disabled {
+	color: var(--link-disabled-primary);
+	background: var(--background-primary);
+	border: 1px solid var(--link-disabled-primary);
+}

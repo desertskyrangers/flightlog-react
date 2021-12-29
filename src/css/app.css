@@ -9,13 +9,15 @@
 	--border-secondary: #B5AD92;
 	--border-disabled: #808080;
 
+	--submit-background-color: #344037;
 	--button-background-color: #344037;
 	--button-background-hover: #3e4d42;
-	--button-background-disabled: #404040;
+	--button-background-disabled: var(--color-disabled);
 
 	/* mountain wheat */
 	--link-color-primary: #9C916D;
 	--link-hover-primary: #B5AD92;
+	--link-disabled-primary: #808080;
 
 	--primary-black: #2a332c;
 	--primary-gray: #b0b0b0;
@@ -59,7 +61,7 @@ a:hover {
 	color: var(--link-hover-primary);
 }
 
-a.button  {
+a.button {
 	margin: 0.25rem;
 	border: 1px solid var(--link-color-primary);
 	border-radius: 5px;
@@ -78,7 +80,6 @@ button {
 	background: transparent;
 	border: 1px solid var(--link-color-primary);
 	border-radius: 5px;
-	margin: 0.25rem;
 	padding: 0.25rem;
 	cursor: pointer;
 }
