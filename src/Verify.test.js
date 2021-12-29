@@ -12,6 +12,7 @@ test('renders verify field', () => {
 	const element = screen.getByLabelText(/verification code/i);
 	expect(element).toBeInTheDocument();
 	expect(element).toHaveAttribute('type', 'text');
+	expect(element).toHaveClass('login-field');
 });
 
 test('renders verify button', () => {
@@ -34,5 +35,6 @@ test('renders messages', () => {
 	const element = screen.getByText(/hello/i);
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('DIV');
+	expect(element).toHaveClass('notice-message');
 });
 

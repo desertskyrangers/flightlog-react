@@ -5,7 +5,7 @@ import React from 'react';
 import AuthService from "./api/AuthService";
 import {useNavigate} from 'react-router-dom';
 
-export default function Login() {
+export default function Login(props) {
 
 	const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ export default function Login() {
 	}
 
 	return (
-		<LoginComponent navHome={home} navRegister={register}/>
+		<LoginComponent messages={props.messages} navHome={home} navRegister={register}/>
 	)
 }
 
@@ -27,7 +27,7 @@ class LoginComponent extends React.Component {
 	state = {
 		username: '',
 		password: '',
-		messages: []
+		messages: this.props.messages || [],
 	}
 
 	onKeyDown = (event) => {

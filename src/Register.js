@@ -7,14 +7,20 @@ import Notice from "./Notice";
 import React from "react";
 import {isEqual} from "lodash";
 
-export default class Register extends React.Component {
+export default function Register(props) {
+	return (
+		<RegisterComponent messages={props.messages}/>
+	)
+}
+
+class RegisterComponent extends React.Component {
 
 	state = {
 		username: '',
 		password: '',
 		verifyPassword: '',
 		email: '',
-		messages: []
+		messages: this.props.messages || [],
 	}
 
 	notice = <Notice priority='error'/>

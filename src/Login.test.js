@@ -1,6 +1,7 @@
 import {render, screen} from '@testing-library/react';
 import Login from './Login';
 import {BrowserRouter} from "react-router-dom";
+import Verify from "./Verify";
 
 test('renders DSR FlightLog text', () => {
 	render(<BrowserRouter><Login/></BrowserRouter>);
@@ -12,6 +13,7 @@ test('renders username field', () => {
 	const element = screen.getByLabelText(/username/i);
 	expect(element).toBeInTheDocument();
 	expect(element).toHaveAttribute('type', 'text');
+	expect(element).toHaveClass('login-field');
 });
 
 test('renders password field', () => {
@@ -19,6 +21,7 @@ test('renders password field', () => {
 	const element = screen.getByLabelText(/password/i);
 	expect(element).toBeInTheDocument();
 	expect(element).toHaveAttribute('type', 'password');
+	expect(element).toHaveClass('login-field');
 });
 
 test('renders sign in button', () => {
@@ -36,4 +39,11 @@ test('renders sign up button', () => {
 	expect(element.nodeName).toBe('BUTTON');
 });
 
-// TODO What about the notice???
+
+test('renders messages', () => {
+	render(<BrowserRouter><Login messages={["HELLO"]}/></BrowserRouter>);
+	const element = screen.getByText(/hello/i);
+	expect(element).toBeInTheDocument();
+	expect(element.nodeName).toBe('DIV');
+	expect(element).toHaveClass('notice-message');
+});
