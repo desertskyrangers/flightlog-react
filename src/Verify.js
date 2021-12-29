@@ -65,7 +65,7 @@ class VerifyAccountEmailComponent extends React.Component {
 					<div className='login-form'>
 						<label htmlFor='code' className='login-label'>Verification Code</label>
 						<input id='code' name='code' type='text' placeholder='Verification Code' className='login-field' onChange={this.updateCode} onKeyDown={this.onKeyDown}/>
-						<input type='button' className='login-submit' value='Verify' onClick={this.verify}/>
+						<input type='button' className='login-submit' value='Verify' onClick={this.verify} onKeyDown={this.onKeyDown}/>
 						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
 					</div>
 				</div>

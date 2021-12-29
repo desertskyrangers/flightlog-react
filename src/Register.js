@@ -19,7 +19,11 @@ export default class Register extends React.Component {
 
 	notice = <Notice priority='error'/>
 
-	doSignup = (event) => {
+	onKeyDown = (event) => {
+		if (event.key === 'Enter') this.register();
+	}
+
+	register = (event) => {
 		AuthService.signup(this.state.username, this.state.password, this.state.email, (verification) => {
 			window.location.assign("/verify?id=" + verification.id);
 		}, (failure) => {
@@ -77,11 +81,11 @@ export default class Register extends React.Component {
 				</div>
 				<div className='login-body'>
 					<form className='login-form'>
-						<SignupField id='username' text='Username' type='text' autoFocus='autofocus' value={this.state.username} onChange={this.updateUsername}/>
-						<SignupField id='password' text='Password' type='password' value={this.state.password} onChange={this.updatePassword}/>
-						<SignupField id='verify-password' text='Verify Password' type='password' value={this.state.verifyPassword} onChange={this.updateVerifyPassword}/>
-						<SignupField id='email' text='Email Address' type='text' value={this.state.email} onChange={this.updateEmail}/>
-						<input id='login' type='button' value='Sign Up' disabled={this.state.messages.length > 0} className='login-submit' onClick={this.doSignup}/>
+						<SignupField id='username' text='Username' type='text' autoFocus='autofocus' value={this.state.username} onChange={this.updateUsername} onKeyDown={this.onKeyDown}/>
+						<SignupField id='password' text='Password' type='password' value={this.state.password} onChange={this.updatePassword} onKeyDown={this.onKeyDown}/>
+						<SignupField id='verify-password' text='Verify Password' type='password' value={this.state.verifyPassword} onChange={this.updateVerifyPassword} onKeyDown={this.onKeyDown}/>
+						<SignupField id='email' text='Email Address' type='text' value={this.state.email} onChange={this.updateEmail} onKeyDown={this.onKeyDown}/>
+						<input id='login' type='button' value='Sign Up' disabled={this.state.messages.length > 0} className='login-submit' onClick={this.register} onKeyDown={this.onKeyDown}/>
 						<Notice priority='error' messages={this.state.messages} clearMessages={this.clearMessages}/>
 					</form>
 				</div>
@@ -98,7 +102,7 @@ class SignupField extends React.Component {
 			<div>
 				<label htmlFor={this.props.id} className='login-label'>{this.props.text}</label>
 				<input id={this.props.id} name={this.props.id} type={this.props.type} placeholder={this.props.text} autoCapitalize='none' autoCorrect='off' className='login-field' autoFocus={this.props.autoFocus} value={this.props.value}
-							 onChange={this.props.onChange}/>
+							 onChange={this.props.onChange} onKeyDown={this.props.onKeyDown}/>
 			</div>
 		);
 	}
