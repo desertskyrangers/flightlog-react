@@ -25,6 +25,7 @@ export class AuthService extends ApiService {
 
 		this.fetchNoAuth(url, {})
 			.then((response) => {
+				// TODO Store the returned JWT token just like login
 				successCallback(response)
 			}).catch((error) => {
 			  failureCallback(error)

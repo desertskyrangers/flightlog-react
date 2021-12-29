@@ -3,11 +3,11 @@ import Notice from "./Notice";
 import AuthService from "./api/AuthService";
 import {useSearchParams} from "react-router-dom";
 
-export default function Verify() {
+export default function Verify(props) {
 	const [searchParams] = useSearchParams();
 
 	return (
-		<VerifyAccountEmailComponent vid={searchParams.get("id")}/>
+		<VerifyAccountEmailComponent vid={searchParams.get("id")} messages={props.messages}/>
 	);
 }
 
@@ -16,7 +16,7 @@ class VerifyAccountEmailComponent extends React.Component {
 	state = {
 		id: this.props.vid,
 		code: '',
-		messages: [],
+		messages: this.props.messages || [],
 		resendMessages: []
 	}
 
@@ -25,8 +25,9 @@ class VerifyAccountEmailComponent extends React.Component {
 	}
 
 	verify = () => {
-		AuthService.verify(this.state.id, this.state.code, () => {
-
+		AuthService.verify(this.state.id, this.state.code, (response) => {
+			// TODO What to do with a good response??? Since we should have a valid JWT token we can just go home
+			console.log( response )
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]

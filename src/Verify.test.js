@@ -28,3 +28,10 @@ test('renders resend button', () => {
 	expect(element.nodeName).toBe('BUTTON');
 });
 
+test('renders messages', () => {
+	render(<BrowserRouter><Verify messages={["HELLO"]}/></BrowserRouter>);
+	const element = screen.getByText(/hello/i);
+	expect(element).toBeInTheDocument();
+	expect(element.nodeName).toBe('DIV');
+});
+
