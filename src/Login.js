@@ -52,7 +52,7 @@ export default class Login extends React.Component {
 					</form>
 				</div>
 				<div className='login-body'>
-					<p>Need an account? <Link to='/register' className='button'>Sign Up</Link></p>
+					<p>Need an account? <a href='/register' className='button'>Sign Up</a></p>
 				</div>
 			</div>
 		);
