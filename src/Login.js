@@ -83,7 +83,7 @@ class Username extends React.Component {
 		return (
 			<div>
 				<label htmlFor='username' className='login-label'>Username or email address</label>
-				<input id='username' name='username' type='text' autoCapitalize='none' autoCorrect='off' autoComplete='username' autoFocus='autofocus' className='login-field' onChange={this.props.onChange}/>
+				<input id='username' name='username' type='text' placeholder='Username' autoCapitalize='none' autoCorrect='off' autoComplete='username' autoFocus='autofocus' className='login-field' onChange={this.props.onChange}/>
 			</div>
 		);
 	}
@@ -96,7 +96,7 @@ class Password extends React.Component {
 		return (
 			<div>
 				<label htmlFor='password' className='login-label'>Password</label>
-				<input id='password' name='password' type='password' autoComplete='current-password' className='login-field' onChange={this.props.onChange}/>
+				<input id='password' name='password' type='password' placeholder='Password' autoComplete='current-password' className='login-field' onChange={this.props.onChange}/>
 			</div>
 		);
 	}

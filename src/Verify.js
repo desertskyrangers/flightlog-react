@@ -3,7 +3,7 @@ import Notice from "./Notice";
 import AuthService from "./api/AuthService";
 import {useSearchParams} from "react-router-dom";
 
-export default function VerifyAccountEmail() {
+export default function Verify() {
 	const [searchParams] = useSearchParams();
 
 	return (
@@ -58,13 +58,14 @@ class VerifyAccountEmailComponent extends React.Component {
 				</div>
 				<div className='login-body'>
 					<form className='login-form'>
-						<input id='code' name='code' type='text' className='login-field' onChange={this.updateCode}/>
+						<label htmlFor='code' className='login-label'>Verification Code</label>
+						<input id='code' name='code' type='text' placeholder='Verification Code' className='login-field' onChange={this.updateCode}/>
 						<input type='button' className='login-submit' value='Verify' onClick={this.verify}/>
 						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
 					</form>
 				</div>
 				<div className='login-body'>
-					<p>Didn't receive the email? <button className='button' onClick={this.resend}>Resend</button></p>
+					<div>Didn't receive the email? <button className='button' onClick={this.resend}>Resend</button></div>
 					<Notice messages={this.state.resendMessages} clearMessages={this.clearResendMessages}/>
 				</div>
 			</div>
