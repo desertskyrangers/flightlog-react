@@ -71,6 +71,23 @@ a.button:hover {
 	border: 1px solid var(--link-hover-primary);
 }
 
+button {
+	font-size: 1rem;
+
+	color: var(--link-color-primary);
+	background: transparent;
+	border: 1px solid var(--link-color-primary);
+	border-radius: 5px;
+	margin: 0.25rem;
+	padding: 0.25rem;
+	cursor: pointer;
+}
+
+button:hover {
+	color: var(--link-hover-primary);
+	border: 1px solid var(--link-hover-primary);
+}
+
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

@@ -3,8 +3,26 @@ import Notice from "./Notice";
 
 import React from 'react';
 import AuthService from "./api/AuthService";
+import {useNavigate} from 'react-router-dom';
 
-export default class Login extends React.Component {
+export default function Login() {
+
+	const navigate = useNavigate();
+
+	const home = () => {
+		navigate( '/' )
+	}
+
+	const register = () => {
+		navigate( '/register' )
+	}
+
+	return (
+		<LoginComponent navHome={home} navRegister={register}/>
+	)
+}
+
+class LoginComponent extends React.Component {
 
 	state = {
 		username: '',
@@ -15,7 +33,7 @@ export default class Login extends React.Component {
 	login = () => {
 		this.setState({messages: []})
 		AuthService.login(this.state.username, this.state.password, (success) => {
-			window.location.replace('/');
+			this.props.navHome();
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -43,15 +61,15 @@ export default class Login extends React.Component {
 					<h1>FlightLog</h1>
 				</div>
 				<div className='login-body'>
-					<form className='login-form'>
+					<div className='login-form'>
 						<Username onChange={this.updateUsername}/>
 						<Password onChange={this.updatePassword}/>
 						<input id='login' type='button' value='Sign In' className='login-submit' onClick={this.login}/>
 						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
-					</form>
+					</div>
 				</div>
 				<div className='login-body'>
-					<p>Need an account? <a href='/register' className='button'>Sign Up</a></p>
+					<p>Need an account? <button onClick={this.props.navRegister}>Sign Up</button> </p>
 				</div>
 			</div>
 		);

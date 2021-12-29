@@ -4,14 +4,14 @@ import AuthService from "./api/AuthService";
 import {useSearchParams} from "react-router-dom";
 
 export default function VerifyAccountEmail() {
-	const searchParams = useSearchParams();
+	const [searchParams] = useSearchParams();
 
 	return (
-		<InternalVerifyAccountEmail vid={searchParams.get("id")}/>
+		<VerifyAccountEmailComponent vid={searchParams.get("id")}/>
 	);
 }
 
-class InternalVerifyAccountEmail extends React.Component {
+class VerifyAccountEmailComponent extends React.Component {
 
 	state = {
 		id: this.props.vid,
@@ -64,7 +64,7 @@ class InternalVerifyAccountEmail extends React.Component {
 					</form>
 				</div>
 				<div className='login-body'>
-					<p>Didn't receive the email? <a className='button' onClick={this.resend}>Resend</a></p>
+					<p>Didn't receive the email? <button className='button' onClick={this.resend}>Resend</button></p>
 					<Notice messages={this.state.resendMessages} clearMessages={this.clearResendMessages}/>
 				</div>
 			</div>
