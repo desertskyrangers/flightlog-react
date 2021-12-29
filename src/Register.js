@@ -1,4 +1,4 @@
-import './css/signup.css';
+import './css/login.css';
 
 import AuthService from "./api/AuthService";
 import Config from "./Config";
@@ -20,10 +20,8 @@ export default class Register extends React.Component {
 	notice = <Notice priority='error'/>
 
 	doSignup = (event) => {
-		AuthService.signup(this.state.username, this.state.password, this.state.email, () => {
-			console.log("signup success");
-			// Redirect to wait/verify page...
-			window.location.assign("/verify");
+		AuthService.signup(this.state.username, this.state.password, this.state.email, (verification) => {
+			window.location.assign("/verify?id=" + verification.id);
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -72,18 +70,18 @@ export default class Register extends React.Component {
 
 	render() {
 		return (
-			<div className='signup-container'>
-				<div className='signup-banner'>
-					<img src='logo192.png' alt='Logo'/>
+			<div className='login-container'>
+				<div className='login-banner'>
+					<img src='logo.png' alt='Logo'/>
 					<h1>FlightLog</h1>
 				</div>
-				<div className='signup-body'>
-					<form className='signup-form'>
+				<div className='login-body'>
+					<form className='login-form'>
 						<SignupField id='username' text='Username' type='text' autoFocus='autofocus' value={this.state.username} onChange={this.updateUsername}/>
 						<SignupField id='password' text='Password' type='password' value={this.state.password} onChange={this.updatePassword}/>
 						<SignupField id='verify-password' text='Verify Password' type='password' value={this.state.verifyPassword} onChange={this.updateVerifyPassword}/>
 						<SignupField id='email' text='Email Address' type='text' value={this.state.email} onChange={this.updateEmail}/>
-						<input id='login' type='button' value='Sign Up' disabled={this.state.messages.length > 0} className='signup-submit' onClick={this.doSignup}/>
+						<input id='login' type='button' value='Sign Up' disabled={this.state.messages.length > 0} className='login-submit' onClick={this.doSignup}/>
 						<Notice priority='error' messages={this.state.messages} clearMessages={this.clearMessages}/>
 					</form>
 				</div>
@@ -98,8 +96,8 @@ class SignupField extends React.Component {
 	render() {
 		return (
 			<div>
-				<label htmlFor={this.props.id} className='signup-label'>{this.props.text}</label>
-				<input id={this.props.id} name={this.props.id} type={this.props.type} placeholder={this.props.text} autoCapitalize='none' autoCorrect='off' className='signup-field' autoFocus={this.props.autoFocus} value={this.props.value}
+				<label htmlFor={this.props.id} className='login-label'>{this.props.text}</label>
+				<input id={this.props.id} name={this.props.id} type={this.props.type} placeholder={this.props.text} autoCapitalize='none' autoCorrect='off' className='login-field' autoFocus={this.props.autoFocus} value={this.props.value}
 							 onChange={this.props.onChange}/>
 			</div>
 		);

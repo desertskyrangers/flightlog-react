@@ -3,6 +3,7 @@ import Notice from "./Notice";
 
 import React from 'react';
 import AuthService from "./api/AuthService";
+import {Link} from "react-router-dom";
 
 export default class Login extends React.Component {
 
@@ -12,7 +13,7 @@ export default class Login extends React.Component {
 		messages: []
 	}
 
-	doLogin = () => {
+	login = () => {
 		this.setState({messages: []})
 		AuthService.login(this.state.username, this.state.password, (success) => {
 			window.location.replace('/');
@@ -39,19 +40,19 @@ export default class Login extends React.Component {
 		return (
 			<div className='login-container'>
 				<div className='login-banner'>
-					<img src='logo192.png' alt='Logo'/>
+					<img src='logo.png' alt='Logo'/>
 					<h1>FlightLog</h1>
 				</div>
 				<div className='login-body'>
-					<form action='/login' method='post' className='login-form'>
+					<form className='login-form'>
 						<Username onChange={this.updateUsername}/>
 						<Password onChange={this.updatePassword}/>
-						<input id='login' type='button' value='Sign In' className='login-submit' onClick={this.doLogin}/>
+						<input id='login' type='button' value='Sign In' className='login-submit' onClick={this.login}/>
 						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
 					</form>
 				</div>
 				<div className='login-body'>
-					<p>Need an account? <a href='/register' className='button'>Sign up</a></p>
+					<p>Need an account? <Link to='/register' className='button'>Sign Up</Link></p>
 				</div>
 			</div>
 		);
