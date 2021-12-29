@@ -24,10 +24,14 @@ class VerifyAccountEmailComponent extends React.Component {
 		this.setState({code: event.target.value})
 	}
 
+	onKeyDown = (event) => {
+		if (event.key === 'Enter') this.verify();
+	}
+
 	verify = () => {
 		AuthService.verify(this.state.id, this.state.code, (response) => {
 			// TODO What to do with a good response??? Since we should have a valid JWT token we can just go home
-			console.log( response )
+			console.log(response)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -58,12 +62,12 @@ class VerifyAccountEmailComponent extends React.Component {
 					<div>Please click on the link in the email you received or enter the verification code:</div>
 				</div>
 				<div className='login-body'>
-					<form className='login-form'>
+					<div className='login-form'>
 						<label htmlFor='code' className='login-label'>Verification Code</label>
-						<input id='code' name='code' type='text' placeholder='Verification Code' className='login-field' onChange={this.updateCode}/>
+						<input id='code' name='code' type='text' placeholder='Verification Code' className='login-field' onChange={this.updateCode} onKeyDown={this.onKeyDown}/>
 						<input type='button' className='login-submit' value='Verify' onClick={this.verify}/>
 						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
-					</form>
+					</div>
 				</div>
 				<div className='login-body'>
 					<div>Didn't receive the email? <button className='button' onClick={this.resend}>Resend</button></div>
