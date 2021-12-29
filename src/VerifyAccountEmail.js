@@ -4,14 +4,14 @@ import AuthService from "./api/AuthService";
 import {useSearchParams} from "react-router-dom";
 
 export default function VerifyAccountEmail() {
-	const [searchParams, setSearchParams] = useSearchParams();
+	const searchParams = useSearchParams();
 
 	return (
 		<InternalVerifyAccountEmail vid={searchParams.get("id")}/>
 	);
 }
 
-	class InternalVerifyAccountEmail extends React.Component {
+class InternalVerifyAccountEmail extends React.Component {
 
 	state = {
 		id: this.props.vid,

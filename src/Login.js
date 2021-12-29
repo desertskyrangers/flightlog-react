@@ -3,7 +3,6 @@ import Notice from "./Notice";
 
 import React from 'react';
 import AuthService from "./api/AuthService";
-import {Link} from "react-router-dom";
 
 export default class Login extends React.Component {
 
