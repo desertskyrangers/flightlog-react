@@ -3,5 +3,5 @@ import Home from './Home';
 
 test('renders home text', () => {
 	render(<Home/>);
-	expect(screen.getByText(/Home/i)).toBeInTheDocument();
+	expect(screen.getByText(/FlightLog/i)).toBeInTheDocument();
 });
