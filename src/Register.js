@@ -30,7 +30,7 @@ class RegisterComponent extends React.Component {
 	}
 
 	register = (event) => {
-		AuthService.signup(this.state.username, this.state.password, this.state.email, (verification) => {
+		AuthService.register(this.state.username, this.state.password, this.state.email, (verification) => {
 			window.location.assign("/verify?id=" + verification.id);
 		}, (failure) => {
 			let messages = failure.messages

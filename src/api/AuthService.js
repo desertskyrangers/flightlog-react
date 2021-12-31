@@ -4,7 +4,7 @@ import Config from "../Config";
 
 export class AuthService extends ApiService {
 
-	signup(username, password, email, successCallback, failureCallback) {
+	register(username, password, email, successCallback, failureCallback) {
 		this.fetchNoAuth(Config.API_URL + '/api/auth/register', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -13,6 +13,7 @@ export class AuthService extends ApiService {
 				email
 			})
 		}).then((response) => {
+			TokenService.setToken(response.jwt.token)
 			successCallback(response)
 		}).catch((error) => {
 			failureCallback(error)
@@ -25,7 +26,6 @@ export class AuthService extends ApiService {
 
 		this.fetchNoAuth(url, {})
 			.then((response) => {
-				// TODO Store the returned JWT token just like login
 				successCallback(response)
 			}).catch((error) => {
 			  failureCallback(error)
@@ -40,7 +40,7 @@ export class AuthService extends ApiService {
 				password
 			})
 		}).then(response => {
-			TokenService.setToken(response.token)
+			TokenService.setToken(response.jwt.token)
 			successCallback(response)
 		}).catch((error) => {
 			failureCallback(error)
@@ -53,7 +53,7 @@ export class AuthService extends ApiService {
 
 	reauthenticate() {
 		this.logout(() => {
-			window.location.replace('/login')
+			window.location.assign('/login')
 		})
 	}
 
@@ -62,8 +62,7 @@ export class AuthService extends ApiService {
 		this.fetch(Config.API_URL + '/api/auth/logout', {
 			method: 'GET'
 		}).then(response => {
-			//this.props.history.push('/login')
-			window.location.replace('/home')
+			window.location.assign('/')
 			setTimeout(callback, 100)
 		})
 	}

@@ -30,8 +30,7 @@ class VerifyAccountEmailComponent extends React.Component {
 
 	verify = () => {
 		AuthService.verify(this.state.id, this.state.code, (response) => {
-			// TODO What to do with a good response??? Since we should have a valid JWT token we can just go home
-			console.log(response)
+			window.location.assign("/")
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
