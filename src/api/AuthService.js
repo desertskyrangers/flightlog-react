@@ -20,15 +20,29 @@ export class AuthService extends ApiService {
 		})
 	}
 
-	verify(id, code, successCallback, failureCallback) {
-		const url = new URL(Config.API_URL + '/api/auth/verify');
-		url.search = new URLSearchParams({id: id, code: code}).toString()
+	// verify(id, code, successCallback, failureCallback) {
+	// 	const url = new URL(Config.API_URL + '/api/auth/verify');
+	// 	url.search = new URLSearchParams({id: id, code: code}).toString()
+	//
+	// 	this.fetchNoAuth(url, {})
+	// 		.then((response) => {
+	// 			successCallback(response)
+	// 		}).catch((error) => {
+	// 		  failureCallback(error)
+	// 	})
+	// }
 
-		this.fetchNoAuth(url, {})
-			.then((response) => {
-				successCallback(response)
-			}).catch((error) => {
-			  failureCallback(error)
+	verify(id, code, successCallback, failureCallback) {
+		this.fetchNoAuth(Config.API_URL + '/api/auth/verify', {
+			method: 'PUT',
+			body: JSON.stringify({
+				"id": id,
+				"code": code
+			})
+		}).then(response => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
 		})
 	}
 
