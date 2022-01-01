@@ -31,7 +31,7 @@ class RegisterComponent extends React.Component {
 
 	register = (event) => {
 		AuthService.register(this.state.username, this.state.password, this.state.email, (verification) => {
-			window.location.assign("/verify?id=" + verification.id);
+			window.location.assign("/verify/" + verification.id);
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -82,7 +82,7 @@ class RegisterComponent extends React.Component {
 		return (
 			<div className='login-container'>
 				<div className='login-banner'>
-					<img src='logo.png' alt='Logo'/>
+					<img src='/logo.png' alt='Logo'/>
 					<h1>FlightLog</h1>
 				</div>
 				<div className='login-body'>

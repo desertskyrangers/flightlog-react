@@ -27,7 +27,8 @@ function App() {
 						<Route exact path='/legal' element={<Legal/>}/>
 						<Route exact path='/login' element={<Login/>}/>
 						<Route exact path="/register" element={<Register/>}/>
-						<Route exact path="/verify" element={<Verify/>}/>
+						<Route exact path="/verify/:id" element={<Verify/>}/>
+						<Route exact path="/verify/:id/:code" element={<Verify/>}/>
 
 						<Route exact path='/' element={<Protect> <Home/> </Protect>}/>
 

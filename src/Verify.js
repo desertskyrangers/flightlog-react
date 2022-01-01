@@ -1,21 +1,22 @@
 import React from "react";
 import Notice from "./Notice";
 import AuthService from "./api/AuthService";
-import {useSearchParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 export default function Verify(props) {
-	const [searchParams] = useSearchParams();
+	const {id} = useParams()
+	const {code} = useParams()
 
 	return (
-		<VerifyAccountEmailComponent vid={searchParams.get("id")} messages={props.messages}/>
+		<VerifyAccountEmailComponent id={id} code={code} messages={props.messages}/>
 	);
 }
 
 class VerifyAccountEmailComponent extends React.Component {
 
 	state = {
-		id: this.props.vid,
-		code: '',
+		id: this.props.id || '',
+		code: this.props.code || '',
 		messages: this.props.messages || [],
 		resendMessages: []
 	}
@@ -50,11 +51,15 @@ class VerifyAccountEmailComponent extends React.Component {
 		this.setState({resendMessages: []})
 	}
 
+	componentDidMount() {
+		if (this.state.code !== '') setTimeout(this.verify, 100)
+	}
+
 	render() {
 		return (
 			<div className='login-container'>
 				<div className='login-banner'>
-					<img src='logo.png' alt='Logo'/>
+					<img src='/logo.png' alt='Logo'/>
 					<h1>FlightLog</h1>
 				</div>
 				<div className='login-body'>
@@ -63,7 +68,7 @@ class VerifyAccountEmailComponent extends React.Component {
 				<div className='login-body'>
 					<div className='login-form'>
 						<label htmlFor='code' className='login-label'>Verification Code</label>
-						<input id='code' name='code' type='text' placeholder='Verification Code' className='login-field' onChange={this.updateCode} onKeyDown={this.onKeyDown}/>
+						<input id='code' name='code' type='text' value={this.state.code} placeholder='Verification Code' className='login-field' onChange={this.updateCode} onKeyDown={this.onKeyDown}/>
 						<button className='login-submit' onClick={this.verify}>Verify</button>
 						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
 					</div>
