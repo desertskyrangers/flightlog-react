@@ -14,14 +14,12 @@ export default class ApiService {
 	 * Perform the api call and return the JSON object or Error if an error occurs.
 	 */
 	doFetch(auth, url, options) {
-		if( !!!options.headers) options.headers = {}
+		if (!!!options.headers) options.headers = {}
 		options.headers['Accept'] = 'application/json'
 		options.headers['Content-Type'] = 'application/json'
 		if (TokenService.isAuthenticated()) options.headers['Authorization'] = 'Bearer ' + TokenService.getToken()
 
-		return fetch(url,
-			options
-		)
+		return fetch(url, options)
 			.then(response => this.checkStatus(auth, response))
 			.then(response => response.text().then(text => {
 				if ('' === text) text = '{}'
@@ -43,7 +41,6 @@ export default class ApiService {
 		}
 
 		//Error condition
-
 		return response.text().then(text => {
 			const error = new Error()
 			error.status = response.status
