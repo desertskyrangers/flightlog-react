@@ -80,8 +80,8 @@ class LoginComponent extends React.Component {
 				</div>
 				<div className='login-body'>
 					<div className='login-form'>
-						<Username onChange={this.updateUsername}/>
-						<Password onChange={this.updatePassword}/>
+						<Username onChange={this.updateUsername} onKeyDown={this.onKeyDown}/>
+						<Password onChange={this.updatePassword} onKeyDown={this.onKeyDown}/>
 						<button className='login-submit' onClick={this.login}>Sign In</button>
 						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
 					</div>
@@ -103,7 +103,7 @@ class Username extends React.Component {
 			<div>
 				<label htmlFor='username' className='login-label'>Username or email address</label>
 				<input id='username' name='username' type='text' placeholder='Username' autoCapitalize='none' autoCorrect='off' autoComplete='username' autoFocus='autofocus' className='login-field' onChange={this.props.onChange}
-							 onKeyDown={this.onKeyDown}/>
+							 onKeyDown={this.props.onKeyDown}/>
 			</div>
 		);
 	}
@@ -116,7 +116,8 @@ class Password extends React.Component {
 		return (
 			<div>
 				<label htmlFor='password' className='login-label'>Password</label>
-				<input id='password' name='password' type='password' placeholder='Password' autoComplete='current-password' className='login-field' onChange={this.props.onChange} onKeyDown={this.onKeyDown}/>
+				<input id='password' name='password' type='password' placeholder='Password' autoCapitalize='none' autoCorrect='off' autoComplete='current-password' className='login-field' onChange={this.props.onChange}
+							 onKeyDown={this.props.onKeyDown}/>
 			</div>
 		);
 	}
