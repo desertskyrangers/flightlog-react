@@ -2,6 +2,7 @@ import './css/login.css';
 import Notice from "./Notice";
 
 import React from 'react';
+import AppService from "./api/AppService";
 import AuthService from "./api/AuthService";
 import {useNavigate} from 'react-router-dom';
 
@@ -10,11 +11,11 @@ export default function Login(props) {
 	const navigate = useNavigate();
 
 	const home = () => {
-		navigate( '/' )
+		navigate('/')
 	}
 
 	const register = () => {
-		navigate( '/register' )
+		navigate('/register')
 	}
 
 	return (
@@ -28,7 +29,20 @@ class LoginComponent extends React.Component {
 		username: '',
 		password: '',
 		messages: this.props.messages || [],
+		status: ''
 	}
+
+	componentDidMount() {
+		this.loadProgramInformation();
+	}
+
+	loadProgramInformation = () => {
+		AppService.getProgramInformation((program) => {
+			this.setState({status: program})
+		}, (message) => {
+			console.log(message);
+		});
+	};
 
 	onKeyDown = (event) => {
 		if (event.key === 'Enter') this.login();
@@ -71,10 +85,11 @@ class LoginComponent extends React.Component {
 						<button className='login-submit' onClick={this.login}>Sign In</button>
 						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
 					</div>
+					<div>
+						Need an account? <button onClick={this.props.navRegister}>Sign Up</button>
+					</div>
 				</div>
-				<div className='login-body'>
-					<p>Need an account? <button onClick={this.props.navRegister}>Sign Up</button> </p>
-				</div>
+				<div className='login-label'>Version: {this.state.status.version}</div>
 			</div>
 		);
 	}
@@ -87,7 +102,8 @@ class Username extends React.Component {
 		return (
 			<div>
 				<label htmlFor='username' className='login-label'>Username or email address</label>
-				<input id='username' name='username' type='text' placeholder='Username' autoCapitalize='none' autoCorrect='off' autoComplete='username' autoFocus='autofocus' className='login-field' onChange={this.props.onChange} onKeyDown={this.onKeyDown}/>
+				<input id='username' name='username' type='text' placeholder='Username' autoCapitalize='none' autoCorrect='off' autoComplete='username' autoFocus='autofocus' className='login-field' onChange={this.props.onChange}
+							 onKeyDown={this.onKeyDown}/>
 			</div>
 		);
 	}
