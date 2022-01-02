@@ -20,6 +20,19 @@ export class AuthService extends ApiService {
 		})
 	}
 
+	resend(id, successCallback, failureCallback) {
+		this.fetchNoAuth(Config.API_URL + '/api/auth/resend', {
+			method: 'POST',
+			body: JSON.stringify({
+				"id": id
+			})
+		}).then(response => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 	verify(id, code, successCallback, failureCallback) {
 		this.fetchNoAuth(Config.API_URL + '/api/auth/verify', {
 			method: 'POST',

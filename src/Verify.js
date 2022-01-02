@@ -40,7 +40,15 @@ class VerifyAccountEmailComponent extends React.Component {
 	}
 
 	resend = () => {
-		this.setState({resendMessages: ["Resend not implemented"]})
+		AuthService.resend(this.state.id, (response) => {
+			let messages = response.messages
+			if (!!!messages) messages = [response.message]
+			this.setState({messages: messages})
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			this.setState({messages: messages})
+		})
 	}
 
 	clearMessages = () => {

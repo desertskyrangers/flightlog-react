@@ -61,7 +61,7 @@ class RegisterComponent extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const validUsername = !!this.state.username && this.state.username.match(Config.USERNAME_PATTERN)
+		const validUsername = !!this.state.username
 		const validPassword = !!this.state.password
 		const passwordTooShort = !!this.state.password && this.state.password.length < 8;
 		const passwordTooLong = !!this.state.password && this.state.password.length >= 128;
