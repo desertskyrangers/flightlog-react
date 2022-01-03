@@ -72,14 +72,17 @@ export class AuthService extends ApiService {
 		})
 	}
 
-	logout(callback) {
+	logout(callback, failureCallback) {
+		TokenService.expire()
 		this.fetch(Config.API_URL + '/api/auth/logout', {
 			method: 'POST',
 			body: JSON.stringify({})
 		}).then(response => {
-			TokenService.expire()
 			callback()
+		}).catch(failure => {
+			failureCallback(failure)
 		})
+		window.location.assign('/')
 	}
 
 	// getProfile() {

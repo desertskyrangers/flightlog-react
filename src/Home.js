@@ -17,8 +17,11 @@ class HomeComponent extends React.Component {
 	}
 
 	logout = () => {
-		AuthService.logout( () => {
-			window.location.assign('/')
+		AuthService.logout(() => {
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			console.log("API logout error=" + JSON.stringify(messages))
 		})
 	}
 
