@@ -1,5 +1,6 @@
 import React from "react";
 import AuthService from "./api/AuthService";
+import ApiPath from "./api/ApiPath";
 
 export default function Home(props) {
 	return (
@@ -14,6 +15,14 @@ class HomeComponent extends React.Component {
 	}
 
 	planFlight = () => {
+	}
+
+	profile = () => {
+		window.location.assign(ApiPath.PROFILE)
+	}
+
+	settings = () => {
+		window.location.assign(ApiPath.SETTINGS)
 	}
 
 	logout = () => {
@@ -36,6 +45,8 @@ class HomeComponent extends React.Component {
 					<div className='login-form'>
 						<button className='login-submit' onClick={this.timeFlight}>Time a Flight</button>
 						<button className='login-submit' onClick={this.planFlight}>Plan a Flight</button>
+						{/*<button className='login-submit' onClick={this.profile}>Profile</button>*/}
+						<button className='login-submit' onClick={this.settings}>Settings</button>
 						<button className='login-submit' onClick={this.logout}>Logout</button>
 					</div>
 				</div>

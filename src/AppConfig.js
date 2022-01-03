@@ -1,4 +1,4 @@
-class Config {
+class AppConfig {
 
 	HOSTNAME = window && window.location && window.location.hostname
 	API_URL = 'https://flightlog.desertskyrangers.com'
@@ -14,6 +14,6 @@ class Config {
 
 }
 
-const instance = new Config()
+const instance = new AppConfig()
 Object.freeze(instance)
 export default instance

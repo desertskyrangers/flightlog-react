@@ -1,7 +1,7 @@
 import './css/login.css';
 
 import AuthService from "./api/AuthService";
-import Config from "./Config";
+import Config from "./AppConfig";
 import Notice from "./Notice";
 
 import React from "react";
@@ -66,7 +66,7 @@ class RegisterComponent extends React.Component {
 		const passwordTooShort = !!this.state.password && this.state.password.length < 8;
 		const passwordTooLong = !!this.state.password && this.state.password.length >= 128;
 		const passwordsMatch = this.state.password === this.state.verifyPassword
-		const validEmail = !!this.state.email && this.state.email.match(Config.EMAIL_PATTERN)
+		const validEmail = !this.state.email || this.state.email.match(Config.EMAIL_PATTERN)
 
 		let messages = [];
 		if (!validUsername) messages.push('Invalid username')

@@ -1,4 +1,4 @@
-import Config from "../Config";
+import Config from "../AppConfig";
 import ApiService from "./ApiService"
 
 export class AppService extends ApiService {

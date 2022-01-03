@@ -1,16 +1,18 @@
 import './css/app.css';
 import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
+import TokenService from "./api/TokenService";
+import ApiPath from "./api/ApiPath";
 
-import Home from "./Home";
 import Header from "./Header";
 import Footer from "./Footer";
 import Legal from "./Legal";
+import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
 import Verify from "./Verify";
-
 import NotFound from "./NotFound";
-import TokenService from "./api/TokenService";
+import Profile from "./Profile";
+import Settings from "./Settings";
 
 function App() {
 
@@ -24,13 +26,15 @@ function App() {
 			<div className='content'>
 				<Router>
 					<Routes>
-						<Route exact path='/legal' element={<Legal/>}/>
-						<Route exact path='/login' element={<Login/>}/>
-						<Route exact path="/register" element={<Register/>}/>
-						<Route exact path="/verify/:id" element={<Verify/>}/>
-						<Route exact path="/verify/:id/:code" element={<Verify/>}/>
+						<Route exact path={ApiPath.LEGAL} element={<Legal/>}/>
+						<Route exact path={ApiPath.LOGIN} element={<Login/>}/>
+						<Route exact path={ApiPath.REGISTER} element={<Register/>}/>
+						<Route exact path={ApiPath.VERIFY + "/:id"} element={<Verify/>}/>
+						<Route exact path={ApiPath.VERIFY + "/:id/:code"} element={<Verify/>}/>
 
-						<Route exact path='/' element={<Protect> <Home/> </Protect>}/>
+						<Route exact path={ApiPath.HOME} element={<Protect> <Home/> </Protect>}/>
+						<Route exact path={ApiPath.PROFILE} element={<Protect> <Profile/> </Protect>}/>
+						<Route exact path={ApiPath.SETTINGS} element={<Protect> <Settings/> </Protect>}/>
 
 						<Route path='*' element={<NotFound/>}/>
 					</Routes>

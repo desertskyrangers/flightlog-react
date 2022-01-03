@@ -1,6 +1,6 @@
 import ApiService from "./ApiService"
 import TokenService from "./TokenService"
-import Config from "../Config";
+import Config from "../AppConfig";
 
 export class AuthService extends ApiService {
 

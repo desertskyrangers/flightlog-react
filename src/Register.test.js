@@ -1,7 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import Register from './Register';
 import {BrowserRouter} from "react-router-dom";
-import Verify from "./Verify";
 
 test('renders username field', () => {
 	render(<Register/>);
