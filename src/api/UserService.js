@@ -4,9 +4,8 @@ import Config from "../AppConfig";
 export class UserService extends ApiService {
 
 	profile(id, successCallback, failureCallback) {
-		this.fetchNoAuth(Config.API_URL + `/api/user/${id}`, {
-			method: 'GET',
-			body: JSON.stringify({})
+		this.fetch(Config.API_URL + `/api/profile`, {
+			method: 'GET'
 		}).then((response) => {
 			successCallback(response)
 		}).catch((error) => {

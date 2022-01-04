@@ -9,7 +9,7 @@ import TokenService from "./api/TokenService";
 export default class Profile extends React.Component {
 
 	state = {
-		id: this.props.id || '',
+		id: TokenService.getUserId(),
 		firstName: this.props.firstName || '',
 		lastName: this.props.lastName || '',
 		email: this.props.email || '',
@@ -23,7 +23,7 @@ export default class Profile extends React.Component {
 	notice = <Notice priority='error'/>
 
 	update = () => {
-		console.log( "Update profile")
+		console.log("Update profile")
 	}
 
 	onKeyDown = (event) => {
@@ -39,12 +39,12 @@ export default class Profile extends React.Component {
 	}
 
 	componentDidMount() {
-		TokenService.getUser()
-
 		UserService.profile(this.state.id, (success => {
-
+			console.log("success=" + JSON.stringify(success))
 		}), (failure) => {
-
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			this.setState({messages: messages})
 		})
 	}
 

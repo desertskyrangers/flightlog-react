@@ -20,7 +20,6 @@ class TokenService {
 	}
 
 	setToken(token) {
-		// Saves user token to localStorage
 		localStorage.setItem(TOKEN_KEY, token)
 	}
 
@@ -33,9 +32,8 @@ class TokenService {
 		localStorage.removeItem(TOKEN_KEY);
 	}
 
-	getUser() {
-		const decoded = decode(this.getToken());
-		console.log(decoded);
+	getUserId() {
+		return decode(this.getToken()).uid;
 	}
 
 }
