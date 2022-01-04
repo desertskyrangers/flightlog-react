@@ -10,16 +10,8 @@ export default function Login(props) {
 
 	const navigate = useNavigate();
 
-	const home = () => {
-		navigate('/')
-	}
-
-	const register = () => {
-		navigate('/register')
-	}
-
 	return (
-		<LoginComponent messages={props.messages} navHome={home} navRegister={register}/>
+		<LoginComponent messages={props.messages} navigate={navigate}/>
 	)
 }
 
@@ -51,7 +43,7 @@ class LoginComponent extends React.Component {
 	login = () => {
 		this.setState({messages: []})
 		AuthService.login(this.state.username, this.state.password, (success) => {
-			this.props.navHome();
+			this.props.navigate('/')
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -71,6 +63,10 @@ class LoginComponent extends React.Component {
 		this.setState({messages: []})
 	}
 
+	navRegister = () => {
+		this.props.navigate('/register')
+	}
+
 	render() {
 		return (
 			<div className='login-container'>
@@ -86,7 +82,7 @@ class LoginComponent extends React.Component {
 						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
 					</div>
 					<div>
-						Need an account? <button onClick={this.props.navRegister}>Sign Up</button>
+						Need an account? <button onClick={this.navRegister}>Register Here</button>
 					</div>
 				</div>
 				<div className='login-label'>Version: {this.state.status.version}</div>

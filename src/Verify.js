@@ -1,14 +1,15 @@
 import React from "react";
 import Notice from "./Notice";
 import AuthService from "./api/AuthService";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 export default function Verify(props) {
 	const {id} = useParams()
 	const {code} = useParams()
+	const navigate = useNavigate();
 
 	return (
-		<VerifyAccountEmailComponent id={id} code={code} messages={props.messages}/>
+		<VerifyAccountEmailComponent id={id} code={code} messages={props.messages} navigate={navigate}/>
 	);
 }
 
@@ -31,7 +32,7 @@ class VerifyAccountEmailComponent extends React.Component {
 
 	verify = () => {
 		AuthService.verify(this.state.id, this.state.code, (response) => {
-			window.location.assign("/")
+			this.props.navigate("/")
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]

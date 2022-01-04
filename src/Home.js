@@ -1,10 +1,13 @@
 import React from "react";
 import AuthService from "./api/AuthService";
 import ApiPath from "./api/ApiPath";
+import {useNavigate} from "react-router-dom";
 
 export default function Home(props) {
+	const navigate = useNavigate();
+
 	return (
-		<HomeComponent/>
+		<HomeComponent navigate={navigate}/>
 	);
 }
 
@@ -17,12 +20,8 @@ class HomeComponent extends React.Component {
 	planFlight = () => {
 	}
 
-	profile = () => {
-		window.location.assign(ApiPath.PROFILE)
-	}
-
 	settings = () => {
-		window.location.assign(ApiPath.SETTINGS)
+		this.props.navigate(ApiPath.SETTINGS)
 	}
 
 	logout = () => {

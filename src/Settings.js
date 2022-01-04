@@ -1,11 +1,19 @@
 import React from "react";
 import ApiPath from "./api/ApiPath";
+import {useNavigate} from "react-router-dom";
 
+export default function Settings(props) {
+	const navigate = useNavigate();
 
-export default class Settings extends React.Component {
+	return (
+		<SettingsComponent navigate={navigate}/>
+	);
+}
+
+class SettingsComponent extends React.Component {
 
 	profile = () => {
-		window.location.assign(ApiPath.PROFILE)
+		this.props.navigate(ApiPath.PROFILE)
 	}
 
 	render() {

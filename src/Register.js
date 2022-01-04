@@ -6,10 +6,12 @@ import Notice from "./Notice";
 
 import React from "react";
 import {isEqual} from "lodash";
+import {useNavigate} from "react-router-dom";
 
 export default function Register(props) {
+	const navigate = useNavigate();
 	return (
-		<RegisterComponent messages={props.messages}/>
+		<RegisterComponent messages={props.messages} navigate={navigate}/>
 	)
 }
 
@@ -31,7 +33,7 @@ class RegisterComponent extends React.Component {
 
 	register = (event) => {
 		AuthService.register(this.state.username, this.state.password, this.state.email, (verification) => {
-			window.location.assign("/verify/" + verification.id);
+			this.props.navigate("/verify/" + verification.id);
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
