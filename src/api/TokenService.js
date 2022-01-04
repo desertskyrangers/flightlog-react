@@ -33,7 +33,12 @@ class TokenService {
 	}
 
 	getUserId() {
-		return decode(this.getToken()).uid;
+		try {
+			return decode(this.getToken()).uid;
+		} catch( error ) {
+			console.log( error.message );
+			return '';
+		}
 	}
 
 }

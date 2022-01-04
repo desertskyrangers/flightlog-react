@@ -5,11 +5,10 @@ import {isEqual} from "lodash";
 import UserService from "./api/UserService";
 import TokenService from "./api/TokenService";
 
-
 export default class Profile extends React.Component {
 
 	state = {
-		id: TokenService.getUserId(),
+		id: this.props.id || '',
 		firstName: this.props.firstName || '',
 		lastName: this.props.lastName || '',
 		email: this.props.email || '',
@@ -39,8 +38,18 @@ export default class Profile extends React.Component {
 	}
 
 	componentDidMount() {
-		UserService.profile(this.state.id, (success => {
-			console.log("success=" + JSON.stringify(success))
+		const id = TokenService.getUserId();
+		UserService.profile(id, (success => {
+			this.setState({
+				id: success.account.id,
+				firstName: success.account.firstName || '',
+				lastName: success.account.lastName || '',
+				email: success.account.email || '',
+				emailVerified: success.account.emailVerified || false,
+				smsNumber: success.account.smsNumber || '',
+				smsCarrier: success.account.smsCarrier || '',
+				messages: success.messages || []
+			})
 		}), (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]

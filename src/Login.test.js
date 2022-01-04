@@ -34,7 +34,7 @@ test('renders sign in button', () => {
 
 test('renders sign up button', () => {
 	render(<BrowserRouter><Login/></BrowserRouter>);
-	const element = screen.getByText(/sign up/i);
+	const element = screen.getByText(/register/i);
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('BUTTON');
 });
