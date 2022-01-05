@@ -4,7 +4,7 @@ import Config from "./AppConfig";
 import {isEqual} from "lodash";
 import UserService from "./api/UserService";
 import TokenService from "./api/TokenService";
-import SmsService from "./api/SmsService";
+import LookupService from "./api/LookupService";
 
 export default class Profile extends React.Component {
 
@@ -65,7 +65,6 @@ export default class Profile extends React.Component {
 	componentDidMount() {
 		const id = TokenService.getUserId();
 		UserService.profile(id, (success) => {
-			console.log("account=" + JSON.stringify(success))
 			this.setState({
 				id: success.account.id,
 				firstName: success.account.firstName || '',
@@ -85,7 +84,7 @@ export default class Profile extends React.Component {
 			this.setState({messages: messages})
 		})
 
-		SmsService.getSmsCarriers((success) => {
+		LookupService.getSmsCarriers((success) => {
 			this.setState({smsCarriers: success})
 		}, (failure) => {
 			let messages = failure.messages
@@ -111,13 +110,6 @@ export default class Profile extends React.Component {
 	render() {
 		return (
 			<div className='login-container'>
-				<div className='login-banner'>
-					<img src='/logo.png' alt='Logo'/>
-					<h1>FlightLog</h1>
-				</div>
-				<div className='login-body'>
-					<div>User Profile</div>
-				</div>
 				<div className='login-body'>
 					<div className='login-form'>
 						<ProfileField id='firstName' text='First Name' type='text' autoFocus='autofocus' value={this.state.firstName} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
