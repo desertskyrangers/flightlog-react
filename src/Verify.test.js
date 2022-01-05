@@ -2,11 +2,6 @@ import {render, screen} from "@testing-library/react";
 import {BrowserRouter} from "react-router-dom";
 import Verify from "./Verify";
 
-test('renders DSR FlightLog text', () => {
-	render(<BrowserRouter><Verify/></BrowserRouter>);
-	expect(screen.getByText(/FlightLog/i)).toBeInTheDocument();
-});
-
 test('renders verify field', () => {
 	render(<BrowserRouter><Verify/></BrowserRouter>);
 	const element = screen.getByLabelText(/verification code/i);

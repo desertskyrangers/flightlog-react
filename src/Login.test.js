@@ -3,11 +3,6 @@ import Login from './Login';
 import {BrowserRouter} from "react-router-dom";
 import Verify from "./Verify";
 
-test('renders DSR FlightLog text', () => {
-	render(<BrowserRouter><Login/></BrowserRouter>);
-	expect(screen.getByText(/FlightLog/i)).toBeInTheDocument();
-});
-
 test('renders username field', () => {
 	render(<BrowserRouter><Login/></BrowserRouter>);
 	const element = screen.getByLabelText(/username/i);
