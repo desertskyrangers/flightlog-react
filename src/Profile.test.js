@@ -43,6 +43,6 @@ test('renders sms carrier field', () => {
 	render(<Router><Profile/></Router>);
 	const element = screen.getByLabelText('SMS Carrier');
 	expect(element).toBeInTheDocument();
-	expect(element).toHaveAttribute('type', 'text');
+	expect(element.nodeName).toBe('SELECT');
 	expect(element).toHaveClass('login-field');
 });
