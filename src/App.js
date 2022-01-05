@@ -11,8 +11,10 @@ import Login from "./Login";
 import Register from "./Register";
 import Verify from "./Verify";
 import NotFound from "./NotFound";
+import Flights from "./Flights";
+import Setup from "./Setup";
+import UserActions from "./UserActions";
 import Profile from "./Profile";
-import Settings from "./Settings";
 
 function App() {
 
@@ -21,10 +23,10 @@ function App() {
 	return (
 
 		<div className="app">
-			<Header/>
 			{/*{atRoot?<Header/>:<HeaderThin/>}*/}
-			<div className='content'>
-				<Router>
+			<Router>
+				<Header/>
+				<div className='content'>
 					<Routes>
 						<Route exact path={ApiPath.LEGAL} element={<Legal/>}/>
 						<Route exact path={ApiPath.LOGIN} element={<Login/>}/>
@@ -33,14 +35,17 @@ function App() {
 						<Route exact path={ApiPath.VERIFY + "/:id/:code"} element={<Verify/>}/>
 
 						<Route exact path={ApiPath.HOME} element={<Protect> <Home/> </Protect>}/>
+						<Route exact path={ApiPath.FLIGHTS} element={<Protect> <Flights/> </Protect>}/>
+						<Route exact path={ApiPath.SETUP} element={<Protect> <Setup/> </Protect>}/>
+
+						<Route exact path={ApiPath.USER} element={<Protect> <UserActions/> </Protect>}/>
 						<Route exact path={ApiPath.PROFILE} element={<Protect> <Profile/> </Protect>}/>
-						<Route exact path={ApiPath.SETTINGS} element={<Protect> <Settings/> </Protect>}/>
 
 						<Route path='*' element={<NotFound/>}/>
 					</Routes>
-				</Router>
-			</div>
-			<Footer/>
+				</div>
+				<Footer/>
+			</Router>
 		</div>
 	);
 

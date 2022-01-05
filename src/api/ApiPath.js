@@ -2,15 +2,19 @@ class ApiPath {
 
 	ROOT = ""
 
+	// Not protected (does not require authentication)
 	LEGAL = this.ROOT + "/legal"
-
+	LOGIN = this.ROOT + "/login"
 	REGISTER = this.ROOT + "/register"
 	VERIFY = this.ROOT + "/verify"
-	LOGIN = this.ROOT + "/login"
 
+	// Protected (requires authentication)
 	HOME = this.ROOT + "/"
-	PROFILE = "/profile"
-	SETTINGS = "/settings"
+	FLIGHTS = this.ROOT + "/flights"
+	SETUP = this.ROOT + "/settings"
+
+	USER = this.ROOT + "/user"
+	PROFILE = this.USER + "/profile"
 }
 
 const instance = new ApiPath()
