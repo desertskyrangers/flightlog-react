@@ -4,6 +4,7 @@ import Config from "./AppConfig";
 import {isEqual} from "lodash";
 import UserService from "./api/UserService";
 import TokenService from "./api/TokenService";
+import SmsService from "./api/SmsService";
 
 export default class Profile extends React.Component {
 
@@ -15,9 +16,10 @@ export default class Profile extends React.Component {
 		email: this.props.email || '',
 		emailVerified: this.props.emailVerified || '',
 		smsNumber: this.props.smsNumber || '',
-		smsCarrier: this.props.smsCarrier || '',
+		smsCarrier: this.props.smsCarrier || 'verizon',
 		smsVerified: this.props.smsVerified || '',
 		messages: this.props.messages || [],
+		smsCarriers: [],
 	}
 
 	notice = <Notice priority='error'/>
@@ -37,6 +39,7 @@ export default class Profile extends React.Component {
 	}
 
 	updateField = (event) => {
+		console.log("updating field=" + event.target.name + " = " + event.target.value)
 		this.setState({[event.target.name]: event.target.value})
 
 		if (event.target.name === 'firstName') {
@@ -52,7 +55,7 @@ export default class Profile extends React.Component {
 	updatePreferredName(oldFirstName, oldLastName, newFirstName, newLastName) {
 		const oldPreferredName = oldFirstName + " " + oldLastName
 		const newPreferredName = newFirstName + " " + newLastName
-		if( this.state.preferredName === oldPreferredName ) this.setState({preferredName: newPreferredName})
+		if (this.state.preferredName === oldPreferredName) this.setState({preferredName: newPreferredName})
 	}
 
 	clearMessages = () => {
@@ -61,7 +64,8 @@ export default class Profile extends React.Component {
 
 	componentDidMount() {
 		const id = TokenService.getUserId();
-		UserService.profile(id, (success => {
+		UserService.profile(id, (success) => {
+			console.log("account=" + JSON.stringify(success))
 			this.setState({
 				id: success.account.id,
 				firstName: success.account.firstName || '',
@@ -75,7 +79,15 @@ export default class Profile extends React.Component {
 			})
 			this.oldFirstName = success.account.firstName
 			this.oldLastName = success.account.lastName
-		}), (failure) => {
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			this.setState({messages: messages})
+		})
+
+		SmsService.getSmsCarriers((success) => {
+			this.setState({smsCarriers: success})
+		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
 			this.setState({messages: messages})
@@ -109,11 +121,16 @@ export default class Profile extends React.Component {
 				<div className='login-body'>
 					<div className='login-form'>
 						<ProfileField id='firstName' text='First Name' type='text' autoFocus='autofocus' value={this.state.firstName} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
-						<ProfileField id='lastName' text='Last Name' type='text' autoFocus='autofocus' value={this.state.lastName} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
-						<ProfileField id='preferredName' text='Preferred Name' type='text' autoFocus='autofocus' value={this.state.preferredName} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
-						<ProfileField id='email' text='Email' type='text' autoFocus='autofocus' value={this.state.email} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
-						<ProfileField id='smsNumber' text='SMS Number' type='text' autoFocus='autofocus' value={this.state.smsNumber} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
-						<ProfileField id='smsCarrier' text='SMS Carrier' type='text' autoFocus='autofocus' value={this.state.smsCarrier} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
+						<ProfileField id='lastName' text='Last Name' type='text' value={this.state.lastName} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
+						<ProfileField id='preferredName' text='Preferred Name' type='text' value={this.state.preferredName} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
+						<ProfileField id='email' text='Email' type='text' value={this.state.email} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
+						<ProfileField id='smsNumber' text='SMS Number' type='text' value={this.state.smsNumber} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
+						<div>
+							<label htmlFor='smsCarrier' className='login-label'>SMS Carrier</label>
+							<select id='smsCarrier' name='smsCarrier' value={this.state.smsCarrier} className='login-field' onChange={this.updateField}>
+								{this.state.smsCarriers.map((carrier) => <option key={carrier.id} value={carrier.id}>{carrier.name}</option>)}
+							</select>
+						</div>
 						<Notice priority='error' messages={this.state.messages} clearMessages={this.clearMessages}/>
 						<button disabled={this.state.messages.length > 0} className='login-submit' onClick={this.update}>Update</button>
 					</div>

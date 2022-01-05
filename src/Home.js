@@ -45,7 +45,7 @@ class HomeComponent extends React.Component {
 						<button className='login-submit' onClick={this.timeFlight}>Time a Flight</button>
 						<button className='login-submit' onClick={this.planFlight}>Plan a Flight</button>
 						{/*<button className='login-submit' onClick={this.profile}>Profile</button>*/}
-						<button className='login-submit' onClick={this.settings}>Settings</button>
+						<button className='login-submit' onClick={this.settings}>Setup</button>
 						<button className='login-submit' onClick={this.logout}>Logout</button>
 					</div>
 				</div>
