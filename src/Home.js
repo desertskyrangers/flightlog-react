@@ -1,8 +1,6 @@
 import React from "react";
-import AuthService from "./api/AuthService";
 import ApiPath from "./api/ApiPath";
 import {useNavigate} from "react-router-dom";
-import NavBar from "./NavBar";
 
 export default function Home(props) {
 	const navigate = useNavigate();
