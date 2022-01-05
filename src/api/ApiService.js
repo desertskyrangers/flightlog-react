@@ -14,7 +14,7 @@ export default class ApiService {
 	 * Perform the api call and return the JSON object or Error if an error occurs.
 	 */
 	doFetch(auth, url, options) {
-		if (!!!options.headers) options.headers = {}
+		if (!options.headers) options.headers = {}
 		options.headers['Accept'] = 'application/json'
 		options.headers['Content-Type'] = 'application/json'
 		if (TokenService.isAuthenticated()) options.headers['Authorization'] = 'Bearer ' + TokenService.getToken()

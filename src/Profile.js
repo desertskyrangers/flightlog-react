@@ -23,6 +23,11 @@ export default class Profile extends React.Component {
 
 	update = () => {
 		console.log("Update profile")
+		UserService.update( this.state, () => {}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			this.setState({messages: messages})
+		} )
 	}
 
 	onKeyDown = (event) => {

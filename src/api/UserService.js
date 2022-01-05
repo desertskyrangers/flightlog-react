@@ -13,6 +13,24 @@ export class UserService extends ApiService {
 		})
 	}
 
+	update(account, successCallback, failureCallback) {
+		this.fetch(Config.API_URL + `/api/user/${account.id}`, {
+			method: 'PUT',
+			body: JSON.stringify({
+				id: account.id,
+				firstName: account.firstName,
+				lastName: account.lastName,
+				email: account.email,
+				smsNumber: account.smsNumber,
+				smsCarrier: account.smsCarrier
+			})
+		}).then((response) => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 }
 
 
