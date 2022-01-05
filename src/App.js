@@ -15,10 +15,9 @@ import Flights from "./Flights";
 import Setup from "./Setup";
 import UserActions from "./UserActions";
 import Profile from "./Profile";
+import NavBar from "./NavBar";
 
 function App() {
-
-	//const atRoot = window.location.pathname === '/';
 
 	return (
 
@@ -52,8 +51,7 @@ function App() {
 }
 
 function Protect({children}) {
-	let isAuthenticated = TokenService.isAuthenticated();
-	return isAuthenticated ? children : <Navigate to='/login'/>;
+	return TokenService.isAuthenticated() ? <div><NavBar/>{children}</div> : <Navigate to='/login'/>;
 }
 
 export default App;

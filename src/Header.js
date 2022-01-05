@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "./NavBar";
 
 export default class Header extends React.Component {
 
@@ -10,7 +9,6 @@ export default class Header extends React.Component {
 					<img src='/logo.png' alt='Logo'/>
 					<h1>FlightLog</h1>
 				</div>
-				<NavBar/>
 			</div>
 		)
 	}
