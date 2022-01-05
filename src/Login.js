@@ -70,10 +70,6 @@ class LoginComponent extends React.Component {
 	render() {
 		return (
 			<div className='login-container'>
-				<div className='login-banner'>
-					<img src='/logo.png' alt='Logo'/>
-					<h1>FlightLog</h1>
-				</div>
 				<div className='login-body'>
 					<div className='login-form'>
 						<Username onChange={this.updateUsername} onKeyDown={this.onKeyDown}/>
