@@ -11,6 +11,7 @@ export default class Profile extends React.Component {
 		id: this.props.id || '',
 		firstName: this.props.firstName || '',
 		lastName: this.props.lastName || '',
+		preferredName: this.props.preferredName || '',
 		email: this.props.email || '',
 		emailVerified: this.props.emailVerified || '',
 		smsNumber: this.props.smsNumber || '',
@@ -23,11 +24,12 @@ export default class Profile extends React.Component {
 
 	update = () => {
 		console.log("Update profile")
-		UserService.update( this.state, () => {}, (failure) => {
+		UserService.update(this.state, () => {
+		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
 			this.setState({messages: messages})
-		} )
+		})
 	}
 
 	onKeyDown = (event) => {
@@ -36,6 +38,21 @@ export default class Profile extends React.Component {
 
 	updateField = (event) => {
 		this.setState({[event.target.name]: event.target.value})
+
+		if (event.target.name === 'firstName') {
+			this.updatePreferredName(this.oldFirstName, this.oldLastName, event.target.value, this.state.lastName)
+			this.oldFirstName = event.target.value
+		}
+		if (event.target.name === 'lastName') {
+			this.updatePreferredName(this.oldFirstName, this.oldLastName, this.state.firstName, event.target.value)
+			this.oldLastName = event.target.value
+		}
+	}
+
+	updatePreferredName(oldFirstName, oldLastName, newFirstName, newLastName) {
+		const oldPreferredName = oldFirstName + " " + oldLastName
+		const newPreferredName = newFirstName + " " + newLastName
+		if( this.state.preferredName === oldPreferredName ) this.setState({preferredName: newPreferredName})
 	}
 
 	clearMessages = () => {
@@ -49,12 +66,15 @@ export default class Profile extends React.Component {
 				id: success.account.id,
 				firstName: success.account.firstName || '',
 				lastName: success.account.lastName || '',
+				preferredName: success.account.preferredName || '',
 				email: success.account.email || '',
 				emailVerified: success.account.emailVerified || false,
 				smsNumber: success.account.smsNumber || '',
 				smsCarrier: success.account.smsCarrier || '',
 				messages: success.messages || []
 			})
+			this.oldFirstName = success.account.firstName
+			this.oldLastName = success.account.lastName
 		}), (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -90,6 +110,7 @@ export default class Profile extends React.Component {
 					<div className='login-form'>
 						<ProfileField id='firstName' text='First Name' type='text' autoFocus='autofocus' value={this.state.firstName} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
 						<ProfileField id='lastName' text='Last Name' type='text' autoFocus='autofocus' value={this.state.lastName} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
+						<ProfileField id='preferredName' text='Preferred Name' type='text' autoFocus='autofocus' value={this.state.preferredName} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
 						<ProfileField id='email' text='Email' type='text' autoFocus='autofocus' value={this.state.email} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
 						<ProfileField id='smsNumber' text='SMS Number' type='text' autoFocus='autofocus' value={this.state.smsNumber} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
 						<ProfileField id='smsCarrier' text='SMS Carrier' type='text' autoFocus='autofocus' value={this.state.smsCarrier} onChange={this.updateField} onKeyDown={this.onKeyDown}/>

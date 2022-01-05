@@ -20,6 +20,7 @@ export class UserService extends ApiService {
 				id: account.id,
 				firstName: account.firstName,
 				lastName: account.lastName,
+				preferredName: account.preferredName,
 				email: account.email,
 				smsNumber: account.smsNumber,
 				smsCarrier: account.smsCarrier
