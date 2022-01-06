@@ -7,7 +7,7 @@ test('renders verify field', () => {
 	const element = screen.getByLabelText(/verification code/i);
 	expect(element).toBeInTheDocument();
 	expect(element).toHaveAttribute('type', 'text');
-	expect(element).toHaveClass('login-field');
+	expect(element).toHaveClass('page-field');
 });
 
 test('renders verify button', () => {
@@ -15,7 +15,7 @@ test('renders verify button', () => {
 	const element = screen.getByText(/verify/i);
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('BUTTON');
-	expect(element).toHaveClass('login-submit');
+	expect(element).toHaveClass('page-submit');
 });
 
 test('renders resend button', () => {

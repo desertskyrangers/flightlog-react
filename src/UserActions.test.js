@@ -7,7 +7,7 @@ test('renders profile button', () => {
 	const element = screen.getByText('Profile');
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('BUTTON');
-	expect(element).toHaveClass('login-submit');
+	expect(element).toHaveClass('page-submit');
 });
 
 test('renders log out button', () => {
@@ -15,6 +15,6 @@ test('renders log out button', () => {
 	const element = screen.getByText('Logout');
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('BUTTON');
-	expect(element).toHaveClass('login-submit');
+	expect(element).toHaveClass('page-submit');
 });
 

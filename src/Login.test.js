@@ -8,7 +8,7 @@ test('renders username field', () => {
 	const element = screen.getByLabelText(/username/i);
 	expect(element).toBeInTheDocument();
 	expect(element).toHaveAttribute('type', 'text');
-	expect(element).toHaveClass('login-field');
+	expect(element).toHaveClass('page-field');
 });
 
 test('renders password field', () => {
@@ -16,7 +16,7 @@ test('renders password field', () => {
 	const element = screen.getByLabelText(/password/i);
 	expect(element).toBeInTheDocument();
 	expect(element).toHaveAttribute('type', 'password');
-	expect(element).toHaveClass('login-field');
+	expect(element).toHaveClass('page-field');
 });
 
 test('renders sign in button', () => {
@@ -24,7 +24,7 @@ test('renders sign in button', () => {
 	const element = screen.getByText(/sign in/i);
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('BUTTON');
-	expect(element).toHaveClass('login-submit');
+	expect(element).toHaveClass('page-submit');
 });
 
 test('renders sign up button', () => {

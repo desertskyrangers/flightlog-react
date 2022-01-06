@@ -7,7 +7,7 @@ test('renders first name field', () => {
 	const element = screen.getByLabelText('First Name');
 	expect(element).toBeInTheDocument();
 	expect(element).toHaveAttribute('type', 'text');
-	expect(element).toHaveClass('login-field');
+	expect(element).toHaveClass('page-field');
 });
 
 test('renders last name field', () => {
@@ -15,7 +15,7 @@ test('renders last name field', () => {
 	const element = screen.getByLabelText('Last Name');
 	expect(element).toBeInTheDocument();
 	expect(element).toHaveAttribute('type', 'text');
-	expect(element).toHaveClass('login-field');
+	expect(element).toHaveClass('page-field');
 });
 
 test('renders email field', () => {
@@ -23,7 +23,7 @@ test('renders email field', () => {
 	const element = screen.getByLabelText('Email');
 	expect(element).toBeInTheDocument();
 	expect(element).toHaveAttribute('type', 'text');
-	expect(element).toHaveClass('login-field');
+	expect(element).toHaveClass('page-field');
 });
 
 test('renders sms number field', () => {
@@ -31,7 +31,7 @@ test('renders sms number field', () => {
 	const element = screen.getByLabelText('SMS Number');
 	expect(element).toBeInTheDocument();
 	expect(element).toHaveAttribute('type', 'text');
-	expect(element).toHaveClass('login-field');
+	expect(element).toHaveClass('page-field');
 });
 
 test('renders sms carrier field', () => {
@@ -39,5 +39,5 @@ test('renders sms carrier field', () => {
 	const element = screen.getByLabelText('SMS Carrier');
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('SELECT');
-	expect(element).toHaveClass('login-field');
+	expect(element).toHaveClass('page-field');
 });
