@@ -102,16 +102,14 @@ class Username extends React.Component {
 
 }
 
-class Password extends React.Component {
+function Password(props) {
 
-	render() {
-		return (
-			<div>
-				<label htmlFor='password' className='login-label'>Password</label>
-				<input id='password' name='password' type='password' placeholder='Password' autoCapitalize='none' autoCorrect='off' autoComplete='current-password' className='login-field' onChange={this.props.onChange}
-							 onKeyDown={this.props.onKeyDown}/>
-			</div>
-		);
-	}
+	return (
+		<div>
+			<label htmlFor='password' className='login-label'>Password</label>
+			<input id='password' name='password' type='password' placeholder='Password' autoCapitalize='none' autoCorrect='off' autoComplete='current-password' className='login-field' onChange={props.onChange}
+						 onKeyDown={props.onKeyDown}/>
+		</div>
+	);
 
 }

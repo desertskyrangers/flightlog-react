@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Notice from "./Notice";
 import AuthService from "./api/AuthService";
 import {useNavigate, useParams} from "react-router-dom";
@@ -73,7 +73,7 @@ class VerifyAccountEmailComponent extends React.Component {
 				<div className='login-body'>
 					<div className='login-form'>
 						<label htmlFor='code' className='login-label'>Verification Code</label>
-						<input id='code' name='code' type='text' value={this.state.code} placeholder='Verification Code' className='login-field' onChange={this.updateCode} onKeyDown={this.onKeyDown}/>
+						<input id='code' name='code' type='text' value={this.state.code} placeholder='Verification Code' autoComplete='one-time-code' className='login-field' onChange={this.updateCode} onKeyDown={this.onKeyDown}/>
 						<button className='login-submit' onClick={this.verify}>Verify</button>
 						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
 					</div>

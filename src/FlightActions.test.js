@@ -1,9 +1,9 @@
 import {render, screen} from '@testing-library/react';
-import Home from './Home';
 import {BrowserRouter as Router} from 'react-router-dom'
+import FlightActions from "./FlightActions";
 
 test('renders time a flight button', () => {
-	render(<Router><Home/></Router>);
+	render(<Router><FlightActions/></Router>);
 	const element = screen.getByText('Time a Flight');
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('BUTTON');
@@ -11,8 +11,8 @@ test('renders time a flight button', () => {
 });
 
 test('renders plan a flight button', () => {
-	render(<Router><Home/></Router>);
-	const element = screen.getByText('Plan a Flight');
+	render(<Router><FlightActions/></Router>);
+	const element = screen.getByText('Log a Flight');
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('BUTTON');
 	expect(element).toHaveClass('login-submit');
