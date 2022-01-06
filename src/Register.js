@@ -10,19 +10,13 @@ import {useNavigate} from "react-router-dom";
 
 export default function Register(props) {
 	const navigate = useNavigate();
-	return (
-		<RegisterComponent messages={props.messages} navigate={navigate}/>
-	)
+	return (<RegisterComponent messages={props.messages} navigate={navigate}/>)
 }
 
 class RegisterComponent extends React.Component {
 
 	state = {
-		username: '',
-		password: '',
-		verifyPassword: '',
-		email: '',
-		messages: this.props.messages || [],
+		username: '', password: '', verifyPassword: '', email: '', messages: this.props.messages || [],
 	}
 
 	notice = <Notice priority='error'/>
@@ -81,34 +75,35 @@ class RegisterComponent extends React.Component {
 	}
 
 	render() {
-		return (
-			<div className='login-container'>
-				<div className='login-body'>
-					<div className='login-form'>
-						<SignupField id='username' text='Username' type='text' autoFocus='autofocus' value={this.state.username} onChange={this.updateUsername} onKeyDown={this.onKeyDown}/>
-						<SignupField id='password' text='Password' type='password' value={this.state.password} onChange={this.updatePassword} onKeyDown={this.onKeyDown}/>
-						<SignupField id='verify-password' text='Verify Password' type='password' value={this.state.verifyPassword} onChange={this.updateVerifyPassword} onKeyDown={this.onKeyDown}/>
-						<SignupField id='email' text='Email Address' type='text' value={this.state.email} onChange={this.updateEmail} onKeyDown={this.onKeyDown}/>
-						<button disabled={this.state.messages.length > 0} className='login-submit' onClick={this.register}>Sign Up</button>
-						<Notice priority='error' messages={this.state.messages} clearMessages={this.clearMessages}/>
-					</div>
+		return (<div className='login-container'>
+			<div className='login-body'>
+				<div className='login-form'>
+					<SignupField id='username' text='Username' type='text' autoFocus='autofocus' value={this.state.username} onChange={this.updateUsername} onKeyDown={this.onKeyDown}/>
+					<SignupField id='password' text='Password' type='password' value={this.state.password} onChange={this.updatePassword} onKeyDown={this.onKeyDown}/>
+					<SignupField id='verify-password' text='Verify Password' type='password' value={this.state.verifyPassword} onChange={this.updateVerifyPassword} onKeyDown={this.onKeyDown}/>
+					<SignupField id='email' text='Email Address' type='text' value={this.state.email} onChange={this.updateEmail} onKeyDown={this.onKeyDown}/>
+					<button disabled={this.state.messages.length > 0} className='login-submit' onClick={this.register}>Sign Up</button>
+					<Notice priority='error' messages={this.state.messages} clearMessages={this.clearMessages}/>
 				</div>
 			</div>
-		);
+		</div>);
 	}
 
 }
 
-class SignupField extends React.Component {
-
-	render() {
-		return (
-			<div>
-				<label htmlFor={this.props.id} className='login-label'>{this.props.text}</label>
-				<input id={this.props.id} name={this.props.id} type={this.props.type} placeholder={this.props.text} autoCapitalize='none' autoCorrect='off' className='login-field' autoFocus={this.props.autoFocus} value={this.props.value}
-							 onChange={this.props.onChange} onKeyDown={this.props.onKeyDown}/>
-			</div>
-		);
-	}
-
+function SignupField(props) {
+	return (<div>
+		<label htmlFor={props.id} className='login-label'>{props.text}</label>
+		<input id={props.id}
+					 name={props.id}
+					 type={props.type}
+					 placeholder={props.text}
+					 autoCapitalize='none'
+					 autoCorrect='off'
+					 className='login-field'
+					 autoFocus={props.autoFocus}
+					 value={props.value}
+					 onChange={props.onChange}
+					 onKeyDown={props.onKeyDown}/>
+	</div>)
 }

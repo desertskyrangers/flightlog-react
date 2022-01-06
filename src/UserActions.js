@@ -6,18 +6,11 @@ import AuthService from "./api/AuthService";
 export default function UserActions(props) {
 	const navigate = useNavigate();
 
-	return (
-		<UserActionsComponent navigate={navigate}/>
-	);
-}
-
-class UserActionsComponent extends React.Component {
-
-	profile = () => {
-		this.props.navigate(ApiPath.PROFILE)
+	function profile() {
+		navigate(ApiPath.PROFILE)
 	}
 
-	logout = () => {
+	function logout() {
 		AuthService.logout(() => {
 		}, (failure) => {
 			let messages = failure.messages
@@ -26,17 +19,15 @@ class UserActionsComponent extends React.Component {
 		})
 	}
 
-	render() {
-		return (
-			<div className='login-container'>
-				<div className='login-body'>
-					<div className='login-form'>
-						<button className='login-submit' onClick={this.profile}>Profile</button>
-						<button className='login-submit' onClick={this.logout}>Logout</button>
-					</div>
+	return (
+		<div className='login-container'>
+			<div className='login-body'>
+				<div className='login-form'>
+					<button className='login-submit' onClick={profile}>Profile</button>
+					<button className='login-submit' onClick={logout}>Logout</button>
 				</div>
 			</div>
-		)
-	}
+		</div>
+	)
 
 }

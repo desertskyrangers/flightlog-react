@@ -1,89 +1,79 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Notice from "./Notice";
 import AuthService from "./api/AuthService";
 import {useNavigate, useParams} from "react-router-dom";
 
 export default function Verify(props) {
-	const {id} = useParams()
-	const {code} = useParams()
 	const navigate = useNavigate();
 
-	return (
-		<VerifyAccountEmailComponent id={id} code={code} messages={props.messages} navigate={navigate}/>
-	);
-}
+	const [id, setId] = useState(useParams().id)
+	const [code, setCode] = useState(useParams().code)
+	const [messages, setMessages] = useState(props.messages || [])
+	const [resendMessages, setResendMessages] = useState([])
+	const [autoVerify, setAutoVerify] = useState(!!useParams().code)
 
-class VerifyAccountEmailComponent extends React.Component {
-
-	state = {
-		id: this.props.id || '',
-		code: this.props.code || '',
-		messages: this.props.messages || [],
-		resendMessages: []
+	function updateCode(event) {
+		setCode(event.target.value)
 	}
 
-	updateCode = (event) => {
-		this.setState({code: event.target.value})
+	function onKeyDown(event) {
+		if (event.key === 'Enter') verify();
 	}
 
-	onKeyDown = (event) => {
-		if (event.key === 'Enter') this.verify();
-	}
-
-	verify = () => {
-		AuthService.verify(this.state.id, this.state.code, (response) => {
-			this.props.navigate("/")
+	function verify() {
+		AuthService.verify(id, code, (response) => {
+			navigate("/")
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
-			this.setState({messages: messages})
+			setMessages(messages)
 		})
 	}
 
-	resend = () => {
-		AuthService.resend(this.state.id, (response) => {
+	function resend() {
+		AuthService.resend(id, (response) => {
 			let messages = response.messages
 			if (!!!messages) messages = [response.message]
-			this.setState({messages: messages})
+			setMessages(messages)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
-			this.setState({messages: messages})
+			setMessages(messages)
 		})
 	}
 
-	clearMessages = () => {
+	function clearMessages() {
 		this.setState({messages: []})
 	}
 
-	clearResendMessages = () => {
+	function clearResendMessages() {
 		this.setState({resendMessages: []})
 	}
 
-	componentDidMount() {
-		if (this.state.code !== '') setTimeout(this.verify, 100)
-	}
+	useEffect(() => {
+		if (autoVerify) {
+			setTimeout(verify, 3000)
+			setAutoVerify(false)
+		}
+	})
 
-	render() {
-		return (
-			<div className='login-container'>
-				<div className='login-body'>
-					<div>Please click on the link in the email you received or enter the verification code:</div>
-				</div>
-				<div className='login-body'>
-					<div className='login-form'>
-						<label htmlFor='code' className='login-label'>Verification Code</label>
-						<input id='code' name='code' type='text' value={this.state.code} placeholder='Verification Code' className='login-field' onChange={this.updateCode} onKeyDown={this.onKeyDown}/>
-						<button className='login-submit' onClick={this.verify}>Verify</button>
-						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
-					</div>
-				</div>
-				<div className='login-body'>
-					<div>Didn't receive the email? <button className='button' onClick={this.resend}>Resend</button></div>
-					<Notice messages={this.state.resendMessages} clearMessages={this.clearResendMessages}/>
+	return (
+		<div className='login-container'>
+			<div className='login-body'>
+				<div>Please click on the link in the email you received or enter the verification code:</div>
+			</div>
+			<div className='login-body'>
+				<div className='login-form'>
+					<label htmlFor='code' className='login-label'>Verification Code</label>
+					<input id='code' name='code' type='text' value={code} placeholder='Verification Code' autoComplete='one-time-code' className='login-field' onChange={updateCode} onKeyDown={onKeyDown}/>
+					<button className='login-submit' onClick={verify}>Verify</button>
+					<Notice messages={messages} priority='error' clearMessages={clearMessages}/>
 				</div>
 			</div>
-		)
-	}
-
+			<div className='login-body'>
+				<div>Didn't receive the email? <button className='button' onClick={resend}>Resend</button></div>
+				<Notice messages={resendMessages} clearMessages={clearResendMessages}/>
+			</div>
+		</div>
+	)
 }

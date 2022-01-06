@@ -133,16 +133,14 @@ export default class Profile extends React.Component {
 
 }
 
-class ProfileField extends React.Component {
+function ProfileField(props) {
 
-	render() {
-		return (
-			<div>
-				<label htmlFor={this.props.id} className='login-label'>{this.props.text}</label>
-				<input id={this.props.id} name={this.props.id} type={this.props.type} placeholder={this.props.text} autoCapitalize='none' autoCorrect='off' className='login-field' autoFocus={this.props.autoFocus} value={this.props.value}
-							 onChange={this.props.onChange} onKeyDown={this.props.onKeyDown}/>
-			</div>
-		);
-	}
+	return (
+		<div>
+			<label htmlFor={props.id} className='login-label'>{props.text}</label>
+			<input id={props.id} name={props.id} type={props.type} placeholder={props.text} autoCapitalize='none' autoCorrect='off' className='login-field' autoFocus={props.autoFocus} value={props.value} onChange={props.onChange}
+						 onKeyDown={props.onKeyDown}/>
+		</div>
+	);
 
 }

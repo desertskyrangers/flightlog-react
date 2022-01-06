@@ -1,117 +1,117 @@
 import './css/login.css';
 import Notice from "./Notice";
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import AppService from "./api/AppService";
 import AuthService from "./api/AuthService";
 import {useNavigate} from 'react-router-dom';
+import ApiPath from "./api/ApiPath";
 
 export default function Login(props) {
 
 	const navigate = useNavigate();
 
-	return (
-		<LoginComponent messages={props.messages} navigate={navigate}/>
-	)
-}
+	const [username, setUsername] = useState('')
+	const [password, setPassword] = useState('')
+	const [messages, setMessages] = useState(props.messages || [])
+	const [status, setStatus] = useState('')
 
-class LoginComponent extends React.Component {
+	useEffect(() => {
+		loadProgramInformation();
+	})
 
-	state = {
-		username: '',
-		password: '',
-		messages: this.props.messages || [],
-		status: ''
+	function loadProgramInformation() {
+		if (status === '') {
+			AppService.getProgramInformation((program) => {
+				setStatus(program)
+			}, (message) => {
+				console.log(message);
+			})
+		}
 	}
 
-	componentDidMount() {
-		this.loadProgramInformation();
+	function onKeyDown(event) {
+		if (event.key === 'Enter') login();
 	}
 
-	loadProgramInformation = () => {
-		AppService.getProgramInformation((program) => {
-			this.setState({status: program})
-		}, (message) => {
-			console.log(message);
-		});
-	};
-
-	onKeyDown = (event) => {
-		if (event.key === 'Enter') this.login();
-	}
-
-	login = () => {
-		this.setState({messages: []})
-		AuthService.login(this.state.username, this.state.password, (success) => {
-			this.props.navigate('/')
+	function login() {
+		setMessages([])
+		AuthService.login(username, password, (success) => {
+			navigate(ApiPath.HOME)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
-			this.setState({messages: messages})
+			setMessages(messages)
 		});
 	}
 
-	updateUsername = (event) => {
-		this.setState({username: event.target.value})
+	function updateUsername(event) {
+		setUsername(event.target.value)
 	}
 
-	updatePassword = (event) => {
-		this.setState({password: event.target.value})
+	function updatePassword(event) {
+		setPassword(event.target.value)
 	}
 
-	clearMessages = () => {
-		this.setState({messages: []})
+	function clearMessages() {
+		setMessages([])
 	}
 
-	navRegister = () => {
-		this.props.navigate('/register')
+	function navRegister() {
+		navigate(ApiPath.REGISTER)
 	}
 
-	render() {
-		return (
-			<div className='login-container'>
-				<div className='login-body'>
-					<div className='login-form'>
-						<Username onChange={this.updateUsername} onKeyDown={this.onKeyDown}/>
-						<Password onChange={this.updatePassword} onKeyDown={this.onKeyDown}/>
-						<button className='login-submit' onClick={this.login}>Sign In</button>
-						<Notice messages={this.state.messages} priority='error' clearMessages={this.clearMessages}/>
-					</div>
-					<div>
-						Need an account? <button onClick={this.navRegister}>Register Here</button>
-					</div>
+	return (
+		<div className='login-container'>
+			<div className='login-body'>
+				<div className='login-form'>
+					<Username onChange={updateUsername} onKeyDown={onKeyDown}/>
+					<Password onChange={updatePassword} onKeyDown={onKeyDown}/>
+					<button className='login-submit' onClick={login}>Sign In</button>
+					<Notice messages={messages} priority='error' clearMessages={clearMessages}/>
 				</div>
-				<div className='login-label'>Version: {this.state.status.version}</div>
+				<div>
+					Need an account? <button onClick={navRegister}>Register Here</button>
+				</div>
 			</div>
-		);
-	}
-
+			<div className='login-label'>Version: {status.version}</div>
+		</div>
+	)
 }
 
-class Username extends React.Component {
-
-	render() {
-		return (
-			<div>
-				<label htmlFor='username' className='login-label'>Username or email address</label>
-				<input id='username' name='username' type='text' placeholder='Username' autoCapitalize='none' autoCorrect='off' autoComplete='username' autoFocus='autofocus' className='login-field' onChange={this.props.onChange}
-							 onKeyDown={this.props.onKeyDown}/>
-			</div>
-		);
-	}
-
+function Username(props) {
+	return (
+		<div>
+			<label htmlFor='username' className='login-label'>Username or email address</label>
+			<input id='username'
+						 name='username'
+						 type='text'
+						 placeholder='Username'
+						 autoCapitalize='none'
+						 autoCorrect='off'
+						 autoComplete='username'
+						 autoFocus='autofocus'
+						 className='login-field'
+						 onChange={props.onChange}
+						 onKeyDown={props.onKeyDown}/>
+		</div>
+	)
 }
 
-class Password extends React.Component {
-
-	render() {
-		return (
-			<div>
-				<label htmlFor='password' className='login-label'>Password</label>
-				<input id='password' name='password' type='password' placeholder='Password' autoCapitalize='none' autoCorrect='off' autoComplete='current-password' className='login-field' onChange={this.props.onChange}
-							 onKeyDown={this.props.onKeyDown}/>
-			</div>
-		);
-	}
-
+function Password(props) {
+	return (
+		<div>
+			<label htmlFor='password' className='login-label'>Password</label>
+			<input id='password'
+						 name='password'
+						 type='password'
+						 placeholder='Password'
+						 autoCapitalize='none'
+						 autoCorrect='off'
+						 autoComplete='current-password'
+						 className='login-field'
+						 onChange={props.onChange}
+						 onKeyDown={props.onKeyDown}/>
+		</div>
+	)
 }

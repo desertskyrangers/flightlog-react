@@ -73,7 +73,7 @@ export class AuthService extends ApiService {
 	}
 
 	logout(callback, failureCallback) {
-		TokenService.expire()
+		// Call api logout before expiring the token
 		this.fetch(Config.API_URL + '/api/auth/logout', {
 			method: 'POST',
 			body: JSON.stringify({})
@@ -82,13 +82,11 @@ export class AuthService extends ApiService {
 		}).catch(failure => {
 			failureCallback(failure)
 		})
+
+		// Expire the token after calling api logout
+		TokenService.expire()
 		window.location.assign('/')
 	}
-
-	// getProfile() {
-	// 	// Using jwt-decode npm package to decode the token
-	// 	return decode(this.getToken())
-	// }
 
 }
 

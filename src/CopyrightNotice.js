@@ -1,11 +1,9 @@
-import React from "react";
+import React from "react"
 
-export default class CopyrightNotice extends React.Component {
+export default function CopyrightNotice(props) {
 
-	render() {
-		return (
-			<span>&copy; {this.props.year} Desert Sky Rangers</span>
-		);
-	}
+	return (
+		<span>&copy; {props.year} Desert Sky Rangers</span>
+	)
 
 }
