@@ -20,11 +20,11 @@ export default function UserActions(props) {
 	}
 
 	return (
-		<div className='login-container'>
-			<div className='login-body'>
-				<div className='login-form'>
-					<button className='login-submit' onClick={profile}>Profile</button>
-					<button className='login-submit' onClick={logout}>Logout</button>
+		<div className='page-container'>
+			<div className='page-body'>
+				<div className='page-form'>
+					<button className='page-submit' onClick={profile}>Profile</button>
+					<button className='page-submit' onClick={logout}>Logout</button>
 				</div>
 			</div>
 		</div>

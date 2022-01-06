@@ -15,6 +15,7 @@ class ApiPath {
 
 	USER = this.ROOT + "/user"
 	PROFILE = this.USER + "/profile"
+	AIRCRAFT = this.USER + "/aircraft"
 }
 
 const instance = new ApiPath()

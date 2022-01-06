@@ -1,4 +1,4 @@
-.login-container {
+.page-container {
 	display: flex;
 	flex-flow: column nowrap;
 	/* along the main axis */
@@ -8,7 +8,7 @@
 	gap: 1em;
 }
 
-.login-banner {
+.page-banner {
 	display: flex;
 	flex-flow: row nowrap;
 	/* along the main axis */
@@ -17,12 +17,12 @@
 	align-items: center;
 }
 
-.login-banner img {
+.page-banner img {
 	width: 4em;
 	height: 4em;
 }
 
-.login-body {
+.page-body {
 	width: 20rem;
 
 	display: flex;
@@ -33,7 +33,7 @@
 	align-items: center;
 }
 
-.login-form {
+.page-form {
 	margin: 1em;
 	border: 1px solid var(--border-primary);
 	border-radius: 1em;
@@ -49,15 +49,15 @@
 	gap: 1em;
 }
 
-.login-form div {
+.page-form div {
 	width: 100%;
 }
 
-.login-label {
+.page-label {
 	font-size: 0.9rem;
 }
 
-.login-field {
+.page-field {
 	font-size: 1rem;
 
 	color: var(--color-primary);
@@ -72,7 +72,7 @@
 	box-sizing: border-box;
 }
 
-.login-submit {
+.page-submit {
 	font-size: 1rem;
 
 	color: var(--link-color-primary);
@@ -86,12 +86,12 @@
 	padding: 0.5rem 1rem;
 }
 
-.login-submit:hover {
+.page-submit:hover {
 	color: var(--link-hover-primary);
 	background: var(--button-background-hover);
 }
 
-.login-submit:disabled {
+.page-submit:disabled {
 	color: var(--link-disabled-primary);
 	background: var(--background-primary);
 	border: 1px solid var(--link-disabled-primary);

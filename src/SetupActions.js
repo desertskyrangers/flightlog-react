@@ -6,7 +6,7 @@ export default function SetupActions(props) {
 	const navigate = useNavigate();
 
 	function aircraft() {
-		navigate(ApiPath.SETUP)
+		navigate(ApiPath.AIRCRAFT)
 	}
 
 	function batteries() {
@@ -14,11 +14,11 @@ export default function SetupActions(props) {
 	}
 
 	return (
-		<div className='login-container'>
-			<div className='login-body'>
-				<div className='login-form'>
-					<button className='login-submit' onClick={aircraft}>Aircraft</button>
-					<button className='login-submit' onClick={batteries}>Batteries</button>
+		<div className='page-container'>
+			<div className='page-body'>
+				<div className='page-form'>
+					<button className='page-submit' onClick={aircraft}>Aircraft</button>
+					<button className='page-submit' onClick={batteries}>Batteries</button>
 				</div>
 			</div>
 		</div>

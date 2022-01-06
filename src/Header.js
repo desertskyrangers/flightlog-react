@@ -4,7 +4,7 @@ export default function Header() {
 
 	return (
 		<div>
-			<div className='login-banner'>
+			<div className='page-banner'>
 				<img src='/logo.png' alt='Logo'/>
 				<h1>FlightLog</h1>
 			</div>

@@ -15,6 +15,7 @@ import SetupActions from "./SetupActions";
 import UserActions from "./UserActions";
 import Profile from "./Profile";
 import NavBar from "./NavBar";
+import AircraftList from "./AircraftList";
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
 
 						{/* Entry */}
 						<Route exact path={ApiPath.PROFILE} element={<Protect> <Profile/> </Protect>}/>
+						<Route exact path={ApiPath.AIRCRAFT} element={<Protect><AircraftList/></Protect>}/>
 
 						<Route path='*' element={<NotFound/>}/>
 					</Routes>

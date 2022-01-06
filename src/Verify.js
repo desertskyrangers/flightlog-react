@@ -59,19 +59,19 @@ export default function Verify(props) {
 	})
 
 	return (
-		<div className='login-container'>
-			<div className='login-body'>
+		<div className='page-container'>
+			<div className='page-body'>
 				<div>Please click on the link in the email you received or enter the verification code:</div>
 			</div>
-			<div className='login-body'>
-				<div className='login-form'>
-					<label htmlFor='code' className='login-label'>Verification Code</label>
-					<input id='code' name='code' type='text' value={code} placeholder='Verification Code' autoComplete='one-time-code' className='login-field' onChange={updateCode} onKeyDown={onKeyDown}/>
-					<button className='login-submit' onClick={verify}>Verify</button>
+			<div className='page-body'>
+				<div className='page-form'>
+					<label htmlFor='code' className='page-label'>Verification Code</label>
+					<input id='code' name='code' type='text' value={code} placeholder='Verification Code' autoComplete='one-time-code' className='page-field' onChange={updateCode} onKeyDown={onKeyDown}/>
+					<button className='page-submit' onClick={verify}>Verify</button>
 					<Notice messages={messages} priority='error' clearMessages={clearMessages}/>
 				</div>
 			</div>
-			<div className='login-body'>
+			<div className='page-body'>
 				<div>Didn't receive the email? <button className='button' onClick={resend}>Resend</button></div>
 				<Notice messages={resendMessages} clearMessages={clearResendMessages}/>
 			</div>

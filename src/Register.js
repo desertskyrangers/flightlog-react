@@ -1,4 +1,4 @@
-import './css/login.css';
+import './css/page.css';
 
 import AuthService from "./api/AuthService";
 import Notice from "./Notice";
@@ -82,14 +82,14 @@ export default function Register(props) {
 		setCanRegister(canSubmit)
 	},[username, password, verifyPassword, email])
 
-	return (<div className='login-container'>
-		<div className='login-body'>
-			<div className='login-form'>
+	return (<div className='page-container'>
+		<div className='page-body'>
+			<div className='page-form'>
 				<SignupField id='username' text='Username' type='text' autoFocus='autofocus' value={username} onChange={updateUsername} onKeyDown={onKeyDown}/>
 				<SignupField id='password' text='Password' type='password' value={password} onChange={updatePassword} onKeyDown={onKeyDown}/>
 				<SignupField id='verify-password' text='Verify Password' type='password' value={verifyPassword} onChange={updateVerifyPassword} onKeyDown={onKeyDown}/>
 				<SignupField id='email' text='Email Address' type='text' value={email} onChange={updateEmail} onKeyDown={onKeyDown}/>
-				<button disabled={!canRegister} className='login-submit' onClick={register}>Sign Up</button>
+				<button disabled={!canRegister} className='page-submit' onClick={register}>Sign Up</button>
 				<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 			</div>
 		</div>
@@ -99,14 +99,14 @@ export default function Register(props) {
 
 function SignupField(props) {
 	return (<div>
-		<label htmlFor={props.id} className='login-label'>{props.text}</label>
+		<label htmlFor={props.id} className='page-label'>{props.text}</label>
 		<input id={props.id}
 					 name={props.id}
 					 type={props.type}
 					 placeholder={props.text}
 					 autoCapitalize='none'
 					 autoCorrect='off'
-					 className='login-field'
+					 className='page-field'
 					 autoFocus={props.autoFocus}
 					 value={props.value}
 					 onChange={props.onChange}

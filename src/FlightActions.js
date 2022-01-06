@@ -12,12 +12,12 @@ export default function FlightActions() {
 	}
 
 	return (
-		<div className='login-container'>
-			<div className='login-body'>
-				<div className='login-form'>
-					<button className='login-submit' onClick={timeFlight}>Time a Flight</button>
-					<button className='login-submit' onClick={logFlight}>Log a Flight</button>
-					<button className='login-submit' onClick={flightLog}>My Flight Log</button>
+		<div className='page-container'>
+			<div className='page-body'>
+				<div className='page-form'>
+					<button className='page-submit' onClick={timeFlight}>Time a Flight</button>
+					<button className='page-submit' onClick={logFlight}>Log a Flight</button>
+					<button className='page-submit' onClick={flightLog}>My Flight Log</button>
 				</div>
 			</div>
 		</div>
