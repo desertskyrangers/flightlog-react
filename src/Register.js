@@ -3,7 +3,7 @@ import './css/login.css';
 import AuthService from "./api/AuthService";
 import Notice from "./Notice";
 
-import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
+import React, {useLayoutEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import ApiPath from "./api/ApiPath";
 import AppConfig from "./AppConfig";
@@ -71,7 +71,7 @@ export default function Register(props) {
 		if (passwordTooLong) messages.push('Password too long')
 		if (!passwordsMatch) messages.push('Passwords do not match')
 		if (!validEmail) messages.push('Invalid email address')
-		if (!isEqual(messages, previousMessages.current)) setMessages(messages)
+		if (!isEqual(messages, previousMessages.current)) setMessages(messages,)
 		previousMessages.current = messages
 
 		const canSubmitUsername = !!username && username !== ''
@@ -80,7 +80,7 @@ export default function Register(props) {
 		const canSubmit = canSubmitUsername && canSubmitPassword && canSubmitEmail
 
 		setCanRegister(canSubmit)
-	})
+	},[username, password, verifyPassword, email])
 
 	return (<div className='login-container'>
 		<div className='login-body'>

@@ -6,7 +6,6 @@ import ApiPath from "./api/ApiPath";
 import Header from "./Header";
 import Footer from "./Footer";
 import Legal from "./Legal";
-import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
 import Verify from "./Verify";
@@ -56,7 +55,7 @@ function App() {
 }
 
 function Protect({children}) {
-	return TokenService.isAuthenticated() ? <div><NavBar/>{children}</div> : <Navigate to='/login'/>;
+	return TokenService.isAuthenticated() ? <div><NavBar/>{children}</div> : <Navigate to={ApiPath.LOGIN}/>;
 }
 
 export default App;

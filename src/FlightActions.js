@@ -1,9 +1,6 @@
 import React from "react";
-import {useNavigate} from "react-router-dom";
 
-export default function FlightActions(props) {
-
-	const navigate = useNavigate();
+export default function FlightActions() {
 
 	function timeFlight() {
 	}

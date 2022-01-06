@@ -6,7 +6,7 @@ import {useNavigate, useParams} from "react-router-dom";
 export default function Verify(props) {
 	const navigate = useNavigate();
 
-	const [id, setId] = useState(useParams().id)
+	const [id] = useState(useParams().id)
 	const [code, setCode] = useState(useParams().code)
 	const [messages, setMessages] = useState(props.messages || [])
 	const [resendMessages, setResendMessages] = useState([])
@@ -35,11 +35,11 @@ export default function Verify(props) {
 		AuthService.resend(id, (response) => {
 			let messages = response.messages
 			if (!!!messages) messages = [response.message]
-			setMessages(messages)
+			setResendMessages(messages)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
-			setMessages(messages)
+			setResendMessages(messages)
 		})
 	}
 
