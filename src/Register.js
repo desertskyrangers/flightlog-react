@@ -1,68 +1,68 @@
 import './css/login.css';
 
 import AuthService from "./api/AuthService";
-import Config from "./AppConfig";
 import Notice from "./Notice";
 
-import React from "react";
-import {isEqual} from "lodash";
+import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import ApiPath from "./api/ApiPath";
+import AppConfig from "./AppConfig";
+import {isEqual} from "lodash";
 
 export default function Register(props) {
 	const navigate = useNavigate();
-	return (<RegisterComponent messages={props.messages} navigate={navigate}/>)
-}
 
-class RegisterComponent extends React.Component {
+	const [username, setUsername] = useState(props.username || '');
+	const [password, setPassword] = useState(props.password || '');
+	const [verifyPassword, setVerifyPassword] = useState(props.verifyPassword || '');
+	const [email, setEmail] = useState(props.email || '');
+	const [messages, setMessages] = useState([])
+	const [canRegister, setCanRegister] = useState(false)
 
-	state = {
-		username: '', password: '', verifyPassword: '', email: '', messages: this.props.messages || [],
+	const previousMessages = useRef(messages)
+
+	function onKeyDown(event) {
+		if (event.key === 'Enter') register();
 	}
 
-	notice = <Notice priority='error'/>
-
-	onKeyDown = (event) => {
-		if (event.key === 'Enter') this.register();
-	}
-
-	register = (event) => {
-		AuthService.register(this.state.username, this.state.password, this.state.email, (verification) => {
-			this.props.navigate("/verify/" + verification.id);
+	function register(event) {
+		AuthService.register(username, password, email, (verification) => {
+			navigate(ApiPath.VERIFY + "/" + verification.id);
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
-			this.setState({messages: messages})
+			setMessages(messages)
 		});
 		event.preventDefault();
 	}
 
-	updateUsername = (event) => {
-		this.setState({username: event.target.value})
+	function updateUsername(event) {
+		setUsername(event.target.value)
 	}
 
-	updatePassword = (event) => {
-		this.setState({password: event.target.value})
+	function updatePassword(event) {
+		setPassword(event.target.value)
 	}
 
-	updateVerifyPassword = (event) => {
-		this.setState({verifyPassword: event.target.value})
+	function updateVerifyPassword(event) {
+		setVerifyPassword(event.target.value)
 	}
 
-	updateEmail = (event) => {
-		this.setState({email: event.target.value})
+	function updateEmail(event) {
+		setEmail(event.target.value)
 	}
 
-	clearMessages = () => {
-		this.setState({messages: []})
+	function clearMessages() {
+		setMessages([])
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		const validUsername = !!this.state.username
-		const validPassword = !!this.state.password
-		const passwordTooShort = !!this.state.password && this.state.password.length < 8;
-		const passwordTooLong = !!this.state.password && this.state.password.length >= 128;
-		const passwordsMatch = this.state.password === this.state.verifyPassword
-		const validEmail = !this.state.email || this.state.email.match(Config.EMAIL_PATTERN)
+	useLayoutEffect(() => {
+		const validUsername = !!username || username === ''
+		const validPassword = !!password || password === ''
+		const passwordTooShort = !!password && password.length < 8;
+		const passwordTooLong = !!password && password.length >= 128;
+		const passwordsMatch = password === verifyPassword
+		const validEmail = !email || email.match(AppConfig.EMAIL_PATTERN) != null
 
 		let messages = [];
 		if (!validUsername) messages.push('Invalid username')
@@ -71,23 +71,29 @@ class RegisterComponent extends React.Component {
 		if (passwordTooLong) messages.push('Password too long')
 		if (!passwordsMatch) messages.push('Passwords do not match')
 		if (!validEmail) messages.push('Invalid email address')
-		if (!isEqual(messages, prevState.messages)) this.setState({messages: messages})
-	}
+		if (!isEqual(messages, previousMessages.current)) setMessages(messages)
+		previousMessages.current = messages
 
-	render() {
-		return (<div className='login-container'>
-			<div className='login-body'>
-				<div className='login-form'>
-					<SignupField id='username' text='Username' type='text' autoFocus='autofocus' value={this.state.username} onChange={this.updateUsername} onKeyDown={this.onKeyDown}/>
-					<SignupField id='password' text='Password' type='password' value={this.state.password} onChange={this.updatePassword} onKeyDown={this.onKeyDown}/>
-					<SignupField id='verify-password' text='Verify Password' type='password' value={this.state.verifyPassword} onChange={this.updateVerifyPassword} onKeyDown={this.onKeyDown}/>
-					<SignupField id='email' text='Email Address' type='text' value={this.state.email} onChange={this.updateEmail} onKeyDown={this.onKeyDown}/>
-					<button disabled={this.state.messages.length > 0} className='login-submit' onClick={this.register}>Sign Up</button>
-					<Notice priority='error' messages={this.state.messages} clearMessages={this.clearMessages}/>
-				</div>
+		const canSubmitUsername = !!username && username !== ''
+		const canSubmitPassword = !!password && password !== '' && !passwordTooShort && !passwordTooLong && passwordsMatch
+		const canSubmitEmail = !!email && email !== '' && validEmail
+		const canSubmit = canSubmitUsername && canSubmitPassword && canSubmitEmail
+
+		setCanRegister(canSubmit)
+	})
+
+	return (<div className='login-container'>
+		<div className='login-body'>
+			<div className='login-form'>
+				<SignupField id='username' text='Username' type='text' autoFocus='autofocus' value={username} onChange={updateUsername} onKeyDown={onKeyDown}/>
+				<SignupField id='password' text='Password' type='password' value={password} onChange={updatePassword} onKeyDown={onKeyDown}/>
+				<SignupField id='verify-password' text='Verify Password' type='password' value={verifyPassword} onChange={updateVerifyPassword} onKeyDown={onKeyDown}/>
+				<SignupField id='email' text='Email Address' type='text' value={email} onChange={updateEmail} onKeyDown={onKeyDown}/>
+				<button disabled={!canRegister} className='login-submit' onClick={register}>Sign Up</button>
+				<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 			</div>
-		</div>);
-	}
+		</div>
+	</div>);
 
 }
 

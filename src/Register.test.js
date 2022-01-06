@@ -43,8 +43,8 @@ test('renders sign in button', () => {
 });
 
 test('renders messages', () => {
-	render(<Router><Register messages={["HELLO"]}/></Router>);
-	const element = screen.getByText(/hello/i);
+	render(<Router><Register email={'tia'}/></Router>);
+	const element = screen.getByText(/invalid email address/i);
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('DIV');
 	expect(element).toHaveClass('notice-message');

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Notice from "./Notice";
 import AuthService from "./api/AuthService";
 import {useNavigate, useParams} from "react-router-dom";
@@ -10,7 +10,8 @@ export default function Verify(props) {
 	const [code, setCode] = useState(useParams().code)
 	const [messages, setMessages] = useState(props.messages || [])
 	const [resendMessages, setResendMessages] = useState([])
-	const [autoVerify, setAutoVerify] = useState(!!useParams().code)
+
+	const autoVerify = useRef(!!useParams().code)
 
 	function updateCode(event) {
 		setCode(event.target.value)
@@ -51,9 +52,9 @@ export default function Verify(props) {
 	}
 
 	useEffect(() => {
-		if (autoVerify) {
+		if (autoVerify.current) {
 			setTimeout(verify, 3000)
-			setAutoVerify(false)
+			autoVerify.current = false
 		}
 	})
 
