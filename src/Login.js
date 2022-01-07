@@ -5,7 +5,7 @@ import React, {useEffect, useState} from 'react';
 import AppService from "./api/AppService";
 import AuthService from "./api/AuthService";
 import {useNavigate} from 'react-router-dom';
-import ApiPath from "./api/ApiPath";
+import ApiPath from "./AppPath";
 
 export default function Login(props) {
 

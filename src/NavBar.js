@@ -2,22 +2,26 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Icons from './Icons'
 import './css/nav.css'
 import {Link} from "react-router-dom";
-import ApiPath from "./api/ApiPath";
+import ApiPath from "./AppPath";
 
 export default function NavBar(props) {
 
 	return (
 		<div className='nav-bar'>
-			<Link to={ApiPath.HOME}>
-				<div className='nav-button'><FontAwesomeIcon icon={Icons.PLANE}/></div>
-			</Link>
-			<Link to={ApiPath.SETUP}>
-				<div className='nav-button'><FontAwesomeIcon icon={Icons.BARS}/></div>
-			</Link>
-			<Link to={ApiPath.USER}>
-				<div className='nav-button'><FontAwesomeIcon icon={Icons.USER}/></div>
-			</Link>
+			<NavButton to={ApiPath.HOME} icon={Icons.PLANE}/>
+			<NavButton to={ApiPath.SETUP} icon={Icons.BARS}/>
+			<NavButton to={ApiPath.USER} icon={Icons.USER}/>
 		</div>
+	)
+
+}
+
+function NavButton(props) {
+
+	return (
+		<Link to={props.to}>
+			<div className='nav-button'><FontAwesomeIcon icon={props.icon}/></div>
+		</Link>
 	)
 
 }

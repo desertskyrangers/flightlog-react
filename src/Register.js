@@ -5,7 +5,7 @@ import Notice from "./Notice";
 
 import React, {useLayoutEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import ApiPath from "./api/ApiPath";
+import ApiPath from "./AppPath";
 import AppConfig from "./AppConfig";
 import {isEqual} from "lodash";
 

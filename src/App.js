@@ -1,7 +1,7 @@
 import './css/app.css';
 import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
 import TokenService from "./api/TokenService";
-import ApiPath from "./api/ApiPath";
+import ApiPath from "./AppPath";
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -15,7 +15,7 @@ import SetupActions from "./SetupActions";
 import UserActions from "./UserActions";
 import Profile from "./Profile";
 import NavBar from "./NavBar";
-import AircraftList from "./AircraftList";
+import AircraftPage from "./AircraftPage";
 
 function App() {
 
@@ -44,7 +44,7 @@ function App() {
 
 						{/* Entry */}
 						<Route exact path={ApiPath.PROFILE} element={<Protect> <Profile/> </Protect>}/>
-						<Route exact path={ApiPath.AIRCRAFT} element={<Protect><AircraftList/></Protect>}/>
+						<Route exact path={ApiPath.AIRCRAFT} element={<Protect><AircraftPage/></Protect>}/>
 
 						<Route path='*' element={<NotFound/>}/>
 					</Routes>

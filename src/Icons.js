@@ -1,11 +1,13 @@
-import {faHome, faPlane, faUser, faBars} from '@fortawesome/free-solid-svg-icons'
+import {faBars, faHome, faPlane, faSpinner, faBan, faUser} from '@fortawesome/free-solid-svg-icons'
 
 class Icons {
 
 	BARS = faBars
 	HOME = faHome
+	NO_RESULT = faBan
 	PLANE = faPlane
 	USER = faUser
+	WAIT = faSpinner
 
 }
 

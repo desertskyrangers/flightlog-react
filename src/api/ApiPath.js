@@ -1,20 +1,10 @@
 class ApiPath {
 
-	ROOT = ""
+	ROOT = "/api"
 
-	// Not protected (does not require authentication)
-	LEGAL = this.ROOT + "/legal"
-	LOGIN = this.ROOT + "/login"
-	REGISTER = this.ROOT + "/register"
-	VERIFY = this.ROOT + "/verify"
-
-	// Protected (requires authentication)
-	HOME = this.ROOT + "/"
-	FLIGHTS = this.ROOT + "/flights"
-	SETUP = this.ROOT + "/settings"
+	AUTH = this.ROOT + "/auth"
 
 	USER = this.ROOT + "/user"
-	PROFILE = this.USER + "/profile"
 	AIRCRAFT = this.USER + "/aircraft"
 }
 
