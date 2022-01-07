@@ -45,7 +45,7 @@ function App() {
 
 						{/* Entry */}
 						<Route exact path={ApiPath.PROFILE} element={<Protect> <Profile/> </Protect>}/>
-						<Route exact path={ApiPath.AIRCRAFT + ":/id"} element={<Protect><Aircraft/></Protect>}/>
+						<Route exact path={ApiPath.AIRCRAFT + "/:id"} element={<Protect><Aircraft/></Protect>}/>
 						<Route exact path={ApiPath.USER_AIRCRAFT} element={<Protect><AircraftPage/></Protect>}/>
 
 						<Route path='*' element={<NotFound/>}/>

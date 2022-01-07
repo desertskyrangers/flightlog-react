@@ -36,26 +36,6 @@ export default function Register(props) {
 		event.preventDefault();
 	}
 
-	function updateUsername(event) {
-		setUsername(event.target.value)
-	}
-
-	function updatePassword(event) {
-		setPassword(event.target.value)
-	}
-
-	function updateVerifyPassword(event) {
-		setVerifyPassword(event.target.value)
-	}
-
-	function updateEmail(event) {
-		setEmail(event.target.value)
-	}
-
-	function clearMessages() {
-		setMessages([])
-	}
-
 	useLayoutEffect(() => {
 		const validUsername = !!username || username === ''
 		const validPassword = !!password || password === ''
@@ -80,17 +60,17 @@ export default function Register(props) {
 		const canSubmit = canSubmitUsername && canSubmitPassword && canSubmitEmail
 
 		setCanRegister(canSubmit)
-	},[username, password, verifyPassword, email])
+	}, [username, password, verifyPassword, email])
 
 	return (<div className='page-container'>
 		<div className='page-body'>
 			<div className='page-form'>
-				<SignupField id='username' text='Username' type='text' autoFocus='autofocus' value={username} onChange={updateUsername} onKeyDown={onKeyDown}/>
-				<SignupField id='password' text='Password' type='password' value={password} onChange={updatePassword} onKeyDown={onKeyDown}/>
-				<SignupField id='verify-password' text='Verify Password' type='password' value={verifyPassword} onChange={updateVerifyPassword} onKeyDown={onKeyDown}/>
-				<SignupField id='email' text='Email Address' type='text' value={email} onChange={updateEmail} onKeyDown={onKeyDown}/>
+				<SignupField id='username' text='Username' type='text' autoFocus='autofocus' value={username} onChange={(event) => setUsername(event.target.value)} onKeyDown={onKeyDown}/>
+				<SignupField id='password' text='Password' type='password' value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={onKeyDown}/>
+				<SignupField id='verify-password' text='Verify Password' type='password' value={verifyPassword} onChange={(event) => setVerifyPassword(event.target.value)} onKeyDown={onKeyDown}/>
+				<SignupField id='email' text='Email Address' type='text' value={email} onChange={(event) => setEmail(event.target.value)} onKeyDown={onKeyDown}/>
 				<button disabled={!canRegister} className='page-submit' onClick={register}>Sign Up</button>
-				<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
+				<Notice priority='error' messages={messages} clearMessages={() => setMessages([])}/>
 			</div>
 		</div>
 	</div>);

@@ -38,18 +38,18 @@ export default class Profile extends React.Component {
 		if (event.key === 'Enter') this.update();
 	}
 
-	updateField = (event) => {
-		console.log("updating field=" + event.target.name + " = " + event.target.value)
-		this.setState({[event.target.name]: event.target.value})
+	updateFirstName = (event) => {
+		this.updatePreferredName(this.oldFirstName, this.oldLastName, event.target.value, this.state.lastName)
+		this.oldFirstName = event.target.value
+	}
 
-		if (event.target.name === 'firstName') {
-			this.updatePreferredName(this.oldFirstName, this.oldLastName, event.target.value, this.state.lastName)
-			this.oldFirstName = event.target.value
-		}
-		if (event.target.name === 'lastName') {
-			this.updatePreferredName(this.oldFirstName, this.oldLastName, this.state.firstName, event.target.value)
-			this.oldLastName = event.target.value
-		}
+	updateLastName = (event) => {
+		this.updatePreferredName(this.oldFirstName, this.oldLastName, this.state.firstName, event.target.value)
+		this.oldLastName = event.target.value
+	}
+
+	updateField = (event) => {
+		this.setState({[event.target.name]: event.target.value})
 	}
 
 	updatePreferredName(oldFirstName, oldLastName, newFirstName, newLastName) {
@@ -112,8 +112,8 @@ export default class Profile extends React.Component {
 			<div className='page-container'>
 				<div className='page-body'>
 					<div className='page-form'>
-						<ProfileField id='firstName' text='First Name' type='text' autoFocus='autofocus' value={this.state.firstName} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
-						<ProfileField id='lastName' text='Last Name' type='text' value={this.state.lastName} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
+						<ProfileField id='firstName' text='First Name' type='text' autoFocus='autofocus' value={this.state.firstName} onChange={this.updateFirstName} onKeyDown={this.onKeyDown}/>
+						<ProfileField id='lastName' text='Last Name' type='text' value={this.state.lastName} onChange={this.updateLastName} onKeyDown={this.onKeyDown}/>
 						<ProfileField id='preferredName' text='Preferred Name' type='text' value={this.state.preferredName} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
 						<ProfileField id='email' text='Email' type='text' value={this.state.email} onChange={this.updateField} onKeyDown={this.onKeyDown}/>
 						<ProfileField id='smsNumber' text='SMS Number' type='text' value={this.state.smsNumber} onChange={this.updateField} onKeyDown={this.onKeyDown}/>

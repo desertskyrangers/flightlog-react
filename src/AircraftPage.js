@@ -1,10 +1,12 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Loading from "./part/Loading";
 import NoResults from "./part/NoResults";
 import AircraftApi from "./api/AircraftApi";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Icons from "./Icons";
 import Notice from "./part/Notice";
+import {useNavigate} from "react-router-dom";
+import AppPath from "./AppPath";
 
 export default function AircraftPage() {
 
@@ -46,6 +48,7 @@ export default function AircraftPage() {
 }
 
 function AircraftList(props) {
+	const navigate = useNavigate();
 
 	let page
 	if (props.aircraft.length === 0) {
@@ -54,10 +57,14 @@ function AircraftList(props) {
 		page = props.aircraft.map((craft) => <AircraftRow key={craft.id} value={craft.id} icon={Icons.PLANE} name={craft.name}/>)
 	}
 
+	function add() {
+		navigate(AppPath.AIRCRAFT + "/new")
+	}
+
 	return (
 		<div>
 			{page}
-			<div className='page-submit'>Add a UAV</div>
+			<button className='page-submit' onClick={add}>Add an Aircraft</button>
 		</div>
 	)
 
