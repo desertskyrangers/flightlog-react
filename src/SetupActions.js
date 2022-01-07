@@ -6,7 +6,7 @@ export default function SetupActions(props) {
 	const navigate = useNavigate();
 
 	function aircraft() {
-		navigate(ApiPath.AIRCRAFT)
+		navigate(ApiPath.USER_AIRCRAFT)
 	}
 
 	function batteries() {

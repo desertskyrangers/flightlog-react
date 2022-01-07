@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import Notice from "./Notice";
+import Notice from "./part/Notice";
 import AuthService from "./api/AuthService";
 import {useNavigate, useParams} from "react-router-dom";
 

@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
-import Loading from "./component/Loading";
-import NoResults from "./component/NoResults";
+import Loading from "./part/Loading";
+import NoResults from "./part/NoResults";
 import AircraftApi from "./api/AircraftApi";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Icons from "./Icons";
-import Notice from "./Notice";
+import Notice from "./part/Notice";
 
 export default function AircraftPage() {
 
@@ -47,11 +47,11 @@ export default function AircraftPage() {
 
 function AircraftList(props) {
 
-	let page = null
+	let page
 	if (props.aircraft.length === 0) {
 		page = <NoResults/>
 	} else {
-		page = props.aircraft.map((uav) => <AircraftRow key={uav.id} value={uav.id} icon={Icons.PLANE} name={uav.name}/>)
+		page = props.aircraft.map((craft) => <AircraftRow key={craft.id} value={craft.id} icon={Icons.PLANE} name={craft.name}/>)
 	}
 
 	return (

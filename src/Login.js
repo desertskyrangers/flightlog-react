@@ -1,5 +1,5 @@
 import './css/page.css';
-import Notice from "./Notice";
+import Notice from "./part/Notice";
 
 import React, {useEffect, useState} from 'react';
 import AppService from "./api/AppService";

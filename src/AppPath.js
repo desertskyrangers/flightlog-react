@@ -15,7 +15,9 @@ class AppPath {
 
 	USER = this.ROOT + "/user"
 	PROFILE = this.USER + "/profile"
-	AIRCRAFT = this.USER + "/aircraft"
+	AIRCRAFT = this.ROOT + "/aircraft"
+	ORG_AIRCRAFT = this.AIRCRAFT + "/org"
+	USER_AIRCRAFT = this.AIRCRAFT + "/user"
 }
 
 const instance = new AppPath()

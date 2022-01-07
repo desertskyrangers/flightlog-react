@@ -1,10 +1,10 @@
 import React from "react";
-import Notice from "./Notice";
-import Config from "./AppConfig";
+import Notice from "../part/Notice";
+import Config from "../AppConfig";
 import {isEqual} from "lodash";
-import UserService from "./api/UserService";
-import TokenService from "./api/TokenService";
-import LookupService from "./api/LookupService";
+import UserService from "../api/UserService";
+import TokenService from "../api/TokenService";
+import LookupService from "../api/LookupService";
 
 export default class Profile extends React.Component {
 

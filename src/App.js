@@ -9,13 +9,14 @@ import Legal from "./Legal";
 import Login from "./Login";
 import Register from "./Register";
 import Verify from "./Verify";
-import NotFound from "./NotFound";
+import NotFound from "./part/NotFound";
 import Flights from "./FlightActions";
 import SetupActions from "./SetupActions";
 import UserActions from "./UserActions";
-import Profile from "./Profile";
+import Profile from "./edit/Profile";
 import NavBar from "./NavBar";
 import AircraftPage from "./AircraftPage";
+import Aircraft from "./edit/Aircraft";
 
 function App() {
 
@@ -44,7 +45,8 @@ function App() {
 
 						{/* Entry */}
 						<Route exact path={ApiPath.PROFILE} element={<Protect> <Profile/> </Protect>}/>
-						<Route exact path={ApiPath.AIRCRAFT} element={<Protect><AircraftPage/></Protect>}/>
+						<Route exact path={ApiPath.AIRCRAFT + ":/id"} element={<Protect><Aircraft/></Protect>}/>
+						<Route exact path={ApiPath.USER_AIRCRAFT} element={<Protect><AircraftPage/></Protect>}/>
 
 						<Route path='*' element={<NotFound/>}/>
 					</Routes>

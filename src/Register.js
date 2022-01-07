@@ -1,7 +1,7 @@
 import './css/page.css';
 
 import AuthService from "./api/AuthService";
-import Notice from "./Notice";
+import Notice from "./part/Notice";
 
 import React, {useLayoutEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";

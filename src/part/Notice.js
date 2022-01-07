@@ -1,5 +1,5 @@
-import './css/app.css'
-import './css/notice.css'
+import '../css/app.css'
+import '../css/notice.css'
 
 import React from 'react';
 
