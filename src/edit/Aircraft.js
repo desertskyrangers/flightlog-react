@@ -1,10 +1,12 @@
 import Notice from "../part/Notice";
 import React, {useEffect, useState} from "react";
 import LookupService from "../api/LookupService";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import AircraftService from "../api/AircraftService";
+import Icons from "../Icons";
 
 export default function Aircraft(props) {
+	const navigate = useNavigate();
 
 	const {id} = useParams();
 
@@ -26,12 +28,16 @@ export default function Aircraft(props) {
 			model: model,
 			status: status
 		}, (success) => {
-
-		}, (failure)=>{
+			close()
+		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
 			if (!!messages) setMessages(messages)
 		})
+	}
+
+	function close() {
+		navigate(-1)
 	}
 
 	function onKeyDown(event) {
@@ -71,7 +77,7 @@ export default function Aircraft(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<ProfileField id='name' text='Name' type='text' autoFocus='autofocus' value={name} onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown}/>
+					<ProfileField id='name' text='Name' type='text' autoFocus='autofocus' value={name} onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown} icon={Icons.CLOSE} onIconClick={close}/>
 
 					<div>
 						<label htmlFor='type' className='page-label'>Type</label>
@@ -91,7 +97,7 @@ export default function Aircraft(props) {
 					</div>
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
-					<button disabled={messages.length > 0} className='page-submit' onClick={update}>Update</button>
+					<button disabled={messages.length > 0} className='page-submit' onClick={update}>{id === 'new' ? 'Save' : 'Update'}</button>
 				</div>
 			</div>
 		</div>
@@ -103,8 +109,20 @@ function ProfileField(props) {
 
 	return (
 		<div>
-			<label htmlFor={props.id} className='page-label'>{props.text}</label>
-			<input id={props.id} name={props.id} type={props.type} placeholder={props.text} autoCapitalize='none' autoCorrect='off' className='page-field' autoFocus={props.autoFocus} value={props.value} onChange={props.onChange}
+			<div className='page-label-row'>
+				<label htmlFor={props.id} className='page-label'>{props.text}</label>
+				<span className='icon' onClick={props.onIconClick}>{props.icon}</span>
+			</div>
+			<input id={props.id}
+						 name={props.id}
+						 type={props.type}
+						 placeholder={props.text}
+						 autoCapitalize='none'
+						 autoCorrect='off'
+						 className='page-field'
+						 autoFocus={props.autoFocus}
+						 value={props.value}
+						 onChange={props.onChange}
 						 onKeyDown={props.onKeyDown}/>
 		</div>
 	);

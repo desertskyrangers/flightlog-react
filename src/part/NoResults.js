@@ -1,10 +1,12 @@
 import Icons from "../Icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-export default function NoResults() {
+export default function NoResults(props) {
+
+	const message = props.message || 'no results'
 
 	return (
-		<div className='page-field'><FontAwesomeIcon icon={Icons.NO_RESULT}/> no results</div>
+		<div className='page-result'>{Icons.NO_RESULT} {message}</div>
 	)
 
 }

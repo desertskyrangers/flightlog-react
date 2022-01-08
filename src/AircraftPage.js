@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import Loading from "./part/Loading";
 import NoResults from "./part/NoResults";
 import AircraftApi from "./api/AircraftService";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Icons from "./Icons";
 import Notice from "./part/Notice";
 import {useNavigate} from "react-router-dom";
@@ -50,11 +49,12 @@ export default function AircraftPage() {
 function AircraftList(props) {
 	const navigate = useNavigate();
 
+
 	let page
 	if (props.aircraft.length === 0) {
-		page = <NoResults/>
+		page = <NoResults message='No aircraft found'/>
 	} else {
-		page = props.aircraft.map((craft) => <AircraftRow key={craft.id} value={craft.id} icon={Icons.PLANE} name={craft.name}/>)
+		page = props.aircraft.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)
 	}
 
 	function add() {
@@ -62,7 +62,7 @@ function AircraftList(props) {
 	}
 
 	return (
-		<div>
+		<div className='page-spaced'>
 			{page}
 			<button className='page-submit' onClick={add}>Add an Aircraft</button>
 		</div>
@@ -72,8 +72,22 @@ function AircraftList(props) {
 
 function AircraftRow(props) {
 
+	const type = {
+		fixedwing: 'PLANE',
+		helicopter: 'HELICOPTER',
+		multirotor: 'DRONE',
+		other: 'DRONE'
+	}
+
+	function open() {
+		console.log("Open aircraft...")
+	}
+
+	const icon = Icons[type[props.aircraft.type]]
+
 	return (
-		<div><FontAwesomeIcon icon={props.icon}/> {props.name}</div>
+		<div className='page-result' onClick={open}>{icon} {props.aircraft.name}</div>
 	)
 
 }
+

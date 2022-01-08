@@ -20,7 +20,7 @@ function NavButton(props) {
 
 	return (
 		<Link to={props.to}>
-			<div className='nav-button'><FontAwesomeIcon icon={props.icon}/></div>
+			<div className='nav-button'>{props.icon}</div>
 		</Link>
 	)
 

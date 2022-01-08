@@ -33,6 +33,16 @@
 	align-items: center;
 }
 
+.page-spaced {
+	display: flex;
+	flex-flow: column nowrap;
+	/* along the main axis */
+	justify-content: flex-start;
+	/* along the cross axis */
+	align-items: center;
+	gap: 1em;
+}
+
 .page-form {
 	margin: 1em;
 	border: 1px solid var(--border-primary);
@@ -53,6 +63,15 @@
 	width: 100%;
 }
 
+.page-label-row {
+	display: flex;
+	flex-flow: row nowrap;
+	/* along the main axis */
+	justify-content: space-between;
+	/* along the cross axis */
+	align-items: flex-start;
+}
+
 .page-label {
 	font-size: 0.9rem;
 }
@@ -67,6 +86,20 @@
 	border: 1px solid var(--border-primary);
 	padding: 0.5rem 1rem;
 	margin-top: 0.5rem;
+
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.page-result {
+	font-size: 1rem;
+
+	color: var(--color-primary);
+	/*background: var(--background-primary);*/
+
+	/*border-radius: 5px;*/
+	/*border: 1px solid var(--border-primary);*/
+	/*padding: 0.5rem 1rem;*/
 
 	width: 100%;
 	box-sizing: border-box;
