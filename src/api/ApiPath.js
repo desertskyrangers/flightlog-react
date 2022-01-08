@@ -5,7 +5,8 @@ class ApiPath {
 	AUTH = this.ROOT + "/auth"
 
 	USER = this.ROOT + "/user"
-	AIRCRAFT = this.USER + "/aircraft"
+
+	USER_AIRCRAFT = this.USER + "/aircraft"
 }
 
 const instance = new ApiPath()

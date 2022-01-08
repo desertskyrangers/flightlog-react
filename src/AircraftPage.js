@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Loading from "./part/Loading";
 import NoResults from "./part/NoResults";
-import AircraftApi from "./api/AircraftApi";
+import AircraftApi from "./api/AircraftService";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Icons from "./Icons";
 import Notice from "./part/Notice";
