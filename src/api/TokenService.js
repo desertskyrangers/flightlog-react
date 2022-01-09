@@ -1,6 +1,6 @@
 import decode from "jwt-decode";
 
-const TOKEN_KEY = 'jwt_token';
+const TOKEN_KEY = 'jwt-token';
 
 class TokenService {
 
@@ -19,13 +19,12 @@ class TokenService {
 		}
 	}
 
-	setToken(token) {
-		localStorage.setItem(TOKEN_KEY, token)
+	getToken() {
+		return localStorage.getItem(TOKEN_KEY);
 	}
 
-	getToken() {
-		// Retrieves the user token from localStorage
-		return localStorage.getItem(TOKEN_KEY);
+	setToken(token) {
+		localStorage.setItem(TOKEN_KEY, token)
 	}
 
 	expire() {

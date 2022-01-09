@@ -3,6 +3,7 @@ class AppPath {
 	ROOT = ""
 
 	// Not protected (does not require authentication)
+	ABOUT = this.ROOT + "/about"
 	LEGAL = this.ROOT + "/legal"
 	LOGIN = this.ROOT + "/login"
 	REGISTER = this.ROOT + "/register"

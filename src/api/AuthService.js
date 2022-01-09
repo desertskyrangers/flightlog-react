@@ -2,7 +2,7 @@ import ApiService from "./ApiService"
 import TokenService from "./TokenService"
 import Config from "../AppConfig";
 
-export class AuthService extends ApiService {
+class AuthService extends ApiService {
 
 	register(username, password, email, successCallback, failureCallback) {
 		this.fetchNoAuth(Config.API_URL + '/api/auth/register', {

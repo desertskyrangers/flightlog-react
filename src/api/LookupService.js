@@ -1,7 +1,7 @@
 import ApiService from "./ApiService";
 import Config from "../AppConfig";
 
-export class LookupService extends ApiService {
+class LookupService extends ApiService {
 
 	getAircraftStatuses(successCallback, failureCallback) {
 		this.fetch(Config.API_URL + `/api/lookup/aircraft/status`, {

@@ -4,6 +4,7 @@ import LookupService from "../api/LookupService";
 import {useNavigate, useParams} from "react-router-dom";
 import AircraftService from "../api/AircraftService";
 import Icons from "../Icons";
+import EntryField from "../part/EntryField";
 
 export default function Aircraft(props) {
 	const navigate = useNavigate();
@@ -77,7 +78,7 @@ export default function Aircraft(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<ProfileField id='name' text='Name' type='text' autoFocus='autofocus' value={name} onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown} icon={Icons.CLOSE} onIconClick={close}/>
+					<EntryField id='name' text='Name' type='text' autoFocus='autofocus' value={name} onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown} icon={Icons.CLOSE} onIconClick={close}/>
 
 					<div>
 						<label htmlFor='type' className='page-label'>Type</label>
@@ -86,8 +87,8 @@ export default function Aircraft(props) {
 						</select>
 					</div>
 
-					<ProfileField id='make' text='Manufacturer or Designer' type='text' value={make} onChange={(event) => setMake(event.target.value)} onKeyDown={onKeyDown}/>
-					<ProfileField id='model' text='Model' type='text' value={model} onChange={(event) => setModel(event.target.value)} onKeyDown={onKeyDown}/>
+					<EntryField id='make' text='Manufacturer or Designer' type='text' value={make} onChange={(event) => setMake(event.target.value)} onKeyDown={onKeyDown}/>
+					<EntryField id='model' text='Model' type='text' value={model} onChange={(event) => setModel(event.target.value)} onKeyDown={onKeyDown}/>
 
 					<div>
 						<label htmlFor='status' className='page-label'>Status</label>
@@ -102,29 +103,5 @@ export default function Aircraft(props) {
 			</div>
 		</div>
 	)
-
-}
-
-function ProfileField(props) {
-
-	return (
-		<div>
-			<div className='page-label-row'>
-				<label htmlFor={props.id} className='page-label'>{props.text}</label>
-				<span className='icon' onClick={props.onIconClick}>{props.icon}</span>
-			</div>
-			<input id={props.id}
-						 name={props.id}
-						 type={props.type}
-						 placeholder={props.text}
-						 autoCapitalize='none'
-						 autoCorrect='off'
-						 className='page-field'
-						 autoFocus={props.autoFocus}
-						 value={props.value}
-						 onChange={props.onChange}
-						 onKeyDown={props.onKeyDown}/>
-		</div>
-	);
 
 }

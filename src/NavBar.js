@@ -1,4 +1,3 @@
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Icons from './Icons'
 import './css/nav.css'
 import {Link} from "react-router-dom";

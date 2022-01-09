@@ -1,8 +1,7 @@
 import './css/page.css';
 import Notice from "./part/Notice";
 
-import React, {useEffect, useState} from 'react';
-import AppService from "./api/AppService";
+import React, {useState} from 'react';
 import AuthService from "./api/AuthService";
 import {useNavigate} from 'react-router-dom';
 import ApiPath from "./AppPath";
@@ -14,21 +13,6 @@ export default function Login(props) {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const [messages, setMessages] = useState(props.messages || [])
-	const [status, setStatus] = useState('')
-
-	useEffect(() => {
-		loadProgramInformation();
-	})
-
-	function loadProgramInformation() {
-		if (status === '') {
-			AppService.getProgramInformation((program) => {
-				setStatus(program)
-			}, (message) => {
-				console.log(message);
-			})
-		}
-	}
 
 	function onKeyDown(event) {
 		if (event.key === 'Enter') login();
@@ -74,7 +58,7 @@ export default function Login(props) {
 					Need an account? <button onClick={navRegister}>Register Here</button>
 				</div>
 			</div>
-			<div className='page-label'>Version: {status.version}</div>
+			<div className='page-label'>Version: {props.version}</div>
 		</div>
 	)
 }

@@ -1,9 +1,10 @@
 import Config from "../AppConfig";
 import ApiService from "./ApiService"
 
-export class AppService extends ApiService {
+class AppService extends ApiService {
 
 	getProgramInformation(successCallback, failureCallback) {
+		console.log("get program info...")
 		this.fetchNoAuth(Config.API_URL + '/api/monitor/status', {
 			method: 'GET',
 		}).then((response) => {
@@ -12,7 +13,6 @@ export class AppService extends ApiService {
 			failureCallback(error)
 		})
 	}
-
 
 }
 

@@ -1,7 +1,7 @@
 import ApiService from "./ApiService";
 import Config from "../AppConfig";
 
-export class UserService extends ApiService {
+class UserService extends ApiService {
 
 	profile(id, successCallback, failureCallback) {
 		this.fetch(Config.API_URL + `/api/profile`, {
