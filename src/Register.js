@@ -51,7 +51,7 @@ export default function Register(props) {
 		if (passwordTooLong) messages.push('Password too long')
 		if (!passwordsMatch) messages.push('Passwords do not match')
 		if (!validEmail) messages.push('Invalid email address')
-		if (!isEqual(messages, previousMessages.current)) setMessages(messages,)
+		if (!isEqual(messages, previousMessages.current)) setMessages(messages)
 		previousMessages.current = messages
 
 		const canSubmitUsername = !!username && username !== ''
