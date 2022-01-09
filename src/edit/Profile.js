@@ -23,7 +23,7 @@ export default function Profile(props) {
 	const [smsCarrier, setSmsCarrier] = useState(props.smsCarrier || '')
 	const [smsVerified, setSmsVerified] = useState(props.smsVerified || '')
 	const [messages, setMessages] = useState(props.messages || '')
-	const [smsCarriers, setSmsCarriers] = useState(props.smsCarriers || '')
+	const [smsCarriers, setSmsCarriers] = useState([])
 
 	const oldFirstName = useRef()
 	const oldLastName = useRef()
@@ -125,7 +125,7 @@ export default function Profile(props) {
 		if (!validSmsNumber) messages.push('Invalid SMS number')
 		if (!isEqual(messages, previousMessages.current)) setMessages(messages)
 		previousMessages.current = messages
-	})
+	},[firstName, lastName, email, smsNumber])
 
 	return (
 		<div className='page-container'>
@@ -139,7 +139,7 @@ export default function Profile(props) {
 					<div>
 						<label htmlFor='smsCarrier' className='page-label'>SMS Carrier</label>
 						<select id='smsCarrier' name='smsCarrier' value={smsCarrier} className='page-field' onChange={(event) => setSmsCarrier(event.target.value)}>
-							{/*{smsCarriers.map((carrier) => <option key={carrier.id} value={carrier.id}>{carrier.name}</option>)}*/}
+							{smsCarriers.map((carrier) => <option key={carrier.id} value={carrier.id}>{carrier.name}</option>)}
 						</select>
 					</div>
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
