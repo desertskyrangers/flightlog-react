@@ -1,5 +1,5 @@
 import React from "react";
-import CopyrightNotice from "./CopyrightNotice";
+import CopyrightNotice from "./part/CopyrightNotice";
 
 export default function Footer(props) {
 

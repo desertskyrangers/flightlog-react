@@ -1,7 +1,7 @@
-import Icons from './Icons'
-import './css/nav.css'
+import Icons from '../Icons'
+import '../css/nav.css'
 import {Link} from "react-router-dom";
-import ApiPath from "./AppPath";
+import ApiPath from "../AppPath";
 
 export default function NavBar(props) {
 

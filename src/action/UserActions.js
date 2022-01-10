@@ -1,7 +1,7 @@
 import React from "react";
-import ApiPath from "./AppPath";
+import ApiPath from "../AppPath";
 import {useNavigate} from "react-router-dom";
-import AuthService from "./api/AuthService";
+import AuthService from "../api/AuthService";
 
 export default function UserActions() {
 	const navigate = useNavigate();

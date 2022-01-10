@@ -1,5 +1,5 @@
 import React from "react";
-import ApiPath from "./AppPath";
+import ApiPath from "../AppPath";
 import {useNavigate} from "react-router-dom";
 
 export default function SetupActions(props) {
