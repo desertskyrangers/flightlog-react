@@ -1,7 +1,6 @@
 import {render, screen} from "@testing-library/react";
 import {MemoryRouter as Router, Route, Routes} from "react-router-dom";
 import Aircraft from "./Aircraft";
-import {createMemoryHistory} from 'history'
 import AppPath from "../AppPath";
 
 test('renders name field', () => {
@@ -11,7 +10,6 @@ test('renders name field', () => {
 	expect(element).toHaveAttribute('type', 'text');
 	expect(element).toHaveClass('page-field');
 });
-
 
 test('renders update button', () => {
 	render(<Router><Aircraft/></Router>);
