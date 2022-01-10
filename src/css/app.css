@@ -1,18 +1,60 @@
+/*
+base - #403c38 ( do not use directly )
+
+100% - #ffffff
+ 95% - #f3f2f1
+ 90% - #e7e6e4
+ 95% - #dbd9d6
+ 80% - #d0ccc8
+ 75% - #c4bfbb
+ 70% - #b8b3ad
+ 65% - #aca6a0
+ 60% - #a09992
+ 55% - #948c84
+ 50% - #888077
+ 45% - #7b736b
+ 40% - #6d665f
+ 35% - #5f5953
+ 30% - #524d47
+ 25% - #44403b
+ 20% - #37332f
+ 15% - #292624
+ 10% - #1b1a18
+  5% - #0e0d0c
+  0% - #000000
+*/
+
 :root {
-	--color-primary: #d0c8c0;
-	--color-disabled: #808080;
+	--app-background: #303030;
 
-	--background-primary: #404040;
-	--background-secondary: #504840;
+	--foreground-0: #808080;
+	--foreground-1: #d0ccc8;
 
-	--border-primary: #9C916D;
-	--border-secondary: #B5AD92;
-	--border-disabled: #808080;
+	--background-0: #404040;
+	--background-1: #37332f;
+	--background-2: #383838;
+	--background-3: #44403b;
+	--background-4: #524d47;
+	--background-5: #6d665f;
 
-	--submit-background-color: #344037;
-	--button-background-color: #344037;
-	--button-background-hover: #3e4d42;
-	--button-background-disabled: var(--color-disabled);
+	--border-0: var(--foreground-0);
+	--border-1: #888077;
+	--border-2: #948c84;
+
+	--action-color-0: var(--foreground-0);
+	--action-color-1: #9C916D;
+	--action-color-2: #B5AD92;
+	--action-background-0: var(--background-0);
+	--action-background-1: var(--background-3);
+	--action-background-2: var(--background-4);
+
+	--submit-background-0: var(--background-0);
+	--submit-background-1: #344037;
+	--submit-background-2: #3e4d42;
+
+	--button-background-0: var(--background-0);
+	--button-background-1: #44403b;
+	--button-background-2: #524d47;
 
 	/* mountain wheat */
 	--link-color-primary: #9C916D;
@@ -43,8 +85,8 @@
 }
 
 body {
-	color: var(--color-primary);
-	background-color: var(--background-primary);
+	color: var(--foreground-1);
+	background-color: var(--app-background);
 	margin: 0;
 	padding: 0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -61,32 +103,21 @@ a:hover {
 	color: var(--link-hover-primary);
 }
 
-a.button {
-	margin: 0.25rem;
-	border: 1px solid var(--link-color-primary);
-	border-radius: 5px;
-	padding: 0.25rem;
-	cursor: pointer;
-}
-
-a.button:hover {
-	border: 1px solid var(--link-hover-primary);
-}
-
 button {
 	font-size: 1rem;
 
-	color: var(--color-primary);
-	background: transparent;
-	border: 1px solid var(--link-color-primary);
+	color: var(--action-color-1);
+	background: var(--action-background-1);
+	border: 1px solid var(--action-color-1);
 	border-radius: 5px;
 	padding: 0.25rem;
 	cursor: pointer;
 }
 
 button:hover {
-	color: var(--link-hover-primary);
-	border: 1px solid var(--link-hover-primary);
+	color: var(--action-color-2);
+	background: var(--action-background-2);
+	border-color: var(--action-color-2);
 }
 
 .icon {
@@ -105,7 +136,6 @@ code {
 }
 
 .app {
-	background-color: var(--background-primary);
 	min-height: 100vh;
 
 	display: flex;
@@ -115,7 +145,7 @@ code {
 
 .header {
 	padding: 0.5rem;
-	background-color: var(--background-secondary);
+	background-color: var(--background-2);
 
 	align-self: stretch;
 
@@ -138,12 +168,11 @@ code {
 	justify-content: flex-start;
 	/* along the cross axis */
 	align-items: stretch;
-
 }
 
 .footer {
 	padding: 0.5rem;
-	background-color: var(--background-secondary);
+	background-color: var(--background-2);
 
 	align-self: stretch;
 
@@ -164,8 +193,4 @@ code {
 
 .no-wrap {
 	white-space: nowrap;
-}
-
-.svg-icon {
-	fill: currentColor;
 }

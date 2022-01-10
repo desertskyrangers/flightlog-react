@@ -7,7 +7,7 @@ test('renders aircraft button', () => {
 	const element = screen.getByText('Aircraft');
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('BUTTON');
-	expect(element).toHaveClass('page-submit');
+	expect(element).toHaveClass('page-action');
 });
 
 test('renders batteries button', () => {
@@ -15,6 +15,6 @@ test('renders batteries button', () => {
 	const element = screen.getByText('Batteries');
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('BUTTON');
-	expect(element).toHaveClass('page-submit');
+	expect(element).toHaveClass('page-action');
 });
 

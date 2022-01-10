@@ -27,9 +27,10 @@ export default function UserActions() {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<button className='page-submit' onClick={profile}>Profile</button>
-					<button className='page-submit' onClick={logout}>Logout</button>
-					<button className='page-submit' onClick={about}>About</button>
+					<button className='page-action' onClick={profile}>Profile</button>
+					<button className='page-action' onClick={about}>About</button>
+					<div/>
+					<button className='page-action' onClick={logout}>Logout</button>
 				</div>
 			</div>
 		</div>

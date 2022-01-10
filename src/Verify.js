@@ -72,7 +72,7 @@ export default function Verify(props) {
 				</div>
 			</div>
 			<div className='page-body'>
-				<div>Didn't receive the email? <button className='button' onClick={resend}>Resend</button></div>
+				<div>Didn't receive the email? <button onClick={resend}>Resend</button></div>
 				<Notice messages={resendMessages} clearMessages={clearResendMessages}/>
 			</div>
 		</div>

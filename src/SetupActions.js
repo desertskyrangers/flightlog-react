@@ -17,8 +17,8 @@ export default function SetupActions(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<button className='page-submit' onClick={aircraft}>Aircraft</button>
-					<button className='page-submit' onClick={batteries}>Batteries</button>
+					<button className='page-action' onClick={aircraft}>Aircraft</button>
+					<button className='page-action' onClick={batteries}>Batteries</button>
 				</div>
 			</div>
 		</div>

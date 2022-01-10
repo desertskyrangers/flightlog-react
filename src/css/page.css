@@ -40,15 +40,15 @@
 	justify-content: flex-start;
 	/* along the cross axis */
 	align-items: center;
-	gap: 1em;
+	gap: 0.5em;
 }
 
 .page-form {
 	margin: 1em;
-	border: 1px solid var(--border-primary);
+	border: 1px solid var(--border-1);
 	border-radius: 1em;
 	padding: 1em;
-	background-color: var(--background-secondary);
+	background-color: var(--background-2);
 
 	display: flex;
 	flex-flow: column nowrap;
@@ -79,11 +79,11 @@
 .page-field {
 	font-size: 1rem;
 
-	color: var(--color-primary);
-	background: var(--background-primary);
+	color: var(--foreground-1);
+	background: var(--app-background);
 
 	border-radius: 5px;
-	border: 1px solid var(--border-primary);
+	border: 1px solid var(--border-1);
 	padding: 0.5rem 1rem;
 	margin-top: 0.5rem;
 
@@ -94,38 +94,72 @@
 .page-result {
 	font-size: 1rem;
 
-	color: var(--color-primary);
-	/*background: var(--background-primary);*/
+	color: var(--foreground-1);
+	background: var(--background-3);
 
-	/*border-radius: 5px;*/
+	border-radius: 5px;
 	/*border: 1px solid var(--border-primary);*/
-	/*padding: 0.5rem 1rem;*/
+	padding: 0.5rem 0.5rem;
 
 	width: 100%;
 	box-sizing: border-box;
+
+	cursor: pointer;
+}
+
+.page-result:hover {
+	color: var(--foreground-1);
+	background: var(--background-4);
+}
+
+.page-action {
+	font-size: 1rem;
+
+	color: var(--action-color-1);
+	background: var(--action-background-1);
+
+	width: 100%;
+	box-sizing: border-box;
+
+	border: 1px solid var(--border-1);
+	border-radius: 5px;
+	padding: 0.5rem 1rem;
+}
+
+.page-action:hover {
+	color: var(--action-color-2);
+	background: var(--action-background-2);
+	border-color: var(--border-2);
+}
+
+.page-action:disabled {
+	color: var(--action-color-0);
+	background: var(--action-background-0);
+	border: 1px solid var(--border-0);
 }
 
 .page-submit {
 	font-size: 1rem;
 
 	color: var(--link-color-primary);
-	background: var(--button-background-color);
+	background: var(--submit-background-1);
 
 	width: 100%;
 	box-sizing: border-box;
 
+	border: 1px solid var(--border-1);
 	border-radius: 5px;
-	border: 1px solid var(--border-primary);
 	padding: 0.5rem 1rem;
 }
 
 .page-submit:hover {
 	color: var(--link-hover-primary);
-	background: var(--button-background-hover);
+	background: var(--submit-background-2);
+	border: 1px solid var(--border-2);
 }
 
 .page-submit:disabled {
 	color: var(--link-disabled-primary);
-	background: var(--background-primary);
-	border: 1px solid var(--link-disabled-primary);
+	background: var(--submit-background-0);
+	border: 1px solid var(--border-0);
 }

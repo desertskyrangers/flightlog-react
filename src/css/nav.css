@@ -10,11 +10,11 @@
 .nav-button {
 	font-size: 1.5rem;
 
-	color: var(--color-primary);
-	background: var(--background-primary);
+	color: var(--foreground-1);
+	background: var(--action-background-1);
 
 	border-radius: 50%;
-	border: 1px solid var(--border-primary);
+	border: 1px solid var(--border-1);
 
 	margin: 2px;
 
