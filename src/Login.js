@@ -54,7 +54,7 @@ export default function Login(props) {
 					<button className='page-submit' onClick={login}>Sign In</button>
 					<Notice messages={messages} priority='error' clearMessages={clearMessages}/>
 				</div>
-				<div>
+				<div className='hbox'>
 					Need an account? <button onClick={navRegister}>Register Here</button>
 				</div>
 			</div>

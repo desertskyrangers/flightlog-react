@@ -44,11 +44,11 @@ export default function Verify(props) {
 	}
 
 	function clearMessages() {
-		this.setState({messages: []})
+		setMessages([])
 	}
 
 	function clearResendMessages() {
-		this.setState({resendMessages: []})
+		setResendMessages([])
 	}
 
 	useEffect(() => {
@@ -72,7 +72,7 @@ export default function Verify(props) {
 				</div>
 			</div>
 			<div className='page-body'>
-				<div>Didn't receive the email? <button onClick={resend}>Resend</button></div>
+				<div className='hbox'>Didn't receive the email? <button onClick={resend}>Resend</button></div>
 				<Notice messages={resendMessages} clearMessages={clearResendMessages}/>
 			</div>
 		</div>

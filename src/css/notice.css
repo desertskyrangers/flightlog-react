@@ -16,6 +16,10 @@
 }
 
 .notice .icon {
+	color: #a0a0a0;
+}
+
+.notice .icon:hover {
 	color: lightgrey;
 }
 
@@ -26,11 +30,11 @@
 }
 
 .notice-error .icon {
-	color: red;
+	color: #C00000;
 }
 
 .notice-error .icon:hover {
-	color: #C00000;
+	color: red;
 }
 
 .notice-warn {
@@ -40,11 +44,11 @@
 }
 
 .notice-warn .icon {
-	color: yellow;
+	color: #c0c000;
 }
 
 .notice-warn .icon:hover {
-	color: #c0c000;
+	color: yellow;
 }
 
 .notice-messages {
@@ -73,6 +77,7 @@
 
 .notice-close:hover {
 	border: none;
+	background: none;
 }
 
 .icon {

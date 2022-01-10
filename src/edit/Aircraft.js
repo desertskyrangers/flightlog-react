@@ -20,6 +20,7 @@ export default function Aircraft(props) {
 	const [messages, setMessages] = useState([])
 	const [statusOptions, setStatusOptions] = useState([])
 	const [typeOptions, setTypeOptions] = useState([])
+	const [advanced, setAdvanced] = useState(false)
 
 	function update() {
 		AircraftService.updateAircraft({
@@ -52,7 +53,7 @@ export default function Aircraft(props) {
 
 	function loadAircraft(id) {
 		AircraftService.getAircraft(id, (result) => {
-			setId( result.aircraft.id)
+			setId(result.aircraft.id)
 			setName(result.aircraft.name)
 			setType(result.aircraft.type)
 			setMake(result.aircraft.make || '')
@@ -85,10 +86,14 @@ export default function Aircraft(props) {
 		})
 	}
 
+	function toggleAdvanced() {
+		setAdvanced(!advanced)
+	}
+
 	useEffect(() => {
 		if (statusOptions.length === 0) loadAircraftStatusOptions()
 		if (typeOptions.length === 0) loadAircraftTypeOptions()
-		if (idParam !== 'new' && id ==='') loadAircraft(idParam)
+		if (idParam !== 'new' && id === '') loadAircraft(idParam)
 	})
 
 	return (
@@ -115,7 +120,13 @@ export default function Aircraft(props) {
 					</div>
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
-					<button disabled={messages.length > 0} className='page-submit' onClick={update}>{id === 'new' ? 'Save' : 'Update'}</button>
+					<div className='hbox'>
+						<button className='icon-button' onClick={toggleAdvanced}>{advanced ? Icons.COLLAPSE_UP : Icons.ADVANCED}</button>
+						<button disabled={messages.length > 0} className='page-submit' onClick={update}>{id === 'new' ? 'Save' : 'Update'}</button>
+					</div>
+
+					{/* If advances...show advanced options */}
+
 				</div>
 			</div>
 		</div>

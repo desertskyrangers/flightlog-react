@@ -110,7 +110,7 @@ button {
 	background: var(--action-background-1);
 	border: 1px solid var(--action-color-1);
 	border-radius: 5px;
-	padding: 0.25rem;
+	padding: 0.5rem;
 	cursor: pointer;
 }
 
@@ -129,6 +129,7 @@ button:hover {
 	font-size: 1rem;
 	background: transparent;
 	cursor: pointer;
+	width: 2.5rem;
 }
 
 code {

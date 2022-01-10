@@ -62,7 +62,7 @@ function AircraftList(props) {
 	}
 
 	return (
-		<div className='page-spaced'>
+		<div className='vbox'>
 			{page}
 			<button className='page-action' onClick={add}>Add an Aircraft</button>
 		</div>

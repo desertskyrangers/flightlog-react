@@ -33,7 +33,17 @@
 	align-items: center;
 }
 
-.page-spaced {
+.hbox {
+	display: flex;
+	flex-flow: row nowrap;
+	/* along the main axis */
+	justify-content: flex-start;
+	/* along the cross axis */
+	align-items: center;
+	gap: 0.5em;
+}
+
+.vbox {
 	display: flex;
 	flex-flow: column nowrap;
 	/* along the main axis */
@@ -113,17 +123,17 @@
 }
 
 .page-action {
-	font-size: 1rem;
+	/*font-size: 1rem;*/
 
-	color: var(--action-color-1);
-	background: var(--action-background-1);
+	/*color: var(--action-color-1);*/
+	/*background: var(--action-background-1);*/
 
 	width: 100%;
-	box-sizing: border-box;
+	/*box-sizing: border-box;*/
 
-	border: 1px solid var(--border-1);
-	border-radius: 5px;
-	padding: 0.5rem 1rem;
+	/*border: 1px solid var(--border-1);*/
+	/*border-radius: 5px;*/
+	/*padding: 0.5rem 1rem;*/
 }
 
 .page-action:hover {
@@ -139,23 +149,23 @@
 }
 
 .page-submit {
-	font-size: 1rem;
+	/*font-size: 1rem;*/
 
-	color: var(--link-color-primary);
-	background: var(--submit-background-1);
+	/*color: var(--link-color-primary);*/
+	/*background: var(--submit-background-1);*/
 
 	width: 100%;
-	box-sizing: border-box;
+	/*box-sizing: border-box;*/
 
-	border: 1px solid var(--border-1);
-	border-radius: 5px;
-	padding: 0.5rem 1rem;
+	/*border: 1px solid var(--border-1);*/
+	/*border-radius: 5px;*/
+	/*padding: 0.5rem 1rem;*/
 }
 
 .page-submit:hover {
-	color: var(--link-hover-primary);
-	background: var(--submit-background-2);
-	border: 1px solid var(--border-2);
+	/*color: var(--link-hover-primary);*/
+	/*background: var(--submit-background-2);*/
+	/*border: 1px solid var(--border-2);*/
 }
 
 .page-submit:disabled {
