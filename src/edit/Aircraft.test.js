@@ -21,13 +21,10 @@ test('renders update button', () => {
 });
 
 test('renders save button', () => {
-	const route = AppPath.AIRCRAFT + '/:id'
-	const path = AppPath.AIRCRAFT + '/new'
-
 	render(
-		<Router initialEntries={[path]} initialIndex={0}>
+		<Router initialEntries={[AppPath.AIRCRAFT + '/new']}>
 			<Routes>
-				<Route exact path={route} element={<Aircraft/>}/>
+				<Route exact path={AppPath.AIRCRAFT + '/:id'} element={<Aircraft/>}/>
 			</Routes>
 		</Router>
 	)
