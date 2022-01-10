@@ -24,7 +24,7 @@ export default function Aircraft(props) {
 
 	function update() {
 		AircraftService.updateAircraft({
-			id: id,
+			id: idParam,
 			name: name,
 			type: type,
 			make: make,
@@ -133,7 +133,7 @@ export default function Aircraft(props) {
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 					<div className='hbox'>
 						<button className='icon-button' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE_UP : Icons.DELETE}</button>
-						{requestDelete ? null : <button disabled={messages.length > 0} className='page-submit' onClick={update}>{id === 'new' ? 'Save' : 'Update'}</button>}
+						{requestDelete ? null : <button disabled={messages.length > 0} className='page-submit' onClick={update}>{idParam === 'new' ? 'Save' : 'Update'}</button>}
 					</div>
 
 					{requestDelete ? <DeleteWithConfirm entity='aircraft' name={name} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}

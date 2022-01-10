@@ -1,12 +1,39 @@
 import {render, screen} from "@testing-library/react";
-import {BrowserRouter as Router} from "react-router-dom";
+import {MemoryRouter as Router, Route, Routes} from "react-router-dom";
 import Aircraft from "./Aircraft";
+import {createMemoryHistory} from 'history'
+import AppPath from "../AppPath";
 
 test('renders name field', () => {
-	render(<Router><Aircraft id='00000000-0000-0000-0000-000000000000' name='ojo'/></Router>);
+	render(<Router><Aircraft/></Router>);
 	const element = screen.getByLabelText('Name');
 	expect(element).toBeInTheDocument();
 	expect(element).toHaveAttribute('type', 'text');
 	expect(element).toHaveClass('page-field');
+});
+
+
+test('renders update button', () => {
+	render(<Router><Aircraft/></Router>);
+	const element = screen.getByText('Update');
+	expect(element).toBeInTheDocument();
+	expect(element.nodeName).toBe('BUTTON');
+});
+
+test('renders save button', () => {
+	const route = AppPath.AIRCRAFT + '/:id'
+	const path = AppPath.AIRCRAFT + '/new'
+
+	render(
+		<Router initialEntries={[path]} initialIndex={0}>
+			<Routes>
+				<Route exact path={route} element={<Aircraft/>}/>
+			</Routes>
+		</Router>
+	)
+
+	const element = screen.getByText('Save');
+	expect(element).toBeInTheDocument();
+	expect(element.nodeName).toBe('BUTTON');
 });
 

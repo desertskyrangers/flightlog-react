@@ -34,8 +34,8 @@ class TokenService {
 	getUserId() {
 		try {
 			return decode(this.getToken()).uid;
-		} catch( error ) {
-			console.log( error.message );
+		} catch (error) {
+			console.log(error.message);
 			return '';
 		}
 	}

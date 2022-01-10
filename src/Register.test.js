@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import Register from './Register';
-import {BrowserRouter as Router} from "react-router-dom";
+import {MemoryRouter as Router} from "react-router-dom";
 
 test('renders username field', () => {
 	render(<Router><Register/></Router>);
