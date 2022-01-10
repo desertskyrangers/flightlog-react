@@ -9,8 +9,9 @@ import EntryField from "../part/EntryField";
 export default function Aircraft(props) {
 	const navigate = useNavigate();
 
-	const {id} = useParams();
+	const idParam = useParams().id;
 
+	const [id, setId] = useState(props.id || '')
 	const [name, setName] = useState(props.name || '')
 	const [type, setType] = useState(props.type || 'multirotor')
 	const [make, setMake] = useState(props.make || '')
@@ -49,6 +50,21 @@ export default function Aircraft(props) {
 		setMessages([])
 	}
 
+	function loadAircraft(id) {
+		AircraftService.getAircraft(id, (result) => {
+			setId( result.aircraft.id)
+			setName(result.aircraft.name)
+			setType(result.aircraft.type)
+			setMake(result.aircraft.make || '')
+			setModel(result.aircraft.model || '')
+			setStatus(result.aircraft.status)
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			if (!!messages) setMessages(messages)
+		})
+	}
+
 	function loadAircraftStatusOptions() {
 		LookupService.getAircraftStatuses((success) => {
 			setStatusOptions(success)
@@ -72,6 +88,7 @@ export default function Aircraft(props) {
 	useEffect(() => {
 		if (statusOptions.length === 0) loadAircraftStatusOptions()
 		if (typeOptions.length === 0) loadAircraftTypeOptions()
+		if (idParam !== 'new' && id ==='') loadAircraft(idParam)
 	})
 
 	return (

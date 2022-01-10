@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import Loading from "./part/Loading";
 import NoResults from "./part/NoResults";
-import AircraftApi from "./api/AircraftService";
 import Icons from "./Icons";
 import Notice from "./part/Notice";
 import {useNavigate} from "react-router-dom";
 import AppPath from "./AppPath";
+import UserService from "./api/UserService";
 
 export default function AircraftPage() {
 
@@ -20,8 +20,8 @@ export default function AircraftPage() {
 		list = <Loading/>
 	}
 
-	function loadAircraft(page) {
-		AircraftApi.getAircraftPage(page, (success) => {
+	function loadAircraftPage(page) {
+		UserService.getAircraftPage(page, (success) => {
 			setAircraft(success.aircraft)
 		}, (failure) => {
 			let messages = failure.messages
@@ -31,7 +31,7 @@ export default function AircraftPage() {
 	}
 
 	useEffect(() => {
-		if (!aircraft) loadAircraft(page)
+		if (!aircraft) loadAircraftPage(page)
 	})
 
 	return (
@@ -72,6 +72,8 @@ function AircraftList(props) {
 
 function AircraftRow(props) {
 
+	const navigate = useNavigate();
+
 	const type = {
 		fixedwing: 'PLANE',
 		helicopter: 'HELICOPTER',
@@ -81,6 +83,7 @@ function AircraftRow(props) {
 
 	function open() {
 		console.log("Open aircraft...")
+		navigate(AppPath.AIRCRAFT + "/" + props.aircraft.id)
 	}
 
 	const icon = Icons[type[props.aircraft.type]]

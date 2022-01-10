@@ -66,17 +66,10 @@ class AuthService extends ApiService {
 		return TokenService.isAuthenticated()
 	}
 
-	reauthenticate() {
-		this.logout(() => {
-			window.location.assign('/login')
-		})
-	}
-
 	logout(callback, failureCallback) {
 		// Call api logout before expiring the token
 		this.fetch(Config.API_URL + '/api/auth/logout', {
-			method: 'POST',
-			body: JSON.stringify({})
+			method: 'GET'
 		}).then(response => {
 			callback()
 		}).catch(failure => {

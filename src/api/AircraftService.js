@@ -4,9 +4,9 @@ import ApiService from "./ApiService"
 
 class AircraftService extends ApiService {
 
-	getAircraftPage(page, successCallback, failureCallback) {
-		this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT + "/" + page, {
-			method: 'GET',
+	getAircraft(id, successCallback, failureCallback) {
+		this.fetch(Config.API_URL + ApiPath.AIRCRAFT + "/" + id, {
+			method: 'GET'
 		}).then((response) => {
 			console.log(JSON.stringify(response))
 			successCallback(response)
@@ -16,9 +16,8 @@ class AircraftService extends ApiService {
 	}
 
 	updateAircraft(aircraft, successCallback, failureCallback) {
-		const url = Config.API_URL + ApiPath.USER_AIRCRAFT + (aircraft.id === 'new' ? '' : '/' + aircraft.id)
 		const method = aircraft.id === 'new' ? 'POST' : 'PUT'
-		this.fetch(url, {
+		this.fetch(Config.API_URL + ApiPath.AIRCRAFT, {
 			method: method,
 			body: JSON.stringify(aircraft)
 		}).then((response) => {
@@ -30,8 +29,9 @@ class AircraftService extends ApiService {
 	}
 
 	deleteAircraft(id, successCallback, failureCallback) {
-		this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT + "/" + id, {
-			method: 'DELETE'
+		this.fetch(Config.API_URL + ApiPath.AIRCRAFT, {
+			method: 'DELETE',
+			body: JSON.stringify({id: id})
 		}).then((response) => {
 			console.log(JSON.stringify(response))
 			successCallback(response)

@@ -1,5 +1,6 @@
 import ApiService from "./ApiService";
 import Config from "../AppConfig";
+import ApiPath from "./ApiPath";
 
 class UserService extends ApiService {
 
@@ -26,6 +27,17 @@ class UserService extends ApiService {
 				smsCarrier: account.smsCarrier
 			})
 		}).then((response) => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
+	getAircraftPage(page, successCallback, failureCallback) {
+		this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT + "/" + page, {
+			method: 'GET',
+		}).then((response) => {
+			console.log(JSON.stringify(response))
 			successCallback(response)
 		}).catch((error) => {
 			failureCallback(error)
