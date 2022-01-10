@@ -1,4 +1,4 @@
-import {faBan, faBars, faAngleUp, faEllipsisH, faHelicopter, faHome, faPlane, faSpinner, faTimesCircle, faUser} from '@fortawesome/free-solid-svg-icons'
+import {faAngleUp, faBan, faBars, faEllipsisH, faHelicopter, faHome, faPlane, faSpinner, faTimesCircle, faTrash, faUser} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import DroneIcon from "./icon/DroneIcon";
 
@@ -8,6 +8,7 @@ class Icons {
 	BARS = <FontAwesomeIcon icon={faBars}/>
 	CLOSE = <FontAwesomeIcon icon={faTimesCircle}/>
 	COLLAPSE_UP = <FontAwesomeIcon icon={faAngleUp}/>
+	DELETE = <FontAwesomeIcon icon={faTrash}/>
 	DRONE = <DroneIcon/>
 	HELICOPTER = <FontAwesomeIcon icon={faHelicopter}/>
 	HOME = <FontAwesomeIcon icon={faHome}/>

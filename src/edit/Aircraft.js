@@ -20,7 +20,7 @@ export default function Aircraft(props) {
 	const [messages, setMessages] = useState([])
 	const [statusOptions, setStatusOptions] = useState([])
 	const [typeOptions, setTypeOptions] = useState([])
-	const [advanced, setAdvanced] = useState(false)
+	const [requestDelete, setRequestDelete] = useState(false)
 
 	function update() {
 		AircraftService.updateAircraft({
@@ -86,8 +86,19 @@ export default function Aircraft(props) {
 		})
 	}
 
-	function toggleAdvanced() {
-		setAdvanced(!advanced)
+	function toggleDelete() {
+		setRequestDelete(!requestDelete)
+	}
+
+	function doDelete() {
+		console.log("Delete aircraft=" + id)
+		AircraftService.deleteAircraft(id, (result) => {
+			close()
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			if (!!messages) setMessages(messages)
+		})
 	}
 
 	useEffect(() => {
@@ -121,15 +132,45 @@ export default function Aircraft(props) {
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 					<div className='hbox'>
-						<button className='icon-button' onClick={toggleAdvanced}>{advanced ? Icons.COLLAPSE_UP : Icons.ADVANCED}</button>
-						<button disabled={messages.length > 0} className='page-submit' onClick={update}>{id === 'new' ? 'Save' : 'Update'}</button>
+						<button className='icon-button' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE_UP : Icons.DELETE}</button>
+						{requestDelete ? null : <button disabled={messages.length > 0} className='page-submit' onClick={update}>{id === 'new' ? 'Save' : 'Update'}</button>}
 					</div>
 
-					{/* If advances...show advanced options */}
+					{requestDelete ? <DeleteWithConfirm entity='aircraft' name={name} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
 
 				</div>
 			</div>
 		</div>
+	)
+
+}
+
+function DeleteWithConfirm(props) {
+
+	const [name, setName] = useState('')
+	const [canDelete, setCanDelete] = useState(false)
+
+	function doDelete() {
+		props.onDelete()
+	}
+
+	function onKeyDown(event) {
+		if (event.key === 'Enter') document.getElementById('submit-delete').click()
+	}
+
+	function updateName(event) {
+		setName(event.target.value)
+		setCanDelete(event.target.value === props.name)
+	}
+
+	return (
+		<div className='vbox'>
+			WARNING: This action cannot be undone. Please type the name of the {props.entity} to confirm:
+			<input id='name' name='name' value={name} type='text' className='page-field' onChange={updateName} onKeyDown={onKeyDown}/>
+			<button id='submit-delete' disabled={!canDelete} className='page-action' onClick={doDelete}>Delete</button>
+		</div>
+
+
 	)
 
 }
