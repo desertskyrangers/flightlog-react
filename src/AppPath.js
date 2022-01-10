@@ -15,10 +15,13 @@ class AppPath {
 	SETUP = this.ROOT + "/settings"
 
 	USER = this.ROOT + "/user"
-	PROFILE = this.USER + "/profile"
 	AIRCRAFT = this.ROOT + "/aircraft"
+	FLIGHT = this.ROOT + "flight"
+	PROFILE = this.USER + "/profile"
 	ORG_AIRCRAFT = this.AIRCRAFT + "/org"
 	USER_AIRCRAFT = this.AIRCRAFT + "/user"
+	USER_FLIGHTS = this.FLIGHTS + "/user"
+	//ORG_FLIGHTS = this.FLIGHTS + "/org"
 }
 
 const instance = new AppPath()

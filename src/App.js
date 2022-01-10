@@ -10,29 +10,32 @@ import Login from "./Login";
 import Register from "./Register";
 import Verify from "./Verify";
 import NotFound from "./part/NotFound";
-import Flights from "./action/FlightActions";
+import FlightActions from "./action/FlightActions";
 import SetupActions from "./action/SetupActions";
 import UserActions from "./action/UserActions";
 import Profile from "./edit/Profile";
 import NavBar from "./part/NavBar";
-import AircraftPage from "./AircraftPage";
+import UserAircraft from "./UserAircraft";
+import UserFlights from "./UserFlights"
 import Aircraft from "./edit/Aircraft";
 import About from "./About";
 import {useEffect, useState} from "react";
 import AppService from "./api/AppService";
+import Flight from "./edit/Flight";
 
 function App() {
 
 	const [version, setVersion] = useState()
 
-	useEffect( () => {
-		if( !version ) loadProgramInformation()
+	useEffect(() => {
+		if (!version) loadProgramInformation()
 	})
 
 	function loadProgramInformation() {
-		AppService.getProgramInformation((result)=>{
+		AppService.getProgramInformation((result) => {
 			setVersion(result.version)
-		},()=>{	})
+		}, () => {
+		})
 	}
 
 	return (
@@ -52,17 +55,19 @@ function App() {
 						<Route exact path={ApiPath.VERIFY + "/:id/:code"} element={<Verify/>}/>
 
 						{/* Home */}
-						<Route exact path={ApiPath.HOME} element={<Protect> <Flights/> </Protect>}/>
+						<Route exact path={ApiPath.HOME} element={<Protect> <FlightActions/> </Protect>}/>
 
 						{/* Menus */}
-						<Route exact path={ApiPath.FLIGHTS} element={<Protect> <Flights/> </Protect>}/>
+						<Route exact path={ApiPath.FLIGHTS} element={<Protect> <FlightActions/> </Protect>}/>
 						<Route exact path={ApiPath.SETUP} element={<Protect> <SetupActions/> </Protect>}/>
 						<Route exact path={ApiPath.USER} element={<Protect> <UserActions/> </Protect>}/>
 
 						{/* Entry */}
-						<Route exact path={ApiPath.PROFILE} element={<Protect> <Profile/> </Protect>}/>
 						<Route exact path={ApiPath.AIRCRAFT + "/:id"} element={<Protect><Aircraft/></Protect>}/>
-						<Route exact path={ApiPath.USER_AIRCRAFT} element={<Protect><AircraftPage/></Protect>}/>
+						<Route exact path={ApiPath.FLIGHT + "/:id"} element={<Protect><Flight/></Protect>}/>
+						<Route exact path={ApiPath.PROFILE} element={<Protect> <Profile/> </Protect>}/>
+						<Route exact path={ApiPath.USER_AIRCRAFT} element={<Protect><UserAircraft/></Protect>}/>
+						<Route exact path={ApiPath.USER_FLIGHTS} element={<Protect><UserFlights/></Protect>}/>
 
 						<Route path='*' element={<NotFound/>}/>
 					</Routes>

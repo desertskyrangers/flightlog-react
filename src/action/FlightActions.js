@@ -1,6 +1,10 @@
 import React from "react";
+import ApiPath from "../AppPath";
+import {useNavigate} from "react-router-dom";
 
 export default function FlightActions() {
+
+	const navigate = useNavigate();
 
 	function timeFlight() {
 	}
@@ -9,6 +13,7 @@ export default function FlightActions() {
 	}
 
 	function flightLog() {
+		navigate(ApiPath.USER_FLIGHTS)
 	}
 
 	return (

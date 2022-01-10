@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import AppPath from "./AppPath";
 import UserService from "./api/UserService";
 
-export default function AircraftPage() {
+export default function UserAircraft() {
 
 	const [aircraft, setAircraft] = useState()
 	const [page] = useState(0)

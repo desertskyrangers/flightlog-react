@@ -4,6 +4,8 @@ class ApiPath {
 
 	AIRCRAFT = this.ROOT + "/aircraft"
 
+	FLIGHT = this.ROOT + "/flight"
+
 	AUTH = this.ROOT + "/auth"
 
 	USER = this.ROOT + "/user"

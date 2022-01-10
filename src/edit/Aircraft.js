@@ -169,8 +169,6 @@ function DeleteWithConfirm(props) {
 			<input id='name' name='name' value={name} type='text' className='page-field' onChange={updateName} onKeyDown={onKeyDown}/>
 			<button id='submit-delete' disabled={!canDelete} className='page-action' onClick={doDelete}>Delete</button>
 		</div>
-
-
 	)
 
 }
