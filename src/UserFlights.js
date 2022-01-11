@@ -8,9 +8,9 @@ import AppPath from "./AppPath";
 
 export default function UserAircraft() {
 
-	const [flights, setFlights] = useState()
+	const [flights] = useState()
 	const [page] = useState(0)
-	const [messages, setMessages] = useState([])
+	const [messages] = useState([])
 
 	let list;
 	if (!!flights) {
