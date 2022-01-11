@@ -13,7 +13,7 @@ export default function Aircraft(props) {
 
 	const [id, setId] = useState(props.id || '')
 	const [name, setName] = useState(props.name || '')
-	const [type, setType] = useState(props.type || 'multirotor')
+	const [type, setType] = useState(props.type || 'fixedwing')
 	const [make, setMake] = useState(props.make || '')
 	const [model, setModel] = useState(props.model || '')
 	const [status, setStatus] = useState(props.status || 'airworthy')
