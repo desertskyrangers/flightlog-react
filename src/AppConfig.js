@@ -1,7 +1,7 @@
 class AppConfig {
 
 	HOSTNAME = window && window.location && window.location.hostname
-	API_URL = 'https://flightlog.desertskyrangers.com'
+	API_URL = 'https://flightlog.desertskyrangers.org'
 	EMAIL_PATTERN = /[a-z0-9!#$%&'*+\\/=?^_{|}~-]+(?:\.[a-z0-9!#$%&'*+\\/=?^_{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9][a-z0-9-]*[a-z0-9]/;
 	PHONE_PATTERN = /^[-+.()0-9 ]*$/;
 
