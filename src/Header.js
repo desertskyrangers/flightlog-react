@@ -6,7 +6,7 @@ export default function Header() {
 		<div>
 			<div className='page-banner'>
 				<img src='/logo.png' alt='Logo'/>
-				<h1>FlightLog</h1>
+				<h1>FlightDeck</h1>
 			</div>
 		</div>
 	)

@@ -1,5 +1,5 @@
-# FlightLog React Web Client
-A React web client for the Desert Sky Rangers FlightLog application
+# FlightDeck React Web Client
+A React web client for the Desert Sky Rangers FlightDeck application
 
 ## How the Code Repository was Initialized
 
@@ -11,4 +11,4 @@ Check the version with: ```npm -v```
 
 Install the latest with: ```npm install -g npm```
 
-Create the application with: ```npx create-react-app flightlog```
+Create the application with: ```npx create-react-app flightdeck```
