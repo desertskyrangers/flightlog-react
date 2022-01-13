@@ -17,7 +17,7 @@ class AppPath {
 	USER = this.ROOT + "/user"
 	AIRCRAFT = this.ROOT + "/aircraft"
 	BATTERY = this.ROOT + "/battery"
-	FLIGHT = this.ROOT + "flight"
+	FLIGHT = this.ROOT + "/flight"
 	PROFILE = this.USER + "/profile"
 	ORG_AIRCRAFT = this.AIRCRAFT + "/org"
 	USER_AIRCRAFT = this.AIRCRAFT + "/user"

@@ -5,33 +5,29 @@ import Icons from "./Icons";
 import Notice from "./part/Notice";
 import {useNavigate} from "react-router-dom";
 import AppPath from "./AppPath";
+import UserService from "./api/UserService";
 
 export default function UserAircraft() {
 
-	const [flights] = useState()
+	const [flights, setFlights] = useState()
 	const [page] = useState(0)
-	const [messages] = useState([])
+	const [messages, setMessages] = useState([])
 
 	let list;
 	if (!!flights) {
-		list = <FlightList flight={flights}/>
+		list = <FlightList flights={flights}/>
 	} else {
-		list = (
-			<div>
-				<div>Flight List</div>
-				<Loading/>
-			</div>
-		)
+		list = <Loading/>
 	}
 
 	function loadFlightPage(page) {
-		// UserService.getFlightPage(page, (success) => {
-		// 	setFlights(success.flight)
-		// }, (failure) => {
-		// 	let messages = failure.messages
-		// 	if (!!!messages) messages = [failure.message]
-		// 	if (!!messages) setMessages(messages)
-		// })
+		UserService.getFlightPage(page, (success) => {
+			setFlights(success.flights)
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			if (!!messages) setMessages(messages)
+		})
 	}
 
 	useEffect(() => {
@@ -54,14 +50,14 @@ function FlightList(props) {
 	const navigate = useNavigate();
 
 	let page
-	if (props.flight.length === 0) {
+	if (props.flights.length === 0) {
 		page = <NoResults message='No flight found'/>
 	} else {
-		page = props.flight.map((craft) => <FlightRow key={craft.id} value={craft.id} flight={craft}/>)
+		page = props.flights.map((craft) => <FlightRow key={craft.id} value={craft.id} flight={craft}/>)
 	}
 
 	function add() {
-		navigate(AppPath.AIRCRAFT + "/new")
+		navigate(AppPath.FLIGHT + "/new")
 	}
 
 	return (
@@ -77,22 +73,13 @@ function FlightRow(props) {
 
 	const navigate = useNavigate();
 
-	const type = {
-		fixedwing: 'PLANE',
-		helicopter: 'HELICOPTER',
-		multirotor: 'DRONE',
-		other: 'DRONE'
-	}
-
 	function open() {
 		console.log("Open flight...")
-		navigate(AppPath.AIRCRAFT + "/" + props.flight.id)
+		navigate(AppPath.FLIGHT + "/" + props.flight.id)
 	}
 
-	const icon = Icons[type[props.flight.type]]
-
 	return (
-		<div className='page-result' onClick={open}>{icon} {props.flight.name}</div>
+		<div className='page-result' onClick={open}>{Icons.PLANE} {props.flight.name}</div>
 	)
 
 }

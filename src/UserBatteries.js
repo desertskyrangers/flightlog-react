@@ -15,7 +15,7 @@ export default function UserBatteries() {
 
 	let list;
 	if (!!batteries) {
-		list = <BatteryList battery={batteries}/>
+		list = <BatteryList batteries={batteries}/>
 	} else {
 		list = <Loading/>
 	}
@@ -50,10 +50,10 @@ function BatteryList(props) {
 	const navigate = useNavigate();
 
 	let page
-	if (props.battery.length === 0) {
+	if (props.batteries.length === 0) {
 		page = <NoResults message='No batteries found'/>
 	} else {
-		page = props.battery.map((craft) => <BatteryRow key={craft.id} value={craft.id} battery={craft}/>)
+		page = props.batteries.map((craft) => <BatteryRow key={craft.id} value={craft.id} battery={craft}/>)
 	}
 
 	function add() {

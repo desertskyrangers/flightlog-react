@@ -55,6 +55,39 @@ class UserService extends ApiService {
 		})
 	}
 
+	getFlightPage(page, successCallback, failureCallback) {
+		this.fetch(Config.API_URL + ApiPath.USER_FLIGHT + "/" + page, {
+			method: 'GET',
+		}).then((response) => {
+			console.log(JSON.stringify(response))
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
+	getAircraftOptions(successCallback, failureCallback) {
+		this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT_LOOKUP, {
+			method: 'GET',
+		}).then((response) => {
+			console.log(JSON.stringify(response))
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
+	getBatteryOptions(successCallback, failureCallback) {
+		this.fetch(Config.API_URL + ApiPath.USER_BATTERY_LOOKUP, {
+			method: 'GET',
+		}).then((response) => {
+			console.log(JSON.stringify(response))
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 }
 
 
