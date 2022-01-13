@@ -44,6 +44,17 @@ class UserService extends ApiService {
 		})
 	}
 
+	getBatteryPage(page, successCallback, failureCallback) {
+		this.fetch(Config.API_URL + ApiPath.USER_BATTERY + "/" + page, {
+			method: 'GET',
+		}).then((response) => {
+			console.log(JSON.stringify(response))
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 }
 
 

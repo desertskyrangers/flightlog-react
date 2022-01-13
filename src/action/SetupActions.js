@@ -10,7 +10,7 @@ export default function SetupActions(props) {
 	}
 
 	function batteries() {
-		navigate(ApiPath.SETUP)
+		navigate(ApiPath.USER_BATTERIES)
 	}
 
 	return (

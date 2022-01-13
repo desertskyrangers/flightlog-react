@@ -1,9 +1,12 @@
 export default function EntryField(props) {
 
+	const isRequired=props.required
+	const text = props.text + (isRequired ? " *" : "" )
+
 	return (
 		<div>
 			<div className='page-label-row'>
-				<label htmlFor={props.id} className='page-label'>{props.text}</label>
+				<label htmlFor={props.id} className='page-label'>{text}</label>
 				<span className='icon' onClick={props.onIconClick}>{props.icon}</span>
 			</div>
 			<input id={props.id}

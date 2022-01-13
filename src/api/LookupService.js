@@ -23,6 +23,36 @@ class LookupService extends ApiService {
 		})
 	}
 
+	getBatteryConnectors(successCallback, failureCallback) {
+		this.fetch(Config.API_URL + `/api/lookup/battery/connector`, {
+			method: 'GET'
+		}).then((response) => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
+	getBatteryStatuses(successCallback, failureCallback) {
+		this.fetch(Config.API_URL + `/api/lookup/battery/status`, {
+			method: 'GET'
+		}).then((response) => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
+	getBatteryTypes(successCallback, failureCallback) {
+		this.fetch(Config.API_URL + `/api/lookup/battery/type`, {
+			method: 'GET'
+		}).then((response) => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 	getSmsCarriers(successCallback, failureCallback) {
 		this.fetch(Config.API_URL + `/api/lookup/sms/carriers`, {
 			method: 'GET'
