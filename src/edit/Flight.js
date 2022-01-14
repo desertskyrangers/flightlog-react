@@ -15,9 +15,6 @@ export default function Flight(props) {
 
 	const navigate = useNavigate();
 
-	const idParam = useParams().id;
-	const isNew = idParam === 'new'
-
 	const [id, setId] = useState(props.id || '')
 	const [pilot, setPilot] = useState(props.pilot || '')
 	const [unlistedPilot, setUnlistedPilot] = useState(props.unlistedPilot || '')
@@ -28,20 +25,27 @@ export default function Flight(props) {
 	const [startTime, setStartTime] = useState(props.startTime || '')
 	const [duration, setDuration] = useState(props.duration || '')
 	const [notes, setNotes] = useState(props.notes || '')
-
-	// Not using locations yet
 	//const [locationOptions, setLocationOptions] = useState([])
-
 	const [messages, setMessages] = useState([])
+
+	// Options
 	const [pilotOptions, setPilotOptions] = useState([])
 	const [observerOptions, setObserverOptions] = useState([])
 	const [aircraftOptions, setAircraftOptions] = useState([])
 	const [batteryOptions, setBatteryOptions] = useState([])
-	const [requestDelete, setRequestDelete] = useState(false)
 
+	// Actions
+	const [requestDelete, setRequestDelete] = useState(false)
 	const [canSave, setCanSave] = useState(false)
+
+	// References
+	const idRef = useRef(useParams().id)
+	const isNewRef = useRef(idRef.current === 'new')
 	const previousMessages = useRef(messages)
 	const timestamp = useRef(props.timestamp)
+
+	// Method references
+	const setTimestampRef = useRef(setTimestamp)
 
 	function close() {
 		navigate(-1)
@@ -104,15 +108,15 @@ export default function Flight(props) {
 	}
 
 	function loadFlight() {
-		if (isNew) {
-			setTimestamp(new Date())
+		if (isNewRef.current) {
+			setTimestampRef.current(new Date())
 		} else {
-			FlightService.getFlight(idParam, (result) => {
+			FlightService.getFlight(idRef.current, (result) => {
 				setId(result.flight.id)
 				setPilot(result.flight.pilot || '')
-				setUnlistedPilot(result.flight.unlistedPilot)
+				setUnlistedPilot(result.flight.unlistedPilot || '')
 				setObserver(result.flight.observer || '')
-				setUnlistedObserver(result.flight.unlistedObserver)
+				setUnlistedObserver(result.flight.unlistedObserver || '')
 				setAircraft(result.flight.aircraft || '')
 				setBattery(result.flight.battery || '')
 				setTimestamp(result.flight.timestamp ? new Date() : result.flight.timestamp)
@@ -129,9 +133,8 @@ export default function Flight(props) {
 	}
 
 	function update() {
-		console.log("Update flight=" + id)
 		FlightService.updateFlight({
-			id: idParam,
+			id: idRef.current,
 			pilot: pilot,
 			unlistedPilot: unlistedPilot,
 			observer: observer,
@@ -241,11 +244,12 @@ export default function Flight(props) {
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 					<div className='hbox'>
-						{isNew ? null : <button className='icon-button' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE_UP : Icons.DELETE}</button>}
-						{requestDelete ? null : <button disabled={!canSave} className='page-submit' onClick={update}>{isNew ? 'Save' : 'Update'}</button>}
+						{isNewRef.current ? null : <button className='icon-button' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE_UP : Icons.DELETE}</button>}
+						{requestDelete ? null : <button disabled={!canSave} className='page-submit' onClick={update}>{isNewRef.current ? 'Save' : 'Update'}</button>}
 					</div>
 
-					{requestDelete ? <DeleteWithConfirm entity='date of the flight' placeholder={Dates.isoDate(new Date(timestamp.current))} name={Dates.isoDate(new Date(timestamp.current))} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
+					{requestDelete ?
+						<DeleteWithConfirm entity='date of the flight' placeholder={Dates.isoDate(new Date(timestamp.current))} name={Dates.isoDate(new Date(timestamp.current))} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
 				</div>
 			</div>
 		</div>
