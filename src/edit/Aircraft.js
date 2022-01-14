@@ -1,5 +1,5 @@
 import Notice from "../part/Notice";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import LookupService from "../api/LookupService";
 import {useNavigate, useParams} from "react-router-dom";
 import AircraftService from "../api/AircraftService";
