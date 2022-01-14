@@ -30,7 +30,7 @@ export default function Aircraft(props) {
 
 	function update() {
 		AircraftService.updateAircraft({
-			id: idParam,
+			id: idRef.current,
 			name: name,
 			type: type,
 			make: make,

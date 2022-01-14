@@ -37,7 +37,7 @@ export default function Battery(props) {
 
 	const [canSave, setCanSave] = useState(false)
 
-	const idRef = useRef(useParams.id)
+	const idRef = useRef(useParams().id)
 	const isNewRef = useRef(idRef.current === 'new')
 	const previousMessages = useRef(messages)
 
@@ -113,7 +113,7 @@ export default function Battery(props) {
 
 	function update() {
 		BatteryService.updateBattery({
-			id: idParam,
+			id: idRef.current,
 			name: name,
 			type: type,
 			make: make,
