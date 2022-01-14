@@ -22,6 +22,7 @@ export default function Battery(props) {
 	const [make, setMake] = useState(props.make || '')
 	const [model, setModel] = useState(props.model || '')
 	const [connector, setConnector] = useState(props.connector || '')
+	const [otherConnector, setOtherConnector] = useState(props.otherConnector || '')
 
 	const [type, setType] = useState(props.type || '')
 	const [cells, setCells] = useState(props.cells || '')
@@ -40,29 +41,7 @@ export default function Battery(props) {
 	const previousMessages = useRef(messages)
 
 	const isNew = idParam === 'new'
-
-	function update() {
-		BatteryService.updateBattery({
-			id: idParam,
-			name: name,
-			type: type,
-			make: make,
-			model: model,
-			connector: connector,
-			status: status,
-			cells: cells,
-			cycles: cycles,
-			capacity: capacity,
-			chargeRating: chargeRating,
-			dischargeRating: dischargeRating
-		}, (success) => {
-			close()
-		}, (failure) => {
-			let messages = failure.messages
-			if (!!!messages) messages = [failure.message]
-			if (!!messages) setMessages(messages)
-		})
-	}
+	const useOtherConnector = false
 
 	function close() {
 		navigate(-1)
@@ -72,29 +51,12 @@ export default function Battery(props) {
 		if (event.key === 'Enter') update();
 	}
 
-	function clearMessages() {
-		setMessages([])
+	function toggleDelete() {
+		setRequestDelete(!requestDelete)
 	}
 
-	function loadBattery(id) {
-		BatteryService.getBattery(id, (result) => {
-			setId(result.battery.id)
-			setName(result.battery.name || '')
-			setType(result.battery.type || '')
-			setMake(result.battery.make || '')
-			setModel(result.battery.model || '')
-			setConnector(result.battery.connector || '')
-			setStatus(result.battery.status || '')
-			setCells(result.battery.cells || '')
-			setCycles(result.battery.cycles || '')
-			setCapacity(result.battery.capacity || '')
-			setChargeRating(result.battery.chargeRating || '')
-			setDischargeRating(result.battery.dischargeRating || '')
-		}, (failure) => {
-			let messages = failure.messages
-			if (!!!messages) messages = [failure.message]
-			if (!!messages) setMessages(messages)
-		})
+	function clearMessages() {
+		setMessages([])
 	}
 
 	function loadBatteryConnectorOptions() {
@@ -127,8 +89,49 @@ export default function Battery(props) {
 		})
 	}
 
-	function toggleDelete() {
-		setRequestDelete(!requestDelete)
+	function loadBattery(id) {
+		if (isNew) return
+		BatteryService.getBattery(id, (result) => {
+			setId(result.battery.id)
+			setName(result.battery.name || '')
+			setType(result.battery.type || '')
+			setMake(result.battery.make || '')
+			setModel(result.battery.model || '')
+			setConnector(result.battery.connector || '')
+			setStatus(result.battery.status || '')
+			setCells(result.battery.cells || '')
+			setCycles(result.battery.cycles || '')
+			setCapacity(result.battery.capacity || '')
+			setChargeRating(result.battery.chargeRating || '')
+			setDischargeRating(result.battery.dischargeRating || '')
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			if (!!messages) setMessages(messages)
+		})
+	}
+
+	function update() {
+		BatteryService.updateBattery({
+			id: idParam,
+			name: name,
+			type: type,
+			make: make,
+			model: model,
+			connector: connector,
+			status: status,
+			cells: cells,
+			cycles: cycles,
+			capacity: capacity,
+			chargeRating: chargeRating,
+			dischargeRating: dischargeRating
+		}, (success) => {
+			close()
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			if (!!messages) setMessages(messages)
+		})
 	}
 
 	function doDelete() {
@@ -159,20 +162,18 @@ export default function Battery(props) {
 		previousMessages.current = messages
 
 		setCanSave(validCells && validCycles && validCapacity && validChargeRating && validDischargeRating)
-	},[cells, cycles, capacity, chargeRating, dischargeRating])
+	}, [cells, cycles, capacity, chargeRating, dischargeRating])
 
-	useEffect(() => {
-		if (connectorOptions.length === 0) loadBatteryConnectorOptions()
-		if (statusOptions.length === 0) loadBatteryStatusOptions()
-		if (typeOptions.length === 0) loadBatteryTypeOptions()
-		if (!isNew && id === '') loadBattery(idParam)
-	})
+	useEffect(() => loadBatteryConnectorOptions(), [])
+	useEffect(() => loadBatteryStatusOptions(), [])
+	useEffect(() => loadBatteryTypeOptions(), [])
+	useEffect(() => loadBattery(idParam), [])
 
 	return (
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<EntryField id='name' text='Name' type='text' required={true} autoFocus='autofocus' value={name} onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown} icon={Icons.CLOSE} onIconClick={close}/>
+					<EntryField id='name' text='Name' type='text' required={true} autoFocus='autofocus' value={name} onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown} labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
 					<EntrySelect id='status' text='Status' value={status} required={true} onChange={(event) => setStatus(event.target.value)}>
 						{statusOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
@@ -181,6 +182,7 @@ export default function Battery(props) {
 					<EntrySelect id='connector' text='Connector' value={connector} onChange={(event) => setConnector(event.target.value)}>
 						{connectorOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
+					{useOtherConnector ? <EntryField id='otherConnector' text='Connector' type='text' value={otherConnector} onChange={(event) => setOtherConnector(event.target.value)}/> : null}
 
 					<EntrySelect id='type' text='Type' value={type} onChange={(event) => setType(event.target.value)}>
 						{typeOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
@@ -197,7 +199,7 @@ export default function Battery(props) {
 						{requestDelete ? null : <button disabled={!canSave} className='page-submit' onClick={update}>{isNew ? 'Save' : 'Update'}</button>}
 					</div>
 
-					{requestDelete ? <DeleteWithConfirm entity='battery' name={name} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
+					{requestDelete ? <DeleteWithConfirm entity='name of the battery' name={name} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
 
 				</div>
 			</div>

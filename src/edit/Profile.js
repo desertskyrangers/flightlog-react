@@ -79,7 +79,7 @@ export default function Profile(props) {
 
 	function loadProfileData() {
 		LookupService.getSmsCarriers((result) => {
-			console.log( "carriers="+JSON.stringify(result))
+			console.log("carriers=" + JSON.stringify(result))
 			setSmsCarriers(result)
 		}, (failure) => {
 			let messages = failure.messages
@@ -108,9 +108,7 @@ export default function Profile(props) {
 		})
 	}
 
-	useEffect(() => {
-		if (!id) loadProfileData()
-	})
+	useEffect(() => loadProfileData(), [])
 
 	useLayoutEffect(() => {
 		const firstNameTooLong = !!firstName && firstName.length >= 64;
@@ -125,13 +123,13 @@ export default function Profile(props) {
 		if (!validSmsNumber) messages.push('Invalid SMS number')
 		if (!isEqual(messages, previousMessages.current)) setMessages(messages)
 		previousMessages.current = messages
-	},[firstName, lastName, email, smsNumber])
+	}, [firstName, lastName, email, smsNumber])
 
 	return (
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<EntryField id='firstName' text='First Name' type='text' autoFocus='autofocus' value={firstName} onChange={updateFirstName} onKeyDown={onKeyDown} icon={Icons.CLOSE} onIconClick={close}/>
+					<EntryField id='firstName' text='First Name' type='text' autoFocus='autofocus' value={firstName} onChange={updateFirstName} onKeyDown={onKeyDown} labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
 					<EntryField id='lastName' text='Last Name' type='text' value={lastName} onChange={updateLastName} onKeyDown={onKeyDown}/>
 					<EntryField id='preferredName' text='Preferred Name' type='text' value={preferredName} onChange={(event) => setPreferredName(event.target.value)} onKeyDown={onKeyDown}/>
 					<EntryField id='email' text='Email' type='text' value={email} onChange={(event) => setEmail(event.target.value)} onKeyDown={onKeyDown}/>

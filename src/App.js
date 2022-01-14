@@ -40,6 +40,24 @@ function App() {
 		})
 	}
 
+	Date.prototype.isoDate = function () {
+		let YYYY = this.getFullYear();
+		let MM = this.getMonth() + 1; // getMonth() is zero-based
+		let DD = this.getDate();
+
+		return [YYYY, (MM > 9 ? '' : '0') + MM, (DD > 9 ? '' : '0') + DD].join('-');
+	};
+
+	Date.prototype.isoDateHourMin = function () {
+		let YYYY = this.getFullYear();
+		let MM = this.getMonth() + 1; // getMonth() is zero-based
+		let DD = this.getDate();
+		let hh = this.getHours();
+		let mm = this.getMinutes();
+
+		return [YYYY, (MM > 9 ? '' : '0') + MM, (DD > 9 ? '' : '0') + DD].join('-') + 'T' + [(hh>9 ? '':'0')+hh,(mm>9 ? '':'0')+mm].join(':');
+	};
+
 	return (
 
 		<div className="app">

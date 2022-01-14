@@ -20,8 +20,8 @@ export default function DeleteWithConfirm(props) {
 
 	return (
 		<div className='vbox'>
-			WARNING: This action cannot be undone. Please type the name of the {props.entity} to confirm:
-			<input id='name' name='name' value={name} type='text' className='page-field' onChange={updateName} onKeyDown={onKeyDown}/>
+			WARNING: This action cannot be undone. Please type the {props.entity} to confirm:
+			<input id='name' name='name' value={name} type='text' placeholder={props.placeholder} className='page-field' onChange={updateName} onKeyDown={onKeyDown}/>
 			<button id='submit-delete' disabled={!canDelete} className='page-action' onClick={doDelete}>Delete</button>
 		</div>
 	)

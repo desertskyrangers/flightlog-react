@@ -18,9 +18,15 @@ class ApiPath {
 
 	USER_FLIGHT = this.USER + "/flight"
 
-	USER_AIRCRAFT_LOOKUP = this.USER_AIRCRAFT + "/lookup"
+	USER_LOOKUP = this.USER + "/lookup"
 
-	USER_BATTERY_LOOKUP = this.USER_BATTERY + "/lookup"
+	USER_AIRCRAFT_LOOKUP = this.USER_LOOKUP + "/aircraft"
+
+	USER_BATTERY_LOOKUP = this.USER_LOOKUP + "/battery"
+
+	USER_OBSERVER_LOOKUP = this.USER_LOOKUP + "/observer"
+
+	USER_PILOT_LOOKUP = this.USER_LOOKUP + "/pilot"
 }
 
 const instance = new ApiPath()

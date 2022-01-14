@@ -56,6 +56,7 @@ export default function Aircraft(props) {
 	}
 
 	function loadAircraft(id) {
+		if (isNew) return
 		AircraftService.getAircraft(id, (result) => {
 			setId(result.aircraft.id)
 			setName(result.aircraft.name)
@@ -105,17 +106,21 @@ export default function Aircraft(props) {
 		})
 	}
 
-	useEffect(() => {
-		if (statusOptions.length === 0) loadAircraftStatusOptions()
-		if (typeOptions.length === 0) loadAircraftTypeOptions()
-		if (!isNew && id === '') loadAircraft(idParam)
-	})
+	useEffect(() => loadAircraftStatusOptions(), [])
+	useEffect(() => loadAircraftTypeOptions(), [])
+	useEffect(() => loadAircraft(idParam), [])
+
+	// useEffect(() => {
+	// 	if (statusOptions.length === 0) loadAircraftStatusOptions()
+	// 	if (typeOptions.length === 0) loadAircraftTypeOptions()
+	// 	if (!isNew && id === '') loadAircraft(idParam)
+	// })
 
 	return (
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<EntryField id='name' text='Name' type='text' value={name} required={true} autoFocus='autofocus' onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown} icon={Icons.CLOSE} onIconClick={close}/>
+					<EntryField id='name' text='Name' type='text' value={name} required={true} autoFocus='autofocus' onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown} labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
 
 					<EntrySelect id='type' name='type' text='Type' value={type} required={true} onChange={(event) => setType(event.target.value)}>
 						{typeOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
@@ -134,7 +139,7 @@ export default function Aircraft(props) {
 						{requestDelete ? null : <button disabled={messages.length > 0} className='page-submit' onClick={update}>{isNew ? 'Save' : 'Update'}</button>}
 					</div>
 
-					{requestDelete ? <DeleteWithConfirm entity='aircraft' name={name} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
+					{requestDelete ? <DeleteWithConfirm entity='name of the aircraft' name={name} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
 
 				</div>
 			</div>

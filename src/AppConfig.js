@@ -5,6 +5,9 @@ class AppConfig {
 	EMAIL_PATTERN = /[a-z0-9!#$%&'*+\\/=?^_{|}~-]+(?:\.[a-z0-9!#$%&'*+\\/=?^_{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9][a-z0-9-]*[a-z0-9]/
 	PHONE_PATTERN = /^[-+.()0-9 ]*$/
 
+	TIMESTAMP_PATTERN = /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}$/
+	DURATION_PATTERN = /^[0-9]{2}:[0-9]{2}:[0-9]{2}$/
+
 	POSITIVE_INTEGER_PATTERN = /^[0-9]*$/
 
 	constructor() {

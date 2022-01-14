@@ -123,6 +123,15 @@ button:hover {
 .icon {
 	width: 1rem;
 	height: 1rem;
+
+	fill: currentColor;
+
+	display: inline-block;
+	box-sizing: border-box;
+
+	text-align: center;
+	vertical-align: text-bottom;
+	cursor: pointer;
 }
 
 .icon-button {

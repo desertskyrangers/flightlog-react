@@ -101,6 +101,14 @@
 	box-sizing: border-box;
 }
 
+.page-field-label-button {
+	align-self: end;
+}
+
+.page-field-action-button {
+	align-self: end;
+}
+
 .page-result {
 	font-size: 1rem;
 

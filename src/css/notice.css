@@ -79,14 +79,3 @@
 	border: none;
 	background: none;
 }
-
-.icon {
-	fill: currentColor;
-
-	display: inline-block;
-	box-sizing: border-box;
-
-	text-align: center;
-	vertical-align: text-bottom;
-	cursor: pointer;
-}

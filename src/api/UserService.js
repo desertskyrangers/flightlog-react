@@ -88,6 +88,28 @@ class UserService extends ApiService {
 		})
 	}
 
+	getObserverOptions(successCallback, failureCallback) {
+		this.fetch(Config.API_URL + ApiPath.USER_OBSERVER_LOOKUP, {
+			method: 'GET',
+		}).then((response) => {
+			console.log(JSON.stringify(response))
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
+	getPilotOptions(successCallback, failureCallback) {
+		this.fetch(Config.API_URL + ApiPath.USER_PILOT_LOOKUP, {
+			method: 'GET',
+		}).then((response) => {
+			console.log(JSON.stringify(response))
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 }
 
 
