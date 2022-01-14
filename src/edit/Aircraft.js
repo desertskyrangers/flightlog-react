@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import LookupService from "../api/LookupService";
 import {useNavigate, useParams} from "react-router-dom";
 import AircraftService from "../api/AircraftService";
-import Icons from "../Icons";
+import Icons from "../util/Icons";
 import EntryField from "../part/EntryField";
 import DeleteWithConfirm from "../part/DeleteWithConfirm";
 import EntrySelect from "../part/EntrySelect";
@@ -55,9 +55,9 @@ export default function Aircraft(props) {
 		setMessages([])
 	}
 
-	function loadAircraft(id) {
+	function loadAircraft() {
 		if (isNew) return
-		AircraftService.getAircraft(id, (result) => {
+		AircraftService.getAircraft(idParam, (result) => {
 			setId(result.aircraft.id)
 			setName(result.aircraft.name)
 			setType(result.aircraft.type)
@@ -108,13 +108,7 @@ export default function Aircraft(props) {
 
 	useEffect(() => loadAircraftStatusOptions(), [])
 	useEffect(() => loadAircraftTypeOptions(), [])
-	useEffect(() => loadAircraft(idParam), [])
-
-	// useEffect(() => {
-	// 	if (statusOptions.length === 0) loadAircraftStatusOptions()
-	// 	if (typeOptions.length === 0) loadAircraftTypeOptions()
-	// 	if (!isNew && id === '') loadAircraft(idParam)
-	// })
+	useEffect(() => loadAircraft(), [])
 
 	return (
 		<div className='page-container'>

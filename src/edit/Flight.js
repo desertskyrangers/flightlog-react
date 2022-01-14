@@ -1,6 +1,6 @@
 import EntryField from "../part/EntryField";
 import Notice from "../part/Notice";
-import Icons from "../Icons";
+import Icons from "../util/Icons";
 import DeleteWithConfirm from "../part/DeleteWithConfirm";
 import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
@@ -9,6 +9,7 @@ import EntrySelect from "../part/EntrySelect";
 import AppConfig from "../AppConfig";
 import {isEqual} from "lodash";
 import FlightService from "../api/FlightService";
+import Dates from "../util/Dates";
 
 export default function Flight(props) {
 
@@ -102,11 +103,11 @@ export default function Flight(props) {
 		})
 	}
 
-	function loadFlight(id) {
+	function loadFlight() {
 		if (isNew) {
 			setTimestamp(new Date())
 		} else {
-			FlightService.getFlight(id, (result) => {
+			FlightService.getFlight(idParam, (result) => {
 				setId(result.flight.id)
 				setPilot(result.flight.pilot || '')
 				setUnlistedPilot(result.flight.unlistedPilot)
@@ -162,14 +163,14 @@ export default function Flight(props) {
 
 	function setTimestamp(value) {
 		timestamp.current = value
-		setStartTime(value.dateHourMin())
+		setStartTime(Dates.isoDateHourMin(new Date(value)))
 	}
 
 	function updateStartTime(value) {
-		timestamp.current = new Date(String(value))
-		setStartTime(value)
+		setTimestamp(new Date(String(value)))
 	}
 
+	/* This should only be called from field.onChange */
 	function doSetStartTime() {
 		setTimestamp(new Date())
 	}
@@ -190,8 +191,6 @@ export default function Flight(props) {
 		const validTimestamp = !startTime || String(startTime).match(AppConfig.TIMESTAMP_PATTERN) != null
 		const validDuration = !duration || String(duration).match(AppConfig.DURATION_PATTERN) != null
 
-		//console.log("timestamp=" + startTime.toISOString())
-
 		let messages = [];
 		if (!validPilot) messages.push('Invalid pilot')
 		if (!validObserver) messages.push('Invalid observer')
@@ -202,13 +201,13 @@ export default function Flight(props) {
 		previousMessages.current = messages
 
 		setCanSave(validPilot && validObserver && validAircraft && validTimestamp && validDuration)
-	}, [pilot, aircraft, startTime, duration])
+	}, [pilot, observer, aircraft, startTime, duration])
 
 	useEffect(() => loadPilotOptions(), [])
 	useEffect(() => loadObserverOptions(), [])
 	useEffect(() => loadAircraftOptions(), [])
 	useEffect(() => loadBatteryOptions(), [])
-	useEffect(() => loadFlight(idParam), [])
+	useEffect(() => loadFlight(), [])
 
 	return (
 		<div className='page-container'>
@@ -228,7 +227,15 @@ export default function Flight(props) {
 						{batteryOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
 
-					<EntryField id='startTime' text='Start time' type='datetime-local' value={startTime} required onChange={(event) => updateStartTime(event.target.value)} onKeyDown={onKeyDown} fieldActionIcon={Icons.CALENDAR} onFieldAction={doSetStartTime}/>
+					<EntryField id='startTime'
+											text='Start time'
+											type='datetime-local'
+											value={startTime}
+											required
+											onChange={(event) => updateStartTime(event.target.value)}
+											onKeyDown={onKeyDown}
+											fieldActionIcon={Icons.CALENDAR}
+											onFieldAction={doSetStartTime}/>
 					<EntryField id='duration' text='Duration (mins)' type='number' min='0' value={duration} onChange={(event) => setDuration(event.target.value)} onKeyDown={onKeyDown} fieldActionIcon={Icons.CLOCK} onFieldAction={doSetDuration}/>
 					<EntryField id='notes' text='Notes' type='area' value={notes} onChange={(event) => setNotes(event.target.value)} onKeyDown={onKeyDown}/>
 
@@ -238,7 +245,7 @@ export default function Flight(props) {
 						{requestDelete ? null : <button disabled={!canSave} className='page-submit' onClick={update}>{isNew ? 'Save' : 'Update'}</button>}
 					</div>
 
-					{requestDelete ? <DeleteWithConfirm entity='date of the flight' placeholder={new Date(timestamp.current).isoDate()} name={new Date(timestamp.current).isoDate()} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
+					{requestDelete ? <DeleteWithConfirm entity='date of the flight' placeholder={Dates.isoDate(new Date(timestamp.current))} name={Dates.isoDate(new Date(timestamp.current))} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
 				</div>
 			</div>
 		</div>

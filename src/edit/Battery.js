@@ -3,7 +3,7 @@ import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import BatteryService from "../api/BatteryService";
 import LookupService from "../api/LookupService";
 import EntryField from "../part/EntryField";
-import Icons from "../Icons";
+import Icons from "../util/Icons";
 import Notice from "../part/Notice";
 import DeleteWithConfirm from "../part/DeleteWithConfirm";
 import EntrySelect from "../part/EntrySelect";
@@ -89,9 +89,9 @@ export default function Battery(props) {
 		})
 	}
 
-	function loadBattery(id) {
+	function loadBattery() {
 		if (isNew) return
-		BatteryService.getBattery(id, (result) => {
+		BatteryService.getBattery(idParam, (result) => {
 			setId(result.battery.id)
 			setName(result.battery.name || '')
 			setType(result.battery.type || '')
@@ -167,7 +167,7 @@ export default function Battery(props) {
 	useEffect(() => loadBatteryConnectorOptions(), [])
 	useEffect(() => loadBatteryStatusOptions(), [])
 	useEffect(() => loadBatteryTypeOptions(), [])
-	useEffect(() => loadBattery(idParam), [])
+	useEffect(() => loadBattery(), [])
 
 	return (
 		<div className='page-container'>

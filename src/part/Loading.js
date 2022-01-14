@@ -1,4 +1,4 @@
-import Icons from "../Icons";
+import Icons from "../util/Icons";
 
 export default function Loading() {
 

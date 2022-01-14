@@ -6,7 +6,7 @@ class AppConfig {
 	PHONE_PATTERN = /^[-+.()0-9 ]*$/
 
 	TIMESTAMP_PATTERN = /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}$/
-	DURATION_PATTERN = /^[0-9]{2}:[0-9]{2}:[0-9]{2}$/
+	DURATION_PATTERN = /^[0-9]*$/
 
 	POSITIVE_INTEGER_PATTERN = /^[0-9]*$/
 

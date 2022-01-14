@@ -1,6 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
-import Icons from "./Icons";
+import Icons from "./util/Icons";
 
 export default function About(props) {
 	const navigate = useNavigate();

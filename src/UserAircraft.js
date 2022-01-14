@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Loading from "./part/Loading";
 import NoResults from "./part/NoResults";
-import Icons from "./Icons";
+import Icons from "./util/Icons";
 import Notice from "./part/Notice";
 import {useNavigate} from "react-router-dom";
 import AppPath from "./AppPath";
@@ -63,8 +63,8 @@ function AircraftList(props) {
 
 	return (
 		<div className='vbox'>
-			{page}
 			<button className='page-action' onClick={add}>Add an Aircraft</button>
+			{page}
 		</div>
 	)
 

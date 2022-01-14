@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 import Loading from "./part/Loading";
 import NoResults from "./part/NoResults";
-import Icons from "./Icons";
+import Icons from "./util/Icons";
 import Notice from "./part/Notice";
 import {useNavigate} from "react-router-dom";
 import AppPath from "./AppPath";
 import UserService from "./api/UserService";
+import Dates from "./util/Dates";
 
 export default function UserAircraft() {
 
@@ -62,8 +63,8 @@ function FlightList(props) {
 
 	return (
 		<div className='vbox'>
-			{page}
 			<button className='page-action' onClick={add}>Add a Flight</button>
+			{page}
 		</div>
 	)
 
@@ -78,8 +79,10 @@ function FlightRow(props) {
 		navigate(AppPath.FLIGHT + "/" + props.flight.id)
 	}
 
+	console.log(JSON.stringify(props.flight))
+
 	return (
-		<div className='page-result' onClick={open}>{Icons.PLANE} {props.flight.name}</div>
+		<div className='page-result' onClick={open}>{Icons.fromAircraftType(props.flight.type)} {Dates.humanDateHourMin(new Date(props.flight.timestamp))} {props.flight.name}</div>
 	)
 
 }

@@ -1,6 +1,6 @@
 import {faAngleUp, faBan, faCalendar, faClock, faBatteryFull, faBars, faEllipsisH, faHelicopter, faHome, faPlane, faSpinner, faTimesCircle, faTrash, faUser} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import DroneIcon from "./icon/DroneIcon";
+import DroneIcon from "../icon/DroneIcon";
 
 class Icons {
 
@@ -19,6 +19,20 @@ class Icons {
 	PLANE = <FontAwesomeIcon icon={faPlane}/>
 	USER = <FontAwesomeIcon icon={faUser}/>
 	WAIT = <FontAwesomeIcon icon={faSpinner}/>
+
+	fromAircraftType(type) {
+		const aircraftTypeIcons = {
+			fixedwing: instance.PLANE,
+			helicopter: instance.HELICOPTER,
+			multirotor: instance.DRONE,
+			other: instance.DRONE
+		}
+
+		let icon = aircraftTypeIcons[type]
+		if( !icon ) icon = instance.DRONE
+
+		return icon
+	}
 
 }
 

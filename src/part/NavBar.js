@@ -1,4 +1,4 @@
-import Icons from '../Icons'
+import Icons from '../util/Icons'
 import '../css/nav.css'
 import {Link} from "react-router-dom";
 import ApiPath from "../AppPath";
