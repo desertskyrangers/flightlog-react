@@ -14,8 +14,6 @@ export default function Battery(props) {
 
 	const navigate = useNavigate();
 
-	const idParam = useParams().id;
-
 	const [id, setId] = useState(props.id || '')
 	const [name, setName] = useState(props.name || '')
 	const [status, setStatus] = useState(props.status || 'new')
@@ -38,9 +36,11 @@ export default function Battery(props) {
 	const [requestDelete, setRequestDelete] = useState(false)
 
 	const [canSave, setCanSave] = useState(false)
+
+	const idRef = useRef(useParams.id)
+	const isNewRef = useRef(idRef.current === 'new')
 	const previousMessages = useRef(messages)
 
-	const isNew = idParam === 'new'
 	const useOtherConnector = false
 
 	function close() {
@@ -90,8 +90,8 @@ export default function Battery(props) {
 	}
 
 	function loadBattery() {
-		if (isNew) return
-		BatteryService.getBattery(idParam, (result) => {
+		if (isNewRef.current) return
+		BatteryService.getBattery(idRef.current, (result) => {
 			setId(result.battery.id)
 			setName(result.battery.name || '')
 			setType(result.battery.type || '')
@@ -195,8 +195,8 @@ export default function Battery(props) {
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 					<div className='hbox'>
-						{isNew ? null : <button className='icon-button' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE_UP : Icons.DELETE}</button>}
-						{requestDelete ? null : <button disabled={!canSave} className='page-submit' onClick={update}>{isNew ? 'Save' : 'Update'}</button>}
+						{isNewRef.current ? null : <button className='icon-button' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE_UP : Icons.DELETE}</button>}
+						{requestDelete ? null : <button disabled={!canSave} className='page-submit' onClick={update}>{isNewRef.current ? 'Save' : 'Update'}</button>}
 					</div>
 
 					{requestDelete ? <DeleteWithConfirm entity='name of the battery' name={name} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}

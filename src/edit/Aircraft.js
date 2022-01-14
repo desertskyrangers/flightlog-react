@@ -11,7 +11,8 @@ import EntrySelect from "../part/EntrySelect";
 export default function Aircraft(props) {
 	const navigate = useNavigate();
 
-	const idParam = useParams().id;
+	// const idParam = useParams().id;
+	// const isNew = idParam === 'new'
 
 	const [id, setId] = useState(props.id || '')
 	const [name, setName] = useState(props.name || '')
@@ -24,7 +25,8 @@ export default function Aircraft(props) {
 	const [typeOptions, setTypeOptions] = useState([])
 	const [requestDelete, setRequestDelete] = useState(false)
 
-	const isNew = idParam === 'new'
+	const idRef = useRef(useParams().id)
+	const isNewRef = useRef(idRef.current === 'new')
 
 	function update() {
 		AircraftService.updateAircraft({
@@ -56,8 +58,8 @@ export default function Aircraft(props) {
 	}
 
 	function loadAircraft() {
-		if (isNew) return
-		AircraftService.getAircraft(idParam, (result) => {
+		if (isNewRef.current) return
+		AircraftService.getAircraft(idRef.current, (result) => {
 			setId(result.aircraft.id)
 			setName(result.aircraft.name)
 			setType(result.aircraft.type)
@@ -129,8 +131,8 @@ export default function Aircraft(props) {
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 					<div className='hbox'>
-						{isNew ? null : <button className='icon-button' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE_UP : Icons.DELETE}</button>}
-						{requestDelete ? null : <button disabled={messages.length > 0} className='page-submit' onClick={update}>{isNew ? 'Save' : 'Update'}</button>}
+						{isNewRef.current ? null : <button className='icon-button' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE_UP : Icons.DELETE}</button>}
+						{requestDelete ? null : <button disabled={messages.length > 0} className='page-submit' onClick={update}>{isNewRef.current ? 'Save' : 'Update'}</button>}
 					</div>
 
 					{requestDelete ? <DeleteWithConfirm entity='name of the aircraft' name={name} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
