@@ -19,10 +19,10 @@ export default function Battery(props) {
 	const [status, setStatus] = useState(props.status || 'new')
 	const [make, setMake] = useState(props.make || '')
 	const [model, setModel] = useState(props.model || '')
-	const [connector, setConnector] = useState(props.connector || '')
+	const [connector, setConnector] = useState(props.connector || 'xt60')
 	const [otherConnector, setOtherConnector] = useState(props.otherConnector || '')
 
-	const [type, setType] = useState(props.type || '')
+	const [type, setType] = useState(props.type || 'lipo')
 	const [cells, setCells] = useState(props.cells || '')
 	const [cycles, setCycles] = useState(props.cycles || '')
 	const [capacity, setCapacity] = useState(props.capacity || '')
@@ -60,8 +60,8 @@ export default function Battery(props) {
 	}
 
 	function loadBatteryConnectorOptions() {
-		LookupService.getBatteryConnectors((success) => {
-			setConnectorOptions(success)
+		LookupService.getBatteryConnectors((result) => {
+			setConnectorOptions(result)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -70,8 +70,8 @@ export default function Battery(props) {
 	}
 
 	function loadBatteryStatusOptions() {
-		LookupService.getBatteryStatuses((success) => {
-			setStatusOptions(success)
+		LookupService.getBatteryStatuses((result) => {
+			setStatusOptions(result)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -80,8 +80,8 @@ export default function Battery(props) {
 	}
 
 	function loadBatteryTypeOptions() {
-		LookupService.getBatteryTypes((success) => {
-			setTypeOptions(success)
+		LookupService.getBatteryTypes((result) => {
+			setTypeOptions(result)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]

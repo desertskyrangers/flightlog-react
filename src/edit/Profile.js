@@ -57,11 +57,13 @@ export default function Profile(props) {
 	}
 
 	function updateFirstName(event) {
+		setFirstName(event.target.value)
 		updatePreferredName(oldFirstName.current, oldLastName.current, event.target.value, lastName)
 		oldFirstName.current = event.target.value
 	}
 
 	function updateLastName(event) {
+		setLastName(event.target.value)
 		updatePreferredName(oldFirstName.current, oldLastName.current, firstName, event.target.value)
 		oldLastName.current = event.target.value
 	}
