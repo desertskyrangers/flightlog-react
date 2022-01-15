@@ -1,15 +1,18 @@
 import React from "react";
 import ApiPath from "../AppPath";
 import {useNavigate} from "react-router-dom";
+import AppPath from "../AppPath";
 
 export default function FlightActions() {
 
 	const navigate = useNavigate();
 
 	function timeFlight() {
+		navigate(ApiPath.FLIGHT_TIMER)
 	}
 
 	function logFlight() {
+		navigate(AppPath.FLIGHT + "/new")
 	}
 
 	function flightLog() {

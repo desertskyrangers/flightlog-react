@@ -24,6 +24,7 @@ import {useEffect, useState} from "react";
 import AppService from "./api/AppService";
 import Flight from "./edit/Flight";
 import Battery from "./edit/Battery";
+import FlightTimer from "./FlightTimer";
 
 function App() {
 
@@ -68,6 +69,8 @@ function App() {
 						<Route exact path={ApiPath.AIRCRAFT + "/:id"} element={<Protect><Aircraft/></Protect>}/>
 						<Route exact path={ApiPath.BATTERY + "/:id"} element={<Protect><Battery/></Protect>}/>
 						<Route exact path={ApiPath.FLIGHT + "/:id"} element={<Protect><Flight/></Protect>}/>
+						<Route exact path={ApiPath.FLIGHT_TIMER} element={<Protect> <FlightTimer/> </Protect>}/>
+						<Route exact path={ApiPath.FLIGHT + "/:id/:timestamp/:duration"} element={<Protect> <Flight/> </Protect>}/>
 						<Route exact path={ApiPath.PROFILE} element={<Protect> <Profile/> </Protect>}/>
 						<Route exact path={ApiPath.USER_AIRCRAFT} element={<Protect><UserAircraft/></Protect>}/>
 						<Route exact path={ApiPath.USER_BATTERIES} element={<Protect><UserBatteries/></Protect>}/>

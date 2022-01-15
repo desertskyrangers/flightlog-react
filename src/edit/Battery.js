@@ -135,7 +135,6 @@ export default function Battery(props) {
 	}
 
 	function doDelete() {
-		console.log("Delete battery=" + id)
 		BatteryService.deleteBattery(id, (result) => {
 			close()
 		}, (failure) => {

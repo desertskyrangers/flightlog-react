@@ -75,11 +75,8 @@ function FlightRow(props) {
 	const navigate = useNavigate();
 
 	function open() {
-		console.log("Open flight...")
 		navigate(AppPath.FLIGHT + "/" + props.flight.id)
 	}
-
-	console.log(JSON.stringify(props.flight))
 
 	return (
 		<div className='page-result' onClick={open}>{Icons.fromAircraftType(props.flight.type)} {Dates.humanDateHourMin(new Date(props.flight.timestamp))} {props.flight.name}</div>

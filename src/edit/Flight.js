@@ -10,10 +10,14 @@ import AppConfig from "../AppConfig";
 import {isEqual} from "lodash";
 import FlightService from "../api/FlightService";
 import Dates from "../util/Dates";
+import AppPath from "../AppPath";
 
 export default function Flight(props) {
 
 	const navigate = useNavigate();
+
+	const paramTimestamp = useParams().timestamp
+	const paramDuration = useParams().duration
 
 	const [id, setId] = useState(props.id || '')
 	const [pilot, setPilot] = useState(props.pilot || '')
@@ -23,7 +27,7 @@ export default function Flight(props) {
 	const [aircraft, setAircraft] = useState(props.aircraft || '')
 	const [battery, setBattery] = useState(props.battery || '')
 	const [startTime, setStartTime] = useState(props.startTime || '')
-	const [duration, setDuration] = useState(props.duration || '')
+	const [duration, setDuration] = useState(paramDuration || '')
 	const [notes, setNotes] = useState(props.notes || '')
 	//const [locationOptions, setLocationOptions] = useState([])
 	const [messages, setMessages] = useState([])
@@ -40,12 +44,17 @@ export default function Flight(props) {
 
 	// References
 	const idRef = useRef(useParams().id)
-	const isNewRef = useRef(idRef.current === 'new')
+	const paramTimestampRef = useRef(new Date(Number.parseInt(paramTimestamp)))
 	const previousMessages = useRef(messages)
 	const timestamp = useRef(props.timestamp)
+	const isNewRef = useRef(idRef.current === 'new')
 
 	// Method references
 	const setTimestampRef = useRef(setTimestamp)
+
+	function goToUserFlights() {
+		navigate(AppPath.USER_FLIGHTS)
+	}
 
 	function close() {
 		navigate(-1)
@@ -109,7 +118,7 @@ export default function Flight(props) {
 
 	function loadFlight() {
 		if (isNewRef.current) {
-			setTimestampRef.current(new Date())
+			setTimestampRef.current(Dates.isValidDate(paramTimestampRef.current) ? paramTimestampRef.current : new Date())
 		} else {
 			FlightService.getFlight(idRef.current, (result) => {
 				setId(result.flight.id)
@@ -119,11 +128,9 @@ export default function Flight(props) {
 				setUnlistedObserver(result.flight.unlistedObserver || '')
 				setAircraft(result.flight.aircraft || '')
 				setBattery(result.flight.battery || '')
-				setTimestampRef.current(result.flight.timestamp ? new Date() : result.flight.timestamp)
+				setTimestampRef.current(result.flight.timestamp ? new Date(result.flight.timestamp) : new Date())
 				setDuration(result.flight.duration || '')
 				setNotes(result.flight.notes || '')
-
-				timestamp.current = result.flight.timestamp
 			}, (failure) => {
 				let messages = failure.messages
 				if (!!!messages) messages = [failure.message]
@@ -145,7 +152,7 @@ export default function Flight(props) {
 			duration: duration,
 			notes: notes,
 		}, (result) => {
-			close()
+			goToUserFlights()
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -154,9 +161,8 @@ export default function Flight(props) {
 	}
 
 	function doDelete() {
-		console.log("Delete flight=" + id)
 		FlightService.deleteFlight(id, (result) => {
-			close()
+			goToUserFlights()
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -183,7 +189,7 @@ export default function Flight(props) {
 			setMessages(['Start time not set'])
 		} else {
 			setMessages([])
-			setDuration(Math.round((new Date() - new Date(String(startTime))) / 60000))
+			setDuration(Math.floor((new Date() - new Date(String(startTime))) / 1000))
 		}
 	}
 
@@ -198,7 +204,7 @@ export default function Flight(props) {
 		if (!validPilot) messages.push('Invalid pilot')
 		if (!validObserver) messages.push('Invalid observer')
 		if (!validAircraft) messages.push('Invalid aircraft')
-		if (!validTimestamp) messages.push('Invalid start time')
+		if (!validTimestamp) messages.push('Invalid start time: ' + startTime)
 		if (!validDuration) messages.push('Invalid duration')
 		if (!isEqual(messages, previousMessages.current)) setMessages(messages)
 		previousMessages.current = messages
@@ -239,7 +245,7 @@ export default function Flight(props) {
 											onKeyDown={onKeyDown}
 											fieldActionIcon={Icons.CALENDAR}
 											onFieldAction={doSetStartTime}/>
-					<EntryField id='duration' text='Duration (mins)' type='number' min='0' value={duration} onChange={(event) => setDuration(event.target.value)} onKeyDown={onKeyDown} fieldActionIcon={Icons.CLOCK} onFieldAction={doSetDuration}/>
+					<EntryField id='duration' text='Duration (sec)' type='number' min='0' value={duration} onChange={(event) => setDuration(event.target.value)} onKeyDown={onKeyDown} fieldActionIcon={Icons.CLOCK} onFieldAction={doSetDuration}/>
 					<EntryField id='notes' text='Notes' type='area' value={notes} onChange={(event) => setNotes(event.target.value)} onKeyDown={onKeyDown}/>
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>

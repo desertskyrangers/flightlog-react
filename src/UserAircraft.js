@@ -82,7 +82,6 @@ function AircraftRow(props) {
 	}
 
 	function open() {
-		console.log("Open aircraft...")
 		navigate(AppPath.AIRCRAFT + "/" + props.aircraft.id)
 	}
 

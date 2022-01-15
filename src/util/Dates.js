@@ -1,5 +1,9 @@
 class Dates {
 
+	isValidDate(date) {
+		return date instanceof Date && !isNaN(date);
+	}
+
 	isoDate(date) {
 		let YYYY = date.getFullYear();
 		let MM = date.getMonth() + 1; // getMonth() is zero-based

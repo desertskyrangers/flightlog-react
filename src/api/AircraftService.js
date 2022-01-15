@@ -8,7 +8,6 @@ class AircraftService extends ApiService {
 		this.fetch(Config.API_URL + ApiPath.AIRCRAFT + "/" + id, {
 			method: 'GET'
 		}).then((response) => {
-			console.log(JSON.stringify(response))
 			successCallback(response)
 		}).catch((error) => {
 			failureCallback(error)
@@ -21,7 +20,6 @@ class AircraftService extends ApiService {
 			method: method,
 			body: JSON.stringify(aircraft)
 		}).then((response) => {
-			console.log(JSON.stringify(response))
 			successCallback(response)
 		}).catch((error) => {
 			failureCallback(error)
@@ -33,7 +31,6 @@ class AircraftService extends ApiService {
 			method: 'DELETE',
 			body: JSON.stringify({id: id})
 		}).then((response) => {
-			console.log(JSON.stringify(response))
 			successCallback(response)
 		}).catch((error) => {
 			failureCallback(error)

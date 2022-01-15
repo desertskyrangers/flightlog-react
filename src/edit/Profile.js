@@ -34,7 +34,6 @@ export default function Profile(props) {
 	}
 
 	function update() {
-		console.log("Update profile")
 		UserService.update({
 			id,
 			firstName,
@@ -79,7 +78,6 @@ export default function Profile(props) {
 
 	function loadProfileData() {
 		LookupService.getSmsCarriers((result) => {
-			console.log("carriers=" + JSON.stringify(result))
 			setSmsCarriers(result)
 		}, (failure) => {
 			let messages = failure.messages

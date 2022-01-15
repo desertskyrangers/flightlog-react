@@ -74,7 +74,6 @@ function BatteryRow(props) {
 	const navigate = useNavigate();
 
 	function open() {
-		console.log("Open battery...")
 		navigate(AppPath.BATTERY + "/" + props.battery.id)
 	}
 

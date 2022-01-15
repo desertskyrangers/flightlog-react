@@ -98,7 +98,6 @@ export default function Aircraft(props) {
 	}
 
 	function doDelete() {
-		console.log("Delete aircraft=" + id)
 		AircraftService.deleteAircraft(id, (result) => {
 			close()
 		}, (failure) => {

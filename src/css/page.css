@@ -83,7 +83,7 @@
 }
 
 .page-label {
-	font-size: 0.9rem;
+	font-size: 0.8rem;
 }
 
 .page-field {
@@ -131,17 +131,8 @@
 }
 
 .page-action {
-	/*font-size: 1rem;*/
-
-	/*color: var(--action-color-1);*/
-	/*background: var(--action-background-1);*/
-
 	width: 100%;
-	/*box-sizing: border-box;*/
-
-	/*border: 1px solid var(--border-1);*/
-	/*border-radius: 5px;*/
-	/*padding: 0.5rem 1rem;*/
+	white-space: nowrap;
 }
 
 .page-action:hover {
@@ -157,17 +148,8 @@
 }
 
 .page-submit {
-	/*font-size: 1rem;*/
-
-	/*color: var(--link-color-primary);*/
-	/*background: var(--submit-background-1);*/
-
 	width: 100%;
-	/*box-sizing: border-box;*/
-
-	/*border: 1px solid var(--border-1);*/
-	/*border-radius: 5px;*/
-	/*padding: 0.5rem 1rem;*/
+	white-space: nowrap;
 }
 
 .page-submit:hover {
