@@ -119,7 +119,7 @@ export default function Flight(props) {
 				setUnlistedObserver(result.flight.unlistedObserver || '')
 				setAircraft(result.flight.aircraft || '')
 				setBattery(result.flight.battery || '')
-				setTimestamp(result.flight.timestamp ? new Date() : result.flight.timestamp)
+				setTimestampRef.current(result.flight.timestamp ? new Date() : result.flight.timestamp)
 				setDuration(result.flight.duration || '')
 				setNotes(result.flight.notes || '')
 
