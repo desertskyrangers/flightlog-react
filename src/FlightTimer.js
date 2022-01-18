@@ -36,7 +36,6 @@ export default function FlightTimer(props) {
 	}
 
 	useEffect(() => {
-		console.log("use effect...")
 		const timer = setInterval(updateClock, 1000)
 		return () => clearInterval(timer)
 	}, [])

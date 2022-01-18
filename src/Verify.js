@@ -52,11 +52,8 @@ export default function Verify(props) {
 	}
 
 	useEffect(() => {
-		if (autoVerify.current) {
-			setTimeout(verify, 3000)
-			autoVerify.current = false
-		}
-	})
+		if (autoVerify.current) setTimeout(verify, 3000)
+	}, [])
 
 	return (
 		<div className='page-container'>
