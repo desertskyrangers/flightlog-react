@@ -10,6 +10,8 @@ class AppConfig {
 
 	POSITIVE_INTEGER_PATTERN = /^[0-9]*$/
 
+	UNLISTED_USER_ID = '6e0c4460-357b-4a86-901d-e2ba16000c59'
+
 	constructor() {
 		if (this.HOSTNAME === 'localhost') this.API_URL = 'http://localhost:8050';
 

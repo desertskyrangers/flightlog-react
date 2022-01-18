@@ -225,9 +225,11 @@ export default function Flight(props) {
 					<EntrySelect id='pilot' text='Pilot' value={pilot} required onChange={(event) => setPilot(event.target.value)} labelActionIcon={Icons.CLOSE} onLabelAction={close}>
 						{pilotOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
+					{pilot === AppConfig.UNLISTED_USER_ID ? <EntryField id='unlistedPilot' text='Unlisted Pilot' type='text' value={unlistedPilot} onChange={(event) => setUnlistedPilot(event.target.value)}/> : null}
 					<EntrySelect id='observer' text='Observer' value={observer} required onChange={(event) => setObserver(event.target.value)}>
 						{observerOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
+					{observer === AppConfig.UNLISTED_USER_ID ? <EntryField id='unlistedObserver' text='Unlisted Observer' type='text' value={unlistedObserver} onChange={(event) => setUnlistedObserver(event.target.value)}/> : null}
 
 					<EntrySelect id='aircraft' text='Aircraft' value={aircraft} required onChange={(event) => setAircraft(event.target.value)}>
 						{aircraftOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
