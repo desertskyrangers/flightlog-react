@@ -1,6 +1,7 @@
 {
   "short_name": "FlightDeck",
   "name": "Desert Sky Rangers FlightDeck",
+  "version": "0.4.5",
   "icons": [
     {
       "src": "favicon.png",

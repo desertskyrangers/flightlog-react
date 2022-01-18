@@ -20,7 +20,7 @@ export default function Battery(props) {
 	const [make, setMake] = useState(props.make || '')
 	const [model, setModel] = useState(props.model || '')
 	const [connector, setConnector] = useState(props.connector || 'xt60')
-	const [otherConnector, setOtherConnector] = useState(props.otherConnector || '')
+	const [unlistedConnector, setUnlistedConnector] = useState(props.unlistedConnector || '')
 
 	const [type, setType] = useState(props.type || 'lipo')
 	const [cells, setCells] = useState(props.cells || '')
@@ -40,8 +40,6 @@ export default function Battery(props) {
 	const idRef = useRef(useParams().id)
 	const isNewRef = useRef(idRef.current === 'new')
 	const previousMessages = useRef(messages)
-
-	const useOtherConnector = false
 
 	function close() {
 		navigate(-1)
@@ -98,6 +96,7 @@ export default function Battery(props) {
 			setMake(result.battery.make || '')
 			setModel(result.battery.model || '')
 			setConnector(result.battery.connector || '')
+			setUnlistedConnector(result.battery.unlistedConnector || '')
 			setStatus(result.battery.status || '')
 			setCells(result.battery.cells || '')
 			setCycles(result.battery.cycles || '')
@@ -119,6 +118,7 @@ export default function Battery(props) {
 			make: make,
 			model: model,
 			connector: connector,
+			unlistedConnector: unlistedConnector,
 			status: status,
 			cells: cells,
 			cycles: cycles,
@@ -181,7 +181,7 @@ export default function Battery(props) {
 					<EntrySelect id='connector' text='Connector' value={connector} onChange={(event) => setConnector(event.target.value)}>
 						{connectorOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
-					{useOtherConnector ? <EntryField id='otherConnector' text='Connector' type='text' value={otherConnector} onChange={(event) => setOtherConnector(event.target.value)}/> : null}
+					{connector === 'unlisted' ? <EntryField id='unlistedConnector' text='Unlisted Connector' type='text' value={unlistedConnector} onChange={(event) => setUnlistedConnector(event.target.value)}/> : null}
 
 					<EntrySelect id='type' text='Type' value={type} onChange={(event) => setType(event.target.value)}>
 						{typeOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
