@@ -31,8 +31,8 @@ function App() {
 	const [version, setVersion] = useState()
 
 	useEffect(() => {
-		if (!version) loadProgramInformation()
-	})
+		loadProgramInformation()
+	},[])
 
 	function loadProgramInformation() {
 		AppService.getProgramInformation((result) => {
