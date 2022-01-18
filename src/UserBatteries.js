@@ -30,7 +30,7 @@ export default function UserBatteries() {
 		})
 	}
 
-	useEffect(() => loadBatteryPage(page), [])
+	useEffect(() => loadBatteryPage(page), [page])
 
 	return (
 		<div className='page-container'>

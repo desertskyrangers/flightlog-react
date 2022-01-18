@@ -31,7 +31,7 @@ export default function UserAircraft() {
 		})
 	}
 
-	useEffect(() => loadFlightPage(page),[])
+	useEffect(() => loadFlightPage(page),[page])
 
 	return (
 		<div className='page-container'>

@@ -13,6 +13,8 @@ export default function Verify(props) {
 
 	const autoVerify = useRef(!!useParams().code)
 
+	const verifyRef = useRef(verify)
+
 	function updateCode(event) {
 		setCode(event.target.value)
 	}
@@ -52,7 +54,7 @@ export default function Verify(props) {
 	}
 
 	useEffect(() => {
-		if (autoVerify.current) setTimeout(verify, 3000)
+		if (autoVerify.current) setTimeout(verifyRef.current, 3000)
 	}, [])
 
 	return (
