@@ -4,6 +4,7 @@ class AppPath {
 
 	// Not protected (does not require authentication)
 	ABOUT = this.ROOT + "/about"
+	RECOVERY = this.ROOT + "/recovery"
 	LEGAL = this.ROOT + "/legal"
 	LOGIN = this.ROOT + "/login"
 	REGISTER = this.ROOT + "/register"

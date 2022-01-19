@@ -1,11 +1,12 @@
 import ApiService from "./ApiService"
 import TokenService from "./TokenService"
 import Config from "../AppConfig";
+import ApiPath from "./ApiPath";
 
 class AuthService extends ApiService {
 
 	register(username, password, email, successCallback, failureCallback) {
-		this.fetchNoAuth(Config.API_URL + '/api/auth/register', {
+		this.fetchNoAuth(Config.API_URL + ApiPath.AUTH_REGISTER, {
 			method: 'POST',
 			body: JSON.stringify({
 				username,
@@ -21,7 +22,7 @@ class AuthService extends ApiService {
 	}
 
 	resend(id, successCallback, failureCallback) {
-		this.fetchNoAuth(Config.API_URL + '/api/auth/resend', {
+		this.fetchNoAuth(Config.API_URL + ApiPath.AUTH_RESEND, {
 			method: 'POST',
 			body: JSON.stringify({
 				"id": id
@@ -34,7 +35,7 @@ class AuthService extends ApiService {
 	}
 
 	verify(id, code, successCallback, failureCallback) {
-		this.fetchNoAuth(Config.API_URL + '/api/auth/verify', {
+		this.fetchNoAuth(Config.API_URL + ApiPath.AUTH_VERIFY, {
 			method: 'POST',
 			body: JSON.stringify({
 				"id": id,
@@ -48,7 +49,7 @@ class AuthService extends ApiService {
 	}
 
 	login(username, password, successCallback, failureCallback) {
-		this.fetchNoAuth(Config.API_URL + '/api/auth/login', {
+		this.fetchNoAuth(Config.API_URL + ApiPath.AUTH_LOGIN, {
 			method: 'POST',
 			body: JSON.stringify({
 				username,
@@ -62,13 +63,26 @@ class AuthService extends ApiService {
 		})
 	}
 
+	recover(id, successCallback, failureCallback) {
+		this.fetchNoAuth(Config.API_URL + ApiPath.AUTH_RECOVER, {
+			method: 'POST',
+			body: JSON.stringify({
+				"id": id
+			})
+		}).then(response => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 	loggedIn() {
 		return TokenService.isAuthenticated()
 	}
 
 	logout(callback, failureCallback) {
 		// Call api logout before expiring the token
-		this.fetch(Config.API_URL + '/api/auth/logout', {
+		this.fetch(Config.API_URL + ApiPath.AUTH_LOGOUT, {
 			method: 'GET'
 		}).then(response => {
 			callback()

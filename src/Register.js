@@ -8,6 +8,8 @@ import {useNavigate} from "react-router-dom";
 import ApiPath from "./AppPath";
 import AppConfig from "./AppConfig";
 import {isEqual} from "lodash";
+import Icons from "./util/Icons";
+import EntryField from "./part/EntryField";
 
 export default function Register(props) {
 	const navigate = useNavigate();
@@ -20,6 +22,10 @@ export default function Register(props) {
 	const [canRegister, setCanRegister] = useState(false)
 
 	const previousMessages = useRef(messages)
+
+	function close() {
+		navigate(-1)
+	}
 
 	function onKeyDown(event) {
 		if (event.key === 'Enter') register();
@@ -65,31 +71,14 @@ export default function Register(props) {
 	return (<div className='page-container'>
 		<div className='page-body'>
 			<div className='page-form'>
-				<SignupField id='username' text='Username' type='text' autoFocus='autofocus' value={username} onChange={(event) => setUsername(event.target.value)} onKeyDown={onKeyDown}/>
-				<SignupField id='password' text='Password' type='password' value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={onKeyDown}/>
-				<SignupField id='verify-password' text='Verify Password' type='password' value={verifyPassword} onChange={(event) => setVerifyPassword(event.target.value)} onKeyDown={onKeyDown}/>
-				<SignupField id='email' text='Email Address' type='text' value={email} onChange={(event) => setEmail(event.target.value)} onKeyDown={onKeyDown}/>
+				<EntryField id='username' text='Username' type='text' autoFocus='autofocus' value={username} onChange={(event) => setUsername(event.target.value)} onKeyDown={onKeyDown} labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
+				<EntryField id='password' text='Password' type='password' value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={onKeyDown}/>
+				<EntryField id='verify-password' text='Verify Password' type='password' value={verifyPassword} onChange={(event) => setVerifyPassword(event.target.value)} onKeyDown={onKeyDown}/>
+				<EntryField id='email' text='Email Address' type='text' value={email} onChange={(event) => setEmail(event.target.value)} onKeyDown={onKeyDown}/>
 				<button disabled={!canRegister} className='page-submit' onClick={register}>Sign Up</button>
 				<Notice priority='error' messages={messages} clearMessages={() => setMessages([])}/>
 			</div>
 		</div>
 	</div>);
 
-}
-
-function SignupField(props) {
-	return (<div>
-		<label htmlFor={props.id} className='page-label'>{props.text}</label>
-		<input id={props.id}
-					 name={props.id}
-					 type={props.type}
-					 placeholder={props.text}
-					 autoCapitalize='none'
-					 autoCorrect='off'
-					 className='page-field'
-					 autoFocus={props.autoFocus}
-					 value={props.value}
-					 onChange={props.onChange}
-					 onKeyDown={props.onKeyDown}/>
-	</div>)
 }

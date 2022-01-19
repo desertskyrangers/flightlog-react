@@ -147,6 +147,13 @@
 	border: 1px solid var(--border-0);
 }
 
+.page-link {
+	font-size: 0.8rem;
+	width: 100%;
+	white-space: nowrap;
+	text-align: right;
+}
+
 .page-submit {
 	width: 100%;
 	white-space: nowrap;

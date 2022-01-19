@@ -3,8 +3,9 @@ import Notice from "./part/Notice";
 
 import React, {useState} from 'react';
 import AuthService from "./api/AuthService";
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import ApiPath from "./AppPath";
+import AppPath from "./AppPath";
 
 export default function Login(props) {
 
@@ -41,21 +42,16 @@ export default function Login(props) {
 		setMessages([])
 	}
 
-	function navRegister() {
-		navigate(ApiPath.REGISTER)
-	}
-
 	return (
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
 					<Username onChange={updateUsername} onKeyDown={onKeyDown}/>
 					<Password onChange={updatePassword} onKeyDown={onKeyDown}/>
+					<Link className='page-link' to={AppPath.RECOVERY}>Forgot your password?</Link>
 					<button className='page-submit' onClick={login}>Sign In</button>
 					<Notice messages={messages} priority='error' clearMessages={clearMessages}/>
-				</div>
-				<div className='hbox'>
-					Need an account? <button onClick={navRegister}>Register Here</button>
+					<Link className='page-link' to={AppPath.REGISTER}>Need an account?</Link>
 				</div>
 			</div>
 			<div className='page-label'>Version: {props.version}</div>

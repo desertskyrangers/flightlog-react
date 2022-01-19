@@ -4,11 +4,23 @@ class ApiPath {
 
 	AIRCRAFT = this.ROOT + "/aircraft"
 
+	AUTH = this.ROOT + "/auth"
+
+	AUTH_LOGIN = this.AUTH + "/login"
+
+	AUTH_LOGOUT = this.AUTH + "/logout"
+
+	AUTH_RECOVER = this.AUTH + "/recover"
+
+	AUTH_REGISTER = this.AUTH + "/register"
+
+	AUTH_RESEND = this.AUTH + "/resend"
+
+	AUTH_VERIFY = this.AUTH + "/verify"
+
 	BATTERY = this.ROOT + "/battery"
 
 	FLIGHT = this.ROOT + "/flight"
-
-	AUTH = this.ROOT + "/auth"
 
 	USER = this.ROOT + "/user"
 
