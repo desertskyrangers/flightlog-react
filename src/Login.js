@@ -48,7 +48,7 @@ export default function Login(props) {
 				<div className='page-form'>
 					<Username onChange={updateUsername} onKeyDown={onKeyDown}/>
 					<Password onChange={updatePassword} onKeyDown={onKeyDown}/>
-					<Link className='page-link' to={AppPath.RECOVERY}>Forgot your password?</Link>
+					<Link className='page-link' to={AppPath.RECOVERY}>Forget your password?</Link>
 					<button className='page-submit' onClick={login}>Sign In</button>
 					<Notice messages={messages} priority='error' clearMessages={clearMessages}/>
 					<Link className='page-link' to={AppPath.REGISTER}>Need an account?</Link>

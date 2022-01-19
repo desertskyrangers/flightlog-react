@@ -18,6 +18,13 @@ test('renders password field', () => {
 	expect(element).toHaveClass('page-field');
 });
 
+test('renders forgot password link', () => {
+	render(<Router><Login/></Router>);
+	const element = screen.getByText(/forget your password/i);
+	expect(element).toBeInTheDocument();
+	expect(element.nodeName).toBe('A');
+});
+
 test('renders sign in button', () => {
 	render(<Router><Login/></Router>);
 	const element = screen.getByText(/sign in/i);
@@ -26,13 +33,12 @@ test('renders sign in button', () => {
 	expect(element).toHaveClass('page-submit');
 });
 
-test('renders sign up button', () => {
+test('renders register link', () => {
 	render(<Router><Login/></Router>);
-	const element = screen.getByText(/register/i);
+	const element = screen.getByText(/need an account/i);
 	expect(element).toBeInTheDocument();
-	expect(element.nodeName).toBe('BUTTON');
+	expect(element.nodeName).toBe('A');
 });
-
 
 test('renders messages', () => {
 	render(<Router><Login messages={["HELLO"]}/></Router>);
