@@ -4,8 +4,9 @@ import Notice from "./part/Notice";
 import {useNavigate} from "react-router-dom";
 import Icons from "./util/Icons";
 import AuthService from "./api/AuthService";
+import AppPath from "./AppPath";
 
-export default function Recovery(props) {
+export default function Recover(props) {
 
 	const navigate = useNavigate()
 	const [username, setUsername] = useState('')

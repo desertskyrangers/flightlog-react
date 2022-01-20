@@ -12,6 +12,9 @@ class AppConfig {
 
 	UNLISTED_USER_ID = '6e0c4460-357b-4a86-901d-e2ba16000c59'
 
+	PASSWORD_LENGTH_MIN = 8
+	PASSWORD_LENGTH_MAX = 128
+
 	constructor() {
 		if (this.HOSTNAME === 'localhost') this.API_URL = 'http://localhost:8050';
 

@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import Notice from "./part/Notice";
 import AuthService from "./api/AuthService";
 import {useNavigate, useParams} from "react-router-dom";
+import AppPath from "./AppPath";
 
 export default function Verify(props) {
 	const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function Verify(props) {
 
 	function verify() {
 		AuthService.verify(id, code, (response) => {
-			navigate("/")
+			navigate(AppPath.HOME)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]

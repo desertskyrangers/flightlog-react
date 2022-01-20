@@ -25,7 +25,8 @@ import AppService from "./api/AppService";
 import Flight from "./edit/Flight";
 import Battery from "./edit/Battery";
 import FlightTimer from "./FlightTimer";
-import Recovery from "./Recovery";
+import Recover from "./Recover";
+import Reset from "./Reset";
 
 function App() {
 
@@ -50,10 +51,11 @@ function App() {
 					<Routes>
 						{/* Login */}
 						<Route exact path={ApiPath.ABOUT} element={<About version={version}/>}/>
-						<Route exact path={ApiPath.RECOVERY} element={<Recovery/>}/>
 						<Route exact path={ApiPath.LEGAL} element={<Legal/>}/>
 						<Route exact path={ApiPath.LOGIN} element={<Login version={version}/>}/>
+						<Route exact path={ApiPath.RECOVER} element={<Recover/>}/>
 						<Route exact path={ApiPath.REGISTER} element={<Register/>}/>
+						<Route exact path={ApiPath.RESET} element={<Reset/>}/>
 						<Route exact path={ApiPath.VERIFY + "/:id"} element={<Verify/>}/>
 						<Route exact path={ApiPath.VERIFY + "/:id/:code"} element={<Verify/>}/>
 

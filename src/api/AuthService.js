@@ -63,11 +63,25 @@ class AuthService extends ApiService {
 		})
 	}
 
-	recover(id, successCallback, failureCallback) {
+	recover(username, successCallback, failureCallback) {
 		this.fetchNoAuth(Config.API_URL + ApiPath.AUTH_RECOVER, {
 			method: 'POST',
 			body: JSON.stringify({
-				"id": id
+				"username": username
+			})
+		}).then(response => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
+	reset(id, password, successCallback, failureCallback) {
+		this.fetchNoAuth(Config.API_URL + ApiPath.AUTH_RESET, {
+			method: 'POST',
+			body: JSON.stringify({
+				"id": id,
+				"password": password
 			})
 		}).then(response => {
 			successCallback(response)

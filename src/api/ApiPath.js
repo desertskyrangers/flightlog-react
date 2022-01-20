@@ -16,6 +16,8 @@ class ApiPath {
 
 	AUTH_RESEND = this.AUTH + "/resend"
 
+	AUTH_RESET = this.AUTH + "/reset"
+
 	AUTH_VERIFY = this.AUTH + "/verify"
 
 	BATTERY = this.ROOT + "/battery"

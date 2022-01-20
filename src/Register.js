@@ -45,8 +45,8 @@ export default function Register(props) {
 	useLayoutEffect(() => {
 		const validUsername = !!username || username === ''
 		const validPassword = !!password || password === ''
-		const passwordTooShort = !!password && password.length < 8;
-		const passwordTooLong = !!password && password.length >= 128;
+		const passwordTooShort = !!password && password.length < AppConfig.PASSWORD_LENGTH_MIN;
+		const passwordTooLong = !!password && password.length >= AppConfig.PASSWORD_LENGTH_MAX;
 		const passwordsMatch = password === verifyPassword
 		const validEmail = !email || email.match(AppConfig.EMAIL_PATTERN) != null
 
