@@ -27,6 +27,7 @@ import Battery from "./edit/Battery";
 import FlightTimer from "./FlightTimer";
 import Recover from "./Recover";
 import Reset from "./Reset";
+import Password from "./edit/Password";
 
 function App() {
 
@@ -73,6 +74,7 @@ function App() {
 						<Route exact path={ApiPath.FLIGHT + "/:id"} element={<Protect><Flight/></Protect>}/>
 						<Route exact path={ApiPath.FLIGHT_TIMER} element={<Protect> <FlightTimer/> </Protect>}/>
 						<Route exact path={ApiPath.FLIGHT + "/:id/:timestamp/:duration"} element={<Protect> <Flight/> </Protect>}/>
+						<Route exact path={ApiPath.PASSWORD} element={<Protect> <Password/> </Protect>}/>
 						<Route exact path={ApiPath.PROFILE} element={<Protect> <Profile/> </Protect>}/>
 						<Route exact path={ApiPath.USER_AIRCRAFT} element={<Protect><UserAircraft/></Protect>}/>
 						<Route exact path={ApiPath.USER_BATTERIES} element={<Protect><UserBatteries/></Protect>}/>

@@ -6,10 +6,6 @@ import AuthService from "../api/AuthService";
 export default function UserActions() {
 	const navigate = useNavigate();
 
-	function profile() {
-		navigate(ApiPath.PROFILE)
-	}
-
 	function logout() {
 		AuthService.logout(() => {
 		}, (failure) => {
@@ -19,16 +15,13 @@ export default function UserActions() {
 		})
 	}
 
-	function about() {
-		navigate(ApiPath.ABOUT)
-	}
-
 	return (
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<button className='page-action' onClick={profile}>Profile</button>
-					<button className='page-action' onClick={about}>About</button>
+					<button className='page-action' onClick={() => navigate(ApiPath.PROFILE)}>Profile</button>
+					<button className='page-action' onClick={() => navigate(ApiPath.PASSWORD)}>Password</button>
+					<button className='page-action' onClick={() => navigate(ApiPath.ABOUT)}>About</button>
 					<div/>
 					<button className='page-action' onClick={logout}>Logout</button>
 				</div>

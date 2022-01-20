@@ -33,6 +33,21 @@ class UserService extends ApiService {
 		})
 	}
 
+	updatePassword(id, currentPassword, password, successCallback, failureCallback) {
+		this.fetch(Config.API_URL + `/api/user/password`, {
+			method: 'PUT',
+			body: JSON.stringify({
+				id: id,
+				currentPassword: currentPassword,
+				password: password
+			})
+		}).then((response) => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 	getAircraftPage(page, successCallback, failureCallback) {
 		this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT + "/" + page, {
 			method: 'GET',
