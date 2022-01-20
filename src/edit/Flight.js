@@ -11,6 +11,7 @@ import {isEqual} from "lodash";
 import FlightService from "../api/FlightService";
 import Dates from "../util/Dates";
 import AppPath from "../AppPath";
+import TokenService from "../api/TokenService";
 
 export default function Flight(props) {
 
@@ -20,9 +21,9 @@ export default function Flight(props) {
 	const paramDuration = useParams().duration
 
 	const [id, setId] = useState(props.id || '')
-	const [pilot, setPilot] = useState(props.pilot || '')
+	const [pilot, setPilot] = useState(props.pilot || TokenService.getUserId() || '')
 	const [unlistedPilot, setUnlistedPilot] = useState(props.unlistedPilot || '')
-	const [observer, setObserver] = useState(props.observer || '')
+	const [observer, setObserver] = useState(props.observer || TokenService.getUserId() || '')
 	const [unlistedObserver, setUnlistedObserver] = useState(props.unlistedObserver || '')
 	const [aircraft, setAircraft] = useState(props.aircraft || '')
 	const [battery, setBattery] = useState(props.battery || '')
@@ -99,6 +100,7 @@ export default function Flight(props) {
 	function loadAircraftOptions() {
 		UserService.getAircraftOptions((result) => {
 			setAircraftOptions(result)
+			if( !aircraft ) setAircraft(result[0])
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
