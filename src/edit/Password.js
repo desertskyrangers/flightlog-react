@@ -1,16 +1,17 @@
-import Notice from "../part/Notice";
 import React, {useLayoutEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import Icons from "../util/Icons";
-import EntryField from "../part/EntryField";
-import UserService from "../api/UserService";
 import AppConfig from "../AppConfig";
+import EntryField from "../part/EntryField";
+import Icons from "../util/Icons";
+import Notice from "../part/Notice";
+import TokenService from "../api/TokenService";
+import UserService from "../api/UserService";
 import {isEqual} from "lodash";
 
 export default function Password(props) {
 	const navigate = useNavigate();
 
-	const [id, setId] = useState(props.user || '')
+	const [id] = useState(TokenService.getUserId() || '')
 	const [currentPassword, setCurrentPassword] = useState(props.currentPassword || '')
 	const [password, setPassword] = useState(props.password || '');
 	const [verifyPassword, setVerifyPassword] = useState(props.verifyPassword || '');
@@ -23,7 +24,7 @@ export default function Password(props) {
 	const previousMessages = useRef(messages)
 
 	function update() {
-		UserService.updatePassword( id, currentPassword, password, (success) => {
+		UserService.updatePassword(id, currentPassword, password, (success) => {
 			close()
 		}, (failure) => {
 			let messages = failure.messages
@@ -67,7 +68,14 @@ export default function Password(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<EntryField id='current-password' text='Current Password' type='password' value={currentPassword} onChange={(event) => setCurrentPassword(event.target.value)} onKeyDown={onKeyDown} labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
+					<EntryField id='current-password'
+											text='Current Password'
+											type='password'
+											value={currentPassword}
+											onChange={(event) => setCurrentPassword(event.target.value)}
+											onKeyDown={onKeyDown}
+											labelActionIcon={Icons.CLOSE}
+											onLabelAction={close}/>
 					<EntryField id='password' text='Password' type='password' value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={onKeyDown}/>
 					<EntryField id='verify-password' text='Verify Password' type='password' value={verifyPassword} onChange={(event) => setVerifyPassword(event.target.value)} onKeyDown={onKeyDown}/>
 

@@ -34,7 +34,7 @@ class UserService extends ApiService {
 	}
 
 	updatePassword(id, currentPassword, password, successCallback, failureCallback) {
-		this.fetch(Config.API_URL + `/api/user/password`, {
+		this.fetch(Config.API_URL + `/api/user/${id}/password`, {
 			method: 'PUT',
 			body: JSON.stringify({
 				id: id,
