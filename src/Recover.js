@@ -4,7 +4,6 @@ import Notice from "./part/Notice";
 import {useNavigate} from "react-router-dom";
 import Icons from "./util/Icons";
 import AuthService from "./api/AuthService";
-import AppPath from "./AppPath";
 
 export default function Recover(props) {
 
@@ -25,7 +24,7 @@ export default function Recover(props) {
 	}
 
 	function submit() {
-		console.log( "Submit recover request")
+		console.log("Submit recover request")
 		AuthService.recover(username, (response) => {
 			let messages = response.messages
 			if (!!!messages) messages = [response.message]
