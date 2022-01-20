@@ -28,6 +28,9 @@ export default function Flight(props) {
 	const [battery, setBattery] = useState(props.battery || '')
 	const [startTime, setStartTime] = useState(props.startTime || '')
 	const [duration, setDuration] = useState(paramDuration || '')
+	const [durationHH, setDurationHH] = useState('')
+	const [durationMM, setDurationMM] = useState('')
+	const [durationSS, setDurationSS] = useState('')
 	const [notes, setNotes] = useState(props.notes || '')
 	//const [locationOptions, setLocationOptions] = useState([])
 	const [messages, setMessages] = useState([])
@@ -125,7 +128,7 @@ export default function Flight(props) {
 				setAircraft(result.flight.aircraft || '')
 				setBattery(result.flight.batteries[0] || '')
 				setTimestampRef.current(result.flight.timestamp ? new Date(result.flight.timestamp) : new Date())
-				setDuration(result.flight.duration || '')
+				updateDurationSeconds(result.flight.duration)
 				setNotes(result.flight.notes || '')
 			}, (failure) => {
 				let messages = failure.messages
@@ -180,13 +183,27 @@ export default function Flight(props) {
 		setTimestamp(new Date())
 	}
 
-	function doSetDuration() {
+	function updateDurationFromStartTime() {
 		if (!startTime) {
 			setMessages(['Start time not set'])
 		} else {
 			setMessages([])
-			setDuration(Math.floor((new Date() - new Date(String(startTime))) / 1000))
+			updateDurationSeconds(Math.floor((new Date() - new Date(String(startTime))) / 1000))
 		}
+	}
+
+	function updateDurationSeconds(seconds) {
+		setDuration(seconds)
+		setDurationHH(Math.floor(seconds / 3600).toString())
+		setDurationMM(Math.floor(seconds / 60 % 60).toString())
+		setDurationSS(Math.floor(seconds % 60).toString())
+	}
+
+	function updateDuration(hh, mm, ss) {
+		setDuration(parseInt(hh) * 3600 + parseInt(mm) * 60 + parseInt(ss))
+		setDurationHH(hh)
+		setDurationMM(mm)
+		setDurationSS(ss)
 	}
 
 	useLayoutEffect(() => {
@@ -208,6 +225,7 @@ export default function Flight(props) {
 		setCanSave(validPilot && validObserver && validAircraft && validTimestamp && validDuration)
 	}, [pilot, observer, aircraft, startTime, duration])
 
+	useEffect(() => updateDurationSeconds(paramDuration),[])
 	useEffect(() => loadPilotOptions(), [])
 	useEffect(() => loadObserverOptions(), [])
 	useEffect(() => loadAircraftOptions(), [])
@@ -235,15 +253,27 @@ export default function Flight(props) {
 					</EntrySelect>
 
 					<EntryField id='startTime'
-											text='Start time'
+											text='Start date and time'
 											type='datetime-local'
 											value={startTime}
 											required
 											onChange={(event) => updateStartTime(event.target.value)}
 											onKeyDown={onKeyDown}
-											fieldActionIcon={Icons.CALENDAR}
+											fieldActionIcon={Icons.CLOCK}
 											onFieldAction={doSetStartTime}/>
-					<EntryField id='duration' text='Duration (sec)' type='number' min='0' value={duration} onChange={(event) => setDuration(event.target.value)} onKeyDown={onKeyDown} fieldActionIcon={Icons.CLOCK} onFieldAction={doSetDuration}/>
+
+					<div>
+						<div className='page-label-row'>
+							<label htmlFor='durationHH' className='page-label'>Duration (hh:mm:ss)</label>
+						</div>
+						<div className='hbox'>
+							<input id='durationHH' className='page-field' type='number' value={durationHH} min={0} max={99} onChange={(event) => updateDuration(event.target.value, durationMM, durationSS)}/>:
+							<input id='durationMM' className='page-field' type='number' value={durationMM} min={0} max={59} onChange={(event) => updateDuration(durationHH, event.target.value, durationSS)}/>:
+							<input id='durationSS' className='page-field' type='number' value={durationSS} min={0} max={59} onChange={(event) => updateDuration(durationHH, durationMM, event.target.value)}/>
+							<button className='icon-button page-field-action-button' onClick={updateDurationFromStartTime}>{Icons.CLOCK}</button>
+						</div>
+					</div>
+
 					<EntryField id='notes' text='Notes' type='area' value={notes} onChange={(event) => setNotes(event.target.value)} onKeyDown={onKeyDown}/>
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>

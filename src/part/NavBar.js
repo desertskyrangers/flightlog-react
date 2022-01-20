@@ -8,7 +8,7 @@ export default function NavBar(props) {
 	return (
 		<div className='nav-bar'>
 			<NavButton to={ApiPath.HOME} icon={Icons.DASHBOARD}/>
-			<NavButton to={ApiPath.FLIGHTS} icon={Icons.PLANE}/>
+			<NavButton to={ApiPath.USER_FLIGHTS} icon={Icons.PLANE}/>
 			<NavButton to={ApiPath.SETUP} icon={Icons.BARS}/>
 			<NavButton to={ApiPath.USER} icon={Icons.USER}/>
 		</div>

@@ -26,9 +26,18 @@ test('renders aircraft field', () => {
 	expect(element).toHaveClass('page-field');
 });
 
-test('renders batter field', () => {
+test('renders battery field', () => {
 	render(<Router><Flight/></Router>);
-	const element = screen.getByLabelText(/batter/i);
+	const element = screen.getByLabelText(/battery/i);
+	expect(element).toBeInTheDocument();
+	expect(element.nodeName).toBe('SELECT')
+	expect(element).toHaveClass('page-field');
+});
+
+
+test('renders hour field', () => {
+	render(<Router><Flight/></Router>);
+	const element = screen.getByPlaceholderText(/HH/i);
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('SELECT')
 	expect(element).toHaveClass('page-field');

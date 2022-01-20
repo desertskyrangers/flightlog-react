@@ -154,6 +154,20 @@
 	text-align: right;
 }
 
+.page-header {
+	font-size: 0.8rem;
+	width: 100%;
+	white-space: nowrap;
+	text-align: center;
+}
+
+.page-metric {
+	font-size: 2rem;
+	width: 100%;
+	white-space: nowrap;
+	text-align: center;
+}
+
 .page-submit {
 	width: 100%;
 	white-space: nowrap;
@@ -169,4 +183,9 @@
 	color: var(--link-disabled-primary);
 	background: var(--submit-background-0);
 	border: 1px solid var(--border-0);
+}
+
+.v-separator {
+	border-left: 2px solid currentColor;
+	height: 4rem;
 }

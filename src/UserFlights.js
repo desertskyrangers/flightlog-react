@@ -61,7 +61,7 @@ function FlightList(props) {
 
 	return (
 		<div className='vbox'>
-			<button className='page-action' onClick={add}>Add a Flight</button>
+			<button className='page-action' onClick={add}>Log a Flight</button>
 			{page}
 		</div>
 	)
