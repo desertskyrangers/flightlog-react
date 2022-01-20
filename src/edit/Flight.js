@@ -75,7 +75,6 @@ export default function Flight(props) {
 	function loadPilotOptions() {
 		UserService.getPilotOptions((result) => {
 			setPilotOptions(result)
-			setPilot(result[0].id)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -86,7 +85,6 @@ export default function Flight(props) {
 	function loadObserverOptions() {
 		UserService.getObserverOptions((result) => {
 			setObserverOptions(result)
-			setObserver(result[0].id)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -97,7 +95,6 @@ export default function Flight(props) {
 	function loadAircraftOptions() {
 		UserService.getAircraftOptions((result) => {
 			setAircraftOptions(result)
-			if (!!result && result.length > 0) setAircraft(result[0].id)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -108,7 +105,6 @@ export default function Flight(props) {
 	function loadBatteryOptions() {
 		UserService.getBatteryOptions((result) => {
 			setBatteryOptions(result)
-			if (!!result && result.length > 0) setBattery(result[0].id)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -122,12 +118,12 @@ export default function Flight(props) {
 		} else {
 			FlightService.getFlight(idRef.current, (result) => {
 				setId(result.flight.id)
-				setPilot(result.flight.pilot || '')
+				setPilot(result.flight.pilot || pilotOptions[0] || '')
 				setUnlistedPilot(result.flight.unlistedPilot || '')
-				setObserver(result.flight.observer || '')
+				setObserver(result.flight.observer || observerOptions[0] || '')
 				setUnlistedObserver(result.flight.unlistedObserver || '')
 				setAircraft(result.flight.aircraft || '')
-				setBattery(result.flight.battery || '')
+				setBattery(result.flight.batteries[0] || '')
 				setTimestampRef.current(result.flight.timestamp ? new Date(result.flight.timestamp) : new Date())
 				setDuration(result.flight.duration || '')
 				setNotes(result.flight.notes || '')
@@ -147,7 +143,7 @@ export default function Flight(props) {
 			observer: observer,
 			unlistedObserver: unlistedObserver,
 			aircraft: aircraft,
-			battery: battery,
+			batteries: [battery],
 			timestamp: timestamp.current.getTime(),
 			duration: duration,
 			notes: notes,
