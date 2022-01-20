@@ -28,6 +28,7 @@ import FlightTimer from "./FlightTimer";
 import Recover from "./Recover";
 import Reset from "./Reset";
 import Password from "./edit/Password";
+import Dashboard from "./Dashboard";
 
 function App() {
 
@@ -61,7 +62,7 @@ function App() {
 						<Route exact path={ApiPath.VERIFY + "/:id/:code"} element={<Verify/>}/>
 
 						{/* Home */}
-						<Route exact path={ApiPath.HOME} element={<Protect> <FlightActions/> </Protect>}/>
+						<Route exact path={ApiPath.HOME} element={<Protect> <Dashboard/> </Protect>}/>
 
 						{/* Menus */}
 						<Route exact path={ApiPath.FLIGHTS} element={<Protect> <FlightActions/> </Protect>}/>
