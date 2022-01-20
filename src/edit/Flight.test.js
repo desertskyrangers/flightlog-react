@@ -34,12 +34,27 @@ test('renders battery field', () => {
 	expect(element).toHaveClass('page-field');
 });
 
-
-test('renders hour field', () => {
+test('renders duration hour field', () => {
 	render(<Router><Flight/></Router>);
-	const element = screen.getByPlaceholderText(/HH/i);
+	const element = screen.getByTestId('durationHH')
 	expect(element).toBeInTheDocument();
-	expect(element.nodeName).toBe('SELECT')
+	expect(element.nodeName).toBe('INPUT')
+	expect(element).toHaveClass('page-field');
+});
+
+test('renders duration minute field', () => {
+	render(<Router><Flight/></Router>);
+	const element = screen.getByTestId('durationMM')
+	expect(element).toBeInTheDocument();
+	expect(element.nodeName).toBe('INPUT')
+	expect(element).toHaveClass('page-field');
+});
+
+test('renders duration second field', () => {
+	render(<Router><Flight/></Router>);
+	const element = screen.getByTestId('durationSS')
+	expect(element).toBeInTheDocument();
+	expect(element.nodeName).toBe('INPUT')
 	expect(element).toHaveClass('page-field');
 });
 
