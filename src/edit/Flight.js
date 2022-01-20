@@ -118,9 +118,9 @@ export default function Flight(props) {
 		} else {
 			FlightService.getFlight(idRef.current, (result) => {
 				setId(result.flight.id)
-				setPilot(result.flight.pilot || pilotOptions[0] || '')
+				setPilot(result.flight.pilot || '')
 				setUnlistedPilot(result.flight.unlistedPilot || '')
-				setObserver(result.flight.observer || observerOptions[0] || '')
+				setObserver(result.flight.observer || '')
 				setUnlistedObserver(result.flight.unlistedObserver || '')
 				setAircraft(result.flight.aircraft || '')
 				setBattery(result.flight.batteries[0] || '')
