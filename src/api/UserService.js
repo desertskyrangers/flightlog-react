@@ -19,6 +19,7 @@ class UserService extends ApiService {
 			method: 'PUT',
 			body: JSON.stringify({
 				id: account.id,
+				username: account.username,
 				firstName: account.firstName,
 				lastName: account.lastName,
 				preferredName: account.preferredName,

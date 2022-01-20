@@ -14,6 +14,7 @@ export default function Profile(props) {
 	const navigate = useNavigate()
 
 	const [id, setId] = useState(props.id || '')
+	const [username, setUsername] = useState(props.username || '')
 	const [firstName, setFirstName] = useState(props.firstName || '')
 	const [lastName, setLastName] = useState(props.lastName || '')
 	const [preferredName, setPreferredName] = useState(props.preferredName || '')
@@ -36,6 +37,7 @@ export default function Profile(props) {
 	function update() {
 		UserService.update({
 			id,
+			username,
 			firstName,
 			lastName,
 			preferredName,
@@ -45,6 +47,7 @@ export default function Profile(props) {
 			smsCarrier,
 			smsVerified
 		}, () => {
+			close()
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -89,6 +92,7 @@ export default function Profile(props) {
 
 		UserService.profile(TokenService.getUserId(), (result) => {
 			setId(result.account.id)
+			setUsername(result.account.username || '')
 			setFirstName(result.account.firstName || '')
 			setLastName(result.account.lastName || '')
 			setPreferredName(result.account.preferredName || '')
@@ -111,25 +115,30 @@ export default function Profile(props) {
 	useEffect(() => loadProfileData(), [])
 
 	useLayoutEffect(() => {
-		const firstNameTooLong = !!firstName && firstName.length >= 64;
-		const lastNameTooLong = !!lastName && lastName.length >= 64;
+		const usernameMissing = !username || username === ''
+		const usernameTooLong = !!username && username.length >= 64
+		const firstNameTooLong = !!firstName && firstName.length >= 64
+		const lastNameTooLong = !!lastName && lastName.length >= 64
 		const validEmail = !email || email.match(Config.EMAIL_PATTERN)
 		const validSmsNumber = !smsNumber || smsNumber.match(Config.PHONE_PATTERN)
 
 		let messages = [];
+		if (usernameMissing) messages.push('Username required')
+		if (usernameTooLong) messages.push('Username too long')
 		if (firstNameTooLong) messages.push('First name too long')
 		if (lastNameTooLong) messages.push('Last name too long')
 		if (!validEmail) messages.push('Invalid email address')
 		if (!validSmsNumber) messages.push('Invalid SMS number')
 		if (!isEqual(messages, previousMessages.current)) setMessages(messages)
 		previousMessages.current = messages
-	}, [firstName, lastName, email, smsNumber])
+	}, [username, firstName, lastName, email, smsNumber])
 
 	return (
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<EntryField id='firstName' text='First Name' type='text' autoFocus='autofocus' value={firstName} onChange={updateFirstName} onKeyDown={onKeyDown} labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
+					<EntryField id='username' text='Username' type='text' value={username} autoFocus='autofocus' onChange={(event) => setUsername(event.target.value)} onKeyDown={onKeyDown} labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
+					<EntryField id='firstName' text='First Name' type='text' value={firstName} onChange={updateFirstName} onKeyDown={onKeyDown}/>
 					<EntryField id='lastName' text='Last Name' type='text' value={lastName} onChange={updateLastName} onKeyDown={onKeyDown}/>
 					<EntryField id='preferredName' text='Preferred Name' type='text' value={preferredName} onChange={(event) => setPreferredName(event.target.value)} onKeyDown={onKeyDown}/>
 					<EntryField id='email' text='Email' type='text' value={email} onChange={(event) => setEmail(event.target.value)} onKeyDown={onKeyDown}/>
