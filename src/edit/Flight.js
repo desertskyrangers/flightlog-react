@@ -25,7 +25,7 @@ export default function Flight(props) {
 	const [unlistedPilot, setUnlistedPilot] = useState(props.unlistedPilot || '')
 	const [observer, setObserver] = useState(props.observer || TokenService.getUserId() || '')
 	const [unlistedObserver, setUnlistedObserver] = useState(props.unlistedObserver || '')
-	const [aircraft, setAircraft] = useState(props.aircraft || '')
+	const [aircraft, setAircraft] = useState(props.aircraft || 'unspecified')
 	const [battery, setBattery] = useState(props.battery || '')
 	const [startTime, setStartTime] = useState(props.startTime || '')
 	const [duration, setDuration] = useState(paramDuration || '')
@@ -100,7 +100,6 @@ export default function Flight(props) {
 	function loadAircraftOptions() {
 		UserService.getAircraftOptions((result) => {
 			setAircraftOptions(result)
-			if( !aircraft ) setAircraft(result[0])
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -248,7 +247,8 @@ export default function Flight(props) {
 					</EntrySelect>
 					{observer === AppConfig.UNLISTED_USER_ID ? <EntryField id='unlistedObserver' text='Unlisted Observer' type='text' value={unlistedObserver} onChange={(event) => setUnlistedObserver(event.target.value)}/> : null}
 
-					<EntrySelect id='aircraft' text='Aircraft' value={aircraft} required onChange={(event) => setAircraft(event.target.value)}>
+					<EntrySelect id='aircraft' text='Aircraft' value={aircraft} required defaultValue='unspecified' onChange={(event) => setAircraft(event.target.value)}>
+						<option key='unspecified' hidden>Select an aircraft</option>
 						{aircraftOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
 					<EntrySelect id='battery' text='Battery' value={battery} onChange={(event) => setBattery(event.target.value)}>
