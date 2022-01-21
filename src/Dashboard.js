@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom";
 
 export default function Dashboard(props) {
 
-	const navigate = useNavigate();
+	const navigate = useNavigate()
 
 	const [pilotFlightCount, setPilotFlightCount] = useState(props.pilotFlightCount || 0)
 	const [pilotFlightTime, setPilotFlightTime] = useState(props.pilotFlightTime || 0)

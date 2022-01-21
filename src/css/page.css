@@ -102,11 +102,11 @@
 }
 
 .page-field-label-button {
-	align-self: end;
+	align-self: flex-end;
 }
 
 .page-field-action-button {
-	align-self: end;
+	align-self: flex-end;
 }
 
 .page-result {
