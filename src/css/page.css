@@ -186,6 +186,6 @@
 }
 
 .v-separator {
-	border-left: 2px solid currentColor;
-	height: 4rem;
+	border-left: 1px solid currentColor;
+	height: 3.5rem;
 }
