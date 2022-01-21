@@ -29,6 +29,7 @@ import Recover from "./Recover";
 import Reset from "./Reset";
 import Password from "./edit/Password";
 import Dashboard from "./Dashboard";
+import AppPath from "./AppPath";
 
 function App() {
 
@@ -52,34 +53,34 @@ function App() {
 				<div className='content'>
 					<Routes>
 						{/* Login */}
-						<Route exact path={ApiPath.ABOUT} element={<About version={version}/>}/>
-						<Route exact path={ApiPath.LEGAL} element={<Legal/>}/>
-						<Route exact path={ApiPath.LOGIN} element={<Login version={version}/>}/>
-						<Route exact path={ApiPath.RECOVER} element={<Recover/>}/>
-						<Route exact path={ApiPath.REGISTER} element={<Register/>}/>
-						<Route exact path={ApiPath.RESET} element={<Reset/>}/>
-						<Route exact path={ApiPath.VERIFY + "/:id"} element={<Verify/>}/>
-						<Route exact path={ApiPath.VERIFY + "/:id/:code"} element={<Verify/>}/>
+						<Route exact path={AppPath.ABOUT} element={<About version={version}/>}/>
+						<Route exact path={AppPath.LEGAL} element={<Legal/>}/>
+						<Route exact path={AppPath.LOGIN} element={<Login version={version}/>}/>
+						<Route exact path={AppPath.RECOVER} element={<Recover/>}/>
+						<Route exact path={AppPath.REGISTER} element={<Register/>}/>
+						<Route exact path={AppPath.RESET} element={<Reset/>}/>
+						<Route exact path={AppPath.VERIFY + "/:id"} element={<Verify/>}/>
+						<Route exact path={AppPath.VERIFY + "/:id/:code"} element={<Verify/>}/>
 
 						{/* Home */}
-						<Route exact path={ApiPath.HOME} element={<Protect> <Dashboard/> </Protect>}/>
+						<Route exact path={AppPath.HOME} element={<Protect> <Dashboard/> </Protect>}/>
 
 						{/* Menus */}
-						<Route exact path={ApiPath.FLIGHTS} element={<Protect> <FlightActions/> </Protect>}/>
-						<Route exact path={ApiPath.SETUP} element={<Protect> <SetupActions/> </Protect>}/>
-						<Route exact path={ApiPath.USER} element={<Protect> <UserActions/> </Protect>}/>
+						<Route exact path={AppPath.FLIGHTS} element={<Protect> <FlightActions/> </Protect>}/>
+						<Route exact path={AppPath.SETUP} element={<Protect> <SetupActions/> </Protect>}/>
+						<Route exact path={AppPath.USER} element={<Protect> <UserActions/> </Protect>}/>
 
 						{/* Entry */}
-						<Route exact path={ApiPath.AIRCRAFT + "/:id"} element={<Protect><Aircraft/></Protect>}/>
-						<Route exact path={ApiPath.BATTERY + "/:id"} element={<Protect><Battery/></Protect>}/>
-						<Route exact path={ApiPath.FLIGHT + "/:id"} element={<Protect><Flight/></Protect>}/>
-						<Route exact path={ApiPath.FLIGHT_TIMER} element={<Protect> <FlightTimer/> </Protect>}/>
-						<Route exact path={ApiPath.FLIGHT + "/:id/:timestamp/:duration"} element={<Protect> <Flight/> </Protect>}/>
-						<Route exact path={ApiPath.PASSWORD} element={<Protect> <Password/> </Protect>}/>
-						<Route exact path={ApiPath.PROFILE} element={<Protect> <Profile/> </Protect>}/>
-						<Route exact path={ApiPath.USER_AIRCRAFT} element={<Protect><UserAircraft/></Protect>}/>
-						<Route exact path={ApiPath.USER_BATTERIES} element={<Protect><UserBatteries/></Protect>}/>
-						<Route exact path={ApiPath.USER_FLIGHTS} element={<Protect><UserFlights/></Protect>}/>
+						<Route exact path={AppPath.AIRCRAFT + "/:id"} element={<Protect><Aircraft/></Protect>}/>
+						<Route exact path={AppPath.BATTERY + "/:id"} element={<Protect><Battery/></Protect>}/>
+						<Route exact path={AppPath.FLIGHT + "/:id"} element={<Protect><Flight/></Protect>}/>
+						<Route exact path={AppPath.FLIGHT_TIMER} element={<Protect> <FlightTimer/> </Protect>}/>
+						<Route exact path={AppPath.FLIGHT + "/:id/:timestamp/:duration"} element={<Protect> <Flight/> </Protect>}/>
+						<Route exact path={AppPath.PASSWORD} element={<Protect> <Password/> </Protect>}/>
+						<Route exact path={AppPath.PROFILE} element={<Protect> <Profile/> </Protect>}/>
+						<Route exact path={AppPath.USER_AIRCRAFT} element={<Protect><UserAircraft/></Protect>}/>
+						<Route exact path={AppPath.USER_BATTERIES} element={<Protect><UserBatteries/></Protect>}/>
+						<Route exact path={AppPath.USER_FLIGHTS} element={<Protect><UserFlights/></Protect>}/>
 
 						<Route path='*' element={<NotFound/>}/>
 					</Routes>

@@ -1,5 +1,7 @@
 import React from "react";
 import CopyrightNotice from "./part/CopyrightNotice";
+import AppPath from "./AppPath";
+import {Link} from "react-router-dom";
 
 export default function Footer(props) {
 
@@ -7,8 +9,8 @@ export default function Footer(props) {
 
 	return (
 		<div className='footer'>
-			<div className='copyright'><a href='/legal'><CopyrightNotice year={year}/></a></div>
-			<div className='tag-line'>v{props.version}</div>
+			<div className='copyright'><Link to={AppPath.LEGAL}><CopyrightNotice year={year}/></Link></div>
+			<div className='tag-line'><Link to={AppPath.ABOUT}>v{props.version}</Link></div>
 		</div>
 	)
 

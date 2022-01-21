@@ -37,6 +37,9 @@ export default function Dashboard(props) {
 			<div className='page-body'>
 				<div className='page-form'>
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
+
+					<button className='page-action' onClick={() => navigate(ApiPath.FLIGHT_TIMER)}>Time a Flight</button>
+
 					<div className='hbox'>
 						<div className='vbox'>
 							<div className='page-header'>Flights</div>
@@ -49,7 +52,6 @@ export default function Dashboard(props) {
 						</div>
 					</div>
 
-					<button className='page-action' onClick={() => navigate(ApiPath.FLIGHT_TIMER)}>Time a Flight</button>
 					<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>Log a Flight</button>
 
 				</div>

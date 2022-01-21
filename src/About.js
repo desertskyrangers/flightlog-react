@@ -14,11 +14,15 @@ export default function About(props) {
 			<div className='page-body'>
 				<div className='page-form'>
 					<div className='page-label-row'>
-						<span>version {props.version}</span>
+						<span>Version {props.version}</span>
 						<span className='icon' onClick={close}>{Icons.CLOSE}</span>
 					</div>
-					<div>hosted by Desert Sky Rangers</div>
-					<div>written by Mark Soderquist</div>
+					<hr/>
+					<div><span className='page-label'>hosted by</span> Desert Sky Rangers</div>
+					<div><span className='page-label'>written by</span> Mark Soderquist</div>
+					<hr/>
+					<div><a href='https://github.com/desertskyrangers/flightdeck-react/issues/new'>Submit an enhancement request</a></div>
+					<div><a href='https://github.com/desertskyrangers/flightdeck-react/issues/new'>Submit a bug report</a></div>
 				</div>
 			</div>
 		</div>
