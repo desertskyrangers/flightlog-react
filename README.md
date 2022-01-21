@@ -1,11 +1,20 @@
-# FlightDeck React Web Client
-A React web client for the Desert Sky Rangers FlightDeck application
+# Desert Sky Rangers FlightDeck
+
+Your personal destination for UAV management, flight logging and pilot data. Built on modern cloud and web technology, FlightDeck is your one stop for all your UAV pilot needs.
+
+#### Version 1.0
+
+| Release                                                               | Feature Goals                                                             |      Status |
+|-----------------------------------------------------------------------|---------------------------------------------------------------------------|------------:|
+| [1.2](https://github.com/desertskyrangers.org/flightdeck/milestone/3) |  |    Planning |
+| [1.1](https://github.com/desertskyrangers.org/flightdeck/milestone/2) |  | In progress |
+| [1.0](https://github.com/desertskyrangers.org/flightdeck/milestone/1) | User accounts, aircraft management, battery management, flight management | 20 Jan 2022 |
 
 ## How the Code Repository was Initialized
 
-These are the commands used to initialize the repository. These are here for
-record keeping purposes and are not intended for each developer to execute in 
-their own environment:
+A React web client for the Desert Sky Rangers FlightDeck application
+
+These are the commands used to initialize the repository. These are here for record keeping purposes and are not intended for each developer to execute in their own environment:
 
 Check the version with: ```npm -v```
 
