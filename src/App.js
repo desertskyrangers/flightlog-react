@@ -83,7 +83,7 @@ function App() {
 						<Route exact path={AppPath.USER_AIRCRAFT} element={<Protect><UserAircraft/></Protect>}/>
 						<Route exact path={AppPath.USER_BATTERIES} element={<Protect><UserBatteries/></Protect>}/>
 						<Route exact path={AppPath.USER_FLIGHTS} element={<Protect><UserFlights/></Protect>}/>
-						<Route exact path={AppPath.USER_ORGS} element={<Protect><UserOrgs/></Protect>}/>
+						<Route exact path={AppPath.USER_GROUPS} element={<Protect><UserOrgs/></Protect>}/>
 
 						<Route path='*' element={<NotFound/>}/>
 					</Routes>

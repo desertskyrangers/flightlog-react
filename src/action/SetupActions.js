@@ -11,7 +11,7 @@ export default function SetupActions(props) {
 				<div className='page-form'>
 					<button className='page-action' onClick={() => navigate(AppPath.USER_AIRCRAFT)}>Aircraft</button>
 					<button className='page-action' onClick={() => navigate(AppPath.USER_BATTERIES)}>Batteries</button>
-					<button className='page-action' onClick={() => navigate(AppPath.USER_ORGS)}>Groups</button>
+					{/*<button className='page-action' onClick={() => navigate(AppPath.USER_GROUPS)}>Groups</button>*/}
 				</div>
 			</div>
 		</div>

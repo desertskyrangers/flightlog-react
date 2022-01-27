@@ -15,7 +15,7 @@ class AppPath {
 	HOME = this.ROOT + "/"
 
 	AIRCRAFT = this.ROOT + "/aircraft"
-	ORG_AIRCRAFT = this.AIRCRAFT + "/org"
+	GROUP_AIRCRAFT = this.AIRCRAFT + "/group"
 	USER_AIRCRAFT = this.AIRCRAFT + "/user"
 
 	BATTERY = this.ROOT + "/battery"
@@ -25,11 +25,11 @@ class AppPath {
 	FLIGHT_TIMER = this.FLIGHT + "/timer"
 
 	FLIGHTS = this.ROOT + "/flights"
-	ORG_FLIGHTS = this.FLIGHTS + "/org"
+	GROUP_FLIGHTS = this.FLIGHTS + "/group"
 	USER_FLIGHTS = this.FLIGHTS + "/user"
 
-	ORG = this.ROOT + "/org"
-	USER_ORGS = this.ORG + "/user"
+	GROUP = this.ROOT + "/group"
+	USER_GROUPS = this.GROUP + "/user"
 
 	SETUP = this.ROOT + "/settings"
 

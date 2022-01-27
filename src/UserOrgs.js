@@ -56,7 +56,7 @@ function OrgList(props) {
 	}
 
 	function add() {
-		navigate(AppPath.ORG + "/new")
+		navigate(AppPath.GROUP + "/new")
 	}
 
 	return (
@@ -73,7 +73,7 @@ function OrgRow(props) {
 	const navigate = useNavigate();
 
 	function open() {
-		navigate(AppPath.ORG + "/" + props.org.id)
+		navigate(AppPath.GROUP + "/" + props.org.id)
 	}
 
 	return (
