@@ -296,7 +296,7 @@ export default function Flight(props) {
 							<label htmlFor='durationHH' className='page-label'>Duration (hh:mm:ss)</label>
 						</div>
 						<div className='hbox'>
-							<input id='durationHH' data-testid='durationHH' className='page-field' type='number' value={durationHH} min={0} max={99} onChange={(event) => hhChanged(event)}/>
+							<input id='durationHH' data-testid='durationHH' className='page-field' type='number' value={durationHH} min={0} max={99} onChange={(event) => hhChanged(event)}/>:
 							<input id='durationMM' data-testid='durationMM' className='page-field' type='number' value={durationMM} min={0} max={59} onChange={(event) => mmChanged(event)}/>:
 							<input id='durationSS' data-testid='durationSS' className='page-field' type='number' value={durationSS} min={0} max={59} onChange={(event) => ssChanged(event)}/>
 							<button className='icon-button page-field-action-button' onClick={updateDurationFromStartTime}>{Icons.CLOCK}</button>
