@@ -89,6 +89,16 @@ class UserService extends ApiService {
 		})
 	}
 
+	getGroupPage(page, successCallback, failureCallback) {
+		this.fetch(Config.API_URL + ApiPath.USER_GROUP + "/" + page, {
+			method: 'GET',
+		}).then((response) => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 	getAircraftOptions(successCallback, failureCallback) {
 		this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT_LOOKUP, {
 			method: 'GET',

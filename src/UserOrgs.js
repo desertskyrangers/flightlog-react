@@ -8,22 +8,22 @@ import AppPath from "./AppPath";
 import UserService from "./api/UserService";
 import Dates from "./util/Dates";
 
-export default function UserFlights() {
+export default function UserOrgs(props) {
 
-	const [flights, setFlights] = useState()
+	const [orgs, setOrgs] = useState()
 	const [page] = useState(0)
 	const [messages, setMessages] = useState([])
 
 	let list;
-	if (!!flights) {
-		list = <FlightList flights={flights}/>
+	if (!!orgs) {
+		list = <OrgList orgs={orgs}/>
 	} else {
 		list = <Loading/>
 	}
 
-	function loadFlightPage(page) {
-		UserService.getFlightPage(page, (success) => {
-			setFlights(success.flights)
+	function loadGroupPage(page) {
+		UserService.getGroupPage(page, (success) => {
+			setOrgs(success.groups)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -31,53 +31,53 @@ export default function UserFlights() {
 		})
 	}
 
-	useEffect(() => loadFlightPage(page),[page])
+	useEffect(() => loadGroupPage(page), [page])
 
 	return (
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
 					{list}
-					<Notice messages={messages}/>
+					<Notice priority='error' messages={messages}/>
 				</div>
 			</div>
 		</div>
 	)
 }
 
-function FlightList(props) {
+function OrgList(props) {
 	const navigate = useNavigate();
 
 	let page
-	if (props.flights.length === 0) {
-		page = <NoResults message='No flight found'/>
+	if (props.orgs.length === 0) {
+		page = <NoResults message='No groups owned by user'/>
 	} else {
-		page = props.flights.map((craft) => <FlightRow key={craft.id} value={craft.id} flight={craft}/>)
+		page = props.orgs.map((craft) => <OrgRow key={craft.id} value={craft.id} org={craft}/>)
 	}
 
 	function add() {
-		navigate(AppPath.FLIGHT + "/new")
+		navigate(AppPath.ORG + "/new")
 	}
 
 	return (
 		<div className='vbox'>
-			<button className='page-action' onClick={add}>Log a Flight</button>
+			<button className='page-action' onClick={add}>Create a Group</button>
 			{page}
 		</div>
 	)
 
 }
 
-function FlightRow(props) {
+function OrgRow(props) {
 
 	const navigate = useNavigate();
 
 	function open() {
-		navigate(AppPath.FLIGHT + "/" + props.flight.id)
+		navigate(AppPath.ORG + "/" + props.org.id)
 	}
 
 	return (
-		<div className='page-result' onClick={open}>{Icons.fromAircraftType(props.flight.type)} {Dates.humanDateHourMin(new Date(props.flight.timestamp))} {props.flight.name}</div>
+		<div className='page-result' onClick={open}>{Icons.fromOrgType(props.org.type)} {Dates.humanDateHourMin(new Date(props.org.timestamp))} {props.org.name}</div>
 	)
 
 }
