@@ -29,9 +29,9 @@ export default function Flight(props) {
 	const [battery, setBattery] = useState(props.battery || '')
 	const [startTime, setStartTime] = useState(props.startTime || '')
 	const [duration, setDuration] = useState(paramDuration || '')
-	const [durationHH, setDurationHH] = useState('')
-	const [durationMM, setDurationMM] = useState('')
-	const [durationSS, setDurationSS] = useState('')
+	const [durationHH, setDurationHH] = useState('0')
+	const [durationMM, setDurationMM] = useState('0')
+	const [durationSS, setDurationSS] = useState('0')
 	const [notes, setNotes] = useState(props.notes || '')
 	//const [locationOptions, setLocationOptions] = useState([])
 	const [messages, setMessages] = useState([])
@@ -208,6 +208,32 @@ export default function Flight(props) {
 		setDurationSS(ss)
 	}
 
+	function hhChanged(event) {
+		updateDuration(event.target.value, durationMM, durationSS)
+		if (event.target.value.length >= 2) {
+			const field = document.getElementById("durationMM")
+			field.focus();
+			field.select();
+		}
+	}
+
+	function mmChanged(event) {
+		updateDuration(durationHH, event.target.value, durationSS)
+		if (event.target.value.length >= 2) {
+			const field = document.getElementById("durationSS")
+			field.focus();
+			field.select();
+		}
+	}
+
+	function ssChanged(event) {
+		updateDuration(durationHH, durationMM, event.target.value)
+		if (event.target.value.length >= 2) {
+			const field = document.getElementById("notes")
+			field.focus();
+		}
+	}
+
 	useLayoutEffect(() => {
 		const validPilot = !!pilot && pilot !== ''
 		const validObserver = !!observer && observer !== ''
@@ -270,9 +296,9 @@ export default function Flight(props) {
 							<label htmlFor='durationHH' className='page-label'>Duration (hh:mm:ss)</label>
 						</div>
 						<div className='hbox'>
-							<input id='durationHH' data-testid='durationHH' className='page-field' type='number' value={durationHH} min={0} max={99} onChange={(event) => updateDuration(event.target.value, durationMM, durationSS)}/>:
-							<input id='durationMM' data-testid='durationMM' className='page-field' type='number' value={durationMM} min={0} max={59} onChange={(event) => updateDuration(durationHH, event.target.value, durationSS)}/>:
-							<input id='durationSS' data-testid='durationSS' className='page-field' type='number' value={durationSS} min={0} max={59} onChange={(event) => updateDuration(durationHH, durationMM, event.target.value)}/>
+							<input id='durationHH' data-testid='durationHH' className='page-field' type='number' value={durationHH} min={0} max={99} onChange={(event) => hhChanged(event)}/>
+							<input id='durationMM' data-testid='durationMM' className='page-field' type='number' value={durationMM} min={0} max={59} onChange={(event) => mmChanged(event)}/>:
+							<input id='durationSS' data-testid='durationSS' className='page-field' type='number' value={durationSS} min={0} max={59} onChange={(event) => ssChanged(event)}/>
 							<button className='icon-button page-field-action-button' onClick={updateDurationFromStartTime}>{Icons.CLOCK}</button>
 						</div>
 					</div>
