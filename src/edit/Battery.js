@@ -26,7 +26,6 @@ export default function Battery(props) {
 	const [cells, setCells] = useState(props.cells || '')
 	const [cycles, setCycles] = useState(props.cycles || '')
 	const [capacity, setCapacity] = useState(props.capacity || '')
-	const [chargeRating, setChargeRating] = useState(props.chargeRating || '')
 	const [dischargeRating, setDischargeRating] = useState(props.dischargeRating || '')
 
 	const [messages, setMessages] = useState([])
@@ -101,7 +100,6 @@ export default function Battery(props) {
 			setCells(result.battery.cells || '')
 			setCycles(result.battery.cycles || '')
 			setCapacity(result.battery.capacity || '')
-			setChargeRating(result.battery.chargeRating || '')
 			setDischargeRating(result.battery.dischargeRating || '')
 		}, (failure) => {
 			let messages = failure.messages
@@ -123,7 +121,6 @@ export default function Battery(props) {
 			cells: cells,
 			cycles: cycles,
 			capacity: capacity,
-			chargeRating: chargeRating,
 			dischargeRating: dischargeRating
 		}, (success) => {
 			close()
@@ -148,20 +145,18 @@ export default function Battery(props) {
 		const validCells = cells === '' || String(cells).match(AppConfig.POSITIVE_INTEGER_PATTERN) != null
 		const validCycles = cycles === '' || String(cycles).match(AppConfig.POSITIVE_INTEGER_PATTERN) != null
 		const validCapacity = capacity === '' || String(capacity).match(AppConfig.POSITIVE_INTEGER_PATTERN) != null
-		const validChargeRating = chargeRating === '' || String(chargeRating).match(AppConfig.POSITIVE_INTEGER_PATTERN) != null
 		const validDischargeRating = dischargeRating === '' || String(dischargeRating).match(AppConfig.POSITIVE_INTEGER_PATTERN) != null
 
 		let messages = [];
 		if (!validCells) messages.push('Invalid cells')
 		if (!validCycles) messages.push('Invalid cycles')
 		if (!validCapacity) messages.push('Invalid capacity')
-		if (!validChargeRating) messages.push('Invalid charge rating')
 		if (!validDischargeRating) messages.push('Invalid discharge rating')
 		if (!isEqual(messages, previousMessages.current)) setMessages(messages)
 		previousMessages.current = messages
 
-		setCanSave(validCells && validCycles && validCapacity && validChargeRating && validDischargeRating)
-	}, [cells, cycles, capacity, chargeRating, dischargeRating])
+		setCanSave(validCells && validCycles && validCapacity && validDischargeRating)
+	}, [cells, cycles, capacity, dischargeRating])
 
 	useEffect(() => loadBatteryConnectorOptions(), [])
 	useEffect(() => loadBatteryStatusOptions(), [])
@@ -186,10 +181,9 @@ export default function Battery(props) {
 					<EntrySelect id='type' text='Type' value={type} onChange={(event) => setType(event.target.value)}>
 						{typeOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
+					<EntryField id='capacity' text='Capacity (mAh)' type='text' value={capacity} onChange={(event) => setCapacity(event.target.value)} onKeyDown={onKeyDown}/>
 					<EntryField id='cells' text='Cells' type='text' value={cells} onChange={(event) => setCells(event.target.value)} onKeyDown={onKeyDown}/>
 					<EntryField id='cycles' text='Cycles' type='text' value={cycles} onChange={(event) => setCycles(event.target.value)} onKeyDown={onKeyDown}/>
-					<EntryField id='capacity' text='Capacity (mAh)' type='text' value={capacity} onChange={(event) => setCapacity(event.target.value)} onKeyDown={onKeyDown}/>
-					<EntryField id='chargeRating' text='Charge Rating (C)' type='text' value={chargeRating} onChange={(event) => setChargeRating(event.target.value)} onKeyDown={onKeyDown}/>
 					<EntryField id='dischargeRating' text='Discharge Rating (C)' type='text' value={dischargeRating} onChange={(event) => setDischargeRating(event.target.value)} onKeyDown={onKeyDown}/>
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>

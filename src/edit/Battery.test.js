@@ -46,6 +46,38 @@ test('renders type field', () => {
 	expect(element).toHaveClass('page-field')
 })
 
+test('renders capacity field', () => {
+	render(<Router><Battery/></Router>)
+	const element = screen.getByLabelText(/capacity/i)
+	expect(element).toBeInTheDocument()
+	expect(element.nodeName).toBe('INPUT')
+	expect(element).toHaveClass('page-field')
+})
+
+test('renders cells field', () => {
+	render(<Router><Battery/></Router>)
+	const element = screen.getByLabelText(/cells/i)
+	expect(element).toBeInTheDocument()
+	expect(element.nodeName).toBe('INPUT')
+	expect(element).toHaveClass('page-field')
+})
+
+test('renders cycles field', () => {
+	render(<Router><Battery/></Router>)
+	const element = screen.getByLabelText(/cycles/i)
+	expect(element).toBeInTheDocument()
+	expect(element.nodeName).toBe('INPUT')
+	expect(element).toHaveClass('page-field')
+})
+
+test('renders discharge rating field', () => {
+	render(<Router><Battery/></Router>)
+	const element = screen.getByLabelText(/discharge rating/i)
+	expect(element).toBeInTheDocument()
+	expect(element.nodeName).toBe('INPUT')
+	expect(element).toHaveClass('page-field')
+})
+
 test('renders update button', () => {
 	render(<Router><Battery/></Router>);
 	const element = screen.getByText('Update')
