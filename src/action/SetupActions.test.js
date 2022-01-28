@@ -18,10 +18,10 @@ test('renders batteries button', () => {
 	expect(element).toHaveClass('page-action');
 });
 
-test('renders groups button', () => {
-	render(<Router><SetupActions/></Router>);
-	const element = screen.getByText(/groups/i);
-	expect(element).toBeInTheDocument();
-	expect(element.nodeName).toBe('BUTTON');
-	expect(element).toHaveClass('page-action');
-});
+// test('renders groups button', () => {
+// 	render(<Router><SetupActions/></Router>);
+// 	const element = screen.getByText(/groups/i);
+// 	expect(element).toBeInTheDocument();
+// 	expect(element.nodeName).toBe('BUTTON');
+// 	expect(element).toHaveClass('page-action');
+// });
