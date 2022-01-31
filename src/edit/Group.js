@@ -25,7 +25,6 @@ export default function Group(props) {
 	// References
 	const idRef = useRef(useParams().id)
 	const isNewRef = useRef(idRef.current === 'new')
-	const previousMessages = useRef(messages)
 
 	function close() {
 		navigate(-1)
