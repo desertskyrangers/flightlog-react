@@ -152,7 +152,7 @@ export default function Flight(props) {
 			timestamp: timestamp.current.getTime(),
 			duration: duration,
 			notes: notes,
-		}, (result) => {
+		}, () => {
 			goToUserFlights()
 		}, (failure) => {
 			let messages = failure.messages
@@ -162,7 +162,7 @@ export default function Flight(props) {
 	}
 
 	function doDelete() {
-		FlightService.deleteFlight(id, (result) => {
+		FlightService.deleteFlight(id, () => {
 			goToUserFlights()
 		}, (failure) => {
 			let messages = failure.messages
@@ -202,7 +202,13 @@ export default function Flight(props) {
 	}
 
 	function updateDuration(hh, mm, ss) {
-		setDuration(parseInt(hh) * 3600 + parseInt(mm) * 60 + parseInt(ss))
+		let h = parseInt(hh)
+		let m = parseInt(mm)
+		let s = parseInt(ss)
+		if (isNaN(h)) h = 0
+		if (isNaN(m)) m = 0
+		if (isNaN(s)) s = 0
+		setDuration(h * 3600 + m * 60 + s)
 		setDurationHH(hh)
 		setDurationMM(mm)
 		setDurationSS(ss)
