@@ -247,17 +247,22 @@ export default function Flight(props) {
 		const validTimestamp = !startTime || String(startTime).match(AppConfig.TIMESTAMP_PATTERN) != null
 		const validDuration = !duration || String(duration).match(AppConfig.DURATION_PATTERN) != null
 
+		const validUnlistedPilot = pilot !== AppConfig.UNLISTED_USER_ID || (pilot === AppConfig.UNLISTED_USER_ID && !!unlistedPilot && unlistedPilot !== '')
+		const validUnlistedObserver = observer !== AppConfig.UNLISTED_USER_ID || (observer === AppConfig.UNLISTED_USER_ID && !!unlistedObserver && unlistedObserver !== '')
+
 		let messages = [];
 		if (!validPilot) messages.push('Invalid pilot')
+		if (!validUnlistedPilot) messages.push('Invalid unlisted pilot')
 		if (!validObserver) messages.push('Invalid observer')
+		if (!validUnlistedObserver) messages.push('Invalid unlisted observer')
 		if (!validAircraft) messages.push('Invalid aircraft')
 		if (!validTimestamp) messages.push('Invalid start time: ' + startTime)
 		if (!validDuration) messages.push('Invalid duration')
 		if (!isEqual(messages, previousMessages.current)) setMessages(messages)
 		previousMessages.current = messages
 
-		setCanSave(validPilot && validObserver && validAircraft && validTimestamp && validDuration)
-	}, [pilot, observer, aircraft, startTime, duration])
+		setCanSave(validPilot && validUnlistedPilot && validObserver && validUnlistedObserver && validAircraft && validTimestamp && validDuration)
+	}, [pilot, unlistedPilot, observer, unlistedObserver, aircraft, startTime, duration])
 
 	useEffect(() => updateDurationSeconds(paramDuration), [paramDuration])
 	useEffect(() => loadPilotOptions(), [])
@@ -277,7 +282,7 @@ export default function Flight(props) {
 					<EntrySelect id='observer' text='Observer' value={observer} required help='You are also the observer if flying alone' onChange={(event) => setObserver(event.target.value)}>
 						{observerOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
-					{observer === AppConfig.UNLISTED_USER_ID ? <EntryField id='unlistedObserver' text='Unlisted Observer' type='text' value={unlistedObserver} onChange={(event) => setUnlistedObserver(event.target.value)}/> : null}
+					{observer === AppConfig.UNLISTED_USER_ID ? <EntryField id='unlistedObserver' text='Unlisted Observer' type='text' value={unlistedObserver} onChange={(event) => setUnlistedObserver(event.target.value)}/> : undefined}
 
 					<EntrySelect id='aircraft' text='Aircraft' value={aircraft} required defaultValue='unspecified' onChange={(event) => setAircraft(event.target.value)}>
 						<option key='unspecified' hidden>Select an aircraft</option>
