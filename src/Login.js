@@ -54,7 +54,7 @@ export default function Login(props) {
 					<Link className='page-link' to={AppPath.REGISTER}>Need an account?</Link>
 				</div>
 			</div>
-			<div className='page-label'>Version: {props.version}</div>
+			<div className='page-label'><Link to={AppPath.ABOUT}>FlightDeck v{props.version}</Link></div>
 		</div>
 	)
 }
