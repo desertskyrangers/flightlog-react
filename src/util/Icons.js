@@ -1,4 +1,4 @@
-import {faAngleUp, faBan, faBars, faBuilding, faUsers, faBatteryFull, faCalendar, faClock, faEllipsisH, faHelicopter, faHome, faKeyboard, faPlane, faSpinner, faTimesCircle, faTrash, faUser} from '@fortawesome/free-solid-svg-icons'
+import {faAngleUp, faBan, faBars, faBatteryFull, faBuilding, faCalendar, faClock, faEllipsisH, faHelicopter, faHome, faKeyboard, faPlane, faSpinner, faTimesCircle, faTrash, faUser, faUsers} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import DroneIcon from "../icon/DroneIcon";
 
@@ -10,7 +10,7 @@ class Icons {
 	CALENDAR = <FontAwesomeIcon icon={faCalendar}/>
 	CLOCK = <FontAwesomeIcon icon={faClock}/>
 	CLOSE = <FontAwesomeIcon icon={faTimesCircle}/>
-	CLUB  = <FontAwesomeIcon icon={faUsers}/>
+	CLUB = <FontAwesomeIcon icon={faUsers}/>
 	COLLAPSE_UP = <FontAwesomeIcon icon={faAngleUp}/>
 	COMPANY = <FontAwesomeIcon icon={faBuilding}/>
 	DASHBOARD = <FontAwesomeIcon icon={faKeyboard}/>
@@ -38,7 +38,7 @@ class Icons {
 		return icon
 	}
 
-	fromOrgType(type) {
+	fromGroupType(type) {
 		const orgTypeIcons = {
 			club: instance.CLUB,
 			company: instance.COMPANY,

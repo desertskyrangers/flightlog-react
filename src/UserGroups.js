@@ -6,24 +6,23 @@ import Notice from "./part/Notice";
 import {useNavigate} from "react-router-dom";
 import AppPath from "./AppPath";
 import UserService from "./api/UserService";
-import Dates from "./util/Dates";
 
-export default function UserOrgs(props) {
+export default function UserGroups(props) {
 
-	const [orgs, setOrgs] = useState()
+	const [groups, setGroups] = useState()
 	const [page] = useState(0)
 	const [messages, setMessages] = useState([])
 
 	let list;
-	if (!!orgs) {
-		list = <OrgList orgs={orgs}/>
+	if (!!groups) {
+		list = <OrgList orgs={groups}/>
 	} else {
 		list = <Loading/>
 	}
 
 	function loadGroupPage(page) {
 		UserService.getGroupPage(page, (success) => {
-			setOrgs(success.groups)
+			setGroups(success.groups)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -55,13 +54,9 @@ function OrgList(props) {
 		page = props.orgs.map((craft) => <OrgRow key={craft.id} value={craft.id} org={craft}/>)
 	}
 
-	function add() {
-		navigate(AppPath.GROUP + "/new")
-	}
-
 	return (
 		<div className='vbox'>
-			<button className='page-action' onClick={add}>Create a Group</button>
+			<button className='page-action' onClick={() => navigate(AppPath.GROUP + "/new")}>Create a Group</button>
 			{page}
 		</div>
 	)
@@ -72,12 +67,8 @@ function OrgRow(props) {
 
 	const navigate = useNavigate();
 
-	function open() {
-		navigate(AppPath.GROUP + "/" + props.org.id)
-	}
-
 	return (
-		<div className='page-result' onClick={open}>{Icons.fromOrgType(props.org.type)} {Dates.humanDateHourMin(new Date(props.org.timestamp))} {props.org.name}</div>
+		<div className='page-result' onClick={() => navigate(AppPath.GROUP + "/" + props.org.id)}>{Icons.fromGroupType(props.org.type)} {props.org.name}</div>
 	)
 
 }
