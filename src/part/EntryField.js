@@ -1,7 +1,8 @@
 export default function EntryField(props) {
 
 	const isRequired = props.required
-	const text = props.text + (isRequired ? " *" : "")
+	const help = !props.help ? '' : '(' + props.help + ')'
+	const text = props.text + (isRequired ? ' *' : '') + ' ' + help
 
 	return (
 		<div>

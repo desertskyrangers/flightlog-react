@@ -2,8 +2,9 @@ import React from "react";
 
 export default function EntrySelect(props) {
 
-	const isRequired=props.required
-	const text = props.text + (isRequired ? " *" : "" )
+	const isRequired = props.required
+	const help = !props.help ? '' : '(' + props.help + ')'
+	const text = props.text + (isRequired ? ' *' : '') + ' ' + help
 
 	return (
 		<div>
