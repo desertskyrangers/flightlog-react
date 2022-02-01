@@ -8,7 +8,7 @@ import AppPath from "./AppPath";
 import UserService from "./api/UserService";
 import Dates from "./util/Dates";
 
-export default function UserAircraft() {
+export default function UserFlights() {
 
 	const [flights, setFlights] = useState()
 	const [page] = useState(0)

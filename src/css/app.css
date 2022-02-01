@@ -120,6 +120,10 @@ button:hover {
 	border-color: var(--action-color-2);
 }
 
+hr {
+	width: 5rem;
+}
+
 .icon {
 	width: 1rem;
 	height: 1rem;

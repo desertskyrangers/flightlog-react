@@ -24,6 +24,12 @@ class ApiPath {
 
 	FLIGHT = this.ROOT + "/flight"
 
+	GROUP = this.ROOT + "/group"
+
+	GROUPS = this.ROOT + "/groups"
+
+	GROUPS_AVAILABLE = this.ROOT + "/groups/available"
+
 	USER = this.ROOT + "/user"
 
 	USER_AIRCRAFT = this.USER + "/aircraft"
@@ -31,6 +37,8 @@ class ApiPath {
 	USER_BATTERY = this.USER + "/battery"
 
 	USER_FLIGHT = this.USER + "/flight"
+
+	USER_GROUP = this.USER + "/group"
 
 	USER_LOOKUP = this.USER + "/lookup"
 

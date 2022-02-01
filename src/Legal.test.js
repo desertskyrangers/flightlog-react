@@ -13,5 +13,5 @@ test('renders copyright notice', () => {
 	render(<Router><Legal/></Router>);
 	const element = screen.getByText(/all content on this website/i);
 	expect(element).toBeInTheDocument();
-	expect(element.nodeName).toBe('P');
+	expect(element.nodeName).toBe('DIV');
 });

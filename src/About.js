@@ -13,12 +13,12 @@ export default function About(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<div className='page-label-row'>
-						<span>Version {props.version}</span>
+					<div className='page-header'>
+						<h1>FlightDeck v{props.version}</h1>
 						<span className='icon' onClick={close}>{Icons.CLOSE}</span>
 					</div>
 					<hr/>
-					<div><span className='page-label'>hosted by</span> Desert Sky Rangers</div>
+					<div><span className='page-label'>hosted by</span> <a href='https://www.desertskyrangers.org/'>Desert Sky Rangers</a></div>
 					<div><span className='page-label'>written by</span> Mark Soderquist</div>
 					<hr/>
 					<div><a href='https://github.com/desertskyrangers/flightdeck-react/issues/new'>Submit an enhancement request</a></div>

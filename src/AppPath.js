@@ -13,21 +13,29 @@ class AppPath {
 
 	// Protected (requires authentication)
 	HOME = this.ROOT + "/"
+
+	AIRCRAFT = this.ROOT + "/aircraft"
+	GROUP_AIRCRAFT = this.AIRCRAFT + "/group"
+	USER_AIRCRAFT = this.AIRCRAFT + "/user"
+
+	BATTERY = this.ROOT + "/battery"
+	USER_BATTERIES = this.BATTERY + "/user"
+
+	FLIGHT = this.ROOT + "/flight"
+	FLIGHT_TIMER = this.FLIGHT + "/timer"
+
 	FLIGHTS = this.ROOT + "/flights"
+	GROUP_FLIGHTS = this.FLIGHTS + "/group"
+	USER_FLIGHTS = this.FLIGHTS + "/user"
+
+	GROUP = this.ROOT + "/group"
+	USER_GROUPS = this.GROUP + "/user"
+
 	SETUP = this.ROOT + "/settings"
 
 	USER = this.ROOT + "/user"
-	AIRCRAFT = this.ROOT + "/aircraft"
-	BATTERY = this.ROOT + "/battery"
-	FLIGHT = this.ROOT + "/flight"
-	FLIGHT_TIMER = this.FLIGHT + "/timer"
 	PASSWORD = this.USER + "/password"
 	PROFILE = this.USER + "/profile"
-	ORG_AIRCRAFT = this.AIRCRAFT + "/org"
-	USER_AIRCRAFT = this.AIRCRAFT + "/user"
-	USER_BATTERIES = this.BATTERY + "/user"
-	USER_FLIGHTS = this.FLIGHTS + "/user"
-	//ORG_FLIGHTS = this.FLIGHTS + "/org"
 }
 
 const instance = new AppPath()

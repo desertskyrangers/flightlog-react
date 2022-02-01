@@ -73,6 +73,15 @@
 	width: 100%;
 }
 
+.page-header {
+	display: flex;
+	flex-flow: row nowrap;
+	/* along the main axis */
+	justify-content: space-between;
+	/* along the cross axis */
+	align-items: flex-start;
+}
+
 .page-label-row {
 	display: flex;
 	flex-flow: row nowrap;

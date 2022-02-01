@@ -4,7 +4,7 @@ import ApiPath from "./ApiPath";
 
 class UserService extends ApiService {
 
-	dashboard(id,successCallback, failureCallback ) {
+	dashboard(id, successCallback, failureCallback) {
 		this.fetch(Config.API_URL + `/api/dashboard`, {
 			method: 'GET'
 		}).then((response) => {
@@ -81,6 +81,16 @@ class UserService extends ApiService {
 
 	getFlightPage(page, successCallback, failureCallback) {
 		this.fetch(Config.API_URL + ApiPath.USER_FLIGHT + "/" + page, {
+			method: 'GET',
+		}).then((response) => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
+	getGroupPage(page, successCallback, failureCallback) {
+		this.fetch(Config.API_URL + ApiPath.USER_GROUP + "/" + page, {
 			method: 'GET',
 		}).then((response) => {
 			successCallback(response)

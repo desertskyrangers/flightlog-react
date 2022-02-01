@@ -53,6 +53,16 @@ class LookupService extends ApiService {
 		})
 	}
 
+	getGroupTypes(successCallback, failureCallback) {
+		this.fetch(Config.API_URL + `/api/lookup/group/type`, {
+			method: 'GET'
+		}).then((response) => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 	getSmsCarriers(successCallback, failureCallback) {
 		this.fetch(Config.API_URL + `/api/lookup/sms/carriers`, {
 			method: 'GET'

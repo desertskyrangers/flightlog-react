@@ -2,6 +2,7 @@ import './css/app.css';
 import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
 import TokenService from "./api/TokenService";
 import ApiPath from "./AppPath";
+import AppPath from "./AppPath";
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -29,7 +30,8 @@ import Recover from "./Recover";
 import Reset from "./Reset";
 import Password from "./edit/Password";
 import Dashboard from "./Dashboard";
-import AppPath from "./AppPath";
+import UserGroups from "./UserGroups";
+import Group from "./edit/Group";
 
 function App() {
 
@@ -76,11 +78,14 @@ function App() {
 						<Route exact path={AppPath.FLIGHT + "/:id"} element={<Protect><Flight/></Protect>}/>
 						<Route exact path={AppPath.FLIGHT_TIMER} element={<Protect> <FlightTimer/> </Protect>}/>
 						<Route exact path={AppPath.FLIGHT + "/:id/:timestamp/:duration"} element={<Protect> <Flight/> </Protect>}/>
+						<Route exact path={AppPath.GROUP + "/:id"} element={<Protect><Group/></Protect>}/>
 						<Route exact path={AppPath.PASSWORD} element={<Protect> <Password/> </Protect>}/>
 						<Route exact path={AppPath.PROFILE} element={<Protect> <Profile/> </Protect>}/>
+						{/*<Route exact path={AppPath.ORG + "/:id"} element={<Protect><Org/></Protect>}/>*/}
 						<Route exact path={AppPath.USER_AIRCRAFT} element={<Protect><UserAircraft/></Protect>}/>
 						<Route exact path={AppPath.USER_BATTERIES} element={<Protect><UserBatteries/></Protect>}/>
 						<Route exact path={AppPath.USER_FLIGHTS} element={<Protect><UserFlights/></Protect>}/>
+						<Route exact path={AppPath.USER_GROUPS} element={<Protect><UserGroups/></Protect>}/>
 
 						<Route path='*' element={<NotFound/>}/>
 					</Routes>
