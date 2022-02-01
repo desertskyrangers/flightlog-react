@@ -4,7 +4,7 @@ import ApiPath from "./ApiPath";
 
 class UserService extends ApiService {
 
-	dashboard(id,successCallback, failureCallback ) {
+	dashboard(id, successCallback, failureCallback) {
 		this.fetch(Config.API_URL + `/api/dashboard`, {
 			method: 'GET'
 		}).then((response) => {
