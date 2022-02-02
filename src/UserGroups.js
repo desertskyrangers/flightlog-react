@@ -1,3 +1,4 @@
+import "./css/member.css"
 import React, {useEffect, useState} from "react";
 import Loading from "./part/Loading";
 import NoResults from "./part/NoResults";
@@ -8,6 +9,7 @@ import AppPath from "./AppPath";
 import UserService from "./api/UserService";
 import EntrySelect from "./part/EntrySelect";
 import GroupService from "./api/GroupService";
+import TokenService from "./api/TokenService";
 
 export default function UserGroups(props) {
 
@@ -16,23 +18,13 @@ export default function UserGroups(props) {
 	const [memberships, setMemberships] = useState([])
 	const [messages, setMessages] = useState([])
 
-	// Actions
-	const [joinRequest, setJoinRequest] = useState(false)
-
-	let list;
-	if (!!groups) {
-		list = <GroupList orgs={groups}/>
-	} else {
-		list = <Loading/>
-	}
-
-	function toggleJoinRequest() {
-		setJoinRequest(!joinRequest)
+	function clearMessages() {
+		setMessages([])
 	}
 
 	function loadGroupPage(page) {
-		UserService.getGroupPage(page, (success) => {
-			setGroups(success.groups)
+		UserService.getGroupPage(page, (response) => {
+			setGroups(response.groups)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -41,8 +33,18 @@ export default function UserGroups(props) {
 	}
 
 	function loadMemberships() {
-		UserService.getMemberships((success) => {
-			setMemberships(success.memberships)
+		UserService.getMemberships((response) => {
+			setMemberships(response.memberships)
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			if (!!messages) setMessages(messages)
+		})
+	}
+
+	function requestMembership(group) {
+		UserService.requestMembership(TokenService.getUserId(), group, 'request', (response) => {
+			setMemberships(response.memberships)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -53,15 +55,20 @@ export default function UserGroups(props) {
 	useEffect(() => loadGroupPage(page), [page])
 	useEffect(() => loadMemberships(), [])
 
+	let list;
+	if (!!groups) {
+		list = <GroupList orgs={groups}/>
+	} else {
+		list = <Loading/>
+	}
+
 	return (
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<button className='page-action' onClick={() => toggleJoinRequest()}>Join a Group</button>
-					{joinRequest ? <JoinRequest/> : null}
-					<MembershipList memberships={memberships}/>
+					<MembershipList memberships={memberships} onMembershipRequest={requestMembership}/>
 					{list}
-					<Notice priority='error' messages={messages}/>
+					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 				</div>
 			</div>
 		</div>
@@ -84,12 +91,16 @@ function JoinRequest(props) {
 		})
 	}
 
+	function requestMembership() {
+		props.onMembershipRequest(group)
+		props.onClose()
+	}
+
 	function getContent() {
 		const hasOptions = !!groupOptions && groupOptions.length > 0
 
 		return hasOptions ?
-			<EntrySelect id='group' text='Group' value={group} required defaultValue='unspecified' onChange={(event) => setGroup(event.target.value)} fieldActionIcon={Icons.GROUP_ADD} onFieldAction={() => {
-			}}>
+			<EntrySelect id='group' text='Group' value={group} required defaultValue='unspecified' onChange={(event) => setGroup(event.target.value)} fieldActionIcon={Icons.GROUP_ADD} onFieldAction={requestMembership}>
 				<option key='unspecified' hidden>Select a group</option>
 				{groupOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 			</EntrySelect> : <div>No groups available to join</div>
@@ -119,7 +130,6 @@ function GroupList(props) {
 			{page}
 		</div>
 	)
-
 }
 
 function GroupRow(props) {
@@ -129,17 +139,69 @@ function GroupRow(props) {
 	return (
 		<div className='page-result' onClick={() => navigate(AppPath.GROUP + "/" + props.group.id)}>{Icons.fromGroupType(props.group.type)} {props.group.name}</div>
 	)
-
 }
 
 function MembershipList(props) {
+	// Actions
+	const [joinRequest, setJoinRequest] = useState(false)
+
+	function toggleJoinRequest() {
+		setJoinRequest(!joinRequest)
+	}
+
 	return (
-		props.memberships.map((membership) => <MembershipRow key={membership.id} membership={membership}/>)
+		<div className='vbox'>
+			<button className='page-action' onClick={() => toggleJoinRequest()}>Join a Group</button>
+			{joinRequest ? <JoinRequest onClose={toggleJoinRequest} onMembershipRequest={props.onMembershipRequest}/> : null}
+			{props.memberships.map((membership) => <MembershipRow key={membership.id} membership={membership}/>)}
+		</div>
 	)
 }
 
 function MembershipRow(props) {
 	return (
-		<div className='page-result'>{Icons.MEMBERSHIP} {props.membership.group.name} {props.status}</div>
+		<div className='page-result'><MembershipStatus status={props.membership.status}/> {props.membership.group.name} </div>
 	)
+}
+
+function MembershipStatus(props) {
+
+	function getIcon(key) {
+		switch (key) {
+			case'owner':
+				return Icons.OWNER
+			case'accepted':
+				return Icons.MEMBER
+			case'invited':
+				return Icons.ENVELOPE
+			case'requested':
+				return Icons.ENVELOPE
+			case'revoked':
+				return Icons.CANCEL
+			default:
+				return Icons.UNKNOWN
+		}
+	}
+
+	function getText(key) {
+		switch (key) {
+			case 'owner':
+				return 'Owner'
+			case 'accepted':
+				return 'Accepted'
+			case 'invited':
+				return 'Invited'
+			case 'requested':
+				return 'Requested'
+			case 'revoked':
+				return 'Revoked'
+			default:
+				return key
+		}
+	}
+
+	return (
+		<span className={'membership-status ' + props.status}>{getIcon(props.status)}</span>
+	)
+
 }

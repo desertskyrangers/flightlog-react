@@ -149,6 +149,21 @@ class UserService extends ApiService {
 		})
 	}
 
+	requestMembership(userid, groupid, type, successCallback, failureCallback) {
+		this.fetch(Config.API_URL + ApiPath.USER_MEMBERSHIP, {
+			method: 'PUT',
+			body: JSON.stringify({
+				userid: userid,
+				groupid: groupid,
+				status: type
+			})
+		}).then((response) => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 }
 
 

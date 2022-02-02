@@ -14,6 +14,10 @@ export default function UserFlights() {
 	const [page] = useState(0)
 	const [messages, setMessages] = useState([])
 
+	function clearMessages() {
+		setMessages([])
+	}
+
 	let list;
 	if (!!flights) {
 		list = <FlightList flights={flights}/>
@@ -38,7 +42,7 @@ export default function UserFlights() {
 			<div className='page-body'>
 				<div className='page-form'>
 					{list}
-					<Notice messages={messages}/>
+					<Notice messages={messages} clearMessages={clearMessages}/>
 				</div>
 			</div>
 		</div>

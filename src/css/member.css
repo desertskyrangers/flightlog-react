@@ -1,0 +1,33 @@
+.membership-status {
+	color: #808080;
+}
+
+.owner {
+	color: #00e0a0;
+	/*background-color: #004000;*/
+	/*border-color: #00a000;*/
+}
+
+.accepted {
+	color: #00e0a0;
+	/*background-color: #004000;*/
+	/*border-color: #00a000;*/
+}
+
+.invited {
+	color: #00a0e0;
+	/*background-color: #404040;*/
+	/*border: 1px solid #a0a0a0;*/
+}
+
+.requested {
+	color: #c08000;
+	/*background-color: #404040;*/
+	/*border: 1px solid #a0a0a0;*/
+}
+
+.revoked {
+	color: #e00000;
+	/*background-color: #400000;*/
+	/*border-color: #a00000;*/
+}

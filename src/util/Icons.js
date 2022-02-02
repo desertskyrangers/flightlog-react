@@ -1,4 +1,27 @@
-import {faIdCard, faAngleUp, faBan, faBars, faBatteryFull, faBuilding, faCalendar, faClock, faEllipsisH, faHelicopter, faHome, faKeyboard, faPlane, faPlus, faSpinner, faTimesCircle, faTrash, faUser, faUsers} from '@fortawesome/free-solid-svg-icons'
+import {
+	faAngleUp,
+	faBan,
+	faBars,
+	faBatteryFull,
+	faBuilding,
+	faCalendar,
+	faClock,
+	faEllipsisH,
+	faEnvelope,
+	faHelicopter,
+	faHome,
+	faKey,
+	faKeyboard,
+	faPlane,
+	faPlus,
+	faQuestion,
+	faSpinner,
+	faTimesCircle,
+	faTrash,
+	faUserAlt,
+	faUserFriends,
+	faUsers
+} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import DroneIcon from "../icon/DroneIcon";
 
@@ -8,22 +31,27 @@ class Icons {
 	BARS = <FontAwesomeIcon icon={faBars}/>
 	BATTERY = <FontAwesomeIcon icon={faBatteryFull}/>
 	CALENDAR = <FontAwesomeIcon icon={faCalendar}/>
+	CANCEL = <FontAwesomeIcon icon={faBan}/>
 	CLOCK = <FontAwesomeIcon icon={faClock}/>
 	CLOSE = <FontAwesomeIcon icon={faTimesCircle}/>
-	CLUB = <FontAwesomeIcon icon={faUsers}/>
+	CLUB = <FontAwesomeIcon icon={faUserFriends}/>
 	COLLAPSE_UP = <FontAwesomeIcon icon={faAngleUp}/>
 	COMPANY = <FontAwesomeIcon icon={faBuilding}/>
 	DASHBOARD = <FontAwesomeIcon icon={faKeyboard}/>
 	DELETE = <FontAwesomeIcon icon={faTrash}/>
 	DRONE = <DroneIcon/>
+	ENVELOPE = <FontAwesomeIcon icon={faEnvelope}/>
 	GROUP = <FontAwesomeIcon icon={faUsers}/>
 	GROUP_ADD = <FontAwesomeIcon icon={faPlus}/>
 	HELICOPTER = <FontAwesomeIcon icon={faHelicopter}/>
 	HOME = <FontAwesomeIcon icon={faHome}/>
-	MEMBERSHIP = <FontAwesomeIcon icon={faIdCard}/>
+	MEMBER = <FontAwesomeIcon icon={faUserAlt}/>
+	// MEMBERSHIP = <FontAwesomeIcon icon={faUserAlt}/>
 	NO_RESULT = <FontAwesomeIcon icon={faBan}/>
+	OWNER = <FontAwesomeIcon icon={faKey}/>
 	PLANE = <FontAwesomeIcon icon={faPlane}/>
-	USER = <FontAwesomeIcon icon={faUser}/>
+	UNKNOWN = <FontAwesomeIcon icon={faQuestion}/>
+	USER = <FontAwesomeIcon icon={faUserAlt}/>
 	WAIT = <FontAwesomeIcon icon={faSpinner}/>
 
 	fromAircraftType(type) {
