@@ -45,10 +45,10 @@ export default function UserGroups(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					{list}
-					<Notice priority='error' messages={messages}/>
 					<button className='page-action' onClick={() => toggleJoinRequest()}>Join a Group</button>
 					{joinRequest ? <JoinRequest/> : null}
+					{list}
+					<Notice priority='error' messages={messages}/>
 				</div>
 			</div>
 		</div>
