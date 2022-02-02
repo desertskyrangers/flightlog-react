@@ -40,6 +40,8 @@ class ApiPath {
 
 	USER_GROUP = this.USER + "/group"
 
+	USER_MEMBERSHIP = this.USER + "/membership"
+
 	USER_LOOKUP = this.USER + "/lookup"
 
 	USER_AIRCRAFT_LOOKUP = this.USER_LOOKUP + "/aircraft"

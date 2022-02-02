@@ -11,8 +11,9 @@ import GroupService from "./api/GroupService";
 
 export default function UserGroups(props) {
 
-	const [groups, setGroups] = useState()
 	const [page] = useState(0)
+	const [groups, setGroups] = useState([])
+	const [memberships, setMemberships] = useState([])
 	const [messages, setMessages] = useState([])
 
 	// Actions
@@ -39,7 +40,18 @@ export default function UserGroups(props) {
 		})
 	}
 
+	function loadMemberships() {
+		UserService.getMemberships((success) => {
+			setMemberships(success.memberships)
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			if (!!messages) setMessages(messages)
+		})
+	}
+
 	useEffect(() => loadGroupPage(page), [page])
+	useEffect(() => loadMemberships(), [])
 
 	return (
 		<div className='page-container'>
@@ -47,6 +59,7 @@ export default function UserGroups(props) {
 				<div className='page-form'>
 					<button className='page-action' onClick={() => toggleJoinRequest()}>Join a Group</button>
 					{joinRequest ? <JoinRequest/> : null}
+					<MembershipList memberships={memberships}/>
 					{list}
 					<Notice priority='error' messages={messages}/>
 				</div>
@@ -97,7 +110,7 @@ function GroupList(props) {
 	if (props.orgs.length === 0) {
 		page = <NoResults message='No groups owned by user'/>
 	} else {
-		page = props.orgs.map((craft) => <GroupRow key={craft.id} value={craft.id} org={craft}/>)
+		page = props.orgs.map((group) => <GroupRow key={group.id} group={group}/>)
 	}
 
 	return (
@@ -114,7 +127,19 @@ function GroupRow(props) {
 	const navigate = useNavigate();
 
 	return (
-		<div className='page-result' onClick={() => navigate(AppPath.GROUP + "/" + props.org.id)}>{Icons.fromGroupType(props.org.type)} {props.org.name}</div>
+		<div className='page-result' onClick={() => navigate(AppPath.GROUP + "/" + props.group.id)}>{Icons.fromGroupType(props.group.type)} {props.group.name}</div>
 	)
 
+}
+
+function MembershipList(props) {
+	return (
+		props.memberships.map((membership) => <MembershipRow key={membership.id} membership={membership}/>)
+	)
+}
+
+function MembershipRow(props) {
+	return (
+		<div className='page-result'>{Icons.MEMBERSHIP} {props.membership.group.name} {props.status}</div>
+	)
 }
