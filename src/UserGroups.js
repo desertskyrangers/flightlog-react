@@ -43,7 +43,7 @@ export default function UserGroups(props) {
 	}
 
 	function requestMembership(group) {
-		UserService.requestMembership(TokenService.getUserId(), group, 'request', (response) => {
+		UserService.requestMembership(TokenService.getUserId(), group, 'requested', (response) => {
 			setMemberships(response.memberships)
 		}, (failure) => {
 			let messages = failure.messages
@@ -183,22 +183,22 @@ function MembershipStatus(props) {
 		}
 	}
 
-	function getText(key) {
-		switch (key) {
-			case 'owner':
-				return 'Owner'
-			case 'accepted':
-				return 'Accepted'
-			case 'invited':
-				return 'Invited'
-			case 'requested':
-				return 'Requested'
-			case 'revoked':
-				return 'Revoked'
-			default:
-				return key
-		}
-	}
+	// function getText(key) {
+	// 	switch (key) {
+	// 		case 'owner':
+	// 			return 'Owner'
+	// 		case 'accepted':
+	// 			return 'Accepted'
+	// 		case 'invited':
+	// 			return 'Invited'
+	// 		case 'requested':
+	// 			return 'Requested'
+	// 		case 'revoked':
+	// 			return 'Revoked'
+	// 		default:
+	// 			return key
+	// 	}
+	// }
 
 	return (
 		<span className={'membership-status ' + props.status}>{getIcon(props.status)}</span>
