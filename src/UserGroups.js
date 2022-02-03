@@ -9,6 +9,7 @@ import UserService from "./api/UserService";
 import EntrySelect from "./part/EntrySelect";
 import GroupService from "./api/GroupService";
 import TokenService from "./api/TokenService";
+import {MembershipRow} from "./part/Membership";
 
 export default function UserGroups(props) {
 	const navigate = useNavigate();
@@ -138,65 +139,4 @@ function MembershipList(props) {
 			{memberships}
 		</div>
 	)
-}
-
-function MembershipRow(props) {
-	const navigate = useNavigate();
-
-	function doClick() {
-		if (props.membership.status === 'owner') navigate(AppPath.GROUP + "/" + props.membership.group.id)
-	}
-
-	return (
-		<div className='page-result' onClick={doClick}>
-			<MembershipStatus status={props.membership.status}/>
-			{/*&nbsp;{Icons.fromGroupType(props.membership.group.type)}*/}
-			&nbsp;{props.membership.group.name}
-		</div>
-	)
-}
-
-function MembershipStatus(props) {
-
-	function getIcon(key) {
-		switch (key) {
-			case'owner':
-				return Icons.OWNER
-			case'accepted':
-				return Icons.MEMBER
-			case'invited':
-				return Icons.ENVELOPE
-			case'requested':
-				return Icons.ENVELOPE
-			case'revoked':
-				return Icons.CANCEL
-			default:
-				return Icons.UNKNOWN
-		}
-	}
-
-	function getText(key) {
-		switch (key) {
-			case 'owner':
-				return 'Owner'
-			case 'accepted':
-				return 'Member'
-			case 'invited':
-				return 'Invited'
-			case 'requested':
-				return 'Requested'
-			case 'revoked':
-				return 'Revoked'
-			default:
-				return key
-		}
-	}
-
-	return (
-		<span className={'tooltip membership-status ' + props.status}>
-			<span className={'tooltiptext membership-status ' + props.status}>{getText(props.status)}</span>
-			{getIcon(props.status)}
-		</span>
-	)
-
 }

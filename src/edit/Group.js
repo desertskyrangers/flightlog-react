@@ -7,6 +7,9 @@ import Icons from "../util/Icons"
 import GroupService from "../api/GroupService";
 import Notice from "../part/Notice";
 import DeleteWithConfirm from "../part/DeleteWithConfirm";
+import NoResults from "../part/NoResults";
+import {MembershipRow} from "../part/Membership";
+import UserService from "../api/UserService";
 
 export default function Group(props) {
 	const navigate = useNavigate();
@@ -14,6 +17,7 @@ export default function Group(props) {
 	const [id, setId] = useState(props.id || '')
 	const [name, setName] = useState(props.name || '')
 	const [type, setType] = useState(props.type || '')
+	const [memberships, setMemberships] = useState([])
 	const [messages, setMessages] = useState([])
 
 	// Options
@@ -62,6 +66,16 @@ export default function Group(props) {
 		})
 	}
 
+	function loadMemberships() {
+		GroupService.getMemberships((response) => {
+			setMemberships(response.memberships)
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			if (!!messages) setMessages(messages)
+		})
+	}
+
 	function update() {
 		GroupService.updateGroup({
 			id: idRef.current,
@@ -93,6 +107,10 @@ export default function Group(props) {
 
 	useEffect(() => loadTypeOptions(), [])
 	useEffect(() => loadGroup(), [])
+	//useEffect(() => loadMemberships(), [])
+
+	let membershipList = <NoResults message='No group memberships'/>
+	if (!!memberships && memberships.length > 0) membershipList = memberships.map((membership) => <MembershipRow key={membership.id} membership={membership}/>)
 
 	return (
 		<div className='page-container'>
@@ -112,6 +130,8 @@ export default function Group(props) {
 					</div>
 
 					{requestDelete ? <DeleteWithConfirm entity='name of the group' name={name} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
+
+					{membershipList}
 				</div>
 			</div>
 		</div>
