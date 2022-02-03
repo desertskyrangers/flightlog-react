@@ -9,7 +9,7 @@ import UserService from "./api/UserService";
 import EntrySelect from "./part/EntrySelect";
 import GroupService from "./api/GroupService";
 import TokenService from "./api/TokenService";
-import {MembershipRow} from "./part/Membership";
+import {MembershipGroup} from "./part/MembershipGroup";
 
 export default function UserGroups(props) {
 	const navigate = useNavigate();
@@ -130,7 +130,7 @@ function MembershipList(props) {
 	}
 
 	let memberships = <NoResults message='No group memberships'/>
-	if (!!props.memberships && props.memberships.length > 0) memberships = props.memberships.map((membership) => <MembershipRow key={membership.id} membership={membership}/>)
+	if (!!props.memberships && props.memberships.length > 0) memberships = props.memberships.map((membership) => <MembershipGroup key={membership.id} membership={membership}/>)
 
 	return (
 		<div className='vbox'>

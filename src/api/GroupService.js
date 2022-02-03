@@ -5,7 +5,7 @@ import ApiService from "./ApiService"
 class GroupService extends ApiService {
 
 	getAvailableGroups(successCallback, failureCallback) {
-		this.fetch(Config.API_URL + ApiPath.GROUPS_AVAILABLE, {
+		this.fetch(Config.API_URL + ApiPath.GROUP_AVAILABLE, {
 			method: 'GET'
 		}).then((response) => {
 			successCallback(response)
@@ -47,8 +47,8 @@ class GroupService extends ApiService {
 		})
 	}
 
-	getMemberships(successCallback, failureCallback) {
-		this.fetch(Config.API_URL + ApiPath.GROUP_MEMBERSHIP, {
+	getMemberships(groupid, successCallback, failureCallback) {
+		this.fetch(Config.API_URL + "/api/group/" + groupid + "/membership", {
 			method: 'GET',
 		}).then((response) => {
 			successCallback(response)

@@ -8,8 +8,7 @@ import GroupService from "../api/GroupService";
 import Notice from "../part/Notice";
 import DeleteWithConfirm from "../part/DeleteWithConfirm";
 import NoResults from "../part/NoResults";
-import {MembershipRow} from "../part/Membership";
-import UserService from "../api/UserService";
+import {MembershipUser} from "../part/MembershipUser";
 
 export default function Group(props) {
 	const navigate = useNavigate();
@@ -58,17 +57,15 @@ export default function Group(props) {
 			setId(result.group.id)
 			setName(result.group.name)
 			setType(result.group.type)
-			// TODO members
-		}, (failure) => {
-			let messages = failure.messages
-			if (!!!messages) messages = [failure.message]
-			if (!!messages) setMessages(messages)
-		})
-	}
 
-	function loadMemberships() {
-		GroupService.getMemberships((response) => {
-			setMemberships(response.memberships)
+			// Load members
+			GroupService.getMemberships(result.group.id, (response) => {
+				setMemberships(response)
+			}, (failure) => {
+				let messages = failure.messages
+				if (!!!messages) messages = [failure.message]
+				if (!!messages) setMessages(messages)
+			})
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -107,10 +104,9 @@ export default function Group(props) {
 
 	useEffect(() => loadTypeOptions(), [])
 	useEffect(() => loadGroup(), [])
-	//useEffect(() => loadMemberships(), [])
 
-	let membershipList = <NoResults message='No group memberships'/>
-	if (!!memberships && memberships.length > 0) membershipList = memberships.map((membership) => <MembershipRow key={membership.id} membership={membership}/>)
+	let membershipList = <NoResults message='No members found'/>
+	if (!!memberships && memberships.length > 0) membershipList = memberships.map((membership) => <MembershipUser key={membership.id} membership={membership}/>)
 
 	return (
 		<div className='page-container'>
