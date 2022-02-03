@@ -1,12 +1,10 @@
-import {useNavigate} from "react-router-dom";
-import AppPath from "../AppPath";
 import MembershipIcon from "./MembershipStatusIcon";
 
 export function MembershipUser(props) {
-	const navigate = useNavigate();
+	//const navigate = useNavigate();
 
 	function doClick() {
-		if (props.membership.status === 'owner') navigate(AppPath.GROUP + "/" + props.membership.group.id)
+		//if (props.membership.status === 'owner') navigate(AppPath.GROUP + "/" + props.membership.group.id)
 	}
 
 	return (
