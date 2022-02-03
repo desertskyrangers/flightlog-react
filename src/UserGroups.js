@@ -148,7 +148,11 @@ function MembershipRow(props) {
 	}
 
 	return (
-		<div className='page-result' onClick={doClick}><MembershipStatus status={props.membership.status}/> {Icons.fromGroupType(props.membership.group.type)} {props.membership.group.name} </div>
+		<div className='page-result' onClick={doClick}>
+			<MembershipStatus status={props.membership.status}/>
+			{/*&nbsp;{Icons.fromGroupType(props.membership.group.type)}*/}
+			&nbsp;{props.membership.group.name}
+		</div>
 	)
 }
 
@@ -171,25 +175,28 @@ function MembershipStatus(props) {
 		}
 	}
 
-	// function getText(key) {
-	// 	switch (key) {
-	// 		case 'owner':
-	// 			return 'Owner'
-	// 		case 'accepted':
-	// 			return 'Accepted'
-	// 		case 'invited':
-	// 			return 'Invited'
-	// 		case 'requested':
-	// 			return 'Requested'
-	// 		case 'revoked':
-	// 			return 'Revoked'
-	// 		default:
-	// 			return key
-	// 	}
-	// }
+	function getText(key) {
+		switch (key) {
+			case 'owner':
+				return 'Owner'
+			case 'accepted':
+				return 'Member'
+			case 'invited':
+				return 'Invited'
+			case 'requested':
+				return 'Requested'
+			case 'revoked':
+				return 'Revoked'
+			default:
+				return key
+		}
+	}
 
 	return (
-		<span className={'membership-status ' + props.status}>{getIcon(props.status)}</span>
+		<span className={'tooltip membership-status ' + props.status}>
+			<span className={'tooltiptext membership-status ' + props.status}>{getText(props.status)}</span>
+			{getIcon(props.status)}
+		</span>
 	)
 
 }

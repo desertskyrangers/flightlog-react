@@ -52,6 +52,9 @@ base - #403c38 ( do not use directly )
 	--submit-background-1: #344037;
 	--submit-background-2: #3e4d42;
 
+	--tooltip-background-0: #202020;
+	--tooltip-background-1: var(--background-4);
+
 	--button-background-0: var(--background-0);
 	--button-background-1: #44403b;
 	--button-background-2: #524d47;

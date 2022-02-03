@@ -45,10 +45,11 @@ class Icons {
 	GROUP_ADD = <FontAwesomeIcon icon={faPlus}/>
 	HELICOPTER = <FontAwesomeIcon icon={faHelicopter}/>
 	HOME = <FontAwesomeIcon icon={faHome}/>
+	KEY = <FontAwesomeIcon icon={faKey}/>
 	MEMBER = <FontAwesomeIcon icon={faUserAlt}/>
 	// MEMBERSHIP = <FontAwesomeIcon icon={faUserAlt}/>
 	NO_RESULT = <FontAwesomeIcon icon={faBan}/>
-	OWNER = <FontAwesomeIcon icon={faKey}/>
+	OWNER = <FontAwesomeIcon icon={faUserAlt}/>
 	PLANE = <FontAwesomeIcon icon={faPlane}/>
 	UNKNOWN = <FontAwesomeIcon icon={faQuestion}/>
 	USER = <FontAwesomeIcon icon={faUserAlt}/>
