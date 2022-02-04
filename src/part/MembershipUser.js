@@ -70,11 +70,11 @@ export function MembershipUser(props) {
 				<MembershipIcon status={props.membership.status}/>
 				{/*&nbsp;{Icons.fromGroupType(props.membership.group.type)}*/}
 				<span className='page-text'>{props.membership.user.preferredName}</span>
-				{props.actionIcon ? <button className='icon' onClick={props.onAction}>{props.actionIcon}</button> : null}
 			</div>
 			{acceptAction ? <button className='icon' onClick={doAccept}>{Icons.ACCEPT}</button> : null}
 			{cancelAction ? <button className='icon' onClick={doCancel}>{Icons.CANCEL}</button> : null}
 			{revokeAction ? <button className='icon' onClick={doRevoke}>{Icons.REVOKE}</button> : null}
+			{props.actionIcon ? <button className='icon' onClick={props.onAction}>{props.actionIcon}</button> : null}
 		</div>
 	)
 }

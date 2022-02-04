@@ -31,6 +31,10 @@ export function MembershipGroup(props) {
 		return props.membership.status === 'requested'
 	}, [props.membership.status])
 
+	const isRevoked = useCallback(() => {
+		return props.membership.status === 'revoked'
+	}, [props.membership.status])
+
 	function doAccept() {
 		MembershipService.acceptMembership(props.membership.id, (result) => {
 			props.onMemberUpdate()
@@ -48,18 +52,20 @@ export function MembershipGroup(props) {
 	}
 
 	useEffect(() => {
-		setAcceptAction(isInvited() )
-		setCancelAction(isRequested() || isAccepted())
-	}, [isRequested, isInvited, isAccepted])
+		setAcceptAction(isInvited())
+		setCancelAction(isRequested() || isAccepted()|| isRevoked())
+	}, [isRequested, isRevoked, isInvited, isAccepted])
 
 	return (
-		<div className={isOwner() ? 'page-result' : 'page-row'} onClick={doClick}>
-			<MembershipIcon status={props.membership.status}/>
-			{/*&nbsp;{Icons.fromGroupType(props.membership.group.type)}*/}
-			<span className='page-text'>{props.membership.group.name}</span>
-			{props.actionIcon ? <button className='icon page-field-action-button' onClick={props.onAction}>{props.actionIcon}</button> : null}
+		<div className='hbox'>
+			<div className={isOwner() ? 'page-result' : 'page-row'} onClick={doClick}>
+				<MembershipIcon status={props.membership.status}/>
+				{/*&nbsp;{Icons.fromGroupType(props.membership.group.type)}*/}
+				<span className='page-text'>{props.membership.group.name}</span>
+			</div>
 			{acceptAction ? <button className='icon' onClick={doAccept}>{Icons.ACCEPT}</button> : null}
 			{cancelAction ? <button className='icon' onClick={doCancel}>{Icons.CANCEL}</button> : null}
+			{props.actionIcon ? <button className='icon page-field-action-button' onClick={props.onAction}>{props.actionIcon}</button> : null}
 		</div>
 	)
 }
