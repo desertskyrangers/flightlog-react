@@ -127,25 +127,25 @@ hr {
 	width: 5rem;
 }
 
+/*.icon {*/
+/*	width: 1rem;*/
+/*	height: 1rem;*/
+
+/*	fill: currentColor;*/
+
+/*	display: inline-block;*/
+/*	box-sizing: border-box;*/
+
+/*	text-align: center;*/
+/*	vertical-align: text-bottom;*/
+/*	cursor: pointer;*/
+/*}*/
+
+/* format a button to be just an icon */
 .icon {
-	width: 1rem;
-	height: 1rem;
-
-	fill: currentColor;
-
-	display: inline-block;
-	box-sizing: border-box;
-
-	text-align: center;
-	vertical-align: text-bottom;
-	cursor: pointer;
-}
-
-.icon-button {
 	font-size: 1rem;
-	background: transparent;
+	/*background: transparent;*/
 	cursor: pointer;
-	width: 2.5rem;
 }
 
 code {

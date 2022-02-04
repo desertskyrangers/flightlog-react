@@ -5,6 +5,7 @@ import {
 	faBatteryFull,
 	faBuilding,
 	faCalendar,
+	faCheck,
 	faClock,
 	faEllipsisH,
 	faEnvelope,
@@ -27,6 +28,7 @@ import DroneIcon from "../icon/DroneIcon";
 
 class Icons {
 
+	ACCEPT = <FontAwesomeIcon icon={faCheck}/>
 	ADVANCED = <FontAwesomeIcon icon={faEllipsisH}/>
 	BARS = <FontAwesomeIcon icon={faBars}/>
 	BATTERY = <FontAwesomeIcon icon={faBatteryFull}/>
@@ -51,6 +53,7 @@ class Icons {
 	NO_RESULT = <FontAwesomeIcon icon={faBan}/>
 	OWNER = <FontAwesomeIcon icon={faUserAlt}/>
 	PLANE = <FontAwesomeIcon icon={faPlane}/>
+	REVOKE = <FontAwesomeIcon icon={faBan}/>
 	UNKNOWN = <FontAwesomeIcon icon={faQuestion}/>
 	USER = <FontAwesomeIcon icon={faUserAlt}/>
 	WAIT = <FontAwesomeIcon icon={faSpinner}/>

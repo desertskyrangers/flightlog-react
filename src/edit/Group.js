@@ -1,5 +1,5 @@
 import EntrySelect from "../part/EntrySelect"
-import React, {useEffect, useRef, useState} from "react"
+import React, {useCallback, useEffect, useRef, useState} from "react"
 import LookupService from "../api/LookupService"
 import {useNavigate, useParams} from "react-router-dom"
 import EntryField from "../part/EntryField"
@@ -51,27 +51,29 @@ export default function Group(props) {
 		})
 	}
 
-	function loadGroup() {
-		if (isNewRef.current) return
-		GroupService.getGroup(idRef.current, (result) => {
-			setId(result.group.id)
-			setName(result.group.name)
-			setType(result.group.type)
-
-			// Load members
-			GroupService.getMemberships(result.group.id, (response) => {
-				setMemberships(response)
-			}, (failure) => {
-				let messages = failure.messages
-				if (!!!messages) messages = [failure.message]
-				if (!!messages) setMessages(messages)
-			})
+	const loadMemberships = useCallback((groupId) => {
+		GroupService.getMemberships(!!groupId ? groupId : id, (response) => {
+			setMemberships(response)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
 			if (!!messages) setMessages(messages)
 		})
-	}
+	},[id])
+
+	const loadGroup = useCallback(() => {
+		if (isNewRef.current) return
+		GroupService.getGroup(idRef.current, (result) => {
+			setId(result.group.id)
+			setName(result.group.name)
+			setType(result.group.type)
+			loadMemberships(result.group.id)
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			if (!!messages) setMessages(messages)
+		})
+	},[loadMemberships])
 
 	function update() {
 		GroupService.updateGroup({
@@ -103,10 +105,10 @@ export default function Group(props) {
 	}
 
 	useEffect(() => loadTypeOptions(), [])
-	useEffect(() => loadGroup(), [])
+	useEffect(() => loadGroup(), [loadGroup])
 
 	let membershipList = <NoResults message='No members found'/>
-	if (!!memberships && memberships.length > 0) membershipList = memberships.map((membership) => <MembershipUser key={membership.id} membership={membership}/>)
+	if (!!memberships && memberships.length > 0) membershipList = memberships.map((membership) => <MembershipUser key={membership.id} membership={membership} onMemberUpdate={loadMemberships}/>)
 
 	return (
 		<div className='page-container'>
@@ -121,13 +123,15 @@ export default function Group(props) {
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 					<div className='hbox'>
-						{isNewRef.current ? null : <button className='icon-button' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE_UP : Icons.DELETE}</button>}
+						{isNewRef.current ? null : <button className='icon' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE_UP : Icons.DELETE}</button>}
 						{requestDelete ? null : <button disabled={messages.length > 0} className='page-submit' onClick={update}>{isNewRef.current ? 'Save' : 'Update'}</button>}
 					</div>
 
 					{requestDelete ? <DeleteWithConfirm entity='name of the group' name={name} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
 
-					{membershipList}
+					<div className='vbox'>
+						{membershipList}
+					</div>
 				</div>
 			</div>
 		</div>

@@ -310,7 +310,7 @@ export default function Flight(props) {
 							<input id='durationHH' data-testid='durationHH' className='page-field' type='number' value={durationHH} min={0} max={99} onChange={(event) => hhChanged(event)}/>:
 							<input id='durationMM' data-testid='durationMM' className='page-field' type='number' value={durationMM} min={0} max={59} onChange={(event) => mmChanged(event)}/>:
 							<input id='durationSS' data-testid='durationSS' className='page-field' type='number' value={durationSS} min={0} max={59} onChange={(event) => ssChanged(event)}/>
-							<button className='icon-button page-field-action-button' onClick={updateDurationFromStartTime}>{Icons.CLOCK}</button>
+							<button className='icon page-field-action-button' onClick={updateDurationFromStartTime}>{Icons.CLOCK}</button>
 						</div>
 					</div>
 
@@ -318,7 +318,7 @@ export default function Flight(props) {
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 					<div className='hbox'>
-						{isNewRef.current ? null : <button className='icon-button' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE_UP : Icons.DELETE}</button>}
+						{isNewRef.current ? null : <button className='icon' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE_UP : Icons.DELETE}</button>}
 						{requestDelete ? null : <button disabled={!canSave} className='page-submit' onClick={update}>{isNewRef.current ? 'Save' : 'Update'}</button>}
 					</div>
 

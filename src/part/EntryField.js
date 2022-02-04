@@ -25,7 +25,7 @@ export default function EntryField(props) {
 							 value={props.value}
 							 onChange={props.onChange}
 							 onKeyDown={props.onKeyDown}/>
-				{props.fieldActionIcon ? <button className='icon-button page-field-action-button' onClick={props.onFieldAction}>{props.fieldActionIcon}</button> : null}
+				{props.fieldActionIcon ? <button className='icon page-field-action-button' onClick={props.onFieldAction}>{props.fieldActionIcon}</button> : null}
 			</div>
 		</div>
 	)

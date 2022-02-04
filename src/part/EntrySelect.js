@@ -16,7 +16,7 @@ export default function EntrySelect(props) {
 				<select id={props.id} name={props.id} value={props.value} className='page-field' onChange={props.onChange} onKeyDown={props.onKeyDown}>
 					{props.children}
 				</select>
-				{props.fieldActionIcon ? <button className='icon-button page-field-action-button' onClick={props.onFieldAction}>{props.fieldActionIcon}</button> : null}
+				{props.fieldActionIcon ? <button className='icon page-field-action-button' onClick={props.onFieldAction}>{props.fieldActionIcon}</button> : null}
 			</div>
 		</div>
 	)

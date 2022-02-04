@@ -10,6 +10,7 @@ import EntrySelect from "./part/EntrySelect";
 import GroupService from "./api/GroupService";
 import TokenService from "./api/TokenService";
 import {MembershipGroup} from "./part/MembershipGroup";
+import MembershipService from "./api/MembershipService";
 
 export default function UserGroups(props) {
 	const navigate = useNavigate();
@@ -44,7 +45,7 @@ export default function UserGroups(props) {
 	}
 
 	function requestMembership(group) {
-		UserService.requestMembership(TokenService.getUserId(), group, 'requested', (response) => {
+		MembershipService.requestMembership(TokenService.getUserId(), group, 'requested', (response) => {
 			setMemberships(response.memberships)
 		}, (failure) => {
 			let messages = failure.messages

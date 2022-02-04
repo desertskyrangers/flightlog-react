@@ -30,6 +30,8 @@ class ApiPath {
 
 	GROUP_MEMBERSHIP = this.GROUP + "/membership"
 
+	MEMBERSHIP = this.ROOT + "/membership"
+
 	USER = this.ROOT + "/user"
 
 	USER_AIRCRAFT = this.USER + "/aircraft"
