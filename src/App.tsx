@@ -32,6 +32,7 @@ import Password from "./edit/Password";
 import Dashboard from "./Dashboard";
 import UserGroups from "./UserGroups";
 import Group from "./edit/Group";
+import React from 'react';
 
 function Protect({children}) {
     return TokenService.isAuthenticated() ? <div><NavBar/>{children}</div> : <Navigate to={ApiPath.LOGIN}/>;

@@ -21,8 +21,8 @@ export default function About(props) {
 					<div><span className='page-label'>hosted by</span> <a href='https://www.desertskyrangers.org/'>Desert Sky Rangers</a></div>
 					<div><span className='page-label'>written by</span> Mark Soderquist</div>
 					<hr/>
-					<div><a href='https://github.com/desertskyrangers/flightdeck-react/issues/new'>Submit an enhancement request</a></div>
-					<div><a href='https://github.com/desertskyrangers/flightdeck-react/issues/new'>Submit a bug report</a></div>
+					<div><a href='https://github.com/desertskyrangers/flightdeck/issues/new'>Submit an enhancement request</a></div>
+					<div><a href='https://github.com/desertskyrangers/flightdeck/issues/new'>Submit a bug report</a></div>
 				</div>
 			</div>
 		</div>
