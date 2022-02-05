@@ -32,7 +32,7 @@ export default function Register(props) {
 		if (event.key === 'Enter') register();
 	}
 
-	function register(event) {
+	function register() {
 		AuthService.register(username, password, email, (verification) => {
 			navigate(ApiPath.VERIFY + "/" + verification.id);
 		}, (failure) => {
@@ -40,7 +40,6 @@ export default function Register(props) {
 			if (!!!messages) messages = [failure.message]
 			setMessages(messages)
 		});
-		event.preventDefault();
 	}
 
 	useLayoutEffect(() => {

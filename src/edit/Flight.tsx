@@ -190,7 +190,7 @@ export default function Flight(props) {
 			setMessages(['Start time not set'])
 		} else {
 			setMessages([])
-			updateDurationSeconds(Math.floor((new Date() - new Date(String(startTime))) / 1000))
+			updateDurationSeconds(Math.floor((new Date().getTime() - new Date(String(startTime)).getTime()) / 1000))
 		}
 	}
 
@@ -219,7 +219,7 @@ export default function Flight(props) {
 		if (event.target.value.length >= 2) {
 			const field = document.getElementById("durationMM")
 			field.focus();
-			field.select();
+			//field.select();
 		}
 	}
 
@@ -228,7 +228,7 @@ export default function Flight(props) {
 		if (event.target.value.length >= 2) {
 			const field = document.getElementById("durationSS")
 			field.focus();
-			field.select();
+			//field.select();
 		}
 	}
 

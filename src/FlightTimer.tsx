@@ -14,7 +14,7 @@ export default function FlightTimer(props) {
 	const [ss, setSS] = useState(0)
 
 	function updateClock() {
-		let duration = Math.floor((new Date() - startRef.current) / 1000)
+		let duration = Math.floor((new Date().getTime() - startRef.current) / 1000)
 		setSS(duration % 60)
 		duration = Math.floor(duration / 60)
 		setMM(duration % 60)
@@ -27,7 +27,7 @@ export default function FlightTimer(props) {
 	}
 
 	function logFlight() {
-		let duration = Math.floor((new Date() - startRef.current) / 1000)
+		let duration = Math.floor((new Date().getTime() - startRef.current) / 1000)
 		navigate(AppPath.FLIGHT + "/new/" + startRef.current.getTime() + "/" + duration)
 	}
 
