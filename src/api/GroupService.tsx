@@ -57,6 +57,17 @@ class GroupService extends ApiService {
 		})
 	}
 
+	inviteMember(id, successCallback, failureCallback) {
+		this.fetch(Config.API_URL + ApiPath.GROUP_INVITE, {
+			method: 'POST',
+			body: JSON.stringify({id: id})
+		}).then((response) => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 }
 
 const instance = new GroupService()

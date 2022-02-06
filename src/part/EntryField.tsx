@@ -1,16 +1,21 @@
+import React from "react"
+
 export default function EntryField(props) {
 
-	const isRequired = props.required
-	const help = !props.help ? '' : '(' + props.help + ')'
-	const text = props.text + (isRequired ? ' *' : '') + ' ' + help
+	const isRequired: boolean = props.required
+	const help: string = !props.help ? '' : '(' + props.help + ')'
+	const text: string = props.text + (isRequired ? ' *' : '') + ' ' + help
 
 	return (
 		<div>
-			<div className='page-label-row'>
-				<label htmlFor={props.id} className='page-label'>{text}</label>
-				<span className='icon' onClick={props.onIconClick}>{props.icon}</span>
-				{props.labelActionIcon ? <span className='icon page-label-action-button' onClick={props.onLabelAction}>{props.labelActionIcon}</span> : null}
-			</div>
+			{
+				!!props.text ?
+				<div className='page-label-row'>
+					<label htmlFor={props.id} className='page-label'>{text}</label>
+					<span className='icon' onClick={props.onIconClick}>{props.icon}</span>
+					{props.labelActionIcon ? <span className='icon page-label-action-button' onClick={props.onLabelAction}>{props.labelActionIcon}</span> : null}
+				</div> : null
+			}
 			<div className='hbox'>
 				<input id={props.id}
 							 name={props.id}

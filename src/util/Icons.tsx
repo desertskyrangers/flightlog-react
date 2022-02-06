@@ -1,3 +1,4 @@
+import React from 'react';
 import {
 	faAngleUp,
 	faBan,
@@ -15,6 +16,9 @@ import {
 	faKeyboard,
 	faPlane,
 	faPlus,
+	faAngleRight,
+	faAngleDoubleRight,
+	faChevronRight,
 	faQuestion,
 	faSpinner,
 	faTimesCircle,
@@ -29,6 +33,7 @@ import DroneIcon from "../icon/DroneIcon";
 class Icons {
 
 	ACCEPT = <FontAwesomeIcon icon={faCheck}/>
+	ADD = <FontAwesomeIcon icon={faPlus}/>
 	ADVANCED = <FontAwesomeIcon icon={faEllipsisH}/>
 	BARS = <FontAwesomeIcon icon={faBars}/>
 	BATTERY = <FontAwesomeIcon icon={faBatteryFull}/>
@@ -47,6 +52,7 @@ class Icons {
 	GROUP_ADD = <FontAwesomeIcon icon={faPlus}/>
 	HELICOPTER = <FontAwesomeIcon icon={faHelicopter}/>
 	HOME = <FontAwesomeIcon icon={faHome}/>
+	INVITE = <FontAwesomeIcon icon={faPlus}/>
 	KEY = <FontAwesomeIcon icon={faKey}/>
 	MEMBER = <FontAwesomeIcon icon={faUserAlt}/>
 	// MEMBERSHIP = <FontAwesomeIcon icon={faUserAlt}/>
@@ -54,6 +60,7 @@ class Icons {
 	OWNER = <FontAwesomeIcon icon={faUserAlt}/>
 	PLANE = <FontAwesomeIcon icon={faPlane}/>
 	REVOKE = <FontAwesomeIcon icon={faBan}/>
+	SEND = <FontAwesomeIcon icon={faAngleDoubleRight}/>
 	UNKNOWN = <FontAwesomeIcon icon={faQuestion}/>
 	USER = <FontAwesomeIcon icon={faUserAlt}/>
 	WAIT = <FontAwesomeIcon icon={faSpinner}/>

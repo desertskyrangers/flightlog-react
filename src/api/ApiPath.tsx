@@ -28,6 +28,8 @@ class ApiPath {
 
 	GROUP_AVAILABLE = this.GROUP + "/available"
 
+	GROUP_INVITE = this.GROUP + "/invite"
+
 	GROUP_MEMBERSHIP = this.GROUP + "/membership"
 
 	MEMBERSHIP = this.ROOT + "/membership"
