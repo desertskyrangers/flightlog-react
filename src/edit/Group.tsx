@@ -39,6 +39,10 @@ export default function Group(props) {
         if (event.key === 'Enter') update();
     }
 
+    function onInviteKeyDown(event) {
+        if (event.key === 'Enter') doInvite();
+    }
+
     function clearMessages() {
         setMessages([])
     }
@@ -150,7 +154,7 @@ export default function Group(props) {
                     <div className='vbox'>
                         {membershipList}
                         <button className='page-action' onClick={toggleInvite}>{Icons.ADD}</button>
-                        {inviteMember ? <EntryField id='invitee' type='text' value={invitee} onChange={(event) => setInvitee(event.target.value)} fieldActionIcon={Icons.SEND} onFieldAction={doInvite}/> : null}
+                        {inviteMember ? <EntryField id='invitee' type='text' value={invitee} onChange={(event) => setInvitee(event.target.value)} onKeyDown={onInviteKeyDown} fieldActionIcon={Icons.SEND} onFieldAction={doInvite}/> : null}
                     </div>
                 </div>
             </div>
