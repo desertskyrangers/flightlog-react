@@ -110,7 +110,7 @@ export default function Group(props) {
     }
 
     function doInvite() {
-		GroupService.inviteMember(invitee, (result) => {
+		GroupService.inviteMember(id, invitee, (result) => {
 			loadGroup()
 			setInviteMember(false)
             setInvitee('')
