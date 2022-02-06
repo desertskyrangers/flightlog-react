@@ -5,6 +5,7 @@ import {
     faBan,
     faBars,
     faBatteryFull,
+    faBinoculars,
     faBuilding,
     faCalendar,
     faCheck,
@@ -53,8 +54,9 @@ class Icons {
     INVITE = <FontAwesomeIcon icon={faPlus}/>
     KEY = <FontAwesomeIcon icon={faKey}/>
     MEMBER = <FontAwesomeIcon icon={faUserAlt}/>
-    // MEMBERSHIP = <FontAwesomeIcon icon={faUserAlt}/>
+    MEMBERSHIP = <FontAwesomeIcon icon={faUserAlt}/>
     NO_RESULT = <FontAwesomeIcon icon={faBan}/>
+    OBSERVER = <FontAwesomeIcon icon={faBinoculars}/>
     OWNER = <FontAwesomeIcon icon={faUserAlt}/>
     PLANE = <FontAwesomeIcon icon={faPlane}/>
     REVOKE = <FontAwesomeIcon icon={faBan}/>
