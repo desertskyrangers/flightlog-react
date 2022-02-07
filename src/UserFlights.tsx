@@ -56,7 +56,7 @@ function FlightList(props) {
 	if (props.flights.length === 0) {
 		page = <NoResults message='No flight found'/>
 	} else {
-		page = props.flights.map((craft) => <FlightRow key={craft.id} value={craft.id} flight={craft}/>)
+		page = props.flights.map((flight) => <FlightRow key={flight.id} value={flight.id} flight={flight}/>)
 	}
 
 	function add() {
@@ -81,7 +81,7 @@ function FlightRow(props) {
 	}
 
 	return (
-		<div className='page-result' onClick={open}>{Icons.fromAircraftType(props.flight.type)} {Dates.humanDateHourMin(new Date(props.flight.timestamp))} {props.flight.name}</div>
+		<div className='page-result' onClick={open}>{Icons.fromUserFlightRole(props.flight.userFlightRole)} {Dates.humanDateHourMin(new Date(props.flight.timestamp))} {props.flight.name}</div>
 	)
 
 }

@@ -57,7 +57,8 @@ class Icons {
     MEMBERSHIP = <FontAwesomeIcon icon={faUserAlt}/>
     NO_RESULT = <FontAwesomeIcon icon={faBan}/>
     OBSERVER = <FontAwesomeIcon icon={faBinoculars}/>
-    OWNER = <FontAwesomeIcon icon={faUserAlt}/>
+    OWNER = <FontAwesomeIcon icon={faKey}/>
+    PILOT = <FontAwesomeIcon icon={faUserAlt}/>
     PLANE = <FontAwesomeIcon icon={faPlane}/>
     REVOKE = <FontAwesomeIcon icon={faBan}/>
     SEND = <FontAwesomeIcon icon={faAngleDoubleRight}/>
@@ -74,6 +75,20 @@ class Icons {
         }
 
         let icon = aircraftTypeIcons[type]
+        if (!icon) icon = instance.DRONE
+
+        return icon
+    }
+
+    fromUserFlightRole(role) {
+        const aircraftTypeIcons = {
+            pilot: instance.PILOT,
+            observer: instance.OBSERVER,
+            owner: instance.OWNER,
+            other: instance.UNKNOWN
+        }
+
+        let icon = aircraftTypeIcons[role]
         if (!icon) icon = instance.DRONE
 
         return icon
