@@ -28,6 +28,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import DroneIcon from "../icon/DroneIcon";
+import CloseIcon from "../icon/CloseIcon";
 
 class Icons {
 
@@ -39,7 +40,7 @@ class Icons {
     CALENDAR = <FontAwesomeIcon icon={faCalendar}/>
     CANCEL = <FontAwesomeIcon icon={faBan}/>
     CLOCK = <FontAwesomeIcon icon={faClock}/>
-    CLOSE = <FontAwesomeIcon icon={faTimesCircle}/>
+    CLOSE = <CloseIcon/>
     CLUB = <FontAwesomeIcon icon={faUserFriends}/>
     COLLAPSE_UP = <FontAwesomeIcon icon={faAngleUp}/>
     COMPANY = <FontAwesomeIcon icon={faBuilding}/>
