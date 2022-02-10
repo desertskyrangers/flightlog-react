@@ -53,7 +53,7 @@ export function MembershipGroup(props) {
 
 	useEffect(() => {
 		setAcceptAction(isInvited())
-		setCancelAction(isRequested() || isAccepted()|| isRevoked())
+		setCancelAction(isRequested() || isAccepted() || isRevoked())
 	}, [isRequested, isRevoked, isInvited, isAccepted])
 
 	return (

@@ -1,7 +1,7 @@
 import React from "react";
 import ApiPath from "../AppPath";
-import {useNavigate} from "react-router-dom";
 import AppPath from "../AppPath";
+import {useNavigate} from "react-router-dom";
 
 export default function FlightActions() {
 

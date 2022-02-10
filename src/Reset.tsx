@@ -70,7 +70,14 @@ export default function Reset(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<EntryField id='password' text='Password' type='password' value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={onKeyDown} labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
+					<EntryField id='password'
+											text='Password'
+											type='password'
+											value={password}
+											onChange={(event) => setPassword(event.target.value)}
+											onKeyDown={onKeyDown}
+											labelActionIcon={Icons.CLOSE}
+											onLabelAction={close}/>
 					<EntryField id='verify-password' text='Verify Password' type='password' value={verifyPassword} onChange={(event) => setVerifyPassword(event.target.value)} onKeyDown={onKeyDown}/>
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 					<button disabled={!canSubmit || messages.length > 0} className='page-submit' onClick={submit}>Reset Password</button>

@@ -137,7 +137,15 @@ export default function Profile(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<EntryField id='username' text='Username' type='text' value={username} autoFocus='autofocus' onChange={(event) => setUsername(event.target.value)} onKeyDown={onKeyDown} labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
+					<EntryField id='username'
+											text='Username'
+											type='text'
+											value={username}
+											autoFocus='autofocus'
+											onChange={(event) => setUsername(event.target.value)}
+											onKeyDown={onKeyDown}
+											labelActionIcon={Icons.CLOSE}
+											onLabelAction={close}/>
 					<EntryField id='firstName' text='First Name' type='text' value={firstName} onChange={updateFirstName} onKeyDown={onKeyDown}/>
 					<EntryField id='lastName' text='Last Name' type='text' value={lastName} onChange={updateLastName} onKeyDown={onKeyDown}/>
 					<EntryField id='preferredName' text='Preferred Name' type='text' value={preferredName} onChange={(event) => setPreferredName(event.target.value)} onKeyDown={onKeyDown}/>

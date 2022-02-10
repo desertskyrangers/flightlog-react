@@ -167,7 +167,16 @@ export default function Battery(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<EntryField id='name' text='Name' type='text' required={true} autoFocus='autofocus' value={name} onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown} labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
+					<EntryField id='name'
+											text='Name'
+											type='text'
+											required={true}
+											autoFocus='autofocus'
+											value={name}
+											onChange={(event) => setName(event.target.value)}
+											onKeyDown={onKeyDown}
+											labelActionIcon={Icons.CLOSE}
+											onLabelAction={close}/>
 					<EntrySelect id='status' text='Status' value={status} required={true} onChange={(event) => setStatus(event.target.value)}>
 						{statusOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
@@ -176,7 +185,8 @@ export default function Battery(props) {
 					<EntrySelect id='connector' text='Connector' value={connector} onChange={(event) => setConnector(event.target.value)}>
 						{connectorOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
-					{connector === 'unlisted' ? <EntryField id='unlistedConnector' text='Unlisted Connector' type='text' value={unlistedConnector} onChange={(event) => setUnlistedConnector(event.target.value)}/> : null}
+					{connector === 'unlisted' ?
+						<EntryField id='unlistedConnector' text='Unlisted Connector' type='text' value={unlistedConnector} onChange={(event) => setUnlistedConnector(event.target.value)}/> : null}
 
 					<EntrySelect id='type' text='Type' value={type} onChange={(event) => setType(event.target.value)}>
 						{typeOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}

@@ -278,11 +278,13 @@ export default function Flight(props) {
 					<EntrySelect id='pilot' text='Pilot/Student' value={pilot} required onChange={(event) => setPilot(event.target.value)} labelActionIcon={Icons.CLOSE} onLabelAction={close}>
 						{pilotOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
-					{pilot === AppConfig.UNLISTED_USER_ID ? <EntryField id='unlistedPilot' text='Unlisted Pilot' type='text' value={unlistedPilot} onChange={(event) => setUnlistedPilot(event.target.value)}/> : null}
+					{pilot === AppConfig.UNLISTED_USER_ID ?
+						<EntryField id='unlistedPilot' text='Unlisted Pilot' type='text' value={unlistedPilot} onChange={(event) => setUnlistedPilot(event.target.value)}/> : null}
 					<EntrySelect id='observer' text='Observer/Trainer' value={observer} required help='You are your own observer if flying alone' onChange={(event) => setObserver(event.target.value)}>
 						{observerOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
-					{observer === AppConfig.UNLISTED_USER_ID ? <EntryField id='unlistedObserver' text='Unlisted Observer' type='text' value={unlistedObserver} onChange={(event) => setUnlistedObserver(event.target.value)}/> : undefined}
+					{observer === AppConfig.UNLISTED_USER_ID ?
+						<EntryField id='unlistedObserver' text='Unlisted Observer' type='text' value={unlistedObserver} onChange={(event) => setUnlistedObserver(event.target.value)}/> : undefined}
 
 					<EntrySelect id='aircraft' text='Aircraft' value={aircraft} required defaultValue='unspecified' onChange={(event) => setAircraft(event.target.value)}>
 						<option key='unspecified' hidden>Select an aircraft</option>
@@ -323,7 +325,11 @@ export default function Flight(props) {
 					</div>
 
 					{requestDelete ?
-						<DeleteWithConfirm entity='date of the flight' placeholder={Dates.isoDate(new Date(timestamp.current))} name={Dates.isoDate(new Date(timestamp.current))} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
+						<DeleteWithConfirm entity='date of the flight'
+															 placeholder={Dates.isoDate(new Date(timestamp.current))}
+															 name={Dates.isoDate(new Date(timestamp.current))}
+															 onDelete={doDelete}
+															 onIconClick={() => toggleDelete()}/> : null}
 				</div>
 			</div>
 		</div>

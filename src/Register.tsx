@@ -6,11 +6,11 @@ import Notice from "./part/Notice";
 import React, {useLayoutEffect, useRef, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import ApiPath from "./AppPath";
+import AppPath from "./AppPath";
 import AppConfig from "./AppConfig";
 import {isEqual} from "lodash";
 import Icons from "./util/Icons";
 import EntryField from "./part/EntryField";
-import AppPath from "./AppPath";
 
 export default function Register(props) {
 	const navigate = useNavigate();
@@ -71,7 +71,15 @@ export default function Register(props) {
 	return (<div className='page-container'>
 		<div className='page-body'>
 			<div className='page-form'>
-				<EntryField id='username' text='Username' type='text' autoFocus='autofocus' value={username} onChange={(event) => setUsername(event.target.value)} onKeyDown={onKeyDown} labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
+				<EntryField id='username'
+										text='Username'
+										type='text'
+										autoFocus='autofocus'
+										value={username}
+										onChange={(event) => setUsername(event.target.value)}
+										onKeyDown={onKeyDown}
+										labelActionIcon={Icons.CLOSE}
+										onLabelAction={close}/>
 				<EntryField id='password' text='Password' type='password' value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={onKeyDown}/>
 				<EntryField id='verify-password' text='Verify Password' type='password' value={verifyPassword} onChange={(event) => setVerifyPassword(event.target.value)} onKeyDown={onKeyDown}/>
 				<EntryField id='email' text='Email Address' type='text' value={email} onChange={(event) => setEmail(event.target.value)} onKeyDown={onKeyDown}/>

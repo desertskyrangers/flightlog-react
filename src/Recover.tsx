@@ -40,7 +40,14 @@ export default function Recover(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<EntryField id='username' text='Username or email address' type='text' value={username} onChange={(event) => setUsername(event.target.value)} onKeyDown={onKeyDown} labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
+					<EntryField id='username'
+											text='Username or email address'
+											type='text'
+											value={username}
+											onChange={(event) => setUsername(event.target.value)}
+											onKeyDown={onKeyDown}
+											labelActionIcon={Icons.CLOSE}
+											onLabelAction={close}/>
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 					<button disabled={messages.length > 0} className='page-submit' onClick={submit}>Send Recovery Email</button>
 				</div>

@@ -84,7 +84,14 @@ function JoinRequest(props) {
 		const hasOptions = !!props.groups && props.groups.length > 0
 
 		return hasOptions ?
-			<EntrySelect id='group' text='Group' value={group} required defaultValue='unspecified' onChange={(event) => setGroup(event.target.value)} fieldActionIcon={Icons.GROUP_ADD} onFieldAction={requestMembership}>
+			<EntrySelect id='group'
+									 text='Group'
+									 value={group}
+									 required
+									 defaultValue='unspecified'
+									 onChange={(event) => setGroup(event.target.value)}
+									 fieldActionIcon={Icons.GROUP_ADD}
+									 onFieldAction={requestMembership}>
 				<option key='unspecified' hidden>Select a group</option>
 				{props.groups.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 			</EntrySelect> : <div>No groups available to join</div>
@@ -105,7 +112,9 @@ function MembershipList(props) {
 	}
 
 	let memberships = <NoResults message='No group memberships'/>
-	if (!!props.memberships && props.memberships.length > 0) memberships = props.memberships.map((membership) => <MembershipGroup key={membership.id} membership={membership} onMemberUpdate={props.onMemberUpdate}/>)
+	if (!!props.memberships && props.memberships.length > 0) memberships = props.memberships.map((membership) => <MembershipGroup key={membership.id}
+																																																																membership={membership}
+																																																																onMemberUpdate={props.onMemberUpdate}/>)
 
 	return (
 		<div className='vbox'>

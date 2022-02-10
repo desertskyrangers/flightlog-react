@@ -115,7 +115,16 @@ export default function Aircraft(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<EntryField id='name' text='Name' type='text' value={name} required={true} autoFocus='autofocus' onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown} labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
+					<EntryField id='name'
+											text='Name'
+											type='text'
+											value={name}
+											required={true}
+											autoFocus='autofocus'
+											onChange={(event) => setName(event.target.value)}
+											onKeyDown={onKeyDown}
+											labelActionIcon={Icons.CLOSE}
+											onLabelAction={close}/>
 
 					<EntrySelect id='type' name='type' text='Type' value={type} required={true} onChange={(event) => setType(event.target.value)}>
 						{typeOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
