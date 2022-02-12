@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from "react";
-import Times from "./util/Times";
-import TokenService from "./api/TokenService";
-import UserService from "./api/UserService";
-import Notice from "./part/Notice";
-import ApiPath from "./AppPath";
-import AppPath from "./AppPath";
-import {useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from "react"
+import Times from "./util/Times"
+import TokenService from "./api/TokenService"
+import UserService from "./api/UserService"
+import Notice from "./part/Notice"
+import ApiPath from "./AppPath"
+import AppPath from "./AppPath"
+import {useNavigate} from "react-router-dom"
+import './css/dashboard.css'
 
 export default function Dashboard(props) {
 
@@ -42,12 +43,12 @@ export default function Dashboard(props) {
 
 					<div className='hbox'>
 						<div className='vbox'>
-							<div className='page-header'>Flights</div>
+							<div className='dashboard-header'>Flights</div>
 							<div className='page-metric'>{pilotFlightCount}</div>
 						</div>
 						<div className='v-separator'/>
 						<div className='vbox'>
-							<div className='page-header'>Flight Time</div>
+							<div className='dashboard-header'>Flight Time</div>
 							<div className='page-metric'>{Times.toHourMinSec(pilotFlightTime * 1000)}</div>
 						</div>
 					</div>

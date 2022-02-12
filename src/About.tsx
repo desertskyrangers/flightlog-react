@@ -13,7 +13,7 @@ export default function About(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<div className='page-header'>
+					<div className='page-header-row'>
 						<h1>FlightDeck v{props.version}</h1>
 						<span className='icon' onClick={close}>{Icons.CLOSE}</span>
 					</div>

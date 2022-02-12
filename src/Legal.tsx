@@ -10,7 +10,7 @@ export default function Legal() {
 			<div className='page-body'>
 				<div className='page-form'>
 
-					<div className='page-header'>
+					<div className='page-header-row'>
 						<h1>Copyright</h1>
 						<span className='icon' onClick={() => navigate(-1)}>{Icons.CLOSE}</span>
 					</div>

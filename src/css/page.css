@@ -73,7 +73,7 @@
 	width: 100%;
 }
 
-.page-header {
+.page-header-row {
 	display: flex;
 	flex-flow: row nowrap;
 	/* along the main axis */
@@ -198,10 +198,9 @@
 }
 
 .page-header {
-	font-size: 0.8rem;
+	font-size: 1.2rem;
 	width: 100%;
 	white-space: nowrap;
-	text-align: center;
 }
 
 .page-metric {

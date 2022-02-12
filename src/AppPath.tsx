@@ -35,6 +35,7 @@ class AppPath {
 
 	USER = this.ROOT + "/user"
 	PASSWORD = this.USER + "/password"
+	PREFERENCES = this.USER + "/preferences"
 	PROFILE = this.USER + "/profile"
 }
 
