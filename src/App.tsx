@@ -32,7 +32,7 @@ import Password from "./edit/Password";
 import Dashboard from "./Dashboard";
 import UserGroups from "./UserGroups";
 import Group from "./edit/Group";
-import Preferences from "./Preferences";
+import Preferences from "./edit/Preferences";
 
 function Protect({children}) {
   return TokenService.isAuthenticated() ? <div><NavBar/>{children}</div> : <Navigate to={ApiPath.LOGIN}/>;
