@@ -1,3 +1,4 @@
+import React from "react";
 import {render, screen} from "@testing-library/react";
 import {MemoryRouter as Router, Route, Routes} from "react-router-dom";
 import Aircraft from "./Aircraft";
@@ -57,7 +58,7 @@ test('renders save button', () => {
 	render(
 		<Router initialEntries={[AppPath.AIRCRAFT + '/new']}>
 			<Routes>
-				<Route exact path={AppPath.AIRCRAFT + '/:id'} element={<Aircraft/>}/>
+				<Route path={AppPath.AIRCRAFT + '/:id'} element={<Aircraft/>}/>
 			</Routes>
 		</Router>
 	)

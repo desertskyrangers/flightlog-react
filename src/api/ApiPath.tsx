@@ -46,6 +46,8 @@ class ApiPath {
 
 	USER_MEMBERSHIP = this.USER + "/membership"
 
+	USER_PREFERENCES = this.USER + "/preferences"
+
 	USER_LOOKUP = this.USER + "/lookup"
 
 	USER_AIRCRAFT_LOOKUP = this.USER_LOOKUP + "/aircraft"

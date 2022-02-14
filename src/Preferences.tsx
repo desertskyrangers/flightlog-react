@@ -1,9 +1,11 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Icons from "./util/Icons";
 import {useNavigate} from "react-router-dom";
 import EntrySelect from "./part/EntrySelect";
 import EntryCheck from "./part/EntryCheck";
 import AppPath from "./AppPath";
+import UserService from "./api/UserService";
+import TokenService from "./api/TokenService";
 
 export default function Preferences(props) {
   const navigate = useNavigate();
@@ -19,16 +21,38 @@ export default function Preferences(props) {
     showOwnerFlights: false
   })
 
+  const [messages, setMessages] = useState(props.messages || [])
+
   function close() {
     navigate(AppPath.USER)
   }
 
-  function updatePreference(name: string, value: Object) {
-    console.log("Set preference " + name + "=" + value)
-    setPreferences({...preferences, [name]: value})
-
-    // Push the preferences back to the server
+  function clearMessages() {
+    setMessages([])
   }
+
+  function loadPreferences() {
+    UserService.getPreferences((success) => {
+      setPreferences(success)
+    }, (failure) => {
+      let messages = failure.messages
+      if (!!!messages) messages = [failure.message]
+      if (!!messages) setMessages(messages)
+    })
+  }
+
+  function updatePreference(name: string, value: Object) {
+    setPreferences({...preferences, [name]: value})
+    UserService.setPreferences(TokenService.getUserId(), preferences, (success) => {
+      console.log( "Preferences saved!")
+    }, (failure) => {
+      let messages = failure.messages
+      if (!!!messages) messages = [failure.message]
+      if (!!messages) setMessages(messages)
+    })
+  }
+
+  useEffect(loadPreferences, [])
 
   return (
     <div className='page-container'>
@@ -121,9 +145,9 @@ function PreferenceSection(props) {
 
   return (
     <div className={'vbox'}>
-      <div className={'hbox'}>
+      <div className={'page-section'} onClick={() => setExpanded(!expanded)}>
         <div className='page-header'>{props.title}</div>
-        <span className='icon' onClick={() => setExpanded(!expanded)}>{expanded ? Icons.COLLAPSE : Icons.EXPAND}</span>
+        <span className='icon'>{expanded ? Icons.COLLAPSE : Icons.EXPAND}</span>
       </div>
       {expanded ? <div>{props.children}</div> : null}
     </div>

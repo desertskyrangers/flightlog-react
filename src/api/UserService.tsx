@@ -4,150 +4,174 @@ import ApiPath from "./ApiPath";
 
 class UserService extends ApiService {
 
-	dashboard(id, successCallback, failureCallback) {
-		this.fetch(Config.API_URL + `/api/dashboard`, {
-			method: 'GET'
-		}).then((response) => {
-			successCallback(response)
-		}).catch((error) => {
-			failureCallback(error)
-		})
-	}
+  dashboard(id, successCallback, failureCallback) {
+    this.fetch(Config.API_URL + `/api/dashboard`, {
+      method: 'GET'
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
 
-	profile(id, successCallback, failureCallback) {
-		this.fetch(Config.API_URL + `/api/profile`, {
-			method: 'GET'
-		}).then((response) => {
-			successCallback(response)
-		}).catch((error) => {
-			failureCallback(error)
-		})
-	}
+  profile(id, successCallback, failureCallback) {
+    this.fetch(Config.API_URL + `/api/profile`, {
+      method: 'GET'
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
 
-	update(account, successCallback, failureCallback) {
-		this.fetch(Config.API_URL + `/api/user/${account.id}`, {
-			method: 'PUT',
-			body: JSON.stringify({
-				id: account.id,
-				username: account.username,
-				firstName: account.firstName,
-				lastName: account.lastName,
-				preferredName: account.preferredName,
-				email: account.email,
-				smsNumber: account.smsNumber,
-				smsCarrier: account.smsCarrier
-			})
-		}).then((response) => {
-			successCallback(response)
-		}).catch((error) => {
-			failureCallback(error)
-		})
-	}
+  update(account, successCallback, failureCallback) {
+    this.fetch(Config.API_URL + `/api/user/${account.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        id: account.id,
+        username: account.username,
+        firstName: account.firstName,
+        lastName: account.lastName,
+        preferredName: account.preferredName,
+        email: account.email,
+        smsNumber: account.smsNumber,
+        smsCarrier: account.smsCarrier
+      })
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
 
-	updatePassword(id, currentPassword, password, successCallback, failureCallback) {
-		this.fetch(Config.API_URL + `/api/user/${id}/password`, {
-			method: 'PUT',
-			body: JSON.stringify({
-				id: id,
-				currentPassword: currentPassword,
-				password: password
-			})
-		}).then((response) => {
-			successCallback(response)
-		}).catch((error) => {
-			failureCallback(error)
-		})
-	}
+  updatePassword(id, currentPassword, password, successCallback, failureCallback) {
+    this.fetch(Config.API_URL + `/api/user/${id}/password`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        id: id,
+        currentPassword: currentPassword,
+        password: password
+      })
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
 
-	getAircraftPage(page, successCallback, failureCallback) {
-		this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT + "/" + page, {
-			method: 'GET',
-		}).then((response) => {
-			successCallback(response)
-		}).catch((error) => {
-			failureCallback(error)
-		})
-	}
+  getAircraftPage(page, successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT + "/" + page, {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
 
-	getBatteryPage(page, successCallback, failureCallback) {
-		this.fetch(Config.API_URL + ApiPath.USER_BATTERY + "/" + page, {
-			method: 'GET',
-		}).then((response) => {
-			successCallback(response)
-		}).catch((error) => {
-			failureCallback(error)
-		})
-	}
+  getBatteryPage(page, successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_BATTERY + "/" + page, {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
 
-	getFlightPage(page, successCallback, failureCallback) {
-		this.fetch(Config.API_URL + ApiPath.USER_FLIGHT + "/" + page, {
-			method: 'GET',
-		}).then((response) => {
-			successCallback(response)
-		}).catch((error) => {
-			failureCallback(error)
-		})
-	}
+  getFlightPage(page, successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_FLIGHT + "/" + page, {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
 
-	getGroupPage(page, successCallback, failureCallback) {
-		this.fetch(Config.API_URL + ApiPath.USER_GROUP + "/" + page, {
-			method: 'GET',
-		}).then((response) => {
-			successCallback(response)
-		}).catch((error) => {
-			failureCallback(error)
-		})
-	}
+  getGroupPage(page, successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_GROUP + "/" + page, {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
 
-	getMemberships(successCallback, failureCallback) {
-		this.fetch(Config.API_URL + ApiPath.USER_MEMBERSHIP, {
-			method: 'GET',
-		}).then((response) => {
-			successCallback(response)
-		}).catch((error) => {
-			failureCallback(error)
-		})
-	}
+  getMemberships(successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_MEMBERSHIP, {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
 
-	getAircraftOptions(successCallback, failureCallback) {
-		this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT_LOOKUP, {
-			method: 'GET',
-		}).then((response) => {
-			successCallback(response)
-		}).catch((error) => {
-			failureCallback(error)
-		})
-	}
+  getAircraftOptions(successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT_LOOKUP, {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
 
-	getBatteryOptions(successCallback, failureCallback) {
-		this.fetch(Config.API_URL + ApiPath.USER_BATTERY_LOOKUP, {
-			method: 'GET',
-		}).then((response) => {
-			successCallback(response)
-		}).catch((error) => {
-			failureCallback(error)
-		})
-	}
+  getBatteryOptions(successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_BATTERY_LOOKUP, {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
 
-	getObserverOptions(successCallback, failureCallback) {
-		this.fetch(Config.API_URL + ApiPath.USER_OBSERVER_LOOKUP, {
-			method: 'GET',
-		}).then((response) => {
-			successCallback(response)
-		}).catch((error) => {
-			failureCallback(error)
-		})
-	}
+  getObserverOptions(successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_OBSERVER_LOOKUP, {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
 
-	getPilotOptions(successCallback, failureCallback) {
-		this.fetch(Config.API_URL + ApiPath.USER_PILOT_LOOKUP, {
-			method: 'GET',
-		}).then((response) => {
-			successCallback(response)
-		}).catch((error) => {
-			failureCallback(error)
-		})
-	}
+  getPilotOptions(successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_PILOT_LOOKUP, {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
+
+  getPreferences(successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_PREFERENCES, {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
+
+  setPreferences(userid, preferences, successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_PREFERENCES, {
+      method: 'PUT',
+      body: JSON.stringify({
+        id: userid,
+        preferences: preferences
+      })
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
 
 }
 

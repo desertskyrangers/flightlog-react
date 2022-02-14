@@ -203,6 +203,22 @@
 	white-space: nowrap;
 }
 
+.page-section {
+	display: flex;
+	flex-flow: row nowrap;
+	/* along the main axis */
+	justify-content: flex-start;
+	/* along the cross axis */
+	align-items: center;
+	gap: 0.5em;
+
+	cursor: pointer;
+}
+
+.page-section:hover {
+	background-color: var(--action-background-2);
+}
+
 .page-metric {
 	font-size: 2rem;
 	width: 100%;
