@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import Icons from "../util/Icons";
 import {useNavigate} from "react-router-dom";
 import EntrySelect from "../part/EntrySelect";
@@ -32,15 +32,15 @@ export default function Preferences(props) {
 		setMessages([])
 	}
 
-	function loadPreferences() {
+	const loadPreferences = useCallback(() => {
 		UserService.getPreferences((success) => {
-			setPreferences(success.data)
+			setPreferences({...preferences, ...success.data})
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
 			if (!!messages) setMessages(messages)
 		})
-	}
+	},[])
 
 	function updatePreference(name: string, value: Object) {
 		UserService.setPreferences(TokenService.getUserId(), {...preferences, ...{[name]: value}}, (success) => {
@@ -52,7 +52,7 @@ export default function Preferences(props) {
 		})
 	}
 
-	useEffect(() => loadPreferences(), [])
+	useEffect(loadPreferences, [loadPreferences])
 
 	return (
 		<div className='page-container'>
