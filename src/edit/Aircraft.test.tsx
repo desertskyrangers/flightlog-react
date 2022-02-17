@@ -1,7 +1,19 @@
 import {render, screen} from "@testing-library/react";
 import {MemoryRouter as Router, Route, Routes} from "react-router-dom";
-import Aircraft from "./Aircraft";
+import Aircraft, {calcAspectRatio, calcMeanAirfoilChord, calcWingLoading} from "./Aircraft";
 import AppPath from "../AppPath";
+
+test('calculate aspect ratio', () => {
+	expect(calcAspectRatio(1500, 3000)).toBe(7.5)
+})
+
+test('calculate mean airfoil chord', () => {
+	expect(calcMeanAirfoilChord(1500, 3000)).toBe(200)
+})
+
+test('calculate wing loading', () => {
+	expect(calcWingLoading(750, 3000)).toBe(0.25)
+})
 
 test('renders name field', () => {
 	render(<Router><Aircraft/></Router>);

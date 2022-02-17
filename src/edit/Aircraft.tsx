@@ -134,9 +134,9 @@ export default function Aircraft(props) {
 		})
 	}
 
-	useEffect(() => setWingAspect((wingspan * wingspan) / (wingarea * 100)), [wingarea, wingspan])
-	useEffect(() => setWingMac((wingarea * 100) / wingspan), [wingarea, wingspan])
-	useEffect(() => setWingLoading(weight / wingarea), [weight, wingarea])
+	useEffect(() => setWingAspect(calcAspectRatio(wingspan, wingarea)), [wingspan, wingarea])
+	useEffect(() => setWingMac(calcMeanAirfoilChord(wingspan, wingarea)), [wingspan, wingarea])
+	useEffect(() => setWingLoading(calcWingLoading(weight, wingarea)), [weight, wingarea])
 
 	useEffect(() => loadAircraftStatusOptions(), [])
 	useEffect(() => loadAircraftTypeOptions(), [])
@@ -234,3 +234,16 @@ export default function Aircraft(props) {
 	)
 
 }
+
+export function calcAspectRatio(wingspan, wingarea) {
+	return (wingspan * wingspan) / (wingarea * 100)
+}
+
+export function calcMeanAirfoilChord(wingspan, wingarea) {
+	return (wingarea * 100) / wingspan;
+}
+
+export function calcWingLoading(weight, wingarea) {
+	return weight / wingarea
+}
+
