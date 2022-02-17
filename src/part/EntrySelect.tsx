@@ -12,6 +12,7 @@ export default function EntrySelect(props) {
 				!!props.text ?
 					<div className='page-label-row'>
 						<label htmlFor={props.id} className='page-label'>{text}</label>
+						<span className='icon' onClick={props.onIconClick}>{props.icon}</span>
 						{props.labelActionIcon ? <span className='icon page-label-action-button' onClick={props.onLabelAction}>{props.labelActionIcon}</span> : null}
 					</div> : null
 			}

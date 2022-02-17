@@ -22,6 +22,8 @@ export default function Battery(props) {
 	const [connector, setConnector] = useState(props.connector || 'xt60')
 	const [unlistedConnector, setUnlistedConnector] = useState(props.unlistedConnector || '')
 
+	const [advanced, setAdvanced] = useState(props.advanced || false)
+
 	const [type, setType] = useState(props.type || 'lipo')
 	const [cells, setCells] = useState(props.cells || '')
 	const [cycles, setCycles] = useState(props.cycles || '')
@@ -46,6 +48,10 @@ export default function Battery(props) {
 
 	function onKeyDown(event) {
 		if (event.key === 'Enter') update();
+	}
+
+	function toggleAdvanced() {
+		setAdvanced(!advanced)
 	}
 
 	function toggleDelete() {
@@ -188,13 +194,19 @@ export default function Battery(props) {
 					{connector === 'unlisted' ?
 						<EntryField id='unlistedConnector' text='Unlisted Connector' type='text' value={unlistedConnector} onChange={(event) => setUnlistedConnector(event.target.value)}/> : null}
 
-					<EntrySelect id='type' text='Type' value={type} onChange={(event) => setType(event.target.value)}>
-						{typeOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
-					</EntrySelect>
-					<EntryField id='capacity' text='Capacity (mAh)' type='text' value={capacity} onChange={(event) => setCapacity(event.target.value)} onKeyDown={onKeyDown}/>
-					<EntryField id='cells' text='Cells' type='text' value={cells} onChange={(event) => setCells(event.target.value)} onKeyDown={onKeyDown}/>
-					<EntryField id='cycles' text='Cycles' type='text' value={cycles} onChange={(event) => setCycles(event.target.value)} onKeyDown={onKeyDown}/>
-					<EntryField id='dischargeRating' text='Discharge Rating (C)' type='text' value={dischargeRating} onChange={(event) => setDischargeRating(event.target.value)} onKeyDown={onKeyDown}/>
+					<button className='icon centered' onClick={toggleAdvanced}>{advanced ? Icons.COLLAPSE : Icons.ADVANCED_V}</button>
+
+					{
+						advanced ? <div className='vbox'>
+							<EntrySelect id='type' text='Type' value={type} onChange={(event) => setType(event.target.value)}>
+								{typeOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
+							</EntrySelect>
+							<EntryField id='capacity' text='Capacity (mAh)' type='text' value={capacity} onChange={(event) => setCapacity(event.target.value)} onKeyDown={onKeyDown}/>
+							<EntryField id='cells' text='Cells' type='text' value={cells} onChange={(event) => setCells(event.target.value)} onKeyDown={onKeyDown}/>
+							<EntryField id='cycles' text='Cycles' type='text' value={cycles} onChange={(event) => setCycles(event.target.value)} onKeyDown={onKeyDown}/>
+							<EntryField id='dischargeRating' text='Discharge Rating (C)' type='text' value={dischargeRating} onChange={(event) => setDischargeRating(event.target.value)} onKeyDown={onKeyDown}/>
+						</div> : null
+					}
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 					<div className='hbox'>
@@ -210,4 +222,3 @@ export default function Battery(props) {
 	)
 
 }
-

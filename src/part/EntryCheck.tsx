@@ -25,7 +25,7 @@ export default function EntryCheck(props) {
           !!props.text ?
             <div className='page-label-row'>
               <label htmlFor={props.id}>{text}</label>
-              <span className='icon' onClick={props.onIconClick}>{props.icon}</span>
+              {/* EntryCheck should not have icon other than the checkbox */}
               {props.labelActionIcon ? <span className='icon page-label-action-button' onClick={props.onLabelAction}>{props.labelActionIcon}</span> : null}
             </div> : null
         }

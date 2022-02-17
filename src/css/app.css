@@ -142,10 +142,26 @@ hr {
 /*}*/
 
 /* format a button to be just an icon */
-.icon {
+button.icon {
+	width: 2.5rem;
 	font-size: 1rem;
-	/*background: transparent;*/
 	cursor: pointer;
+}
+
+span.icon {
+	cursor: pointer;
+}
+
+.left {
+	align-self: flex-start;
+}
+
+.centered {
+	align-self: center;
+}
+
+.right {
+	align-self: flex-end;
 }
 
 code {

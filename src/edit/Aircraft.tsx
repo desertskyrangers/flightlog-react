@@ -20,6 +20,18 @@ export default function Aircraft(props) {
 	const [make, setMake] = useState(props.make || '')
 	const [model, setModel] = useState(props.model || '')
 	const [status, setStatus] = useState(props.status || 'airworthy')
+
+	const [advanced, setAdvanced] = useState(props.advanced || false)
+
+	const [wingspan, setWingspan] = useState(props.wingspan || '')
+	const [length, setLength] = useState(props.length || '')
+	const [wingarea, setWingarea] = useState(props.wingarea || '')
+	const [weight, setWeight] = useState(props.weight || '')
+
+	// Derived
+	const [wingMac, setWingMac] = useState(props.wingMac || '');
+	const [wingLoading, setWingLoading] = useState(props.wingLoading || '');
+
 	const [messages, setMessages] = useState([])
 	const [statusOptions, setStatusOptions] = useState([])
 	const [typeOptions, setTypeOptions] = useState([])
@@ -35,7 +47,12 @@ export default function Aircraft(props) {
 			type: type,
 			make: make,
 			model: model,
-			status: status
+			status: status,
+
+			wingspan: wingspan,
+			length: length,
+			wingarea: wingarea,
+			weight: weight
 		}, (success) => {
 			close()
 		}, (failure) => {
@@ -57,6 +74,10 @@ export default function Aircraft(props) {
 		setMessages([])
 	}
 
+	function toggleAdvanced() {
+		setAdvanced(!advanced)
+	}
+
 	function loadAircraft() {
 		if (isNewRef.current) return
 		AircraftService.getAircraft(idRef.current, (result) => {
@@ -66,6 +87,10 @@ export default function Aircraft(props) {
 			setMake(result.aircraft.make || '')
 			setModel(result.aircraft.model || '')
 			setStatus(result.aircraft.status)
+			setWingspan(result.aircraft.wingspan)
+			setLength(result.aircraft.length)
+			setWingarea(result.aircraft.wingarea)
+			setWeight(result.aircraft.weight)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -107,6 +132,9 @@ export default function Aircraft(props) {
 		})
 	}
 
+	useEffect(() => setWingMac(wingarea * 100 / wingspan))
+	useEffect(() => setWingLoading(weight / wingarea))
+
 	useEffect(() => loadAircraftStatusOptions(), [])
 	useEffect(() => loadAircraftTypeOptions(), [])
 	useEffect(() => loadAircraft(), [])
@@ -115,6 +143,15 @@ export default function Aircraft(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
+					<div className='vbox'>
+						<table>
+							<tr><td>Wing Span (mm):</td><td>{parseFloat(wingspan)}</td></tr>
+							<tr><td>Wing Area (cm²):</td><td>{parseFloat(wingarea)}</td></tr>
+							<tr><td>Wing Mac (mm):</td><td>{parseFloat(wingMac).toFixed(1)}</td></tr>
+							<tr><td>Wing Loading (g/cm²):</td><td>{parseFloat(wingLoading).toFixed(4)}</td></tr>
+						</table>
+					</div>
+
 					<EntryField id='name'
 											text='Name'
 											type='text'
@@ -136,6 +173,27 @@ export default function Aircraft(props) {
 
 					<EntryField id='make' text='Manufacturer or Designer' type='text' value={make} onChange={(event) => setMake(event.target.value)} onKeyDown={onKeyDown}/>
 					<EntryField id='model' text='Model' type='text' value={model} onChange={(event) => setModel(event.target.value)} onKeyDown={onKeyDown}/>
+
+					<button className='icon centered' onClick={toggleAdvanced}>{advanced ? Icons.COLLAPSE : Icons.ADVANCED_V}</button>
+
+					{
+						advanced ? <div className='vbox'>
+							<EntryField id='wingspan' text='Wing Span (mm)' type='text' value={wingspan} onChange={(event) => setWingspan(event.target.value)} onKeyDown={onKeyDown}/>
+							<EntryField id='length' text='Length (mm)' type='text' value={length} onChange={(event) => setLength(event.target.value)} onKeyDown={onKeyDown}/>
+							<EntryField id='wingarea' text='Wing Area (cm²)' type='text' value={wingarea} onChange={(event) => setWingarea(event.target.value)} onKeyDown={onKeyDown}/>
+							<EntryField id='weight' text='Weight (g)' type='text' value={weight} onChange={(event) => setWeight(event.target.value)} onKeyDown={onKeyDown}/>
+							{/* Advanced properties
+							* wing span (mm)
+							* length (mm)
+							* wing area (cm2)
+							* weight (g)
+							* motor radius (mm)
+							* motor length (cm)
+							* motor kv
+							* motor max watts
+							*/}
+						</div> : null
+					}
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 					<div className='hbox'>
