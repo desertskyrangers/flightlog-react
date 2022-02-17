@@ -17,12 +17,12 @@ import {
 	faHelicopter,
 	faHome,
 	faKey,
-	faKeyboard,
 	faPlane,
 	faPlus,
 	faQuestion,
 	faSpinner,
 	faTrash,
+	faTv,
 	faUserAlt,
 	faUserFriends,
 	faUsers
@@ -40,7 +40,7 @@ class Icons {
 	AIRCRAFT_DESTROYED = <FontAwesomeIcon icon={faBan}/>
 	BARS = <FontAwesomeIcon icon={faBars}/>
 	BATTERY = <FontAwesomeIcon icon={faBatteryFull}/>
-	BATTERY_DESTROYED=<FontAwesomeIcon icon={faBan}/>
+	BATTERY_DESTROYED = <FontAwesomeIcon icon={faBan}/>
 	CALENDAR = <FontAwesomeIcon icon={faCalendar}/>
 	CANCEL = <FontAwesomeIcon icon={faBan}/>
 	CLOCK = <FontAwesomeIcon icon={faClock}/>
@@ -48,7 +48,7 @@ class Icons {
 	CLUB = <FontAwesomeIcon icon={faUserFriends}/>
 	COLLAPSE = <FontAwesomeIcon icon={faAngleUp}/>
 	COMPANY = <FontAwesomeIcon icon={faBuilding}/>
-	DASHBOARD = <FontAwesomeIcon icon={faKeyboard}/>
+	DASHBOARD = <FontAwesomeIcon icon={faTv}/>
 	DELETE = <FontAwesomeIcon icon={faTrash}/>
 	DRONE = <DroneIcon/>
 	ENVELOPE = <FontAwesomeIcon icon={faEnvelope}/>
