@@ -33,26 +33,6 @@
 	align-items: center;
 }
 
-.hbox {
-	display: flex;
-	flex-flow: row nowrap;
-	/* along the main axis */
-	justify-content: flex-start;
-	/* along the cross axis */
-	align-items: center;
-	gap: 0.5em;
-}
-
-.vbox {
-	display: flex;
-	flex-flow: column nowrap;
-	/* along the main axis */
-	justify-content: flex-start;
-	/* along the cross axis */
-	align-items: center;
-	gap: 0.5em;
-}
-
 .page-form {
 	margin: 1em;
 	border: 1px solid var(--border-1);

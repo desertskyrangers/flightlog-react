@@ -1,0 +1,7 @@
+table.metrics {
+	width: 100%;
+}
+
+table.metrics td:nth-child(2) {
+	text-align: end;
+}

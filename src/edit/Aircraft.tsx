@@ -1,3 +1,4 @@
+import "../css/metrics.css"
 import Notice from "../part/Notice";
 import React, {useEffect, useRef, useState} from "react";
 import LookupService from "../api/LookupService";
@@ -10,9 +11,6 @@ import EntrySelect from "../part/EntrySelect";
 
 export default function Aircraft(props) {
 	const navigate = useNavigate();
-
-	// const idParam = useParams().id;
-	// const isNew = idParam === 'new'
 
 	const [id, setId] = useState(props.id || '')
 	const [name, setName] = useState(props.name || '')
@@ -29,10 +27,14 @@ export default function Aircraft(props) {
 	const [weight, setWeight] = useState(props.weight || '')
 
 	// Derived
+	const [wingAspect, setWingAspect] = useState(props.wingAspect || '')
 	const [wingMac, setWingMac] = useState(props.wingMac || '');
 	const [wingLoading, setWingLoading] = useState(props.wingLoading || '');
 
+	// Messages
 	const [messages, setMessages] = useState([])
+
+	// Options
 	const [statusOptions, setStatusOptions] = useState([])
 	const [typeOptions, setTypeOptions] = useState([])
 	const [requestDelete, setRequestDelete] = useState(false)
@@ -132,7 +134,8 @@ export default function Aircraft(props) {
 		})
 	}
 
-	useEffect(() => setWingMac(wingarea * 100 / wingspan), [wingarea, wingspan])
+	useEffect(() => setWingAspect((wingspan * wingspan) / (wingarea * 100)), [wingarea, wingspan])
+	useEffect(() => setWingMac(wingarea / wingspan), [wingarea, wingspan])
 	useEffect(() => setWingLoading(weight / wingarea), [weight, wingarea])
 
 	useEffect(() => loadAircraftStatusOptions(), [])
@@ -144,38 +147,50 @@ export default function Aircraft(props) {
 			<div className='page-body'>
 				<div className='page-form'>
 
+					<div className='page-label-row'><span>{name}</span><span className='icon right' onClick={close}>{Icons.CLOSE}</span></div>
+
 					{/* Aircraft information */}
 					<div className='vbox'>
-						<table>
+						<table className='metrics'>
 							<tr>
-								<td>Wing Span (mm):</td>
-								<td>{parseFloat(wingspan)}</td>
+								<td>Wing Span:</td>
+								<td>{wingspan}</td>
+								<td>mm</td>
 							</tr>
 							<tr>
-								<td>Wing Area (cm²):</td>
-								<td>{parseFloat(wingarea)}</td>
+								<td>Length:</td>
+								<td>{length}</td>
+								<td>mm</td>
 							</tr>
 							<tr>
-								<td>Wing Mac (mm):</td>
+								<td>Wing Area:</td>
+								<td>{wingarea}</td>
+								<td>cm²</td>
+							</tr>
+							<tr>
+								<td>Weight:</td>
+								<td>{weight}</td>
+								<td>g</td>
+							</tr>
+							<tr>
+								<td>Aspect Ratio:</td>
+								<td>{parseFloat(wingAspect).toFixed(1)}</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>Wing Mac:</td>
 								<td>{parseFloat(wingMac).toFixed(1)}</td>
+								<td>mm</td>
 							</tr>
 							<tr>
-								<td>Wing Loading (g/cm²):</td>
+								<td>Wing Loading:</td>
 								<td>{parseFloat(wingLoading).toFixed(4)}</td>
+								<td>g/cm²</td>
 							</tr>
 						</table>
 					</div>
 
-					<EntryField id='name'
-											text='Name'
-											type='text'
-											value={name}
-											required={true}
-											autoFocus='autofocus'
-											onChange={(event) => setName(event.target.value)}
-											onKeyDown={onKeyDown}
-											labelActionIcon={Icons.CLOSE}
-											onLabelAction={close}/>
+					<EntryField id='name' text='Name' type='text' value={name} required={true} autoFocus='autofocus' onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown}/>
 
 					<EntrySelect id='type' name='type' text='Type' value={type} required={true} onChange={(event) => setType(event.target.value)}>
 						{typeOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
@@ -197,10 +212,6 @@ export default function Aircraft(props) {
 							<EntryField id='wingarea' text='Wing Area (cm²)' type='text' value={wingarea} onChange={(event) => setWingarea(event.target.value)} onKeyDown={onKeyDown}/>
 							<EntryField id='weight' text='Weight (g)' type='text' value={weight} onChange={(event) => setWeight(event.target.value)} onKeyDown={onKeyDown}/>
 							{/* Advanced properties
-							* wing span (mm)
-							* length (mm)
-							* wing area (cm2)
-							* weight (g)
 							* motor radius (mm)
 							* motor length (cm)
 							* motor kv
