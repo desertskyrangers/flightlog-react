@@ -5,7 +5,11 @@ import {
 	faAngleUp,
 	faBan,
 	faBars,
+	faBatteryEmpty,
 	faBatteryFull,
+	faBatteryHalf,
+	faBatteryQuarter,
+	faBatteryThreeQuarters,
 	faBinoculars,
 	faBuilding,
 	faCalendar,
@@ -40,6 +44,11 @@ class Icons {
 	AIRCRAFT_DESTROYED = <FontAwesomeIcon icon={faBan}/>
 	BARS = <FontAwesomeIcon icon={faBars}/>
 	BATTERY = <FontAwesomeIcon icon={faBatteryFull}/>
+	BATTERY_FULL = <FontAwesomeIcon icon={faBatteryFull}/>
+	BATTERY_THREE_QUARTER = <FontAwesomeIcon icon={faBatteryThreeQuarters}/>
+	BATTERY_HALF = <FontAwesomeIcon icon={faBatteryHalf}/>
+	BATTERY_QUARTER = <FontAwesomeIcon icon={faBatteryQuarter}/>
+	BATTERY_EMPTY = <FontAwesomeIcon icon={faBatteryEmpty}/>
 	BATTERY_DESTROYED = <FontAwesomeIcon icon={faBan}/>
 	CALENDAR = <FontAwesomeIcon icon={faCalendar}/>
 	CANCEL = <FontAwesomeIcon icon={faBan}/>

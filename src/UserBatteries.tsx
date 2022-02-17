@@ -75,8 +75,20 @@ function BatteryRow(props) {
 		navigate(AppPath.BATTERY + "/" + props.battery.id)
 	}
 
+	function icon(status, life) {
+		if (status === "destroyed") {
+			return Icons.fromBatteryStatus(status)
+		} else {
+			if (life > 80) return Icons.BATTERY_FULL;
+			if (life > 60) return Icons.BATTERY_THREE_QUARTER;
+			if (life > 40) return Icons.BATTERY_HALF;
+			if (life > 20) return Icons.BATTERY_QUARTER;
+			return Icons.BATTERY_EMPTY;
+		}
+	}
+
 	return (
-		<div className='page-result' onClick={open}>{Icons.fromBatteryStatus(props.battery.status)} {props.battery.name}</div>
+		<div className='page-result' onClick={open}>{icon(props.battery.status, props.battery.life)} {props.battery.name}</div>
 	)
 
 }
