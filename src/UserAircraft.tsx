@@ -47,7 +47,6 @@ export default function UserAircraft() {
 function AircraftList(props) {
 	const navigate = useNavigate();
 
-
 	let page
 	if (props.aircraft.length === 0) {
 		page = <NoResults message='No aircraft found'/>
