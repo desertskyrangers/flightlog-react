@@ -135,7 +135,7 @@ export default function Aircraft(props) {
 	}
 
 	useEffect(() => setWingAspect((wingspan * wingspan) / (wingarea * 100)), [wingarea, wingspan])
-	useEffect(() => setWingMac(wingarea / wingspan), [wingarea, wingspan])
+	useEffect(() => setWingMac((wingarea * 100) / wingspan), [wingarea, wingspan])
 	useEffect(() => setWingLoading(weight / wingarea), [weight, wingarea])
 
 	useEffect(() => loadAircraftStatusOptions(), [])
