@@ -9,6 +9,18 @@ import EntryField from "../part/EntryField";
 import DeleteWithConfirm from "../part/DeleteWithConfirm";
 import EntrySelect from "../part/EntrySelect";
 
+export function calcAspectRatio(wingspan, wingarea) {
+	return (wingspan * wingspan) / (wingarea * 100)
+}
+
+export function calcMeanAirfoilChord(wingspan, wingarea) {
+	return (wingarea * 100) / wingspan;
+}
+
+export function calcWingLoading(weight, wingarea) {
+	return weight / wingarea
+}
+
 export default function Aircraft(props) {
 	const navigate = useNavigate();
 
@@ -234,16 +246,3 @@ export default function Aircraft(props) {
 	)
 
 }
-
-export function calcAspectRatio(wingspan, wingarea) {
-	return (wingspan * wingspan) / (wingarea * 100)
-}
-
-export function calcMeanAirfoilChord(wingspan, wingarea) {
-	return (wingarea * 100) / wingspan;
-}
-
-export function calcWingLoading(weight, wingarea) {
-	return weight / wingarea
-}
-
