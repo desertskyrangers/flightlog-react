@@ -54,7 +54,7 @@ function FlightList(props) {
 
 	let page
 	if (props.flights.length === 0) {
-		page = <NoResults message='No flight found'/>
+		page = <NoResults message='No flights'/>
 	} else {
 		page = props.flights.map((flight) => <FlightRow key={flight.id} value={flight.id} flight={flight}/>)
 	}
