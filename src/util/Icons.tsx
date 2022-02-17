@@ -37,8 +37,10 @@ class Icons {
 	ADD = <FontAwesomeIcon icon={faPlus}/>
 	ADVANCED = <FontAwesomeIcon icon={faEllipsisH}/>
 	ADVANCED_V = <FontAwesomeIcon icon={faEllipsisV}/>
+	AIRCRAFT_DESTROYED = <FontAwesomeIcon icon={faBan}/>
 	BARS = <FontAwesomeIcon icon={faBars}/>
 	BATTERY = <FontAwesomeIcon icon={faBatteryFull}/>
+	BATTERY_DESTROYED=<FontAwesomeIcon icon={faBan}/>
 	CALENDAR = <FontAwesomeIcon icon={faCalendar}/>
 	CANCEL = <FontAwesomeIcon icon={faBan}/>
 	CLOCK = <FontAwesomeIcon icon={faClock}/>
@@ -70,44 +72,67 @@ class Icons {
 	USER = <FontAwesomeIcon icon={faUserAlt}/>
 	WAIT = <FontAwesomeIcon icon={faSpinner}/>
 
+	private aircraftTypeIcons = {
+		fixedwing: this.PLANE,
+		helicopter: this.HELICOPTER,
+		multirotor: this.DRONE,
+		other: this.DRONE
+	}
+
+	private userFlightRoleIcons = {
+		pilot: this.PILOT,
+		observer: this.OBSERVER,
+		owner: this.OWNER,
+		other: this.UNKNOWN
+	}
+
+	private groupTypeIcons = {
+		club: this.CLUB,
+		company: this.COMPANY,
+		group: this.GROUP,
+	}
+
+	private aircraftStatusIcons = {
+		preflight: this.PLANE,
+		airworthy: this.PLANE,
+		inoperative: this.AIRCRAFT_DESTROYED,
+		decommissioned: this.AIRCRAFT_DESTROYED,
+		destroyed: this.AIRCRAFT_DESTROYED
+	}
+
+	private batteryStatusIcons = {
+		new: this.BATTERY,
+		available: this.BATTERY,
+		destroyed: this.BATTERY_DESTROYED
+	}
+
 	fromAircraftType(type) {
-		const aircraftTypeIcons = {
-			fixedwing: instance.PLANE,
-			helicopter: instance.HELICOPTER,
-			multirotor: instance.DRONE,
-			other: instance.DRONE
-		}
-
-		let icon = aircraftTypeIcons[type]
-		if (!icon) icon = instance.DRONE
-
+		let icon = instance.aircraftTypeIcons[type]
+		if (!icon) icon = instance.PLANE
 		return icon
 	}
 
 	fromUserFlightRole(role) {
-		const aircraftTypeIcons = {
-			pilot: instance.PILOT,
-			observer: instance.OBSERVER,
-			owner: instance.OWNER,
-			other: instance.UNKNOWN
-		}
-
-		let icon = aircraftTypeIcons[role]
-		if (!icon) icon = instance.DRONE
-
+		let icon = instance.userFlightRoleIcons[role]
+		if (!icon) icon = instance.PLANE
 		return icon
 	}
 
 	fromGroupType(type) {
-		const orgTypeIcons = {
-			club: instance.CLUB,
-			company: instance.COMPANY,
-			group: instance.GROUP,
-		}
-
-		let icon = orgTypeIcons[type]
+		let icon = instance.groupTypeIcons[type]
 		if (!icon) icon = instance.GROUP
+		return icon
+	}
 
+	fromAircraftStatus(status) {
+		let icon = instance.aircraftStatusIcons[status]
+		if (!icon) icon = instance.PLANE
+		return icon
+	}
+
+	fromBatteryStatus(status) {
+		let icon = instance.batteryStatusIcons[status]
+		if (!icon) icon = instance.BATTERY
 		return icon
 	}
 

@@ -76,7 +76,7 @@ function BatteryRow(props) {
 	}
 
 	return (
-		<div className='page-result' onClick={open}>{Icons.BATTERY} {props.battery.name}</div>
+		<div className='page-result' onClick={open}>{Icons.fromBatteryStatus(props.battery.status)} {props.battery.name}</div>
 	)
 
 }

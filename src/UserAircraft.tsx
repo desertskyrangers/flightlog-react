@@ -72,21 +72,20 @@ function AircraftRow(props) {
 
 	const navigate = useNavigate();
 
-	const type = {
-		fixedwing: 'PLANE',
-		helicopter: 'HELICOPTER',
-		multirotor: 'DRONE',
-		other: 'DRONE'
-	}
-
 	function open() {
 		navigate(AppPath.AIRCRAFT + "/" + props.aircraft.id)
 	}
 
-	const icon = Icons[type[props.aircraft.type]]
+	function icon(type, status) {
+		if (status === 'airworthy' || status === 'preflight') {
+			return Icons.fromAircraftType(type)
+		} else {
+			return Icons.fromAircraftStatus(status);
+		}
+	}
 
 	return (
-		<div className='page-result' onClick={open}>{icon} {props.aircraft.name}</div>
+		<div className='page-result' onClick={open}>{icon(props.aircraft.type, props.aircraft.status)} {props.aircraft.name}</div>
 	)
 
 }
