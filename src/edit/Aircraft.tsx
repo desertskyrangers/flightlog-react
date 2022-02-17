@@ -132,8 +132,8 @@ export default function Aircraft(props) {
 		})
 	}
 
-	useEffect(() => setWingMac(wingarea * 100 / wingspan))
-	useEffect(() => setWingLoading(weight / wingarea))
+	useEffect(() => setWingMac(wingarea * 100 / wingspan), [wingarea, wingspan])
+	useEffect(() => setWingLoading(weight / wingarea), [weight, wingarea])
 
 	useEffect(() => loadAircraftStatusOptions(), [])
 	useEffect(() => loadAircraftTypeOptions(), [])
@@ -143,12 +143,26 @@ export default function Aircraft(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
+
+					{/* Aircraft information */}
 					<div className='vbox'>
 						<table>
-							<tr><td>Wing Span (mm):</td><td>{parseFloat(wingspan)}</td></tr>
-							<tr><td>Wing Area (cm²):</td><td>{parseFloat(wingarea)}</td></tr>
-							<tr><td>Wing Mac (mm):</td><td>{parseFloat(wingMac).toFixed(1)}</td></tr>
-							<tr><td>Wing Loading (g/cm²):</td><td>{parseFloat(wingLoading).toFixed(4)}</td></tr>
+							<tr>
+								<td>Wing Span (mm):</td>
+								<td>{parseFloat(wingspan)}</td>
+							</tr>
+							<tr>
+								<td>Wing Area (cm²):</td>
+								<td>{parseFloat(wingarea)}</td>
+							</tr>
+							<tr>
+								<td>Wing Mac (mm):</td>
+								<td>{parseFloat(wingMac).toFixed(1)}</td>
+							</tr>
+							<tr>
+								<td>Wing Loading (g/cm²):</td>
+								<td>{parseFloat(wingLoading).toFixed(4)}</td>
+							</tr>
 						</table>
 					</div>
 
