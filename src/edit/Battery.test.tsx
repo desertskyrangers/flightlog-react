@@ -39,7 +39,7 @@ test('renders model field', () => {
 })
 
 test('renders type field', () => {
-	render(<Router><Battery/></Router>)
+	render(<Router><Battery advanced={true}/></Router>)
 	const element = screen.getByLabelText(/type/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('SELECT')
@@ -47,7 +47,7 @@ test('renders type field', () => {
 })
 
 test('renders capacity field', () => {
-	render(<Router><Battery/></Router>)
+	render(<Router><Battery advanced={true}/></Router>)
 	const element = screen.getByLabelText(/capacity/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('INPUT')
@@ -55,7 +55,7 @@ test('renders capacity field', () => {
 })
 
 test('renders cells field', () => {
-	render(<Router><Battery/></Router>)
+	render(<Router><Battery advanced={true}/></Router>)
 	const element = screen.getByLabelText(/cells/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('INPUT')
@@ -63,7 +63,7 @@ test('renders cells field', () => {
 })
 
 test('renders cycles field', () => {
-	render(<Router><Battery/></Router>)
+	render(<Router><Battery advanced={true}/></Router>)
 	const element = screen.getByLabelText(/cycles/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('INPUT')
@@ -71,7 +71,7 @@ test('renders cycles field', () => {
 })
 
 test('renders discharge rating field', () => {
-	render(<Router><Battery/></Router>)
+	render(<Router><Battery advanced={true}/></Router>)
 	const element = screen.getByLabelText(/discharge rating/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('INPUT')
@@ -89,7 +89,7 @@ test('renders save button', () => {
 	render(
 		<Router initialEntries={[AppPath.BATTERY + '/new']}>
 			<Routes>
-				<Route exact path={AppPath.BATTERY + '/:id'} element={<Battery/>}/>
+				<Route path={AppPath.BATTERY + '/:id'} element={<Battery/>}/>
 			</Routes>
 		</Router>
 	)

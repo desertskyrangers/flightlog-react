@@ -1,9 +1,7 @@
-import React from "react";
 import {render, screen} from "@testing-library/react";
 import {MemoryRouter as Router, Route, Routes} from "react-router-dom";
 import Aircraft from "./Aircraft";
 import AppPath from "../AppPath";
-import Battery from "./Battery";
 
 test('renders name field', () => {
 	render(<Router><Aircraft/></Router>);
@@ -30,7 +28,7 @@ test('renders status field', () => {
 })
 
 test('renders make field', () => {
-	render(<Router><Battery/></Router>)
+	render(<Router><Aircraft/></Router>)
 	const element = screen.getByLabelText(/manufacturer/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('INPUT')
@@ -39,8 +37,44 @@ test('renders make field', () => {
 })
 
 test('renders model field', () => {
-	render(<Router><Battery/></Router>)
+	render(<Router><Aircraft/></Router>)
 	const element = screen.getByLabelText(/model/i)
+	expect(element).toBeInTheDocument()
+	expect(element.nodeName).toBe('INPUT')
+	expect(element).toHaveAttribute('type', 'text')
+	expect(element).toHaveClass('page-field')
+})
+
+test('renders wingspan field', () => {
+	render(<Router><Aircraft advanced={true}/></Router>)
+	const element = screen.getByLabelText(/wing span/i)
+	expect(element).toBeInTheDocument()
+	expect(element.nodeName).toBe('INPUT')
+	expect(element).toHaveAttribute('type', 'text')
+	expect(element).toHaveClass('page-field')
+})
+
+test('renders length field', () => {
+	render(<Router><Aircraft advanced={true}/></Router>)
+	const element = screen.getByLabelText(/length/i)
+	expect(element).toBeInTheDocument()
+	expect(element.nodeName).toBe('INPUT')
+	expect(element).toHaveAttribute('type', 'text')
+	expect(element).toHaveClass('page-field')
+})
+
+test('renders wingarea field', () => {
+	render(<Router><Aircraft advanced={true}/></Router>)
+	const element = screen.getByLabelText(/wing area/i)
+	expect(element).toBeInTheDocument()
+	expect(element.nodeName).toBe('INPUT')
+	expect(element).toHaveAttribute('type', 'text')
+	expect(element).toHaveClass('page-field')
+})
+
+test('renders weight field', () => {
+	render(<Router><Aircraft advanced={true}/></Router>)
+	const element = screen.getByLabelText(/weight/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('INPUT')
 	expect(element).toHaveAttribute('type', 'text')
