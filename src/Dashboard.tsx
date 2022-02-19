@@ -14,6 +14,9 @@ export default function Dashboard(props) {
 
 	const [pilotFlightCount, setPilotFlightCount] = useState(props.pilotFlightCount || 0)
 	const [pilotFlightTime, setPilotFlightTime] = useState(props.pilotFlightTime || 0)
+	const [observerFlightCount, setObserverFlightCount] = useState(props.observerFlightCount || 0)
+	const [observerFlightTime, setObserverFlightTime] = useState(props.observerFlightTime || 0)
+
 	const [messages, setMessages] = useState(props.messages || '')
 
 	function clearMessages() {
@@ -24,6 +27,8 @@ export default function Dashboard(props) {
 		UserService.dashboard(TokenService.getUserId(), (result) => {
 			setPilotFlightCount(result.dashboard.pilotFlightCount)
 			setPilotFlightTime(result.dashboard.pilotFlightTime)
+			setObserverFlightCount(result.dashboard.observerFlightCount)
+			setObserverFlightTime(result.dashboard.observerFlightTime)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -52,6 +57,19 @@ export default function Dashboard(props) {
 							<div className='page-metric'>{Times.toHourMinSec(pilotFlightTime * 1000)}</div>
 						</div>
 					</div>
+
+					{!!observerFlightCount ?
+					<div className='hbox'>
+						<div className='vbox'>
+							<div className='dashboard-header'>Observations</div>
+							<div className='page-metric'>{observerFlightCount}</div>
+						</div>
+						<div className='v-separator'/>
+						<div className='vbox'>
+							<div className='dashboard-header'>Observer Time</div>
+							<div className='page-metric'>{Times.toHourMinSec(observerFlightTime * 1000)}</div>
+						</div>
+					</div>: null}
 
 					<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>Log a Flight</button>
 
