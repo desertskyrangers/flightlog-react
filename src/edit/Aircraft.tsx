@@ -166,6 +166,26 @@ export default function Aircraft(props) {
 						<table className='metrics'>
 							<tbody>
 							<tr>
+								<td>Type:</td>
+								<td>{type}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Status:</td>
+								<td>{status}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Manufacturer:</td>
+								<td>{make}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Model:</td>
+								<td>{model}</td>
+								<td></td>
+							</tr>
+							<tr>
 								<td>Wing Span:</td>
 								<td>{wingspan}</td>
 								<td>mm</td>
@@ -204,43 +224,45 @@ export default function Aircraft(props) {
 						</table>
 					</div>
 
-					<EntryField id='name' text='Name' type='text' value={name} required={true} autoFocus='autofocus' onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown}/>
-
-					<EntrySelect id='type' name='type' text='Type' value={type} required={true} onChange={(event) => setType(event.target.value)}>
-						{typeOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
-					</EntrySelect>
-
-					<EntrySelect id='status' name='status' text='Status' value={status} required={true} onChange={(event) => setStatus(event.target.value)}>
-						{statusOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
-					</EntrySelect>
-
-					<EntryField id='make' text='Manufacturer or Designer' type='text' value={make} onChange={(event) => setMake(event.target.value)} onKeyDown={onKeyDown}/>
-					<EntryField id='model' text='Model' type='text' value={model} onChange={(event) => setModel(event.target.value)} onKeyDown={onKeyDown}/>
-
 					<button className='icon centered' onClick={toggleAdvanced}>{advanced ? Icons.COLLAPSE : Icons.ADVANCED_V}</button>
 
 					{
 						advanced ? <div className='vbox'>
+							<EntryField id='name' text='Name' type='text' value={name} required={true} autoFocus='autofocus' onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown}/>
+
+							<EntrySelect id='type' name='type' text='Type' value={type} required={true} onChange={(event) => setType(event.target.value)}>
+								{typeOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
+							</EntrySelect>
+
+							<EntrySelect id='status' name='status' text='Status' value={status} required={true} onChange={(event) => setStatus(event.target.value)}>
+								{statusOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
+							</EntrySelect>
+
+							<EntryField id='make' text='Manufacturer or Designer' type='text' value={make} onChange={(event) => setMake(event.target.value)} onKeyDown={onKeyDown}/>
+							<EntryField id='model' text='Model' type='text' value={model} onChange={(event) => setModel(event.target.value)} onKeyDown={onKeyDown}/>
+
 							<EntryField id='wingspan' text='Wing Span (mm)' type='text' value={wingspan} onChange={(event) => setWingspan(event.target.value)} onKeyDown={onKeyDown}/>
 							<EntryField id='length' text='Length (mm)' type='text' value={length} onChange={(event) => setLength(event.target.value)} onKeyDown={onKeyDown}/>
 							<EntryField id='wingarea' text='Wing Area (cm²)' type='text' value={wingarea} onChange={(event) => setWingarea(event.target.value)} onKeyDown={onKeyDown}/>
 							<EntryField id='weight' text='Weight (g)' type='text' value={weight} onChange={(event) => setWeight(event.target.value)} onKeyDown={onKeyDown}/>
+
 							{/* Advanced properties
 							* motor radius (mm)
 							* motor length (cm)
 							* motor kv
 							* motor max watts
 							*/}
+
+							<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
+							<div className='hbox'>
+								{isNewRef.current ? null : <button className='icon' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE : Icons.DELETE}</button>}
+								{requestDelete ? null : <button disabled={messages.length > 0} className='page-submit' onClick={update}>{isNewRef.current ? 'Save' : 'Update'}</button>}
+							</div>
+
+							{requestDelete ? <DeleteWithConfirm entity='name of the aircraft' name={name} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
+
 						</div> : null
 					}
-
-					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
-					<div className='hbox'>
-						{isNewRef.current ? null : <button className='icon' onClick={toggleDelete}>{requestDelete ? Icons.COLLAPSE : Icons.DELETE}</button>}
-						{requestDelete ? null : <button disabled={messages.length > 0} className='page-submit' onClick={update}>{isNewRef.current ? 'Save' : 'Update'}</button>}
-					</div>
-
-					{requestDelete ? <DeleteWithConfirm entity='name of the aircraft' name={name} onDelete={doDelete} onIconClick={() => toggleDelete()}/> : null}
 
 				</div>
 			</div>
