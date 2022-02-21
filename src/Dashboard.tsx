@@ -72,7 +72,9 @@ export default function Dashboard(props) {
 
 					{!!dashboard.aircraftStats ?
 						<table className='metrics'>
+							<tbody>
 							{dashboard.aircraftStats.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}
+							</tbody>
 						</table>
 						: null}
 				</div>
