@@ -16,7 +16,7 @@ test('calculate wing loading', () => {
 })
 
 test('renders name field', () => {
-	render(<Router><Aircraft/></Router>);
+	render(<Router><Aircraft advanced={true}/></Router>);
 	const element = screen.getByLabelText(/name/i);
 	expect(element).toBeInTheDocument();
 	expect(element).toHaveAttribute('type', 'text');
@@ -24,7 +24,7 @@ test('renders name field', () => {
 });
 
 test('renders type field', () => {
-	render(<Router><Aircraft/></Router>)
+	render(<Router><Aircraft advanced={true}/></Router>)
 	const element = screen.getByLabelText(/type/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('SELECT')
@@ -32,7 +32,7 @@ test('renders type field', () => {
 })
 
 test('renders status field', () => {
-	render(<Router><Aircraft/></Router>)
+	render(<Router><Aircraft advanced={true}/></Router>)
 	const element = screen.getByLabelText(/status/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('SELECT')
@@ -40,7 +40,7 @@ test('renders status field', () => {
 })
 
 test('renders make field', () => {
-	render(<Router><Aircraft/></Router>)
+	render(<Router><Aircraft advanced={true}/></Router>)
 	const element = screen.getByLabelText(/manufacturer/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('INPUT')
@@ -49,7 +49,7 @@ test('renders make field', () => {
 })
 
 test('renders model field', () => {
-	render(<Router><Aircraft/></Router>)
+	render(<Router><Aircraft advanced={true}/></Router>)
 	const element = screen.getByLabelText(/model/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('INPUT')
@@ -94,7 +94,7 @@ test('renders weight field', () => {
 })
 
 test('renders update button', () => {
-	render(<Router><Aircraft/></Router>);
+	render(<Router><Aircraft advanced={true}/></Router>);
 	const element = screen.getByText('Update');
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('BUTTON');
@@ -104,7 +104,7 @@ test('renders save button', () => {
 	render(
 		<Router initialEntries={[AppPath.AIRCRAFT + '/new']}>
 			<Routes>
-				<Route path={AppPath.AIRCRAFT + '/:id'} element={<Aircraft/>}/>
+				<Route path={AppPath.AIRCRAFT + '/:id'} element={<Aircraft advanced={true}/>}/>
 			</Routes>
 		</Router>
 	)
