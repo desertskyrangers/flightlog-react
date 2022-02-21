@@ -164,6 +164,7 @@ export default function Aircraft(props) {
 					{/* Aircraft information */}
 					<div className='vbox'>
 						<table className='metrics'>
+							<tbody>
 							<tr>
 								<td>Wing Span:</td>
 								<td>{wingspan}</td>
@@ -199,6 +200,7 @@ export default function Aircraft(props) {
 								<td>{parseFloat(wingLoading).toFixed(4)}</td>
 								<td>g/cm²</td>
 							</tr>
+							</tbody>
 						</table>
 					</div>
 

@@ -71,7 +71,7 @@ export default function Dashboard(props) {
 					<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>Log a Flight</button>
 
 					{!!dashboard.aircraftStats ?
-						<table className='metrics'>
+						<table className='stats'>
 							<tbody>
 							{dashboard.aircraftStats.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}
 							</tbody>
