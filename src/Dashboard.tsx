@@ -12,10 +12,10 @@ export default function Dashboard(props) {
 
 	const navigate = useNavigate()
 
-	const [pilotFlightCount, setPilotFlightCount] = useState(props.pilotFlightCount || 0)
-	const [pilotFlightTime, setPilotFlightTime] = useState(props.pilotFlightTime || 0)
-	const [observerFlightCount, setObserverFlightCount] = useState(props.observerFlightCount || 0)
-	const [observerFlightTime, setObserverFlightTime] = useState(props.observerFlightTime || 0)
+	const [dashboard, setDashboard] = useState(props.dashboard || {
+		pilotFlightCount: 0,
+		pilotFlightTime: 0
+	})
 
 	const [messages, setMessages] = useState(props.messages || '')
 
@@ -25,10 +25,7 @@ export default function Dashboard(props) {
 
 	function loadDashboard() {
 		UserService.dashboard(TokenService.getUserId(), (result) => {
-			setPilotFlightCount(result.dashboard.pilotFlightCount)
-			setPilotFlightTime(result.dashboard.pilotFlightTime)
-			setObserverFlightCount(result.dashboard.observerFlightCount)
-			setObserverFlightTime(result.dashboard.observerFlightTime)
+			setDashboard(result.dashboard)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -49,33 +46,50 @@ export default function Dashboard(props) {
 					<div className='hbox'>
 						<div className='vbox'>
 							<div className='dashboard-header'>Flights</div>
-							<div className='page-metric'>{pilotFlightCount}</div>
+							<div className='page-metric'>{dashboard.pilotFlightCount}</div>
 						</div>
 						<div className='v-separator'/>
 						<div className='vbox'>
 							<div className='dashboard-header'>Flight Time</div>
-							<div className='page-metric'>{Times.toHourMinSec(pilotFlightTime * 1000)}</div>
+							<div className='page-metric'>{Times.toHourMinSec(dashboard.pilotFlightTime * 1000)}</div>
 						</div>
 					</div>
 
-					{!!observerFlightCount ?
-					<div className='hbox'>
-						<div className='vbox'>
-							<div className='dashboard-header'>Observations</div>
-							<div className='page-metric'>{observerFlightCount}</div>
-						</div>
-						<div className='v-separator'/>
-						<div className='vbox'>
-							<div className='dashboard-header'>Observer Time</div>
-							<div className='page-metric'>{Times.toHourMinSec(observerFlightTime * 1000)}</div>
-						</div>
-					</div>: null}
+					{!!dashboard.observerFlightCount ?
+						<div className='hbox'>
+							<div className='vbox'>
+								<div className='dashboard-header'>Observations</div>
+								<div className='page-metric'>{dashboard.observerFlightCount}</div>
+							</div>
+							<div className='v-separator'/>
+							<div className='vbox'>
+								<div className='dashboard-header'>Observer Time</div>
+								<div className='page-metric'>{Times.toHourMinSec(dashboard.observerFlightTime * 1000)}</div>
+							</div>
+						</div> : null}
 
 					<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>Log a Flight</button>
 
+					{!!dashboard.aircraftStats ?
+						<table className='metrics'>
+							{dashboard.aircraftStats.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}
+						</table>
+						: null}
 				</div>
 			</div>
 		</div>
+	)
+
+}
+
+function AircraftRow(props) {
+
+	return (
+		<tr>
+			<td>{props.aircraft.name}</td>
+			<td>{props.aircraft.flightCount}</td>
+			<td>{Times.toHourMinSec(props.aircraft.flightTime * 1000)}</td>
+		</tr>
 	)
 
 }
