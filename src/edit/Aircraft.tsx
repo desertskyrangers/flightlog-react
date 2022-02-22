@@ -24,15 +24,14 @@ export function calcWingLoading(weight, wingarea) {
 export default function Aircraft(props) {
 	const navigate = useNavigate();
 
+	const [advanced, setAdvanced] = useState(props.advanced || false)
+
 	const [id, setId] = useState(props.id || '')
 	const [name, setName] = useState(props.name || '')
 	const [type, setType] = useState(props.type || '')
 	const [make, setMake] = useState(props.make || '')
 	const [model, setModel] = useState(props.model || '')
 	const [status, setStatus] = useState(props.status || '')
-
-	const [advanced, setAdvanced] = useState(props.advanced || false)
-
 	const [wingspan, setWingspan] = useState(props.wingspan || '')
 	const [length, setLength] = useState(props.length || '')
 	const [wingarea, setWingarea] = useState(props.wingarea || '')
