@@ -178,7 +178,7 @@ export default function Aircraft(props) {
 							{!!weight ? <MetricRow label='Weight:' metric={weight} unit='g'/> : null}
 							{!!wingAspect ? <MetricRow label='Aspect Ratio:' metric={wingAspect} unit='' decimal={1}/> : null}
 							{!!wingMac ? <MetricRow label='Wing MAC:' metric={wingMac} unit='mm' decimal={1}/> : null}
-							{!!wingLoading ? <MetricRow label='Wing Loading:' metric={wingLoading} unit='g/cm²' decimal={4}/> : null}
+							{!!wingLoading ? <MetricRow label='Wing Loading:' metric={wingLoading} unit='g/cm²' decimal={2}/> : null}
 							</tbody>
 						</table>
 					</div>
