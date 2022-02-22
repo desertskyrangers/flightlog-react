@@ -26,10 +26,10 @@ export default function Aircraft(props) {
 
 	const [id, setId] = useState(props.id || '')
 	const [name, setName] = useState(props.name || '')
-	const [type, setType] = useState(props.type || 'fixedwing')
+	const [type, setType] = useState(props.type || '')
 	const [make, setMake] = useState(props.make || '')
 	const [model, setModel] = useState(props.model || '')
-	const [status, setStatus] = useState(props.status || 'airworthy')
+	const [status, setStatus] = useState(props.status || '')
 
 	const [advanced, setAdvanced] = useState(props.advanced || false)
 
@@ -47,8 +47,8 @@ export default function Aircraft(props) {
 	const [messages, setMessages] = useState([])
 
 	// Options
-	const [statusOptions, setStatusOptions] = useState([])
-	const [typeOptions, setTypeOptions] = useState([])
+	const [statusOptions, setStatusOptions] = useState([{'id': '', 'name': ''}])
+	const [typeOptions, setTypeOptions] = useState([{'id': '', 'name': ''}])
 	const [requestDelete, setRequestDelete] = useState(false)
 
 	const idRef = useRef(useParams().id)
@@ -93,7 +93,10 @@ export default function Aircraft(props) {
 	}
 
 	function loadAircraft() {
-		if (isNewRef.current) return
+		if (isNewRef.current) {
+			setAdvanced(true)
+			return
+		}
 		AircraftService.getAircraft(idRef.current, (result) => {
 			setId(result.aircraft.id)
 			setName(result.aircraft.name)
@@ -165,61 +168,17 @@ export default function Aircraft(props) {
 					<div className='vbox'>
 						<table className='metrics'>
 							<tbody>
-							<tr>
-								<td>Type:</td>
-								<td>{type}</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>Status:</td>
-								<td>{status}</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>Manufacturer:</td>
-								<td>{make}</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>Model:</td>
-								<td>{model}</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>Wing Span:</td>
-								<td>{wingspan}</td>
-								<td>mm</td>
-							</tr>
-							<tr>
-								<td>Length:</td>
-								<td>{length}</td>
-								<td>mm</td>
-							</tr>
-							<tr>
-								<td>Wing Area:</td>
-								<td>{wingarea}</td>
-								<td>cm²</td>
-							</tr>
-							<tr>
-								<td>Weight:</td>
-								<td>{weight}</td>
-								<td>g</td>
-							</tr>
-							<tr>
-								<td>Aspect Ratio:</td>
-								<td>{parseFloat(wingAspect).toFixed(1)}</td>
-								<td>&nbsp;</td>
-							</tr>
-							<tr>
-								<td>Wing Mac:</td>
-								<td>{parseFloat(wingMac).toFixed(1)}</td>
-								<td>mm</td>
-							</tr>
-							<tr>
-								<td>Wing Loading:</td>
-								<td>{parseFloat(wingLoading).toFixed(4)}</td>
-								<td>g/cm²</td>
-							</tr>
+							{!!type ? <DataRow label='Type:' data={(typeOptions.find(o => o.id === type) || {'name': ''}).name}/> : null}
+							{!!status ? <DataRow label='Status:' data={(statusOptions.find(o => o.id === status) || {'name': ''}).name}/> : null}
+							{!!make ? <DataRow label='Manufacturer:' data={make}/> : null}
+							{!!model ? <DataRow label='Model:' data={model}/> : null}
+							{!!wingspan ? <MetricRow label='Wing Span:' metric={wingspan} unit='mm'/> : null}
+							{!!length ? <MetricRow label='Length:' metric={length} unit='mm'/> : null}
+							{!!wingarea ? <MetricRow label='Wing Area::' metric={wingarea} unit='mm'/> : null}
+							{!!weight ? <MetricRow label='Weight:' metric={weight} unit='mm'/> : null}
+							{!!wingAspect ? <MetricRow label='Aspect Ratio:' metric={wingAspect} unit='mm'/> : null}
+							{!!wingMac ? <MetricRow label='Wing MAC:' metric={wingMac} unit='mm'/> : null}
+							{!!wingLoading ? <MetricRow label='Wing Loading:' metric={wingLoading} unit='mm'/> : null}
 							</tbody>
 						</table>
 					</div>
@@ -231,10 +190,12 @@ export default function Aircraft(props) {
 							<EntryField id='name' text='Name' type='text' value={name} required={true} autoFocus='autofocus' onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown}/>
 
 							<EntrySelect id='type' name='type' text='Type' value={type} required={true} onChange={(event) => setType(event.target.value)}>
+								<option key='unspecified' hidden>Select a type</option>
 								{typeOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 							</EntrySelect>
 
 							<EntrySelect id='status' name='status' text='Status' value={status} required={true} onChange={(event) => setStatus(event.target.value)}>
+								<option key='unspecified' hidden>Select a status</option>
 								{statusOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 							</EntrySelect>
 
@@ -269,4 +230,24 @@ export default function Aircraft(props) {
 		</div>
 	)
 
+}
+
+function DataRow(props) {
+
+	return (
+		<tr>
+			<td>{props.label}</td>
+			<td colSpan={2}>{props.data}</td>
+		</tr>
+	)
+}
+
+function MetricRow(props) {
+	return (
+		<tr>
+			<td>{props.label}</td>
+			<td>{props.metric}</td>
+			<td>{props.unit}</td>
+		</tr>
+	)
 }
