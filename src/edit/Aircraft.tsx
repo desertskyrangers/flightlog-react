@@ -177,8 +177,8 @@ export default function Aircraft(props) {
 							{!!wingarea ? <MetricRow label='Wing Area::' metric={wingarea} unit='mm'/> : null}
 							{!!weight ? <MetricRow label='Weight:' metric={weight} unit='mm'/> : null}
 							{!!wingAspect ? <MetricRow label='Aspect Ratio:' metric={wingAspect} unit='mm'/> : null}
-							{!!wingMac ? <MetricRow label='Wing MAC:' metric={wingMac} unit='mm'/> : null}
-							{!!wingLoading ? <MetricRow label='Wing Loading:' metric={wingLoading} unit='mm'/> : null}
+							{!!wingMac ? <MetricRow label='Wing MAC:' metric={wingMac} unit='mm' decimal={1}/> : null}
+							{!!wingLoading ? <MetricRow label='Wing Loading:' metric={wingLoading} unit='mm' decimal={4}/> : null}
 							</tbody>
 						</table>
 					</div>
@@ -246,7 +246,7 @@ function MetricRow(props) {
 	return (
 		<tr>
 			<td>{props.label}</td>
-			<td>{props.metric}</td>
+			<td>{parseFloat(props.metric).toFixed(!!props.decimal ? props.decimal : 0)}</td>
 			<td>{props.unit}</td>
 		</tr>
 	)
