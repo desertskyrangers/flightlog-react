@@ -17,8 +17,8 @@ export default function Flight(props) {
 
 	const navigate = useNavigate();
 
-	const paramTimestamp = useParams().timestamp
-	const paramDuration = useParams().duration
+	const paramTimestamp = parseInt(useParams().timestamp)
+	const paramDuration = parseInt(useParams().duration)
 
 	const [id, setId] = useState(props.id || '')
 	const [pilot, setPilot] = useState(props.pilot || TokenService.getUserId() || '')
@@ -48,7 +48,7 @@ export default function Flight(props) {
 
 	// References
 	const idRef = useRef(useParams().id)
-	const paramTimestampRef = useRef(new Date(Number.parseInt(paramTimestamp)))
+	const paramTimestampRef = useRef(new Date(paramTimestamp))
 	const previousMessages = useRef(messages)
 	const timestamp = useRef(props.timestamp)
 	const isNewRef = useRef(idRef.current === 'new')
