@@ -4,7 +4,7 @@ import AppPath from "../AppPath"
 import Battery from "./Battery"
 
 test('renders name field', () => {
-	render(<Router><Battery/></Router>)
+	render(<Router><Battery advanced={true}/></Router>)
 	const element = screen.getByLabelText(/name/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('INPUT')
@@ -13,7 +13,7 @@ test('renders name field', () => {
 })
 
 test('renders status field', () => {
-	render(<Router><Battery/></Router>)
+	render(<Router><Battery advanced={true}/></Router>)
 	const element = screen.getByLabelText(/status/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('SELECT')
@@ -21,7 +21,7 @@ test('renders status field', () => {
 })
 
 test('renders make field', () => {
-	render(<Router><Battery/></Router>)
+	render(<Router><Battery advanced={true}/></Router>)
 	const element = screen.getByLabelText(/manufacturer/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('INPUT')
@@ -30,7 +30,7 @@ test('renders make field', () => {
 })
 
 test('renders model field', () => {
-	render(<Router><Battery/></Router>)
+	render(<Router><Battery advanced={true}/></Router>)
 	const element = screen.getByLabelText(/model/i)
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('INPUT')
@@ -79,7 +79,7 @@ test('renders discharge rating field', () => {
 })
 
 test('renders update button', () => {
-	render(<Router><Battery/></Router>);
+	render(<Router><Battery advanced={true}/></Router>);
 	const element = screen.getByText('Update')
 	expect(element).toBeInTheDocument()
 	expect(element.nodeName).toBe('BUTTON')
@@ -89,7 +89,7 @@ test('renders save button', () => {
 	render(
 		<Router initialEntries={[AppPath.BATTERY + '/new']}>
 			<Routes>
-				<Route path={AppPath.BATTERY + '/:id'} element={<Battery/>}/>
+				<Route path={AppPath.BATTERY + '/:id'} element={<Battery advanced={true}/>}/>
 			</Routes>
 		</Router>
 	)
