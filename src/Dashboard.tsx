@@ -5,7 +5,7 @@ import UserService from "./api/UserService"
 import Notice from "./part/Notice"
 import ApiPath from "./AppPath"
 import AppPath from "./AppPath"
-import {useNavigate} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import './css/dashboard.css'
 
 export default function Dashboard(props) {
@@ -88,7 +88,7 @@ function AircraftRow(props) {
 
 	return (
 		<tr>
-			<td>{props.aircraft.name}</td>
+			<td><Link to={AppPath.AIRCRAFT + "/" + props.aircraft.id}>{props.aircraft.name}</Link></td>
 			<td>{props.aircraft.flightCount}</td>
 			<td>{Times.toHourMinSec(props.aircraft.flightTime * 1000)}</td>
 		</tr>
