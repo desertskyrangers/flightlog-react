@@ -17,7 +17,7 @@ export default function Dashboard(props) {
 		pilotFlightTime: 0
 	})
 
-	const [messages, setMessages] = useState(props.messages || '')
+	const [messages, setMessages] = useState(props.messages || [])
 
 	function clearMessages() {
 		setMessages([])
@@ -70,6 +70,8 @@ export default function Dashboard(props) {
 
 					<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>Log a Flight</button>
 
+					<WeeklyFlights></WeeklyFlights>
+
 					{!!dashboard.aircraftStats ?
 						<table className='stats'>
 							<tbody>
@@ -94,4 +96,11 @@ function AircraftRow(props) {
 		</tr>
 	)
 
+}
+
+function WeeklyFlights(props){
+	const [flightCount, setFlightCount] = useState(props.flightCount || 14)
+	return(
+		<div>Flights this week: {flightCount}</div>
+	)
 }
