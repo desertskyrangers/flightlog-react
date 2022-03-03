@@ -43,34 +43,14 @@ export default function Dashboard(props) {
 
 					<button className='page-action' onClick={() => navigate(ApiPath.FLIGHT_TIMER)}>Time a Flight</button>
 
-					<div className='hbox'>
-						<div className='vbox'>
-							<div className='dashboard-header'>Flights</div>
-							<div className='page-metric'>{dashboard.pilotFlightCount}</div>
-						</div>
-						<div className='v-separator'/>
-						<div className='vbox'>
-							<div className='dashboard-header'>Flight Time</div>
-							<div className='page-metric'>{Times.toHourMinSec(dashboard.pilotFlightTime * 1000)}</div>
-						</div>
-					</div>
-
-					{!!dashboard.observerFlightCount ?
-						<div className='hbox'>
-							<div className='vbox'>
-								<div className='dashboard-header'>Observations</div>
-								<div className='page-metric'>{dashboard.observerFlightCount}</div>
-							</div>
-							<div className='v-separator'/>
-							<div className='vbox'>
-								<div className='dashboard-header'>Observer Time</div>
-								<div className='page-metric'>{Times.toHourMinSec(dashboard.observerFlightTime * 1000)}</div>
-							</div>
-						</div> : null}
+					<table className='dashboard'>
+						<PilotStatsHeader/>
+						<PilotStats count={dashboard.pilotFlightCount} time={dashboard.pilotFlightTime}/>
+						{!!dashboard.observerFlightCount ? <ObserverStatsHeader/>: null}
+						{!!dashboard.observerFlightCount ? <ObserverStats count={dashboard.observerFlightCount} time={dashboard.observerFlightTime}/>: null}
+					</table>
 
 					<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>Log a Flight</button>
-
-					<WeeklyFlights></WeeklyFlights>
 
 					{!!dashboard.aircraftStats ?
 						<table className='stats'>
@@ -79,11 +59,51 @@ export default function Dashboard(props) {
 							</tbody>
 						</table>
 						: null}
+
+					<WeeklyFlights></WeeklyFlights>
 				</div>
 			</div>
 		</div>
 	)
 
+}
+
+function PilotStatsHeader() {
+	return (
+		<tr>
+			<td className='dashboard-header'>Flights</td>
+			<td className='dashboard-header'>Flight Time</td>
+		</tr>
+	)
+}
+
+function PilotStats(props) {
+
+	return (
+		<tr>
+			<td className='page-metric'>{props.count}</td>
+			<td className='page-metric'>{Times.toHourMinSec(props.time)}</td>
+		</tr>
+	)
+
+}
+
+function ObserverStatsHeader() {
+	return (
+		<tr>
+			<td className='dashboard-header'>Flights</td>
+			<td className='dashboard-header'>Observer Time</td>
+		</tr>
+	)
+}
+
+function ObserverStats(props) {
+	return (
+		<tr>
+			<td className='page-metric'>{props.count}</td>
+			<td className='page-metric'>{Times.toHourMinSec(props.time)}</td>
+		</tr>
+	)
 }
 
 function AircraftRow(props) {
@@ -92,15 +112,15 @@ function AircraftRow(props) {
 		<tr>
 			<td><Link to={AppPath.AIRCRAFT + "/" + props.aircraft.id}>{props.aircraft.name}</Link></td>
 			<td>{props.aircraft.flightCount}</td>
-			<td>{Times.toHourMinSec(props.aircraft.flightTime * 1000)}</td>
+			<td>{Times.toHourMinSec(props.aircraft.flightTime)}</td>
 		</tr>
 	)
 
 }
 
-function WeeklyFlights(props){
-	const [flightCount, setFlightCount] = useState(props.flightCount || 14)
-	return(
+function WeeklyFlights(props) {
+	const [flightCount] = useState(props.flightCount || 14)
+	return (
 		<div>Flights this week: {flightCount}</div>
 	)
 }

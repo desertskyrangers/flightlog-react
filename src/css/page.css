@@ -227,3 +227,40 @@
 	border-left: 1px solid currentColor;
 	height: 3.5rem;
 }
+
+table.flight-list {
+	border-collapse: separate;
+	border-spacing: 0 0.5rem;
+}
+
+table.flight-list tr {
+	cursor: pointer;
+	color: var(--foreground-1);
+	background: var(--background-3);
+
+	border: 1px solid red;
+}
+
+table.flight-list tr:hover {
+	color: var(--foreground-1);
+	background: var(--background-4);
+}
+
+table.flight-list td {
+	padding: 0.5rem;
+}
+
+table.flight-list td:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+table.flight-list td:last-child {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+table.flight-list td:nth-child(2) {
+	text-align: right;
+}
+

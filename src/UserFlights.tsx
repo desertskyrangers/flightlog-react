@@ -6,7 +6,7 @@ import Notice from "./part/Notice";
 import {useNavigate} from "react-router-dom";
 import AppPath from "./AppPath";
 import UserService from "./api/UserService";
-import Dates from "./util/Dates";
+import Times from "./util/Times";
 
 export default function UserFlights() {
 
@@ -56,7 +56,11 @@ function FlightList(props) {
 	if (props.flights.length === 0) {
 		page = <NoResults message='No flights'/>
 	} else {
-		page = props.flights.map((flight) => <FlightRow key={flight.id} value={flight.id} flight={flight}/>)
+		page = <table className='flight-list'>
+			<tbody>
+			{props.flights.map((flight) => <FlightRow key={flight.id} value={flight.id} flight={flight}/>)}
+			</tbody>
+		</table>
 	}
 
 	function add() {
@@ -81,7 +85,10 @@ function FlightRow(props) {
 	}
 
 	return (
-		<div className='page-result' onClick={open}>{Icons.fromUserFlightRole(props.flight.userFlightRole)} {Dates.humanDateHourMin(new Date(props.flight.timestamp))} {props.flight.name}</div>
+		<tr onClick={open}>
+			<td>{Icons.fromUserFlightRole(props.flight.userFlightRole)} {props.flight.name}</td>
+			<td>{Times.toMinSec(props.flight.duration)}</td>
+		</tr>
 	)
 
 }
