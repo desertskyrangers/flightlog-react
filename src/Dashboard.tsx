@@ -44,10 +44,12 @@ export default function Dashboard(props) {
 					<button className='page-action' onClick={() => navigate(ApiPath.FLIGHT_TIMER)}>Time a Flight</button>
 
 					<table className='dashboard'>
+						<tbody>
 						<PilotStatsHeader/>
 						<PilotStats count={dashboard.pilotFlightCount} time={dashboard.pilotFlightTime}/>
-						{!!dashboard.observerFlightCount ? <ObserverStatsHeader/>: null}
-						{!!dashboard.observerFlightCount ? <ObserverStats count={dashboard.observerFlightCount} time={dashboard.observerFlightTime}/>: null}
+						{!!dashboard.observerFlightCount ? <ObserverStatsHeader/> : null}
+						{!!dashboard.observerFlightCount ? <ObserverStats count={dashboard.observerFlightCount} time={dashboard.observerFlightTime}/> : null}
+						</tbody>
 					</table>
 
 					<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>Log a Flight</button>
