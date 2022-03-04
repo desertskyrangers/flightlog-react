@@ -67,33 +67,36 @@ export default function Dashboard(props) {
 			</div>
 		</div>
 	)
-
 }
 
 function PilotStatsHeader() {
 	return (
 		<tr>
 			<td className='dashboard-header'>Flights</td>
+			<td rowSpan={2}>
+				<div className='v-separator'/>
+			</td>
 			<td className='dashboard-header'>Flight Time</td>
 		</tr>
 	)
 }
 
 function PilotStats(props) {
-
 	return (
 		<tr>
 			<td className='page-metric'>{props.count}</td>
 			<td className='page-metric'>{Times.toHourMinSec(props.time)}</td>
 		</tr>
 	)
-
 }
 
 function ObserverStatsHeader() {
 	return (
 		<tr>
 			<td className='dashboard-header'>Flights</td>
+			<td rowSpan={2}>
+				<div className='v-separator'/>
+			</td>
 			<td className='dashboard-header'>Observer Time</td>
 		</tr>
 	)
@@ -109,7 +112,6 @@ function ObserverStats(props) {
 }
 
 function AircraftRow(props) {
-
 	return (
 		<tr>
 			<td><Link to={AppPath.AIRCRAFT + "/" + props.aircraft.id}>{props.aircraft.name}</Link></td>
@@ -117,7 +119,6 @@ function AircraftRow(props) {
 			<td>{Times.toHourMinSec(props.aircraft.flightTime)}</td>
 		</tr>
 	)
-
 }
 
 function WeeklyFlights(props) {

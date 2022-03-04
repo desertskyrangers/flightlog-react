@@ -264,3 +264,6 @@ table.flight-list td:nth-child(2) {
 	text-align: right;
 }
 
+table.flight-list td:nth-child(3) {
+	text-align: right;
+}

@@ -32,6 +32,25 @@ class Times {
 		return String(mm).padStart(2, '0') + ":" + String(ss).padStart(2, '0')
 	}
 
+	toAgoAbbrev(seconds) {
+		if( seconds < 0) return "Never"
+
+		let duration = Math.floor( seconds / 60 )
+		if (duration < 1) return "<1m ago"
+		if( duration < 60) return duration + "m ago"
+
+		duration = Math.floor( duration / 60 )
+		if( duration < 24 ) return duration + "h ago"
+
+		duration = Math.floor( duration / 24 )
+		if( duration < 7 ) return duration + "d ago"
+
+		duration = Math.floor( duration / 7 )
+		if( duration < 52 ) return duration + "w ago"
+
+		return duration + "y ago"
+	}
+
 }
 
 const instance = new Times()

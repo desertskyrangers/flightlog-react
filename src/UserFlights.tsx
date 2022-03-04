@@ -80,14 +80,26 @@ function FlightRow(props) {
 
 	const navigate = useNavigate();
 
+	const [ago, setAgo] = useState(-1);
+
 	function open() {
 		navigate(AppPath.FLIGHT + "/" + props.flight.id)
 	}
+
+	function updateAgo() {
+		setAgo((new Date().getTime() - props.flight.timestamp) / 1000)
+	}
+
+	useEffect(() => {
+		updateAgo()
+		setInterval(() => updateAgo, 10000)
+	}, [])
 
 	return (
 		<tr onClick={open}>
 			<td>{Icons.fromUserFlightRole(props.flight.userFlightRole)} {props.flight.name}</td>
 			<td>{Times.toMinSec(props.flight.duration)}</td>
+			<td>{Times.toAgoAbbrev(ago)}</td>
 		</tr>
 	)
 
