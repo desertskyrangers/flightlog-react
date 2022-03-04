@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Loading from "./part/Loading";
 import NoResults from "./part/NoResults";
 import Icons from "./util/Icons";
@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import AppPath from "./AppPath";
 import UserService from "./api/UserService";
 import Times from "./util/Times";
+import Ago from "./part/Ago";
 
 export default function UserFlights() {
 
@@ -80,27 +81,15 @@ function FlightRow(props) {
 
 	const navigate = useNavigate();
 
-	const [ago, setAgo] = useState(-1);
-
 	function open() {
 		navigate(AppPath.FLIGHT + "/" + props.flight.id)
 	}
-
-	const updateAgo = useCallback(() => {
-		setAgo((new Date().getTime() - props.flight.timestamp) / 1000)
-	}, [props.flight.timestamp])
-
-	useEffect(() => {
-		updateAgo()
-		const interval = setInterval(updateAgo, 10000)
-		return () => clearInterval(interval)
-	}, [updateAgo])
 
 	return (
 		<tr onClick={open}>
 			<td>{Icons.fromUserFlightRole(props.flight.userFlightRole)} {props.flight.name}</td>
 			<td>{Times.toMinSec(props.flight.duration)}</td>
-			<td>{Times.toAgoAbbrev(ago)}</td>
+			<td><Ago timestamp={props.flight.timestamp}/></td>
 		</tr>
 	)
 

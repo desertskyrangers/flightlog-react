@@ -7,6 +7,7 @@ import ApiPath from "./AppPath"
 import AppPath from "./AppPath"
 import {Link, useNavigate} from "react-router-dom"
 import './css/dashboard.css'
+import Ago from "./part/Ago";
 
 export default function Dashboard(props) {
 
@@ -62,7 +63,7 @@ export default function Dashboard(props) {
 						</table>
 						: null}
 
-					<WeeklyFlights></WeeklyFlights>
+					<LastFlight timestamp={dashboard.lastPilotFlightTimestamp}/>
 				</div>
 			</div>
 		</div>
@@ -121,9 +122,15 @@ function AircraftRow(props) {
 	)
 }
 
-function WeeklyFlights(props) {
-	const [flightCount] = useState(props.flightCount || 14)
+function LastFlight(props) {
 	return (
-		<div>Flights this week: {flightCount}</div>
+		<table className='metrics'>
+			<tbody>
+			<tr>
+				<td>Last flight:</td>
+				<td><Ago timestamp={props.timestamp}/></td>
+			</tr>
+			</tbody>
+		</table>
 	)
 }
