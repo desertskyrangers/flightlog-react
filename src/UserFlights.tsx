@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import Loading from "./part/Loading";
 import NoResults from "./part/NoResults";
 import Icons from "./util/Icons";
@@ -86,14 +86,15 @@ function FlightRow(props) {
 		navigate(AppPath.FLIGHT + "/" + props.flight.id)
 	}
 
-	function updateAgo() {
+	const updateAgo = useCallback(() => {
 		setAgo((new Date().getTime() - props.flight.timestamp) / 1000)
-	}
+	}, [props.flight.timestamp])
 
 	useEffect(() => {
 		updateAgo()
-		setInterval(() => updateAgo, 10000)
-	}, [])
+		const interval = setInterval(updateAgo, 10000)
+		return () => clearInterval(interval)
+	}, [updateAgo])
 
 	return (
 		<tr onClick={open}>
