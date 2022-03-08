@@ -6,6 +6,7 @@ class AppPath {
 	ABOUT = this.ROOT + "/about"
 	LEGAL = this.ROOT + "/legal"
 	LOGIN = this.ROOT + "/login"
+	PRIVACY = this.ROOT + "/privacy"
 	RECOVER = this.ROOT + "/recover"
 	REGISTER = this.ROOT + "/register"
 	RESET = this.ROOT + "/reset"

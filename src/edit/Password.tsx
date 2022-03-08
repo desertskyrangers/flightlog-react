@@ -76,7 +76,7 @@ export default function Password(props) {
 											onKeyDown={onKeyDown}
 											labelActionIcon={Icons.CLOSE}
 											onLabelAction={close}/>
-					<EntryField id='password' text='Password' type='password' value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={onKeyDown}/>
+					<EntryField id='password' text='New Password' type='password' value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={onKeyDown}/>
 					<EntryField id='verify-password' text='Verify Password' type='password' value={verifyPassword} onChange={(event) => setVerifyPassword(event.target.value)} onKeyDown={onKeyDown}/>
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
