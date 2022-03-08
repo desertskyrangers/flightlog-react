@@ -219,7 +219,13 @@ export default function Flight(props) {
 		if (event.target.value.length >= 2) {
 			const field = document.getElementById("durationMM")
 			field.focus();
-			//field.select();
+		}
+	}
+
+	function mmKeyUp(event) {
+		if (event.key === 'Backspace' && event.target.value.length === 0) {
+			const field = document.getElementById("durationHH")
+			field.focus();
 		}
 	}
 
@@ -228,7 +234,13 @@ export default function Flight(props) {
 		if (event.target.value.length >= 2) {
 			const field = document.getElementById("durationSS")
 			field.focus();
-			//field.select();
+		}
+	}
+
+	function ssKeyUp(event) {
+		if (event.key === 'Backspace' && event.target.value.length === 0) {
+			const field = document.getElementById("durationMM")
+			field.focus();
 		}
 	}
 
@@ -309,9 +321,9 @@ export default function Flight(props) {
 							<label htmlFor='durationHH' className='page-label'>Duration (hh:mm:ss)</label>
 						</div>
 						<div className='hbox'>
-							<input id='durationHH' data-testid='durationHH' className='page-field' type='number' value={durationHH} min={0} max={99} onChange={(event) => hhChanged(event)}/>:
-							<input id='durationMM' data-testid='durationMM' className='page-field' type='number' value={durationMM} min={0} max={59} onChange={(event) => mmChanged(event)}/>:
-							<input id='durationSS' data-testid='durationSS' className='page-field' type='number' value={durationSS} min={0} max={59} onChange={(event) => ssChanged(event)}/>
+							<input id='durationHH' data-testid='durationHH' className='page-field' type='number' value={durationHH} min={0} max={99} onChange={hhChanged}/>:
+							<input id='durationMM' data-testid='durationMM' className='page-field' type='number' value={durationMM} min={0} max={59} onChange={mmChanged} onKeyUp={mmKeyUp}/>:
+							<input id='durationSS' data-testid='durationSS' className='page-field' type='number' value={durationSS} min={0} max={59} onChange={ssChanged} onKeyUp={ssKeyUp}/>
 							<button className='icon page-field-action-button' onClick={updateDurationFromStartTime}>{Icons.CLOCK}</button>
 						</div>
 					</div>
