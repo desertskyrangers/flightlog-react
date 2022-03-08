@@ -7,6 +7,7 @@ import AppPath from "../AppPath";
 import UserService from "../api/UserService";
 import TokenService from "../api/TokenService";
 import Notice from "../part/Notice";
+import AppConfig from "../AppConfig";
 
 export default function Preferences(props) {
 	const navigate = useNavigate();
@@ -56,6 +57,9 @@ export default function Preferences(props) {
 
 	useEffect(loadPreferences, [])
 
+	const dashboardIdUrl = AppConfig.APP_URL + AppPath.DASHBOARD + "/" + TokenService.getUserId()
+	const dashboardUsernameUrl = AppConfig.APP_URL + AppPath.DASHBOARD + "/" + preferences.username
+
 	return (
 		<div className='page-container'>
 			<div className='page-body'>
@@ -94,6 +98,8 @@ export default function Preferences(props) {
 								updatePreference('enablePublicDashboard', !preferences.enablePublicDashboard)
 							}}
 						/>
+						{preferences.enablePublicDashboard ? <a href={dashboardIdUrl}>{dashboardIdUrl}</a> : null}
+						{preferences.enablePublicDashboard ? <a href={dashboardUsernameUrl}>{dashboardUsernameUrl}</a> : null}
 						<EntryCheck
 							id='show-public-observer-stats'
 							text='Show observer statistics'

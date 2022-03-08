@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react"
 import Times from "./util/Times"
-import TokenService from "./api/TokenService"
 import UserService from "./api/UserService"
 import Notice from "./part/Notice"
 import ApiPath from "./AppPath"
@@ -25,7 +24,7 @@ export default function Dashboard(props) {
 	}
 
 	function loadDashboard() {
-		UserService.dashboard(TokenService.getUserId(), (result) => {
+		UserService.dashboard((result) => {
 			setDashboard(result.dashboard)
 		}, (failure) => {
 			let messages = failure.messages

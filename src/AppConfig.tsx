@@ -2,6 +2,7 @@ class AppConfig {
 
 	HOSTNAME = window && window.location && window.location.hostname
 	API_URL = 'https://flightdeck.desertskyrangers.org'
+	APP_URL = 'https://flightdeck.desertskyrangers.org'
 	EMAIL_PATTERN = /[a-z0-9!#$%&'*+\\/=?^_{|}~-]+(?:\.[a-z0-9!#$%&'*+\\/=?^_{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9][a-z0-9-]*[a-z0-9]/
 	PHONE_PATTERN = /^[-+.()0-9 ]*$/
 
@@ -16,10 +17,13 @@ class AppConfig {
 	PASSWORD_LENGTH_MAX = 128
 
 	constructor() {
-		if (this.HOSTNAME === 'localhost') this.API_URL = 'http://localhost:8050';
+		if (this.HOSTNAME === 'localhost') {
+			this.API_URL = 'http://localhost:8050';
+			this.APP_URL = 'http://localhost:3000';
+		}
 
-		console.log("HOSTNAME=" + this.HOSTNAME)
 		console.log("API_URL=" + this.API_URL)
+		console.log("APP_URL=" + this.APP_URL)
 	}
 
 }
