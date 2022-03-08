@@ -1,4 +1,5 @@
 import {render, screen} from "@testing-library/react";
+import React from "react";
 import {BrowserRouter as Router} from "react-router-dom";
 import UserActions from "./UserActions";
 
@@ -10,9 +11,9 @@ test('renders profile button', () => {
 	expect(element).toHaveClass('page-action');
 });
 
-test('renders password button', () => {
+test('renders security button', () => {
 	render(<Router><UserActions/></Router>);
-	const element = screen.getByText(/password/i);
+	const element = screen.getByText(/security/i);
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('BUTTON');
 	expect(element).toHaveClass('page-action');
