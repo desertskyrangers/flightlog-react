@@ -1,11 +1,10 @@
 import React, {useEffect, useRef, useState} from "react"
 import UserService from "./api/UserService"
 import Notice from "./part/Notice"
-import {Link, useParams} from "react-router-dom"
+import {useParams} from "react-router-dom"
 import './css/dashboard.css'
 import Times from "./util/Times";
 import Ago from "./part/Ago";
-import AppPath from "./AppPath";
 
 export default function PublicDashboard(props) {
 
