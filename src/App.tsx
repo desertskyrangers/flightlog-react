@@ -34,6 +34,7 @@ import UserGroups from "./UserGroups";
 import Group from "./edit/Group";
 import Preferences from "./edit/Preferences";
 import Privacy from "./Privacy";
+import PublicDashboard from "./PublicDashboard";
 
 function Protect({children}) {
   return TokenService.isAuthenticated() ? <div><NavBar/>{children}</div> : <Navigate to={ApiPath.LOGIN}/>;
@@ -59,8 +60,9 @@ function App() {
         <Header/>
         <div className='content'>
           <Routes>
-            {/* Login */}
+            {/* Public */}
             <Route path={AppPath.ABOUT} element={<About version={version}/>}/>
+            <Route path={AppPath.DASHBOARD + "/:id"} element={<PublicDashboard/>}/>
             <Route path={AppPath.LEGAL} element={<Legal/>}/>
             <Route path={AppPath.LOGIN} element={<Login version={version}/>}/>
             <Route path={AppPath.PRIVACY} element={<Privacy/>}/>

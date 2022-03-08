@@ -14,6 +14,7 @@ class AppPath {
 
 	// Protected (requires authentication)
 	HOME = this.ROOT + "/"
+	DASHBOARD = this.ROOT + "/dashboard"
 
 	AIRCRAFT = this.ROOT + "/aircraft"
 	GROUP_AIRCRAFT = this.AIRCRAFT + "/group"
