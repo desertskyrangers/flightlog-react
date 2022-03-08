@@ -113,7 +113,7 @@ function ObserverStats(props) {
 function AircraftRow(props) {
 	return (
 		<tr>
-			<td><Link to={AppPath.AIRCRAFT + "/" + props.aircraft.id}>{props.aircraft.name}</Link></td>
+			<td>{props.aircraft.name}</td>
 			<td>{props.aircraft.flightCount}</td>
 			<td>{Times.toHourMinSec(props.aircraft.flightTime)}</td>
 		</tr>
