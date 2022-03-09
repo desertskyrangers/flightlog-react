@@ -41,16 +41,16 @@ export default function PublicDashboard(props) {
 				<div className='page-form'>
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 
-					<h1>{dashboard.displayName}</h1>
+					{!!dashboard.displayName ? <h1>{dashboard.displayName}</h1> : null}
 
-					<table className='dashboard'>
+					{!!dashboard.displayName ? <table className='dashboard'>
 						<tbody>
-						<PilotStatsHeader/>
-						<PilotStats count={dashboard.pilotFlightCount} time={dashboard.pilotFlightTime}/>
+						{!!dashboard.pilotFlightCount ? <PilotStatsHeader/> : null}
+						{!!dashboard.pilotFlightCount ? <PilotStats count={dashboard.pilotFlightCount} time={dashboard.pilotFlightTime}/> : null}
 						{!!dashboard.observerFlightCount ? <ObserverStatsHeader/> : null}
 						{!!dashboard.observerFlightCount ? <ObserverStats count={dashboard.observerFlightCount} time={dashboard.observerFlightTime}/> : null}
 						</tbody>
-					</table>
+					</table> : null}
 
 					{!!dashboard.aircraftStats ?
 						<table className='stats'>
@@ -60,7 +60,7 @@ export default function PublicDashboard(props) {
 						</table>
 						: null}
 
-					<LastFlight timestamp={dashboard.lastPilotFlightTimestamp}/>
+					{!!dashboard.lastPilotFlightTimestamp ? <LastFlight timestamp={dashboard.lastPilotFlightTimestamp}/> : null}
 				</div>
 			</div>
 		</div>
