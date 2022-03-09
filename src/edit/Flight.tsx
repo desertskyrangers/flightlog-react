@@ -12,6 +12,7 @@ import FlightService from "../api/FlightService";
 import Dates from "../util/Dates";
 import AppPath from "../AppPath";
 import TokenService from "../api/TokenService";
+import EntryData from "../part/EntryData";
 
 export default function Flight(props) {
 
@@ -26,7 +27,7 @@ export default function Flight(props) {
 	const [observer, setObserver] = useState(props.observer || TokenService.getUserId() || '')
 	const [unlistedObserver, setUnlistedObserver] = useState(props.unlistedObserver || '')
 	const [aircraft, setAircraft] = useState(props.aircraft || 'unspecified')
-	const [battery, setBattery] = useState(props.battery || '')
+	const [batteries, setBatteries] = useState(props.batteries || [])
 	const [startTime, setStartTime] = useState(props.startTime || '')
 	const [duration, setDuration] = useState(paramDuration || '')
 	const [durationHH, setDurationHH] = useState('0')
@@ -128,7 +129,7 @@ export default function Flight(props) {
 				setObserver(result.flight.observer || '')
 				setUnlistedObserver(result.flight.unlistedObserver || '')
 				setAircraft(result.flight.aircraft || '')
-				setBattery(result.flight.batteries[0] || '')
+				setBatteries(result.flight.batteries || [])
 				setTimestampRef.current(result.flight.timestamp ? new Date(result.flight.timestamp) : new Date())
 				updateDurationSecondsRef.current(result.flight.duration)
 				setNotes(result.flight.notes || '')
@@ -148,7 +149,7 @@ export default function Flight(props) {
 			observer: observer,
 			unlistedObserver: unlistedObserver,
 			aircraft: aircraft,
-			batteries: [battery],
+			batteries: batteries,
 			timestamp: timestamp.current.getTime(),
 			duration: duration,
 			notes: notes,
@@ -252,6 +253,28 @@ export default function Flight(props) {
 		}
 	}
 
+	function addBattery(id) {
+		console.log("Add battery " + id)
+		if (id === '') return;
+		const newBatteries = [...batteries]
+		newBatteries.unshift('')
+		setBatteries(newBatteries)
+	}
+
+	function updateBattery(index, id) {
+		console.log("Update battery " + index + "=" + id)
+		const newBatteries = [...batteries]
+		newBatteries[index] = id
+		setBatteries(newBatteries)
+	}
+
+	function removeBattery(index) {
+		console.log("Remove battery " + index)
+		const newBatteries = [...batteries]
+		newBatteries.splice(index,1)
+		setBatteries(newBatteries)
+	}
+
 	useLayoutEffect(() => {
 		const validPilot = !!pilot && pilot !== ''
 		const validObserver = !!observer && observer !== ''
@@ -302,9 +325,16 @@ export default function Flight(props) {
 						<option key='unspecified' hidden>Select an aircraft</option>
 						{aircraftOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
-					<EntrySelect id='battery' text='Battery' value={battery} onChange={(event) => setBattery(event.target.value)}>
-						{batteryOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
-					</EntrySelect>
+
+					<BatteryField battery={batteries[0] || ''} setBattery={(battery) => updateBattery(0, battery || '')} addBattery={() => addBattery(batteries[0] || '')} batteryOptions={batteryOptions}/>
+					{batteries.slice(1, batteries.length)
+						.map((battery, index) =>
+							<ExtraBatteryField key={battery} battery={battery}
+																 removeBattery={() => removeBattery(index+1)}
+																 batteryOptions={batteryOptions}
+																 last={false}/>
+						)
+					}
 
 					<EntryField id='startTime'
 											text='Start date and time'
@@ -345,6 +375,37 @@ export default function Flight(props) {
 				</div>
 			</div>
 		</div>
+	)
+
+}
+
+function BatteryField(props) {
+
+	return (
+		<EntrySelect id='battery'
+								 text='Battery'
+								 value={props.battery}
+								 onChange={(event) => props.setBattery(event.target.value)}
+								 fieldActionTitle='Add another battery'
+								 onFieldAction={props.addBattery}
+								 fieldActionIcon={Icons.ADD}>
+			{props.batteryOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
+		</EntrySelect>
+	)
+
+}
+
+function ExtraBatteryField(props) {
+
+	return (
+		<EntryData id='battery'
+							 value={props.batteryOptions.find(item => item.id === props.battery).name}
+							 onChange={(event) => props.setBattery(event.target.value)}
+							 fieldActionTitle='Add another battery'
+							 onFieldAction={props.removeBattery}
+							 fieldActionIcon={Icons.DELETE}>
+			{props.batteryOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
+		</EntryData>
 	)
 
 }

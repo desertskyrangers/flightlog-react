@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 
-export default function EntrySelect(props) {
+export default function EntryData(props) {
 
 	const isRequired: boolean = props.required
 	const help: string = !props.help ? '' : '(' + props.help + ')'
@@ -23,9 +23,7 @@ export default function EntrySelect(props) {
 					</div> : null
 			}
 			<div className='hbox'>
-				<select id={props.id} name={props.id} value={props.value} className='page-field' onChange={props.onChange} onKeyDown={props.onKeyDown}>
-					{props.children}
-				</select>
+				<span className='page-field'>{props.value}</span>
 				{props.fieldActionIcon ? <button className='icon page-field-action-button' title={props.fieldActionTitle} onClick={props.onFieldAction}>{props.fieldActionIcon}</button> : null}
 			</div>
 		</div>

@@ -35,7 +35,7 @@ export default function EntryCheck(props) {
               <label className='page-label'>{help}</label>
             </div> : null
         }
-        {props.fieldActionIcon ? <button className='icon page-field-action-button' onClick={props.onFieldAction}>{props.fieldActionIcon}</button> : null}
+        {props.fieldActionIcon ? <button className='icon page-field-action-button' title={props.fieldActionTitle} onClick={props.onFieldAction}>{props.fieldActionIcon}</button> : null}
       </div>
   )
 
