@@ -254,7 +254,6 @@ export default function Flight(props) {
 	}
 
 	function addBattery(id) {
-		console.log("Add battery " + id)
 		if (id === '') return;
 		const newBatteries = [...batteries]
 		newBatteries.unshift('')
@@ -262,14 +261,12 @@ export default function Flight(props) {
 	}
 
 	function updateBattery(index, id) {
-		console.log("Update battery " + index + "=" + id)
 		const newBatteries = [...batteries]
 		newBatteries[index] = id
 		setBatteries(newBatteries)
 	}
 
 	function removeBattery(index) {
-		console.log("Remove battery " + index)
 		const newBatteries = [...batteries]
 		newBatteries.splice(index,1)
 		setBatteries(newBatteries)
