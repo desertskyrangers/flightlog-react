@@ -6,6 +6,7 @@ import Notice from "./part/Notice";
 import {useNavigate} from "react-router-dom";
 import AppPath from "./AppPath";
 import UserService from "./api/UserService";
+import Times from "./util/Times";
 
 export default function UserBatteries() {
 
@@ -51,7 +52,11 @@ function BatteryList(props) {
 	if (props.batteries.length === 0) {
 		page = <NoResults message='No batteries found'/>
 	} else {
-		page = props.batteries.map((craft) => <BatteryRow key={craft.id} value={craft.id} battery={craft}/>)
+		page = <table className='flight-list'>
+			<tbody>
+			{props.batteries.map((craft) => <BatteryRow key={craft.id} value={craft.id} battery={craft}/>)}
+			</tbody>
+		</table>
 	}
 
 	function add() {
@@ -75,20 +80,12 @@ function BatteryRow(props) {
 		navigate(AppPath.BATTERY + "/" + props.battery.id)
 	}
 
-	function icon(status, life) {
-		if (status === "destroyed") {
-			return Icons.fromBatteryStatus(status)
-		} else {
-			if (life > 80) return Icons.BATTERY_FULL;
-			if (life > 60) return Icons.BATTERY_THREE_QUARTER;
-			if (life > 40) return Icons.BATTERY_HALF;
-			if (life > 20) return Icons.BATTERY_QUARTER;
-			return Icons.BATTERY_EMPTY;
-		}
-	}
-
 	return (
-		<div className='page-result' onClick={open}>{icon(props.battery.status, props.battery.life)} {props.battery.name}</div>
+		<tr onClick={open}>
+			<td>{Icons.fromBatteryStatusAndLife(props.battery.status, props.battery.life)} {props.battery.name}</td>
+			<td>{props.battery.flightCount}</td>
+			<td>{Times.toMinSec(props.battery.flightTime)}</td>
+		</tr>
 	)
 
 }

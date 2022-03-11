@@ -6,6 +6,7 @@ import Notice from "./part/Notice";
 import {useNavigate} from "react-router-dom";
 import AppPath from "./AppPath";
 import UserService from "./api/UserService";
+import Times from "./util/Times";
 
 export default function UserAircraft() {
 
@@ -51,7 +52,11 @@ function AircraftList(props) {
 	if (props.aircraft.length === 0) {
 		page = <NoResults message='No aircraft found'/>
 	} else {
-		page = props.aircraft.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)
+		page = <table className='flight-list'>
+			<tbody>
+			{props.aircraft.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}
+			</tbody>
+		</table>
 	}
 
 	function add() {
@@ -75,17 +80,12 @@ function AircraftRow(props) {
 		navigate(AppPath.AIRCRAFT + "/" + props.aircraft.id)
 	}
 
-	function icon(type, status) {
-		if (status === 'airworthy' || status === 'preflight') {
-			return Icons.fromAircraftType(type)
-		} else {
-			return Icons.fromAircraftStatus(status);
-		}
-	}
-
 	return (
-		<div className='page-result' onClick={open}>{icon(props.aircraft.type, props.aircraft.status)} {props.aircraft.name}</div>
+		<tr onClick={open}>
+			<td>{Icons.fromAircraftTypeAndStatus(props.aircraft.type, props.aircraft.status)} {props.aircraft.name}</td>
+			<td>{props.aircraft.flightCount}</td>
+			<td>{Times.toMinSec(props.aircraft.flightTime)}</td>
+		</tr>
 	)
 
 }
-

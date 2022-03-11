@@ -141,12 +141,31 @@ class Icons {
 		return icon
 	}
 
+	fromAircraftTypeAndStatus(type, status) {
+		if (status === 'airworthy' || status === 'preflight') {
+			return this.fromAircraftType(type)
+		} else {
+			return this.fromAircraftStatus(status);
+		}
+	}
+
 	fromBatteryStatus(status) {
 		let icon = instance.batteryStatusIcons[status]
 		if (!icon) icon = instance.BATTERY
 		return icon
 	}
 
+	fromBatteryStatusAndLife(status, life) {
+		if (status === "destroyed") {
+			return this.fromBatteryStatus(status)
+		} else {
+			if (life > 80) return this.BATTERY_FULL;
+			if (life > 60) return this.BATTERY_THREE_QUARTER;
+			if (life > 40) return this.BATTERY_HALF;
+			if (life > 20) return this.BATTERY_QUARTER;
+			return this.BATTERY_EMPTY;
+		}
+	}
 }
 
 const instance = new Icons()
