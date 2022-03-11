@@ -103,11 +103,11 @@ export default function Preferences(props) {
 								updatePreference('enablePublicDashboard', !preferences.enablePublicDashboard)
 							}}
 						/>
+						{preferences.enablePublicDashboard ? <EntryLink to={dashboardUsernameUrl} value='Friendly Link' fieldActionIcon={Icons.COPY} fieldActionTitle='Copy Link' onFieldAction={() => {
+							copyToClipboard(dashboardUsernameUrl)
+						}}/> : null}
 						{preferences.enablePublicDashboard ? <EntryLink to={dashboardIdUrl} value='Forever Link' fieldActionIcon={Icons.COPY} fieldActionTitle='Copy Link' onFieldAction={() => {
 							copyToClipboard(dashboardIdUrl)
-						}}/> : null}
-						{preferences.enablePublicDashboard ? <EntryLink to={dashboardUsernameUrl} value='Username Link' fieldActionIcon={Icons.COPY} fieldActionTitle='Copy Link' onFieldAction={() => {
-							copyToClipboard(dashboardUsernameUrl)
 						}}/> : null}
 						<EntryCheck
 							id='show-public-observer-stats'
