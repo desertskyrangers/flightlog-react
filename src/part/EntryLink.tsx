@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function EntryData(props) {
+export default function EntryLink(props) {
 
 	const isRequired: boolean = props.required
 	const help: string = !props.help ? '' : '(' + props.help + ')'
@@ -23,7 +23,7 @@ export default function EntryData(props) {
 					</div> : null
 			}
 			<div className='hbox'>
-				<span className='page-text'>{props.value}</span>
+				<a className='page-text' href={props.to}>{props.value}</a>
 				{props.fieldActionIcon ? <span className='icon page-field-action-button' title={props.fieldActionTitle} onClick={props.onFieldAction}>{props.fieldActionIcon}</span> : null}
 			</div>
 		</div>

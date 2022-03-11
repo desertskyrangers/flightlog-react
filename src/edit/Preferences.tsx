@@ -8,6 +8,7 @@ import UserService from "../api/UserService";
 import TokenService from "../api/TokenService";
 import Notice from "../part/Notice";
 import AppConfig from "../AppConfig";
+import EntryLink from "../part/EntryLink";
 
 export default function Preferences(props) {
 	const navigate = useNavigate();
@@ -55,6 +56,10 @@ export default function Preferences(props) {
 		})
 	}
 
+	function copyToClipboard(content: string) {
+		return navigator.clipboard.writeText(content)
+	}
+
 	useEffect(loadPreferences, [])
 
 	const dashboardIdUrl = AppConfig.APP_URL + AppPath.DASHBOARD + "/" + TokenService.getUserId()
@@ -98,8 +103,12 @@ export default function Preferences(props) {
 								updatePreference('enablePublicDashboard', !preferences.enablePublicDashboard)
 							}}
 						/>
-						{preferences.enablePublicDashboard ? <a href={dashboardIdUrl}>{dashboardIdUrl}</a> : null}
-						{preferences.enablePublicDashboard ? <a href={dashboardUsernameUrl}>{dashboardUsernameUrl}</a> : null}
+						{preferences.enablePublicDashboard ? <EntryLink to={dashboardIdUrl} value='Forever Link' fieldActionIcon={Icons.COPY} fieldActionTitle='Copy Link' onFieldAction={() => {
+							copyToClipboard(dashboardIdUrl)
+						}}/> : null}
+						{preferences.enablePublicDashboard ? <EntryLink to={dashboardUsernameUrl} value='Username Link' fieldActionIcon={Icons.COPY} fieldActionTitle='Copy Link' onFieldAction={() => {
+							copyToClipboard(dashboardUsernameUrl)
+						}}/> : null}
 						<EntryCheck
 							id='show-public-observer-stats'
 							text='Show observer statistics'

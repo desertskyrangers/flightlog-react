@@ -15,6 +15,7 @@ import {
 	faCalendar,
 	faCheck,
 	faClock,
+	faCopy,
 	faEllipsisH,
 	faEllipsisV,
 	faEnvelope,
@@ -57,6 +58,7 @@ class Icons {
 	CLUB = <FontAwesomeIcon icon={faUserFriends}/>
 	COLLAPSE = <FontAwesomeIcon icon={faAngleUp}/>
 	COMPANY = <FontAwesomeIcon icon={faBuilding}/>
+	COPY = <FontAwesomeIcon icon={faCopy}/>
 	DASHBOARD = <FontAwesomeIcon icon={faTv}/>
 	DELETE = <FontAwesomeIcon icon={faTrash}/>
 	DRONE = <DroneIcon/>
