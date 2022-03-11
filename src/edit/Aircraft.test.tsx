@@ -1,7 +1,8 @@
-import {render, screen} from "@testing-library/react";
+import React from "react";
 import {MemoryRouter as Router, Route, Routes} from "react-router-dom";
 import Aircraft, {calcAspectRatio, calcMeanAirfoilChord, calcWingLoading} from "./Aircraft";
 import AppPath from "../AppPath";
+import {render, screen} from "@testing-library/react";
 
 test('calculate aspect ratio', () => {
 	expect(calcAspectRatio(1500, 3000)).toBe(7.5)
@@ -91,6 +92,14 @@ test('renders weight field', () => {
 	expect(element.nodeName).toBe('INPUT')
 	expect(element).toHaveAttribute('type', 'text')
 	expect(element).toHaveClass('page-field')
+})
+
+test('renders night lights field', () => {
+	render(<Router><Aircraft advanced={true}/></Router>)
+	const element = screen.getByLabelText(/lights for night flying/i)
+	expect(element).toBeInTheDocument()
+	expect(element.nodeName).toBe('INPUT')
+	expect(element).toHaveAttribute('type', 'checkbox')
 })
 
 test('renders update button', () => {

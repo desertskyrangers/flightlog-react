@@ -8,6 +8,7 @@ import Icons from "../util/Icons";
 import EntryField from "../part/EntryField";
 import DeleteWithConfirm from "../part/DeleteWithConfirm";
 import EntrySelect from "../part/EntrySelect";
+import EntryCheck from "../part/EntryCheck";
 
 export function calcAspectRatio(wingspan, wingarea) {
 	return (wingspan * wingspan) / (wingarea * 100)
@@ -36,6 +37,7 @@ export default function Aircraft(props) {
 	const [length, setLength] = useState(props.length || '')
 	const [wingarea, setWingarea] = useState(props.wingarea || '')
 	const [weight, setWeight] = useState(props.weight || '')
+	const [nightLights, setNightLights] = useState(props.nightLights || false)
 
 	// Derived
 	const [wingAspect, setWingAspect] = useState(props.wingAspect || '')
@@ -56,16 +58,16 @@ export default function Aircraft(props) {
 	function update() {
 		AircraftService.updateAircraft({
 			id: idRef.current,
-			name: name,
-			type: type,
-			make: make,
-			model: model,
-			status: status,
-
-			wingspan: wingspan,
-			length: length,
-			wingarea: wingarea,
-			weight: weight
+			name,
+			type,
+			make,
+			model,
+			status,
+			wingspan,
+			length,
+			wingarea,
+			weight,
+			nightLights
 		}, (success) => {
 			close()
 		}, (failure) => {
@@ -107,6 +109,7 @@ export default function Aircraft(props) {
 			setLength(result.aircraft.length)
 			setWingarea(result.aircraft.wingarea)
 			setWeight(result.aircraft.weight)
+			setNightLights(result.aircraft.nightLights || '')
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -178,6 +181,7 @@ export default function Aircraft(props) {
 							{!!wingAspect ? <MetricRow label='Aspect Ratio:' metric={wingAspect} unit='' decimal={1}/> : null}
 							{!!wingMac ? <MetricRow label='Wing MAC:' metric={wingMac} unit='mm' decimal={1}/> : null}
 							{!!wingLoading ? <MetricRow label='Wing Loading:' metric={wingLoading} unit='g/cm²' decimal={2}/> : null}
+							<DataRow label='Night flying lights:' data={nightLights ? "yes" : "no"}/>
 							</tbody>
 						</table>
 					</div>
@@ -205,6 +209,8 @@ export default function Aircraft(props) {
 							<EntryField id='length' text='Length (mm)' type='text' value={length} onChange={(event) => setLength(event.target.value)} onKeyDown={onKeyDown}/>
 							<EntryField id='wingarea' text='Wing Area (cm²)' type='text' value={wingarea} onChange={(event) => setWingarea(event.target.value)} onKeyDown={onKeyDown}/>
 							<EntryField id='weight' text='Weight (g)' type='text' value={weight} onChange={(event) => setWeight(event.target.value)} onKeyDown={onKeyDown}/>
+
+							<EntryCheck id='nightlights' text='Lights for night flying' checked={nightLights} onChange={() => setNightLights(!nightLights)}/>
 
 							{/* Advanced properties
 							* motor radius (mm)
