@@ -11,6 +11,7 @@ import GroupService from "./api/GroupService";
 import TokenService from "./api/TokenService";
 import {MembershipGroup} from "./part/MembershipGroup";
 import MembershipService from "./api/MembershipService";
+import Loading from "./part/Loading";
 
 export default function UserGroups(props) {
 	const navigate = useNavigate();
@@ -21,6 +22,13 @@ export default function UserGroups(props) {
 
 	function clearMessages() {
 		setMessages([])
+	}
+
+	let list;
+	if (!!groups) {
+		list = <MembershipList memberships={memberships} groups={groups} onMembershipRequest={requestMembership} onMemberUpdate={loadMemberships}/>
+	} else {
+		list = <Loading/>
 	}
 
 	function loadGroups() {
@@ -61,7 +69,7 @@ export default function UserGroups(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<MembershipList memberships={memberships} groups={groups} onMembershipRequest={requestMembership} onMemberUpdate={loadMemberships}/>
+					{list}
 					<button className='page-action' onClick={() => navigate(AppPath.GROUP + "/new")}>Create a new Group</button>
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 				</div>
@@ -112,9 +120,11 @@ function MembershipList(props) {
 	}
 
 	let memberships = <NoResults message='No group memberships'/>
-	if (!!props.memberships && props.memberships.length > 0) memberships = props.memberships.map((membership) => <MembershipGroup key={membership.id}
-																																																																membership={membership}
-																																																																onMemberUpdate={props.onMemberUpdate}/>)
+	if (!!props.memberships && props.memberships.length > 0)
+		memberships = props.memberships.map((membership) =>
+			<MembershipGroup key={membership.id}
+											 membership={membership}
+											 onMemberUpdate={props.onMemberUpdate}/>)
 
 	return (
 		<div className='vbox'>
