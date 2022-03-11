@@ -84,7 +84,7 @@ function BatteryRow(props) {
 		<tr onClick={open}>
 			<td>{Icons.fromBatteryStatusAndLife(props.battery.status, props.battery.life)} {props.battery.name}</td>
 			<td>{props.battery.flightCount}</td>
-			<td>{Times.toMinSec(props.battery.flightTime)}</td>
+			<td>{Times.toHourMinSec(props.battery.flightTime)}</td>
 		</tr>
 	)
 
