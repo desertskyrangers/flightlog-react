@@ -11,6 +11,7 @@ import {
 	faBatteryQuarter,
 	faBatteryThreeQuarters,
 	faBinoculars,
+	faShareNodes,
 	faBuilding,
 	faCalendar,
 	faCheck,
@@ -79,6 +80,7 @@ class Icons {
 	PLANE = <FontAwesomeIcon icon={faPlane}/>
 	REVOKE = <FontAwesomeIcon icon={faBan}/>
 	SEND = <FontAwesomeIcon icon={faAngleDoubleRight}/>
+	SHARE = <FontAwesomeIcon icon={faShareNodes}/>
 	UNKNOWN = <FontAwesomeIcon icon={faQuestion}/>
 	USER = <FontAwesomeIcon icon={faUserAlt}/>
 	WAIT = <FontAwesomeIcon icon={faSpinner}/>
