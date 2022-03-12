@@ -268,7 +268,7 @@ export default function Flight(props) {
 
 	function removeBattery(index) {
 		const newBatteries = [...batteries]
-		newBatteries.splice(index,1)
+		newBatteries.splice(index, 1)
 		setBatteries(newBatteries)
 	}
 
@@ -327,7 +327,7 @@ export default function Flight(props) {
 					{batteries.slice(1, batteries.length)
 						.map((battery, index) =>
 							<ExtraBatteryField key={battery} battery={battery}
-																 removeBattery={() => removeBattery(index+1)}
+																 removeBattery={() => removeBattery(index + 1)}
 																 batteryOptions={batteryOptions}
 																 last={false}/>
 						)
