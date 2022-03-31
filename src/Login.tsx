@@ -48,7 +48,7 @@ export default function Login(props) {
 				<div className='page-form'>
 					<Username onChange={updateUsername} onKeyDown={onKeyDown}/>
 					<Password onChange={updatePassword} onKeyDown={onKeyDown}/>
-					<Link className='page-link' to={AppPath.RECOVER}>Forget your password?</Link>
+					<Link className='page-link' to={AppPath.RECOVER}>Forgot password?</Link>
 					<button className='page-submit' onClick={login}>Sign In</button>
 					<Notice messages={messages} priority='error' clearMessages={clearMessages}/>
 					<Link className='page-link' to={AppPath.REGISTER}>Need an account?</Link>
@@ -70,7 +70,7 @@ function Username(props) {
 						 autoCapitalize='none'
 						 autoCorrect='off'
 						 autoComplete='username'
-						 autoFocus='autofocus'
+						 autoFocus={true}
 						 className='page-field'
 						 onChange={props.onChange}
 						 onKeyDown={props.onKeyDown}/>
