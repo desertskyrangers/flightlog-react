@@ -1,3 +1,4 @@
+import React from 'react';
 import {render, screen} from "@testing-library/react";
 import {MemoryRouter as Router} from "react-router-dom";
 import Verify from "./Verify";

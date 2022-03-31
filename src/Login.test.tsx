@@ -1,3 +1,4 @@
+import React from 'react';
 import {render, screen} from '@testing-library/react';
 import Login from './Login';
 import {MemoryRouter as Router} from "react-router-dom";
@@ -20,7 +21,7 @@ test('renders password field', () => {
 
 test('renders forgot password link', () => {
 	render(<Router><Login/></Router>);
-	const element = screen.getByText(/forget your password/i);
+	const element = screen.getByText(/forgot password/i);
 	expect(element).toBeInTheDocument();
 	expect(element.nodeName).toBe('A');
 });
