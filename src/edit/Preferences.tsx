@@ -106,6 +106,14 @@ export default function Preferences(props) {
 								updatePreference('showAircraftStats', !preferences.showAircraftStats)
 							}}
 						/>
+						<EntryCheck
+							id='show-all-aircraft'
+							text='Show all aircraft'
+							checked={preferences.showAllAircraft}
+							onChange={() => {
+								updatePreference('showAllAircraft', !preferences.showAllAircraft)
+							}}
+						/>
 					</PreferenceSection>
 					<PreferenceSection preferences={preferences} title='Public Dashboard'>
 						<EntryCheck
@@ -136,6 +144,14 @@ export default function Preferences(props) {
 							checked={preferences.showPublicAircraftStats}
 							onChange={() => {
 								updatePreference('showPublicAircraftStats', !preferences.showPublicAircraftStats)
+							}}
+						/>
+						<EntryCheck
+							id='show-public-all-aircraft'
+							text='Show all aircraft'
+							checked={preferences.showPublicAllAircraft}
+							onChange={() => {
+								updatePreference('showPublicAllAircraft', !preferences.showPublicAllAircraft)
 							}}
 						/>
 					</PreferenceSection>
