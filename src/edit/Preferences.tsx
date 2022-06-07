@@ -16,9 +16,11 @@ export default function Preferences(props) {
 	const [preferences, setPreferences] = useState(props.preferences || {
 		showObserverStats: false,
 		showAircraftStats: false,
+		showAllAircraft: false,
 		enablePublicDashboard: false,
 		showPublicObserverStats: false,
 		showPublicAircraftStats: false,
+		showPublicAllAircraft: false,
 		flightListView: 'week',
 		showObserverFlights: false,
 		showOwnerFlights: false
