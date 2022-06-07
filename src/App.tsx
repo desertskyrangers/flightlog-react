@@ -33,7 +33,6 @@ import Dashboard from "./Dashboard";
 import UserGroups from "./UserGroups";
 import Group from "./edit/Group";
 import Preferences from "./edit/Preferences";
-import Privacy from "./Privacy";
 import PublicDashboard from "./PublicDashboard";
 
 function Protect({children}) {
