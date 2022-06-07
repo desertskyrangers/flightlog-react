@@ -20,8 +20,8 @@ export default function UserActions() {
 			<div className='page-body'>
 				<div className='page-form'>
 					<button className='page-action' onClick={() => navigate(ApiPath.PROFILE)}>Profile</button>
-					<button className='page-action' onClick={() => navigate(ApiPath.PASSWORD)}>Security</button>
 					<button className='page-action' onClick={() => navigate(ApiPath.PREFERENCES)}>Preferences</button>
+					<button className='page-action' onClick={() => navigate(ApiPath.SECURITY)}>Security</button>
 					<div/>
 					<button className='page-action' onClick={() => navigate(ApiPath.PRIVACY)}>Privacy Policy</button>
 					<button className='page-action' onClick={() => navigate(ApiPath.ABOUT)}>About</button>

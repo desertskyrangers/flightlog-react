@@ -90,6 +90,7 @@ function App() {
             <Route path={AppPath.PASSWORD} element={<Protect children={<Password/>}/>}/>
             <Route path={AppPath.PREFERENCES} element={<Protect children={<Preferences/>}/>}/>
             <Route path={AppPath.PROFILE} element={<Protect children={<Profile/>}/>}/>
+            <Route path={AppPath.SECURITY} element={<Protect children={<Password/>}/>}/>
             {/*<Route path={AppPath.ORG + "/:id"} element={<Protect children={<Org/>}/>}/>*/}
             <Route path={AppPath.USER_AIRCRAFT} element={<Protect children={<UserAircraft/>}/>}/>
             <Route path={AppPath.USER_BATTERIES} element={<Protect children={<UserBatteries/>}/>}/>

@@ -39,6 +39,7 @@ class AppPath {
 	PASSWORD = this.USER + "/password"
 	PREFERENCES = this.USER + "/preferences"
 	PROFILE = this.USER + "/profile"
+	SECURITY = this.USER + "/security"
 }
 
 const instance = new AppPath()
