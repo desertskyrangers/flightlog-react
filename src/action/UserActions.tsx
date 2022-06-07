@@ -23,7 +23,6 @@ export default function UserActions() {
 					<button className='page-action' onClick={() => navigate(ApiPath.PREFERENCES)}>Preferences</button>
 					<button className='page-action' onClick={() => navigate(ApiPath.SECURITY)}>Security</button>
 					<div/>
-					<button className='page-action' onClick={() => navigate(ApiPath.PRIVACY)}>Privacy Policy</button>
 					<button className='page-action' onClick={() => navigate(ApiPath.ABOUT)}>About</button>
 					<div/>
 					<button className='page-action' onClick={logout}>Logout</button>

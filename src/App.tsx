@@ -65,7 +65,7 @@ function App() {
             <Route path={AppPath.DASHBOARD + "/:id"} element={<PublicDashboard/>}/>
             <Route path={AppPath.LEGAL} element={<Legal/>}/>
             <Route path={AppPath.LOGIN} element={<Login version={version}/>}/>
-            <Route path={AppPath.PRIVACY} element={<Privacy/>}/>
+            <Route path={AppPath.PRIVACY} element={<About version={version}/>}/>
             <Route path={AppPath.RECOVER} element={<Recover/>}/>
             <Route path={AppPath.REGISTER} element={<Register/>}/>
             <Route path={AppPath.RESET} element={<Reset/>}/>
