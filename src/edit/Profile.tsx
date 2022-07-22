@@ -18,6 +18,7 @@ export default function Profile(props) {
 	const [firstName, setFirstName] = useState(props.firstName || '')
 	const [lastName, setLastName] = useState(props.lastName || '')
 	const [preferredName, setPreferredName] = useState(props.preferredName || '')
+	const [callSign, setCallSign] = useState(props.callSign || '')
 	const [email, setEmail] = useState(props.email || '')
 	const [emailVerified, setEmailVerified] = useState(props.emailVerified || '')
 	const [smsNumber, setSmsNumber] = useState(props.smsNumber || '')
@@ -41,6 +42,7 @@ export default function Profile(props) {
 			firstName,
 			lastName,
 			preferredName,
+			callSign,
 			email,
 			emailVerified,
 			smsNumber,
@@ -96,6 +98,7 @@ export default function Profile(props) {
 			setFirstName(result.account.firstName || '')
 			setLastName(result.account.lastName || '')
 			setPreferredName(result.account.preferredName || '')
+			setCallSign(result.account.callSign || '')
 			setEmail(result.account.email || '')
 			setEmailVerified(result.account.emailVerified || false)
 			setSmsNumber(result.account.smsNumber || '')
@@ -149,6 +152,7 @@ export default function Profile(props) {
 					<EntryField id='firstName' text='First Name' type='text' value={firstName} onChange={updateFirstName} onKeyDown={onKeyDown}/>
 					<EntryField id='lastName' text='Last Name' type='text' value={lastName} onChange={updateLastName} onKeyDown={onKeyDown}/>
 					<EntryField id='preferredName' text='Preferred Name' type='text' value={preferredName} onChange={(event) => setPreferredName(event.target.value)} onKeyDown={onKeyDown}/>
+					<EntryField id='callSign' text='Call Sign' type='text' value={callSign} onChange={(event) => setCallSign(event.target.value)} onKeyDown={onKeyDown}/>
 					<EntryField id='email' text='Email' type='text' value={email} onChange={(event) => setEmail(event.target.value)} onKeyDown={onKeyDown}/>
 					<EntryField id='smsNumber' text='SMS Number' type='text' value={smsNumber} onChange={(event) => setSmsNumber(event.target.value)} onKeyDown={onKeyDown}/>
 					<div>

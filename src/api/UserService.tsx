@@ -43,6 +43,7 @@ class UserService extends ApiService {
         firstName: account.firstName,
         lastName: account.lastName,
         preferredName: account.preferredName,
+        callSign: account.callSign,
         email: account.email,
         smsNumber: account.smsNumber,
         smsCarrier: account.smsCarrier
