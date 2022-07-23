@@ -19,7 +19,7 @@ function NoticeElement(props) {
 					return (<div key={index} className='notice-message'>{message}</div>)
 				})}
 			</div>
-			<CloseButton onClick={props.onClick}/>
+			{!!props.onClick ? <CloseButton onClick={props.onClick}/> : null}
 		</div>
 	)
 }

@@ -45,6 +45,7 @@ export default function Aircraft(props) {
 	const [wingLoading, setWingLoading] = useState(props.wingLoading || '');
 
 	// Messages
+	const [notices, setNotices] = useState([])
 	const [messages, setMessages] = useState([])
 
 	// Options
@@ -151,6 +152,14 @@ export default function Aircraft(props) {
 		})
 	}
 
+	function verifyWeight(weight) {
+		let notices = []
+		if( weight > 250 ) notices = ['Recreational flyers must add manufacturer and model information for all UAS over 250 grams (0.55 pounds) that they own and operate']
+		setNotices(notices)
+	}
+
+	useEffect(() => verifyWeight(weight), [weight])
+
 	useEffect(() => setWingAspect(calcAspectRatio(wingspan, wingarea)), [wingspan, wingarea])
 	useEffect(() => setWingMac(calcMeanAirfoilChord(wingspan, wingarea)), [wingspan, wingarea])
 	useEffect(() => setWingLoading(calcWingLoading(weight, wingarea)), [weight, wingarea])
@@ -184,6 +193,7 @@ export default function Aircraft(props) {
 							<DataRow label='Night flying lights:' data={nightLights ? "yes" : "no"}/>
 							</tbody>
 						</table>
+						<Notice priority='warn' messages={notices}/>
 					</div>
 
 					<button className='icon centered' onClick={toggleAdvanced}>{advanced ? Icons.COLLAPSE : Icons.ADVANCED_V}</button>
