@@ -73,7 +73,7 @@ class UserService extends ApiService {
   getAircraftPage(page, successCallback, failureCallback) {
     this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT + "?pg=" + page + "&pz=10", {
       method: 'GET',
-    }).then((response) => {
+    }).then((response :Object) => {
       successCallback(response)
     }).catch((error) => {
       failureCallback(error)

@@ -23,7 +23,7 @@ export default function UserAircraft() {
 
 	function loadAircraftPage(page) {
 		UserService.getAircraftPage(page, (success) => {
-			setAircraft(success.aircraft)
+			setAircraft(success)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -49,12 +49,12 @@ function AircraftList(props) {
 	const navigate = useNavigate();
 
 	let page
-	if (props.aircraft.length === 0) {
+	if (props.aircraft.page.content.length === 0) {
 		page = <NoResults message='No aircraft found'/>
 	} else {
 		page = <table className='flight-list'>
 			<tbody>
-			{props.aircraft.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}
+			{props.aircraft.page.content.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}
 			</tbody>
 		</table>
 	}
