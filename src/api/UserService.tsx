@@ -71,7 +71,7 @@ class UserService extends ApiService {
   }
 
   getAircraftPage(page, successCallback, failureCallback) {
-    this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT + "?pg=" + page + "&pz=10", {
+    this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT + "?pg=" + page + "&pz=100", {
       method: 'GET',
     }).then((response :Object) => {
       successCallback(response)
@@ -81,7 +81,7 @@ class UserService extends ApiService {
   }
 
   getBatteryPage(page, successCallback, failureCallback) {
-    this.fetch(Config.API_URL + ApiPath.USER_BATTERY + "?pg=" + page + "&pz=10", {
+    this.fetch(Config.API_URL + ApiPath.USER_BATTERY + "?pg=" + page + "&pz=100", {
       method: 'GET',
     }).then((response) => {
       successCallback(response)
@@ -91,7 +91,7 @@ class UserService extends ApiService {
   }
 
   getFlightPage(page, successCallback, failureCallback) {
-    this.fetch(Config.API_URL + ApiPath.USER_FLIGHT + "?pg=" + page + "&pz=10", {
+    this.fetch(Config.API_URL + ApiPath.USER_FLIGHT + "?pg=" + page + "&pz=100", {
       method: 'GET',
     }).then((response) => {
       successCallback(response)
