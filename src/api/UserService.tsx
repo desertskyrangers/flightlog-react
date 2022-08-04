@@ -81,7 +81,7 @@ class UserService extends ApiService {
   }
 
   getBatteryPage(page, successCallback, failureCallback) {
-    this.fetch(Config.API_URL + ApiPath.USER_BATTERY + "/" + page, {
+    this.fetch(Config.API_URL + ApiPath.USER_BATTERY + "?pg=" + page + "&pz=10", {
       method: 'GET',
     }).then((response) => {
       successCallback(response)
@@ -91,7 +91,7 @@ class UserService extends ApiService {
   }
 
   getFlightPage(page, successCallback, failureCallback) {
-    this.fetch(Config.API_URL + ApiPath.USER_FLIGHT + "/" + page, {
+    this.fetch(Config.API_URL + ApiPath.USER_FLIGHT + "?pg=" + page + "&pz=10", {
       method: 'GET',
     }).then((response) => {
       successCallback(response)
@@ -101,7 +101,7 @@ class UserService extends ApiService {
   }
 
   getGroupPage(page, successCallback, failureCallback) {
-    this.fetch(Config.API_URL + ApiPath.USER_GROUP + "/" + page, {
+    this.fetch(Config.API_URL + ApiPath.USER_GROUP , {
       method: 'GET',
     }).then((response) => {
       successCallback(response)

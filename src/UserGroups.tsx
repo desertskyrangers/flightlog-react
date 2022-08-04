@@ -44,7 +44,7 @@ export default function UserGroups(props) {
 
 	function loadMemberships() {
 		UserService.getMemberships((response) => {
-			setMemberships(response.memberships)
+			setMemberships(response.data)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]

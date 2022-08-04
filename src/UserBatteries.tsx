@@ -23,7 +23,7 @@ export default function UserBatteries() {
 
 	function loadBatteryPage(page) {
 		UserService.getBatteryPage(page, (success) => {
-			setBatteries(success.batteries)
+			setBatteries(success.page.content)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]

@@ -28,7 +28,7 @@ export default function UserFlights() {
 
 	function loadFlightPage(page) {
 		UserService.getFlightPage(page, (success) => {
-			setFlights(success.flights)
+			setFlights(success.page.content)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
