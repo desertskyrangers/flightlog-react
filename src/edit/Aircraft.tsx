@@ -69,7 +69,7 @@ export default function Aircraft(props) {
 			wingarea,
 			weight,
 			nightLights
-		}, (success) => {
+		}, (aircraft) => {
 			close()
 		}, (failure) => {
 			let messages = failure.messages
@@ -99,18 +99,18 @@ export default function Aircraft(props) {
 			setAdvanced(true)
 			return
 		}
-		AircraftService.getAircraft(idRef.current, (result) => {
-			setId(result.aircraft.id)
-			setName(result.aircraft.name)
-			setType(result.aircraft.type)
-			setMake(result.aircraft.make || '')
-			setModel(result.aircraft.model || '')
-			setStatus(result.aircraft.status)
-			setWingspan(result.aircraft.wingspan)
-			setLength(result.aircraft.length)
-			setWingarea(result.aircraft.wingarea)
-			setWeight(result.aircraft.weight)
-			setNightLights(result.aircraft.nightLights || '')
+		AircraftService.getAircraft(idRef.current, (aircraft) => {
+			setId(aircraft.id)
+			setName(aircraft.name)
+			setType(aircraft.type)
+			setMake(aircraft.make || '')
+			setModel(aircraft.model || '')
+			setStatus(aircraft.status)
+			setWingspan(aircraft.wingspan)
+			setLength(aircraft.length)
+			setWingarea(aircraft.wingarea)
+			setWeight(aircraft.weight)
+			setNightLights(aircraft.nightLights || '')
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
