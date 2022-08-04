@@ -50,10 +50,6 @@ export default function UserBatteries() {
 function BatteryList(props) {
 	const navigate = useNavigate();
 
-	if (props.page.number == 0) {
-		console.log("total pages=" + props.page.totalPages)
-	}
-
 	let content
 	if (props.batteries.length === 0) {
 		content = <NoResults message='No batteries found'/>
