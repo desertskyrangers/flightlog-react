@@ -11,19 +11,21 @@ import Times from "./util/Times";
 export default function UserBatteries() {
 
 	const [batteries, setBatteries] = useState()
-	const [page] = useState(0)
+	const [page, setPage] = useState()
 	const [messages, setMessages] = useState([])
 
 	let list;
 	if (!!batteries) {
-		list = <BatteryList batteries={batteries}/>
+		list = <BatteryList page={page} batteries={batteries} loadBatteryPage={loadBatteryPage}/>
 	} else {
 		list = <Loading/>
 	}
 
 	function loadBatteryPage(page) {
 		UserService.getBatteryPage(page, (success) => {
+			console.log(JSON.stringify(success.page))
 			setBatteries(success.page.content)
+			setPage(success.page)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -31,7 +33,7 @@ export default function UserBatteries() {
 		})
 	}
 
-	useEffect(() => loadBatteryPage(page), [page])
+	useEffect(() => loadBatteryPage(0), [])
 
 	return (
 		<div className='page-container'>
@@ -48,11 +50,15 @@ export default function UserBatteries() {
 function BatteryList(props) {
 	const navigate = useNavigate();
 
-	let page
+	if (props.page.number == 0) {
+		console.log("total pages=" + props.page.totalPages)
+	}
+
+	let content
 	if (props.batteries.length === 0) {
-		page = <NoResults message='No batteries found'/>
+		content = <NoResults message='No batteries found'/>
 	} else {
-		page = <table className='flight-list'>
+		content = <table className='flight-list'>
 			<tbody>
 			{props.batteries.map((craft) => <BatteryRow key={craft.id} value={craft.id} battery={craft}/>)}
 			</tbody>
@@ -63,10 +69,22 @@ function BatteryList(props) {
 		navigate(AppPath.BATTERY + "/new")
 	}
 
+	function prior() {
+		props.loadBatteryPage(props.page.number - 1)
+	}
+
+	function next() {
+		props.loadBatteryPage(props.page.number + 1)
+	}
+
 	return (
 		<div className='vbox'>
-			<button className='page-action' onClick={add}>Add an Battery</button>
-			{page}
+			<div className='hbox'>
+				<button className='page-action icon' onClick={prior} disabled={props.page.first}>&lt;</button>
+				<button className='page-action main' onClick={add}>Add an Battery</button>
+				<button className='page-action icon' onClick={next} disabled={props.page.last}>&gt;</button>
+			</div>
+			{content}
 		</div>
 	)
 
