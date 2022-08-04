@@ -11,10 +11,11 @@ import {
 	faBatteryQuarter,
 	faBatteryThreeQuarters,
 	faBinoculars,
-	faShareNodes,
 	faBuilding,
 	faCalendar,
 	faCheck,
+	faChevronLeft,
+	faChevronRight,
 	faClock,
 	faCopy,
 	faEllipsisH,
@@ -26,6 +27,7 @@ import {
 	faPlane,
 	faPlus,
 	faQuestion,
+	faShareNodes,
 	faSpinner,
 	faTrash,
 	faTv,
@@ -76,6 +78,8 @@ class Icons {
 	NO_RESULT = <FontAwesomeIcon icon={faBan}/>
 	OBSERVER = <FontAwesomeIcon icon={faBinoculars}/>
 	OWNER = <FontAwesomeIcon icon={faKey}/>
+	PAGE_NEXT = <FontAwesomeIcon icon={faChevronRight}/>
+	PAGE_PRIOR = <FontAwesomeIcon icon={faChevronLeft}/>
 	PILOT = <FontAwesomeIcon icon={faUserAlt}/>
 	PLANE = <FontAwesomeIcon icon={faPlane}/>
 	REVOKE = <FontAwesomeIcon icon={faBan}/>

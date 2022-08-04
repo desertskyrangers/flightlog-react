@@ -76,9 +76,9 @@ function BatteryList(props) {
 	return (
 		<div className='vbox'>
 			<div className='hbox'>
-				<button className='page-action icon' onClick={prior} disabled={props.page.first}>&lt;</button>
-				<button className='page-action main' onClick={add}>Add a Battery</button>
-				<button className='page-action icon' onClick={next} disabled={props.page.last}>&gt;</button>
+				<button className='page-action icon' onClick={prior} disabled={props.page.first}>{Icons.PAGE_PRIOR}</button>
+				<button className='page-action' onClick={add}>Add a Battery</button>
+				<button className='page-action icon' onClick={next} disabled={props.page.last}>{Icons.PAGE_NEXT}</button>
 			</div>
 			{content}
 		</div>

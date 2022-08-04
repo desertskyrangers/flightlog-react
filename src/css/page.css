@@ -154,15 +154,12 @@
 }
 
 .page-action {
+	width: 100%;
 	white-space: nowrap;
 }
 
 .page-action.icon {
-	/*aspect-ratio : 1 / 1;*/
-}
-
-.page-action.main {
-	width: 100%;
+	width: 3rem;
 }
 
 .page-action:hover {
