@@ -82,7 +82,7 @@ function AircraftRow(props) {
 
 	return (
 		<tr onClick={open}>
-			<td>{Icons.fromAircraftTypeAndStatus(props.aircraft.type, props.aircraft.status)} {props.aircraft.name}</td>
+			<td className='no-wrap'>{Icons.fromAircraftTypeAndStatus(props.aircraft.type, props.aircraft.status)} {props.aircraft.name}</td>
 			<td>{props.aircraft.flightCount}</td>
 			<td>{Times.toHourMinSec(props.aircraft.flightTime)}</td>
 		</tr>

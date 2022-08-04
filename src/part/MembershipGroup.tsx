@@ -4,6 +4,7 @@ import MembershipIcon from "./MembershipStatusIcon";
 import {useCallback, useEffect, useState} from "react";
 import MembershipService from "../api/MembershipService";
 import Icons from "../util/Icons";
+import React from "react";
 
 export function MembershipGroup(props) {
 	const navigate = useNavigate();
@@ -61,7 +62,7 @@ export function MembershipGroup(props) {
 			<div className={isOwner() ? 'page-result' : 'page-row'} onClick={doClick}>
 				<MembershipIcon status={props.membership.status}/>
 				{/*&nbsp;{Icons.fromGroupType(props.membership.group.type)}*/}
-				<span className='page-text'>{props.membership.group.name}</span>
+				<span className='page-text, no-wrap'>{props.membership.group.name}</span>
 			</div>
 			{acceptAction ? <button className='icon' onClick={doAccept}>{Icons.ACCEPT}</button> : null}
 			{cancelAction ? <button className='icon' onClick={doCancel}>{Icons.CANCEL}</button> : null}
