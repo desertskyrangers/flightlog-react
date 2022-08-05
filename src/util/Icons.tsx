@@ -3,6 +3,7 @@ import {
 	faAngleDoubleRight,
 	faAngleDown,
 	faAngleUp,
+	faAsterisk,
 	faBan,
 	faBars,
 	faBatteryEmpty,
@@ -49,6 +50,7 @@ class Icons {
 	AIRCRAFT_DESTROYED = <FontAwesomeIcon icon={faBan}/>
 	BARS = <FontAwesomeIcon icon={faBars}/>
 	BATTERY = <FontAwesomeIcon icon={faBatteryFull}/>
+	BATTERY_NEW = <span className='fa-layers'><FontAwesomeIcon icon={faBatteryFull}/><FontAwesomeIcon icon={faAsterisk} transform='shrink-4 up-5 left-7'/></span>
 	BATTERY_FULL = <FontAwesomeIcon icon={faBatteryFull}/>
 	BATTERY_THREE_QUARTER = <FontAwesomeIcon icon={faBatteryThreeQuarters}/>
 	BATTERY_HALF = <FontAwesomeIcon icon={faBatteryHalf}/>
@@ -119,7 +121,7 @@ class Icons {
 	}
 
 	private batteryStatusIcons = {
-		new: this.BATTERY,
+		new: this.BATTERY_NEW,
 		available: this.BATTERY,
 		destroyed: this.BATTERY_DESTROYED
 	}
@@ -163,7 +165,7 @@ class Icons {
 	}
 
 	fromBatteryStatusAndLife(status, life) {
-		if (status === "destroyed") {
+		if (status !== "available") {
 			return this.fromBatteryStatus(status)
 		} else {
 			if (life > 80) return this.BATTERY_FULL;
