@@ -10,21 +10,26 @@ import Times from "./util/Times";
 
 export default function UserBatteries() {
 
-	const [batteries, setBatteries] = useState()
 	const [page, setPage] = useState()
+	const [unavailablePage, setUnavailablePage] = useState()
 	const [messages, setMessages] = useState([])
+	const [showUnavailable, setShowUnavailable] = useState(false)
 
 	let list;
-	if (!!batteries) {
-		list = <BatteryList page={page} batteries={batteries} loadBatteryPage={loadBatteryPage}/>
+	if (!!page) {
+		list = <BatteryList
+			page={page}
+			unavailablePage={unavailablePage}
+			showUnavailable={showUnavailable}
+			loadBatteryPage={loadBatteryPage}
+			loadUnavailableBatteryPage={loadUnavailableBatteryPage}
+			setShowUnavailable={setShowUnavailable}/>
 	} else {
 		list = <Loading/>
 	}
 
 	function loadBatteryPage(page) {
 		UserService.getBatteryPage(page, (success) => {
-			console.log(JSON.stringify(success.page))
-			setBatteries(success.page.content)
 			setPage(success.page)
 		}, (failure) => {
 			let messages = failure.messages
@@ -33,7 +38,18 @@ export default function UserBatteries() {
 		})
 	}
 
+	function loadUnavailableBatteryPage(page) {
+		UserService.getUnavailableBatteryPage(page, (success) => {
+			setUnavailablePage(success.page)
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			if (!!messages) setMessages(messages)
+		})
+	}
+
 	useEffect(() => loadBatteryPage(0), [])
+	useEffect(() => loadUnavailableBatteryPage(0), [])
 
 	return (
 		<div className='page-container'>
@@ -50,15 +66,32 @@ export default function UserBatteries() {
 function BatteryList(props) {
 	const navigate = useNavigate();
 
-	let content
-	if (props.batteries.length === 0) {
+	let content: JSX.Element;
+	if (props.page.content.length === 0) {
 		content = <NoResults message='No batteries found'/>
 	} else {
 		content = <table className='flight-list'>
 			<tbody>
-			{props.batteries.map((craft) => <BatteryRow key={craft.id} value={craft.id} battery={craft}/>)}
+			{props.page.content.map((craft) => <BatteryRow key={craft.id} value={craft.id} battery={craft}/>)}
 			</tbody>
 		</table>
+	}
+
+	let unavailableBatteryContent: JSX.Element;
+	let unavailableIcon: JSX.Element;
+	if (props.showUnavailable === false) {
+		unavailableIcon = Icons.ADVANCED_V;
+	} else {
+		if (props.unavailablePage.content.length === 0) {
+			unavailableBatteryContent = <NoResults message='No unavailable batteries found'/>
+		} else {
+			unavailableBatteryContent = <table className='flight-list'>
+				<tbody>
+				{props.unavailablePage.content.map((craft) => <BatteryRow key={craft.id} value={craft.id} battery={craft}/>)}
+				</tbody>
+			</table>
+		}
+		unavailableIcon = Icons.COLLAPSE;
 	}
 
 	function add() {
@@ -73,6 +106,10 @@ function BatteryList(props) {
 		props.loadBatteryPage(props.page.number + 1)
 	}
 
+	function toggleUnavailable() {
+		props.setShowUnavailable(!props.showUnavailable)
+	}
+
 	return (
 		<div className='vbox'>
 			<div className='hbox'>
@@ -81,6 +118,8 @@ function BatteryList(props) {
 				<button className='page-action icon' onClick={next} disabled={props.page.last}>{Icons.PAGE_NEXT}</button>
 			</div>
 			{content}
+			<button className='icon centered' onClick={toggleUnavailable}>{unavailableIcon}</button>
+			{unavailableBatteryContent}
 		</div>
 	)
 

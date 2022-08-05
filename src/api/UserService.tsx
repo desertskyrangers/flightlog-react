@@ -73,7 +73,7 @@ class UserService extends ApiService {
   getAircraftPage(page, successCallback, failureCallback) {
     this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT + "?pg=" + page + "&pz=100", {
       method: 'GET',
-    }).then((response :Object) => {
+    }).then((response) => {
       successCallback(response)
     }).catch((error) => {
       failureCallback(error)
@@ -81,7 +81,17 @@ class UserService extends ApiService {
   }
 
   getBatteryPage(page, successCallback, failureCallback) {
-    this.fetch(Config.API_URL + ApiPath.USER_BATTERY + "?pg=" + page + "&pz=10", {
+    this.fetch(Config.API_URL + ApiPath.USER_BATTERY + "?filter=available&pg=" + page + "&pz=10", {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
+
+  getUnavailableBatteryPage(page, successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_BATTERY + "?filter=unavailable&pg=" + page + "&pz=10", {
       method: 'GET',
     }).then((response) => {
       successCallback(response)

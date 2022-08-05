@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
 	faAngleDoubleRight,
 	faAngleDown,
@@ -28,6 +28,7 @@ import {
 	faPlus,
 	faQuestion,
 	faShareNodes,
+	faSlash,
 	faSpinner,
 	faTrash,
 	faTv,
@@ -35,9 +36,9 @@ import {
 	faUserFriends,
 	faUsers
 } from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import DroneIcon from "../icon/DroneIcon";
-import CloseIcon from "../icon/CloseIcon";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import DroneIcon from "../icon/DroneIcon"
+import CloseIcon from "../icon/CloseIcon"
 
 class Icons {
 
@@ -53,7 +54,7 @@ class Icons {
 	BATTERY_HALF = <FontAwesomeIcon icon={faBatteryHalf}/>
 	BATTERY_QUARTER = <FontAwesomeIcon icon={faBatteryQuarter}/>
 	BATTERY_EMPTY = <FontAwesomeIcon icon={faBatteryEmpty}/>
-	BATTERY_DESTROYED = <FontAwesomeIcon icon={faBan}/>
+	BATTERY_DESTROYED = <span className='fa-layers'><FontAwesomeIcon icon={faBatteryEmpty}/><FontAwesomeIcon icon={faSlash}/></span>
 	CALENDAR = <FontAwesomeIcon icon={faCalendar}/>
 	CANCEL = <FontAwesomeIcon icon={faBan}/>
 	CLOCK = <FontAwesomeIcon icon={faClock}/>
