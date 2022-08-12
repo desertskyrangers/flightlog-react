@@ -87,7 +87,7 @@ function BatteryList(props) {
 		} else {
 			unavailableBatteryContent = <table className='flight-list'>
 				<tbody>
-				{props.unavailablePage.content.map((craft) => <BatteryRow key={craft.id} value={craft.id} battery={craft}/>)}
+				{props.unavailablePage.content.map((battery) => <BatteryRow key={battery.id} value={battery.id} battery={battery}/>)}
 				</tbody>
 			</table>
 		}

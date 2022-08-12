@@ -10,20 +10,28 @@ import Times from "./util/Times";
 
 export default function UserAircraft() {
 
-	const [aircraft, setAircraft] = useState()
-	const [page] = useState(0)
+	const [page, setPage] = useState()
+	const [unavailablePage, setUnavailablePage] = useState()
 	const [messages, setMessages] = useState([])
+	const [showUnavailable, setShowUnavailable] = useState(false)
 
 	let list;
-	if (!!aircraft) {
-		list = <AircraftList aircraft={aircraft}/>
+	if (!!page) {
+		list = <AircraftList
+			page={page}
+			unavailablePage={unavailablePage}
+			showUnavailable={showUnavailable}
+			loadAircraftPage={loadAircraftPage}
+			loadUnavailableAircraftPage={loadUnavailableAircraftPage}
+			setShowUnavailable={setShowUnavailable}
+		/>
 	} else {
 		list = <Loading/>
 	}
 
 	function loadAircraftPage(page) {
 		UserService.getAircraftPage(page, (success) => {
-			setAircraft(success.page.content)
+			setPage(success.page)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -31,7 +39,18 @@ export default function UserAircraft() {
 		})
 	}
 
-	useEffect(() => loadAircraftPage(page), [page])
+	function loadUnavailableAircraftPage(page) {
+		UserService.getUnavailableAircraftPage(page, (success) => {
+			setUnavailablePage(success.page)
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			if (!!messages) setMessages(messages)
+		})
+	}
+
+	useEffect(() => loadAircraftPage(0), [])
+	useEffect(() => loadUnavailableAircraftPage(0), [])
 
 	return (
 		<div className='page-container'>
@@ -48,25 +67,60 @@ export default function UserAircraft() {
 function AircraftList(props) {
 	const navigate = useNavigate();
 
-	let page
-	if (props.aircraft.length === 0) {
-		page = <NoResults message='No aircraft found'/>
+	let content: JSX.Element;
+	if (props.page.content.length === 0) {
+		content = <NoResults message='No aircraft found'/>
 	} else {
-		page = <table className='flight-list'>
+		content = <table className='flight-list'>
 			<tbody>
-			{props.aircraft.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}
+			{props.page.content.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}
 			</tbody>
 		</table>
+	}
+
+	let unavailableBatteryContent: JSX.Element;
+	let unavailableIcon: JSX.Element;
+	if (props.showUnavailable === false) {
+		unavailableIcon = Icons.ADVANCED_V;
+	} else {
+		if (props.unavailablePage.content.length === 0) {
+			unavailableBatteryContent = <NoResults message='No unavailable aircraft found'/>
+		} else {
+			unavailableBatteryContent = <table className='flight-list'>
+				<tbody>
+				{props.unavailablePage.content.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}
+				</tbody>
+			</table>
+		}
+		unavailableIcon = Icons.COLLAPSE;
 	}
 
 	function add() {
 		navigate(AppPath.AIRCRAFT + "/new")
 	}
 
+	function prior() {
+		props.loadAircraftPage(props.page.number - 1)
+	}
+
+	function next() {
+		props.loadAircraftPage(props.page.number + 1)
+	}
+
+	function toggleUnavailable() {
+		props.setShowUnavailable(!props.showUnavailable)
+	}
+
 	return (
 		<div className='vbox'>
-			<button className='page-action' onClick={add}>Add an Aircraft</button>
-			{page}
+			<div className='hbox'>
+				<button className='page-action icon' onClick={prior} disabled={props.page.first}>{Icons.PAGE_PRIOR}</button>
+				<button className='page-action' onClick={add}>Add an Aircraft</button>
+				<button className='page-action icon' onClick={next} disabled={props.page.last}>{Icons.PAGE_NEXT}</button>
+			</div>
+			{content}
+			<button className='icon centered' onClick={toggleUnavailable}>{unavailableIcon}</button>
+			{unavailableBatteryContent}
 		</div>
 	)
 

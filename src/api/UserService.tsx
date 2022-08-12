@@ -71,7 +71,17 @@ class UserService extends ApiService {
   }
 
   getAircraftPage(page, successCallback, failureCallback) {
-    this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT + "?pg=" + page + "&pz=100", {
+    this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT + "?filter=available&pg=" + page + "&pz=10", {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
+
+  getUnavailableAircraftPage(page, successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_AIRCRAFT + "?filter=unavailable&pg=" + page + "&pz=10", {
       method: 'GET',
     }).then((response) => {
       successCallback(response)
