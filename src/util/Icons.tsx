@@ -17,7 +17,9 @@ import {
 	faCheck,
 	faChevronLeft,
 	faChevronRight,
+	faPlaneSlash,
 	faClock,
+	faBurst,
 	faCopy,
 	faEllipsisH,
 	faEllipsisV,
@@ -47,16 +49,18 @@ class Icons {
 	ADD = <FontAwesomeIcon icon={faPlus}/>
 	ADVANCED = <FontAwesomeIcon icon={faEllipsisH}/>
 	ADVANCED_V = <FontAwesomeIcon icon={faEllipsisV}/>
-	AIRCRAFT_DESTROYED = <FontAwesomeIcon icon={faBan}/>
+	AIRCRAFT_DECOMMISSIONED = <FontAwesomeIcon icon={faBurst}/>
+	AIRCRAFT_INOPERATIVE = <FontAwesomeIcon icon={faPlaneSlash}/>
+	AIRCRAFT_DESTROYED =  <FontAwesomeIcon icon={faBurst}/>
 	BARS = <FontAwesomeIcon icon={faBars}/>
 	BATTERY = <FontAwesomeIcon icon={faBatteryFull}/>
-	BATTERY_NEW = <span className='fa-layers'><FontAwesomeIcon icon={faBatteryFull}/><FontAwesomeIcon icon={faAsterisk} transform='shrink-4 up-5 left-7'/></span>
+	BATTERY_NEW = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faBatteryFull}/><FontAwesomeIcon icon={faAsterisk} transform='shrink-4 up-5 left-7'/></span>
 	BATTERY_FULL = <FontAwesomeIcon icon={faBatteryFull}/>
 	BATTERY_THREE_QUARTER = <FontAwesomeIcon icon={faBatteryThreeQuarters}/>
 	BATTERY_HALF = <FontAwesomeIcon icon={faBatteryHalf}/>
 	BATTERY_QUARTER = <FontAwesomeIcon icon={faBatteryQuarter}/>
 	BATTERY_EMPTY = <FontAwesomeIcon icon={faBatteryEmpty}/>
-	BATTERY_DESTROYED = <span className='fa-layers'><FontAwesomeIcon icon={faBatteryEmpty}/><FontAwesomeIcon icon={faSlash}/></span>
+	BATTERY_DESTROYED = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faBatteryEmpty}/><FontAwesomeIcon icon={faSlash}/></span>
 	CALENDAR = <FontAwesomeIcon icon={faCalendar}/>
 	CANCEL = <FontAwesomeIcon icon={faBan}/>
 	CLOCK = <FontAwesomeIcon icon={faClock}/>
@@ -99,6 +103,14 @@ class Icons {
 		other: this.DRONE
 	}
 
+	private aircraftStatusIcons = {
+		preflight: this.PLANE,
+		airworthy: this.PLANE,
+		inoperative: this.AIRCRAFT_INOPERATIVE,
+		decommissioned: this.AIRCRAFT_DECOMMISSIONED,
+		destroyed: this.AIRCRAFT_DESTROYED
+	}
+
 	private userFlightRoleIcons = {
 		pilot: this.PILOT,
 		observer: this.OBSERVER,
@@ -110,14 +122,6 @@ class Icons {
 		club: this.CLUB,
 		company: this.COMPANY,
 		group: this.GROUP,
-	}
-
-	private aircraftStatusIcons = {
-		preflight: this.PLANE,
-		airworthy: this.PLANE,
-		inoperative: this.AIRCRAFT_DESTROYED,
-		decommissioned: this.AIRCRAFT_DESTROYED,
-		destroyed: this.AIRCRAFT_DESTROYED
 	}
 
 	private batteryStatusIcons = {
