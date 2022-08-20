@@ -1,16 +1,16 @@
-import Icons from '../util/Icons'
-import '../css/nav.css'
+import Icons from './util/Icons'
+import './css/nav.css'
 import {Link} from "react-router-dom";
-import AppPath from "../AppPath";
+import AppPath from "./AppPath";
 import React from 'react';
 
-export default function NavBar(props) {
+export default function Menu(props) {
 
   return (
     <div className='nav-bar'>
       <NavButton to={AppPath.HOME} icon={Icons.DASHBOARD}/>
-      <NavButton to={AppPath.USER_FLIGHTS} icon={Icons.PLANE}/>
-      <NavButton to={AppPath.SETUP} icon={Icons.BARS}/>
+      <NavButton to={AppPath.USER_FLIGHTS} icon={Icons.FLIGHTS}/>
+      <NavButton to={AppPath.SETUP} icon={Icons.SETUP}/>
       <NavButton to={AppPath.USER} icon={Icons.USER}/>
     </div>
   )

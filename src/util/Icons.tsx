@@ -13,21 +13,22 @@ import {
 	faBatteryThreeQuarters,
 	faBinoculars,
 	faBuilding,
+	faBurst,
 	faCalendar,
 	faCheck,
 	faChevronLeft,
 	faChevronRight,
-	faPlaneSlash,
 	faClock,
-	faBurst,
 	faCopy,
 	faEllipsisH,
 	faEllipsisV,
 	faEnvelope,
+	faGear,
 	faHelicopter,
 	faHome,
 	faKey,
 	faPlane,
+	faPlaneSlash,
 	faPlus,
 	faQuestion,
 	faShareNodes,
@@ -51,7 +52,7 @@ class Icons {
 	ADVANCED_V = <FontAwesomeIcon icon={faEllipsisV}/>
 	AIRCRAFT_DECOMMISSIONED = <FontAwesomeIcon icon={faBurst}/>
 	AIRCRAFT_INOPERATIVE = <FontAwesomeIcon icon={faPlaneSlash}/>
-	AIRCRAFT_DESTROYED =  <FontAwesomeIcon icon={faBurst}/>
+	AIRCRAFT_DESTROYED = <FontAwesomeIcon icon={faBurst}/>
 	BARS = <FontAwesomeIcon icon={faBars}/>
 	BATTERY = <FontAwesomeIcon icon={faBatteryFull}/>
 	BATTERY_NEW = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faBatteryFull}/><FontAwesomeIcon icon={faAsterisk} transform='shrink-4 up-5 left-7'/></span>
@@ -74,6 +75,7 @@ class Icons {
 	DRONE = <DroneIcon/>
 	ENVELOPE = <FontAwesomeIcon icon={faEnvelope}/>
 	EXPAND = <FontAwesomeIcon icon={faAngleDown}/>
+	FLIGHTS = <FontAwesomeIcon icon={faBars}/>
 	GROUP = <FontAwesomeIcon icon={faUsers}/>
 	GROUP_ADD = <FontAwesomeIcon icon={faPlus}/>
 	HELICOPTER = <FontAwesomeIcon icon={faHelicopter}/>
@@ -91,6 +93,7 @@ class Icons {
 	PLANE = <FontAwesomeIcon icon={faPlane}/>
 	REVOKE = <FontAwesomeIcon icon={faBan}/>
 	SEND = <FontAwesomeIcon icon={faAngleDoubleRight}/>
+	SETUP = <FontAwesomeIcon icon={faGear}/>
 	SHARE = <FontAwesomeIcon icon={faShareNodes}/>
 	UNKNOWN = <FontAwesomeIcon icon={faQuestion}/>
 	USER = <FontAwesomeIcon icon={faUserAlt}/>

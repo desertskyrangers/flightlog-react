@@ -15,7 +15,7 @@ import FlightActions from "./action/FlightActions";
 import SetupActions from "./action/SetupActions";
 import UserActions from "./action/UserActions";
 import Profile from "./edit/Profile";
-import NavBar from "./part/NavBar";
+import Menu from "./Menu";
 import UserAircraft from "./UserAircraft";
 import UserBatteries from "./UserBatteries";
 import UserFlights from "./UserFlights"
@@ -36,7 +36,7 @@ import Preferences from "./edit/Preferences";
 import PublicDashboard from "./PublicDashboard";
 
 function Protect({children}) {
-  return TokenService.isAuthenticated() ? <div><NavBar/>{children}</div> : <Navigate to={ApiPath.LOGIN}/>;
+  return TokenService.isAuthenticated() ? <div><Menu/>{children}</div> : <Navigate to={ApiPath.LOGIN}/>;
 }
 
 function App() {
