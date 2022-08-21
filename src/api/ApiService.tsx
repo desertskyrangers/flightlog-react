@@ -1,5 +1,4 @@
 import TokenService from "./TokenService"
-import AuthService from "./AuthService";
 
 export default class ApiService {
 
@@ -37,9 +36,10 @@ export default class ApiService {
 
 		if (auth && response.status === 403) {
 			console.log("HTTP 403 - " + response.url)
-			AuthService.logout(() => {
-			}, () => {
-			})
+			// FIXME Using AuthService causes a circular reference
+			// AuthService.logout(() => {
+			// }, () => {
+			// })
 			return response
 		}
 
