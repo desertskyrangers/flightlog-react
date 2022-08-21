@@ -35,19 +35,28 @@ import Group from "./edit/Group";
 import Preferences from "./edit/Preferences";
 import PublicDashboard from "./PublicDashboard";
 
+const manifest = require('./manifest.json')
+
 function Protect({children}) {
   return TokenService.isAuthenticated() ? <div><Menu/>{children}</div> : <Navigate to={ApiPath.LOGIN}/>;
 }
 
 function App() {
 
-  const [version, setVersion] = useState()
+  const [appVersion, setAppVersion] = useState()
+  const [apiVersion, setApiVersion] = useState()
 
-  useEffect(() => loadProgramInformation(), [])
+  useEffect(() => loadAppInformation(), [])
+  useEffect(() => loadApiInformation(), [])
 
-  function loadProgramInformation() {
+  function loadAppInformation() {
+    console.log( "version=" + manifest.version)
+    setAppVersion(manifest.version)
+  }
+
+  function loadApiInformation() {
     AppService.getProgramInformation((result) => {
-      setVersion(result.version)
+      setApiVersion(result.version)
     }, () => {
     })
   }
@@ -60,11 +69,11 @@ function App() {
         <div className='content'>
           <Routes>
             {/* Public */}
-            <Route path={AppPath.ABOUT} element={<About version={version}/>}/>
+            <Route path={AppPath.ABOUT} element={<About appVersion={appVersion} apiVersion={apiVersion}/>}/>
             <Route path={AppPath.DASHBOARD + "/:id"} element={<PublicDashboard/>}/>
             <Route path={AppPath.LEGAL} element={<Legal/>}/>
-            <Route path={AppPath.LOGIN} element={<Login version={version}/>}/>
-            <Route path={AppPath.PRIVACY} element={<About version={version}/>}/>
+            <Route path={AppPath.LOGIN} element={<Login version={apiVersion}/>}/>
+            <Route path={AppPath.PRIVACY} element={<About version={apiVersion}/>}/>
             <Route path={AppPath.RECOVER} element={<Recover/>}/>
             <Route path={AppPath.REGISTER} element={<Register/>}/>
             <Route path={AppPath.RESET} element={<Reset/>}/>
@@ -99,7 +108,7 @@ function App() {
             <Route path='*' element={<NotFound/>}/>
           </Routes>
         </div>
-        <Footer version={version}/>
+        <Footer version={apiVersion}/>
       </Router>
     </div>
   )

@@ -18,7 +18,8 @@ export default function About(props) {
 							<h1>About</h1>
 							<span className='icon' onClick={close}>{Icons.CLOSE}</span>
 						</div>
-						<div><span className='page-label'>version</span> {props.version}</div>
+						<div><span className='page-label'>app version</span> {props.appVersion}</div>
+						<div><span className='page-label'>api version</span> {props.apiVersion}</div>
 						<hr/>
 						<div>
 							<span className='page-label'>hosted by</span> <a href='https://www.desertskyrangers.org/'>Desert Sky Rangers</a><br/>
