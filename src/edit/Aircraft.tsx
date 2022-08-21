@@ -196,9 +196,9 @@ export default function Aircraft(props) {
 							{!!wingAspect ? <MetricRow label='Aspect Ratio:' metric={wingAspect} unit='' decimal={1}/> : null}
 							{!!wingMac ? <MetricRow label='Wing MAC:' metric={wingMac} unit='mm' decimal={1}/> : null}
 							{!!wingLoading ? <MetricRow label='Wing Loading:' metric={wingLoading} unit='g/cm²' decimal={2}/> : null}
-							<DataRow label='Night flying lights:' data={nightLights ? "yes" : "no"}/>
-							{!!baseColor ? <tr><td>Base color:</td><td colSpan={2} style={{backgroundColor: baseColor}}></td></tr> : null}
-							{!!trimColor ? <tr><td>Trim color:</td><td colSpan={2} style={{backgroundColor: trimColor}}></td></tr> : null}
+							{!!nightLights ? <DataRow label='Night flying lights:' data={nightLights ? "yes" : "no"}/> : null }
+							{!!baseColor ? <ColorRow label='Base color:' color={baseColor}/> : null}
+							{!!trimColor ? <ColorRow label='Trim color:' color={trimColor}/> : null}
 							</tbody>
 						</table>
 						<Notice priority='warn' messages={notices}/>
@@ -253,6 +253,16 @@ export default function Aircraft(props) {
 		</div>
 	)
 
+}
+
+function ColorRow(props) {
+
+	return (
+		<tr>
+			<td>{props.label}</td>
+			<td colSpan={2} style={{backgroundColor: props.color}}></td>
+		</tr>
+	)
 }
 
 function DataRow(props) {
