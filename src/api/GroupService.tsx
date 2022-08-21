@@ -8,7 +8,7 @@ class GroupService extends ApiService {
 		this.fetch(Config.API_URL + ApiPath.GROUP + `/${id}/dashboard`, {
 			method: 'GET'
 		}).then((response) => {
-			successCallback(response)
+			successCallback(response.data)
 		}).catch((error) => {
 			failureCallback(error)
 		})

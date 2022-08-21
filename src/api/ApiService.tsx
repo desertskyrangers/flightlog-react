@@ -1,4 +1,5 @@
 import TokenService from "./TokenService"
+import AuthService from "./AuthService";
 
 export default class ApiService {
 
@@ -36,7 +37,9 @@ export default class ApiService {
 
 		if (auth && response.status === 403) {
 			console.log("HTTP 403 - " + response.url)
-			//AuthService.reauthenticate()
+			AuthService.logout(() => {
+			}, () => {
+			})
 			return response
 		}
 
@@ -49,21 +52,26 @@ export default class ApiService {
 		return response.text().then(text => {
 			const error = new MyError()
 			error.status = response.status
+			error.messages = []
 
 			let messages = []
 
+			let result
 			let jsonParseMessage
 			try {
-				messages = JSON.parse(text).messages
+				result = JSON.parse(text)
+				if( !!result && !!result.messages && result.messages !== '' ) messages = result.messages
 			} catch (error) {
 				jsonParseMessage = error.message
 			}
 
-			if (messages.length === 0 && !!text && text !== '') messages = [text]
-			if (messages.length === 0 && !!response.statusText && response.statusText !== '') messages = [response.statusText]
+			if (messages.length === 0 && !!result && !!result.error && result.error !== '') messages = [result.error]
+			if (messages.length === 0 && !!response.statusMessage && response.statusMessage !== '') messages = [response.statusMessage]
 			if (messages.length === 0 && !!jsonParseMessage && jsonParseMessage !== '') messages = [jsonParseMessage]
+			if (messages.length === 0 && !!text && text !== '') messages = [text]
 
 			error.messages = messages
+
 			throw error
 		})
 	}
