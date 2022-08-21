@@ -29,12 +29,11 @@ import FlightTimer from "./FlightTimer";
 import Recover from "./Recover";
 import Reset from "./Reset";
 import Password from "./edit/Password";
-import Dashboard from "./Dashboard";
 import UserGroups from "./UserGroups";
 import Group from "./edit/Group";
 import Preferences from "./edit/Preferences";
 import PublicDashboard from "./PublicDashboard";
-import GroupDashboard from "./GroupDashboard";
+import Dashboards from "./Dashboards";
 
 const manifest = require('./manifest.json')
 
@@ -81,8 +80,7 @@ function App() {
             <Route path={AppPath.VERIFY + "/:id/:code"} element={<Verify/>}/>
 
             {/* Home */}
-            <Route path={AppPath.HOME} element={<Protect children={<Dashboard/>}/>}/>
-            <Route path={AppPath.GROUP} element={<Protect children={<GroupDashboard/>}/>}/>
+            <Route path={AppPath.HOME} element={<Protect children={<Dashboards/>}/>}/>
 
             {/* Menus */}
             <Route path={AppPath.FLIGHTS} element={<Protect children={<FlightActions/>}/>}/>

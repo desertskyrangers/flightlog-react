@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react"
 import Times from "./util/Times"
 import UserService from "./api/UserService"
-import Notice from "./part/Notice"
 import ApiPath from "./AppPath"
 import AppPath from "./AppPath"
 import {Link, useNavigate} from "react-router-dom"
 import './css/dashboard.css'
 import Ago from "./part/Ago";
-import {FlightStatsHeader, FlightStats} from "./part/FlightStats"
+import {FlightStats, FlightStatsHeader} from "./part/FlightStats"
+import Icons from "./util/Icons";
 
 export default function Dashboard(props) {
 
@@ -18,31 +18,20 @@ export default function Dashboard(props) {
 		pilotFlightTime: 0
 	})
 
-	const [messages, setMessages] = useState(props.messages || [])
-
-	function clearMessages() {
-		setMessages([])
-	}
-
 	function loadDashboard() {
 		UserService.dashboard((result) => {
 			setDashboard(result.dashboard)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
-			setMessages(messages)
+			props.setMessages(messages)
 		})
 	}
 
-	useEffect(loadDashboard, [])
+	useEffect(loadDashboard, [props])
 
 	return (
-		<div className='page-container'>
-			<div className='page-body'>
-				<div className='page-form'>
-					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
-
-					<button className='page-action' onClick={() => navigate(ApiPath.FLIGHT_TIMER)}>Time a Flight</button>
+				<div className='page-form-content'>
 
 					<table className='dashboard'>
 						<tbody>
@@ -53,7 +42,10 @@ export default function Dashboard(props) {
 						</tbody>
 					</table>
 
-					<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>Log a Flight</button>
+					<div className='hbox'>
+						<button className='page-action' onClick={() => navigate(ApiPath.FLIGHT_TIMER)}>{Icons.TIMER}</button>
+						<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>{Icons.LOG}</button>
+					</div>
 
 					{!!dashboard.aircraftStats ?
 						<table className='stats'>
@@ -65,8 +57,6 @@ export default function Dashboard(props) {
 
 					<LastFlight timestamp={dashboard.lastPilotFlightTimestamp}/>
 				</div>
-			</div>
-		</div>
 	)
 }
 

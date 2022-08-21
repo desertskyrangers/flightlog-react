@@ -18,7 +18,7 @@ export default function EntrySelect(props) {
 			}
 			{
 				!!help ?
-					<div>
+					<div className='page-label-row'>
 						<label className='page-label'>{help}</label>
 					</div> : null
 			}

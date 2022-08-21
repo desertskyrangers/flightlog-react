@@ -4,6 +4,16 @@ import ApiService from "./ApiService"
 
 class GroupService extends ApiService {
 
+	dashboard(id,successCallback, failureCallback) {
+		this.fetch(Config.API_URL + ApiPath.GROUP + `/${id}/dashboard`, {
+			method: 'GET'
+		}).then((response) => {
+			successCallback(response)
+		}).catch((error) => {
+			failureCallback(error)
+		})
+	}
+
 	getAvailableGroups(successCallback, failureCallback) {
 		this.fetch(Config.API_URL + ApiPath.GROUP_AVAILABLE, {
 			method: 'GET'

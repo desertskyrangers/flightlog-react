@@ -3,7 +3,6 @@ import Notice from "../part/Notice";
 import Config from "../AppConfig";
 import {isEqual} from "lodash";
 import UserService from "../api/UserService";
-import TokenService from "../api/TokenService";
 import LookupService from "../api/LookupService";
 import EntryField from "../part/EntryField";
 import Icons from "../util/Icons";
@@ -92,7 +91,7 @@ export default function Profile(props) {
 			setMessages(messages)
 		})
 
-		UserService.profile(TokenService.getUserId(), (result) => {
+		UserService.profile((result) => {
 			setId(result.account.id)
 			setUsername(result.account.username || '')
 			setFirstName(result.account.firstName || '')

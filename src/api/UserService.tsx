@@ -34,7 +34,7 @@ class UserService extends ApiService {
     })
   }
 
-  profile(id, successCallback, failureCallback) {
+  profile(successCallback, failureCallback) {
     this.fetch(Config.API_URL + `/api/profile`, {
       method: 'GET'
     }).then((response) => {

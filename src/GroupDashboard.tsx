@@ -1,70 +1,53 @@
-import Notice from "./part/Notice";
 import React, {useEffect, useState} from "react";
 import {FlightStats, FlightStatsHeader} from "./part/FlightStats";
-import UserService from "./api/UserService";
+import GroupService from "./api/GroupService";
 
 export default function GroupDashboard(props) {
 
 	const [dashboard, setDashboard] = useState(props.dashboard || {
-		name: 'Desert Sky Rangers',
 		flightCount: 0,
 		flightTime: 0
 	})
 
-	const [messages, setMessages] = useState(props.messages || [])
-
-	function clearMessages() {
-		setMessages([])
-	}
-
 	function loadDashboards() {
-		UserService.groupDashboards((result) => {
+		GroupService.dashboard(props.id, (result) => {
 			setDashboard(result.dashboard)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
-			setMessages(messages)
+			props.setMessages(messages)
 		})
 	}
 
-	useEffect(loadDashboards, [])
+	useEffect(loadDashboards, [props])
 
 	return (
-		<div className='page-container'>
-			<div className='page-body'>
-				<div className='page-form'>
+		<div className='page-form-content'>
 
-					{/* TODO IF the user has not joined a group, show a link to join */}
+			{/* TODO IF the user has not joined a group, show a link to join */}
 
-					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
+			{/*<button className='page-action' onClick={() => navigate(ApiPath.FLIGHT_TIMER)}>Time a Flight</button>*/}
 
-					{/* For each group make a section or a dropdown to select */}
+			<table className='dashboard'>
+				<tbody>
+				<FlightStatsHeader/>
+				<FlightStats count={dashboard.flightCount} time={dashboard.flightTime}/>
+				{/*	{!!dashboard.observerFlightCount ? <ObserverStatsHeader/> : null}*/}
+				{/*	{!!dashboard.observerFlightCount ? <ObserverStats count={dashboard.observerFlightCount} time={dashboard.observerFlightTime}/> : null}*/}
+				</tbody>
+			</table>
 
-					<h1 className='no-wrap'>{dashboard.name}</h1>
-					{/*<button className='page-action' onClick={() => navigate(ApiPath.FLIGHT_TIMER)}>Time a Flight</button>*/}
+			{/*<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>Log a Flight</button>*/}
 
-					<table className='dashboard'>
-						<tbody>
-						<FlightStatsHeader/>
-						<FlightStats count={dashboard.flightCount} time={dashboard.flightTime}/>
-					{/*	{!!dashboard.observerFlightCount ? <ObserverStatsHeader/> : null}*/}
-					{/*	{!!dashboard.observerFlightCount ? <ObserverStats count={dashboard.observerFlightCount} time={dashboard.observerFlightTime}/> : null}*/}
-						</tbody>
-					</table>
+			{/*{!!dashboard.aircraftStats ?*/}
+			{/*	<table className='stats'>*/}
+			{/*		<tbody>*/}
+			{/*		{dashboard.aircraftStats.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}*/}
+			{/*		</tbody>*/}
+			{/*	</table>*/}
+			{/*	: null}*/}
 
-					{/*<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>Log a Flight</button>*/}
-
-					{/*{!!dashboard.aircraftStats ?*/}
-					{/*	<table className='stats'>*/}
-					{/*		<tbody>*/}
-					{/*		{dashboard.aircraftStats.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}*/}
-					{/*		</tbody>*/}
-					{/*	</table>*/}
-					{/*	: null}*/}
-
-					{/*<LastFlight timestamp={dashboard.lastPilotFlightTimestamp}/>*/}
-				</div>
-			</div>
+			{/*<LastFlight timestamp={dashboard.lastPilotFlightTimestamp}/>*/}
 		</div>
 	)
 }

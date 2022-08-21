@@ -31,10 +31,12 @@ import {
 	faPlane,
 	faPlaneSlash,
 	faPlus,
+	faFilePen,
 	faQuestion,
 	faShareNodes,
 	faSlash,
 	faSpinner,
+	faStopwatch,
 	faTrash,
 	faTv,
 	faUserAlt,
@@ -86,6 +88,7 @@ class Icons {
 	HOME = <FontAwesomeIcon icon={faHome}/>
 	INVITE = <FontAwesomeIcon icon={faPlus}/>
 	KEY = <FontAwesomeIcon icon={faKey}/>
+	LOG = <FontAwesomeIcon icon={faFilePen}/>
 	MEMBER = <FontAwesomeIcon icon={faUserAlt}/>
 	MEMBERSHIP = <FontAwesomeIcon icon={faUserAlt}/>
 	NO_RESULT = <FontAwesomeIcon icon={faBan}/>
@@ -99,6 +102,7 @@ class Icons {
 	SEND = <FontAwesomeIcon icon={faAngleDoubleRight}/>
 	SETUP = <FontAwesomeIcon icon={faGear}/>
 	SHARE = <FontAwesomeIcon icon={faShareNodes}/>
+	TIMER = <FontAwesomeIcon icon={faStopwatch}/>
 	UNKNOWN = <FontAwesomeIcon icon={faQuestion}/>
 	USER = <FontAwesomeIcon icon={faUserAlt}/>
 	WAIT = <FontAwesomeIcon icon={faSpinner}/>

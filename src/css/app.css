@@ -244,6 +244,6 @@ code {
 	/* along the main axis */
 	justify-content: flex-start;
 	/* along the cross axis */
-	align-items: center;
+	align-items: stretch;
 	gap: 0.5em;
 }
