@@ -24,6 +24,16 @@ class UserService extends ApiService {
     })
   }
 
+  groupDashboards(successCallback, failureCallback) {
+    this.fetch(Config.API_URL + `/api/dashboard`, {
+      method: 'GET'
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
+
   profile(id, successCallback, failureCallback) {
     this.fetch(Config.API_URL + `/api/profile`, {
       method: 'GET'

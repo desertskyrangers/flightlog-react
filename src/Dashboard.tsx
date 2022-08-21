@@ -7,6 +7,7 @@ import AppPath from "./AppPath"
 import {Link, useNavigate} from "react-router-dom"
 import './css/dashboard.css'
 import Ago from "./part/Ago";
+import {FlightStatsHeader, FlightStats} from "./part/FlightStats"
 
 export default function Dashboard(props) {
 
@@ -45,8 +46,8 @@ export default function Dashboard(props) {
 
 					<table className='dashboard'>
 						<tbody>
-						<PilotStatsHeader/>
-						<PilotStats count={dashboard.pilotFlightCount} time={dashboard.pilotFlightTime}/>
+						<FlightStatsHeader/>
+						<FlightStats count={dashboard.pilotFlightCount} time={dashboard.pilotFlightTime}/>
 						{!!dashboard.observerFlightCount ? <ObserverStatsHeader/> : null}
 						{!!dashboard.observerFlightCount ? <ObserverStats count={dashboard.observerFlightCount} time={dashboard.observerFlightTime}/> : null}
 						</tbody>
@@ -66,27 +67,6 @@ export default function Dashboard(props) {
 				</div>
 			</div>
 		</div>
-	)
-}
-
-function PilotStatsHeader() {
-	return (
-		<tr>
-			<td className='dashboard-header'>Flights</td>
-			<td rowSpan={2}>
-				<div className='v-separator'/>
-			</td>
-			<td className='dashboard-header'>Flight Time</td>
-		</tr>
-	)
-}
-
-function PilotStats(props) {
-	return (
-		<tr>
-			<td className='page-metric'>{props.count}</td>
-			<td className='page-metric'>{Times.toHourMinSec(props.time)}</td>
-		</tr>
 	)
 }
 

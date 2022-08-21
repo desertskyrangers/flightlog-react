@@ -34,6 +34,7 @@ import UserGroups from "./UserGroups";
 import Group from "./edit/Group";
 import Preferences from "./edit/Preferences";
 import PublicDashboard from "./PublicDashboard";
+import GroupDashboard from "./GroupDashboard";
 
 const manifest = require('./manifest.json')
 
@@ -81,6 +82,7 @@ function App() {
 
             {/* Home */}
             <Route path={AppPath.HOME} element={<Protect children={<Dashboard/>}/>}/>
+            <Route path={AppPath.GROUP} element={<Protect children={<GroupDashboard/>}/>}/>
 
             {/* Menus */}
             <Route path={AppPath.FLIGHTS} element={<Protect children={<FlightActions/>}/>}/>

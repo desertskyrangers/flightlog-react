@@ -6,6 +6,7 @@ import {
 	faAsterisk,
 	faBan,
 	faBars,
+	faGauge,
 	faBatteryEmpty,
 	faBatteryFull,
 	faBatteryHalf,
@@ -71,11 +72,14 @@ class Icons {
 	COMPANY = <FontAwesomeIcon icon={faBuilding}/>
 	COPY = <FontAwesomeIcon icon={faCopy}/>
 	DASHBOARD = <FontAwesomeIcon icon={faTv}/>
+	DASHBOARD_USER = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faTv}/></span>
+	DASHBOARD_GROUP = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faTv}/><FontAwesomeIcon icon={faUsers} transform='shrink-9 up-1'/></span>
 	DELETE = <FontAwesomeIcon icon={faTrash}/>
 	DRONE = <DroneIcon/>
 	ENVELOPE = <FontAwesomeIcon icon={faEnvelope}/>
 	EXPAND = <FontAwesomeIcon icon={faAngleDown}/>
 	FLIGHTS = <FontAwesomeIcon icon={faBars}/>
+	GUAGE = <FontAwesomeIcon icon={faGauge}/>
 	GROUP = <FontAwesomeIcon icon={faUsers}/>
 	GROUP_ADD = <FontAwesomeIcon icon={faPlus}/>
 	HELICOPTER = <FontAwesomeIcon icon={faHelicopter}/>
