@@ -38,6 +38,8 @@ export default function Aircraft(props) {
 	const [wingarea, setWingarea] = useState(props.wingarea || '')
 	const [weight, setWeight] = useState(props.weight || '')
 	const [nightLights, setNightLights] = useState(props.nightLights || false)
+	const [baseColor, setBaseColor] = useState(props.baseColor || '')
+	const [trimColor, setTrimColor] = useState(props.trimColor || '')
 
 	// Derived
 	const [wingAspect, setWingAspect] = useState(props.wingAspect || '')
@@ -68,7 +70,9 @@ export default function Aircraft(props) {
 			length,
 			wingarea,
 			weight,
-			nightLights
+			nightLights,
+			baseColor: String,
+			trimColor: String
 		}, (aircraft) => {
 			close()
 		}, (failure) => {
@@ -111,6 +115,8 @@ export default function Aircraft(props) {
 			setWingarea(aircraft.wingarea)
 			setWeight(aircraft.weight)
 			setNightLights(aircraft.nightLights || '')
+			setBaseColor(aircraft.baseColor || '')
+			setTrimColor(aircraft.trimColor || '')
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -154,7 +160,7 @@ export default function Aircraft(props) {
 
 	function verifyWeight(weight) {
 		let notices = []
-		if( weight > 250 ) notices = ['Recreational flyers must add manufacturer and model information for all UAS over 250 grams (0.55 pounds) that they own and operate']
+		if (weight > 250) notices = ['Recreational flyers must add manufacturer and model information for all UAS over 250 grams (0.55 pounds) that they own and operate']
 		setNotices(notices)
 	}
 
@@ -191,6 +197,8 @@ export default function Aircraft(props) {
 							{!!wingMac ? <MetricRow label='Wing MAC:' metric={wingMac} unit='mm' decimal={1}/> : null}
 							{!!wingLoading ? <MetricRow label='Wing Loading:' metric={wingLoading} unit='g/cm²' decimal={2}/> : null}
 							<DataRow label='Night flying lights:' data={nightLights ? "yes" : "no"}/>
+							{!!baseColor ? <tr><td>Base color:</td><td colSpan={2} style={{backgroundColor: baseColor}}></td></tr> : null}
+							{!!trimColor ? <tr><td>Trim color:</td><td colSpan={2} style={{backgroundColor: trimColor}}></td></tr> : null}
 							</tbody>
 						</table>
 						<Notice priority='warn' messages={notices}/>
