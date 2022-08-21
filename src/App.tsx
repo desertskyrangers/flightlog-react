@@ -50,7 +50,6 @@ function App() {
   useEffect(() => loadApiInformation(), [])
 
   function loadAppInformation() {
-    console.log( "version=" + manifest.version)
     setAppVersion(manifest.version)
   }
 
