@@ -18,13 +18,13 @@ export default function GroupDashboard(props) {
 	}
 
 	function loadDashboards() {
-		// UserService.groupDashboards((result) => {
-		// 	setDashboard(result.dashboard)
-		// }, (failure) => {
-		// 	let messages = failure.messages
-		// 	if (!!!messages) messages = [failure.message]
-		// 	setMessages(messages)
-		// })
+		UserService.groupDashboards((result) => {
+			setDashboard(result.dashboard)
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			setMessages(messages)
+		})
 	}
 
 	useEffect(loadDashboards, [])
