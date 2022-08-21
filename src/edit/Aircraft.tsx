@@ -9,6 +9,7 @@ import EntryField from "../part/EntryField";
 import DeleteWithConfirm from "../part/DeleteWithConfirm";
 import EntrySelect from "../part/EntrySelect";
 import EntryCheck from "../part/EntryCheck";
+import {Option} from "./Option";
 
 export function calcAspectRatio(wingspan, wingarea) {
 	return (wingspan * wingspan) / (wingarea * 100)
@@ -25,35 +26,35 @@ export function calcWingLoading(weight, wingarea) {
 export default function Aircraft(props) {
 	const navigate = useNavigate();
 
-	const [advanced, setAdvanced] = useState(props.advanced || false)
+	const [advanced, setAdvanced] = useState<boolean>(props.advanced || false)
 
-	const [id, setId] = useState(props.id || '')
-	const [name, setName] = useState(props.name || '')
-	const [type, setType] = useState(props.type || '')
-	const [make, setMake] = useState(props.make || '')
-	const [model, setModel] = useState(props.model || '')
-	const [status, setStatus] = useState(props.status || '')
-	const [wingspan, setWingspan] = useState(props.wingspan || '')
-	const [length, setLength] = useState(props.length || '')
-	const [wingarea, setWingarea] = useState(props.wingarea || '')
-	const [weight, setWeight] = useState(props.weight || '')
-	const [nightLights, setNightLights] = useState(props.nightLights || false)
-	const [baseColor, setBaseColor] = useState(props.baseColor || '')
-	const [trimColor, setTrimColor] = useState(props.trimColor || '')
+	const [id, setId] = useState<string>(props.id || '')
+	const [name, setName] = useState<string>(props.name || '')
+	const [type, setType] = useState<string>(props.type || '')
+	const [make, setMake] = useState<string>(props.make || '')
+	const [model, setModel] = useState<string>(props.model || '')
+	const [status, setStatus] = useState<string>(props.status || '')
+	const [wingspan, setWingspan] = useState<number>(props.wingspan || '')
+	const [length, setLength] = useState<number>(props.length || '')
+	const [wingarea, setWingarea] = useState<number>(props.wingarea || '')
+	const [weight, setWeight] = useState<number>(props.weight || '')
+	const [nightLights, setNightLights] = useState<boolean>(props.nightLights || false)
+	const [baseColor, setBaseColor] = useState<string>(props.baseColor || '')
+	const [trimColor, setTrimColor] = useState<string>(props.trimColor || '')
 
 	// Derived
-	const [wingAspect, setWingAspect] = useState(props.wingAspect || '')
-	const [wingMac, setWingMac] = useState(props.wingMac || '');
-	const [wingLoading, setWingLoading] = useState(props.wingLoading || '');
+	const [wingAspect, setWingAspect] = useState<number>(props.wingAspect || '')
+	const [wingMac, setWingMac] = useState<number>(props.wingMac || '');
+	const [wingLoading, setWingLoading] = useState<number>(props.wingLoading || '');
 
 	// Messages
 	const [notices, setNotices] = useState([])
 	const [messages, setMessages] = useState([])
 
 	// Options
-	const [statusOptions, setStatusOptions] = useState([{'id': '', 'name': ''}])
-	const [typeOptions, setTypeOptions] = useState([{'id': '', 'name': ''}])
-	const [requestDelete, setRequestDelete] = useState(false)
+	const [statusOptions, setStatusOptions] = useState<Array<Option>>([{'id': '', 'name': ''}])
+	const [typeOptions, setTypeOptions] = useState<Array<Option>>([{'id': '', 'name': ''}])
+	const [requestDelete, setRequestDelete] = useState<boolean>(false)
 
 	const idRef = useRef(useParams().id)
 	const isNewRef = useRef(idRef.current === 'new')
@@ -73,7 +74,7 @@ export default function Aircraft(props) {
 			nightLights,
 			baseColor: String,
 			trimColor: String
-		}, (aircraft) => {
+		}, () => {
 			close()
 		}, (failure) => {
 			let messages = failure.messages
@@ -149,7 +150,7 @@ export default function Aircraft(props) {
 	}
 
 	function doDelete() {
-		AircraftService.deleteAircraft(id, (result) => {
+		AircraftService.deleteAircraft(id, () => {
 			close()
 		}, (failure) => {
 			let messages = failure.messages
