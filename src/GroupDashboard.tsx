@@ -11,7 +11,7 @@ export default function GroupDashboard(props) {
 
 	function loadDashboards() {
 		GroupService.dashboard(props.id, (result) => {
-			setDashboard(result.dashboard)
+			setDashboard(result)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
