@@ -25,7 +25,7 @@ export default function PublicDashboard(props) {
 
 	function loadDashboard() {
 		UserService.publicDashboard(idRef.current, (result) => {
-			setDashboard(result)
+			setDashboard(result.data)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]

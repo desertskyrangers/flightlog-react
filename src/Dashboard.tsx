@@ -10,7 +10,6 @@ import {FlightStats, FlightStatsHeader} from "./part/FlightStats"
 import Icons from "./util/Icons";
 
 export default function Dashboard(props) {
-
 	const navigate = useNavigate()
 
 	const [dashboard, setDashboard] = useState(props.dashboard || {
@@ -20,7 +19,7 @@ export default function Dashboard(props) {
 
 	function loadDashboard() {
 		UserService.dashboard((result) => {
-			setDashboard(result.dashboard)
+			setDashboard(result.data)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]

@@ -5,8 +5,8 @@ import GroupService from "./api/GroupService";
 export default function GroupDashboard(props) {
 
 	const [dashboard, setDashboard] = useState(props.dashboard || {
-		flightCount: 0,
-		flightTime: 0
+		pilotFlightCount: 0,
+		pilotFlightTime: 0
 	})
 
 	function loadDashboards() {
@@ -31,7 +31,7 @@ export default function GroupDashboard(props) {
 			<table className='dashboard'>
 				<tbody>
 				<FlightStatsHeader/>
-				<FlightStats count={dashboard.flightCount} time={dashboard.flightTime}/>
+				<FlightStats count={dashboard.pilotFlightCount} time={dashboard.pilotFlightTime}/>
 				{/*	{!!dashboard.observerFlightCount ? <ObserverStatsHeader/> : null}*/}
 				{/*	{!!dashboard.observerFlightCount ? <ObserverStats count={dashboard.observerFlightCount} time={dashboard.observerFlightTime}/> : null}*/}
 				</tbody>
