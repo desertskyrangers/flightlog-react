@@ -69,7 +69,7 @@ export function MembershipUser(props) {
 			<div className='page-row' onClick={doClick}>
 				<MembershipIcon status={props.membership.status}/>
 				{/*&nbsp;{Icons.fromGroupType(props.membership.group.type)}*/}
-				<span className='page-text'>{props.membership.user.preferredName}</span>
+				<span className='page-text'>{props.membership.user.name}</span>
 			</div>
 			{acceptAction ? <button className='icon' onClick={doAccept}>{Icons.ACCEPT}</button> : null}
 			{cancelAction ? <button className='icon' onClick={doCancel}>{Icons.CANCEL}</button> : null}

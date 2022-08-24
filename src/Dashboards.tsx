@@ -60,7 +60,7 @@ export default function Dashboards(props) {
 				<div className='page-form'>
 
 					<select id='dashboard' name='dashboard' value={props.value} className='page-field' onChange={changeDashboard} onKeyDown={props.onKeyDown}>
-						<option key='self' value='self'>{user.preferredName}</option>
+						<option key='self' value='self'>{user.name}</option>
 						{memberships.map((membership) => <option key={membership.group.id} value={membership.group.id}>{membership.group.name}</option>)}
 					</select>
 
