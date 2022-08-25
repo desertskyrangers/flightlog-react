@@ -4,6 +4,7 @@ import GroupService from "./api/GroupService";
 import {Link} from "react-router-dom";
 import AppPath from "./AppPath";
 import Times from "./util/Times";
+import Icons from "./util/Icons";
 
 export default function GroupDashboard(props) {
 
@@ -22,6 +23,18 @@ export default function GroupDashboard(props) {
 		})
 	}
 
+	function groupCallout() {
+		GroupService.callout(props.id, (result) => {
+			let messages = result.messages
+			if (!!!messages) messages = [result.message]
+			props.setMessages(messages)
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			props.setMessages(messages)
+		})
+	}
+
 	useEffect(loadDashboards, [props])
 
 	return (
@@ -29,7 +42,6 @@ export default function GroupDashboard(props) {
 
 			{/* TODO IF the user has not joined a group, show a link to join */}
 
-			{/*<button className='page-action' onClick={() => navigate(ApiPath.FLIGHT_TIMER)}>Time a Flight</button>*/}
 
 			<table className='dashboard'>
 				<tbody>
@@ -40,7 +52,9 @@ export default function GroupDashboard(props) {
 				</tbody>
 			</table>
 
-			{/*<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>Log a Flight</button>*/}
+			<div className='hbox'>
+				<button className='page-action' onClick={groupCallout}>{Icons.CALLOUT} Callout</button>
+			</div>
 
 			{!!dashboard.memberStats ?
 				<table className='stats'>

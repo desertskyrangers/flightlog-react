@@ -6,7 +6,6 @@ import {
 	faAsterisk,
 	faBan,
 	faBars,
-	faGauge,
 	faBatteryEmpty,
 	faBatteryFull,
 	faBatteryHalf,
@@ -14,6 +13,7 @@ import {
 	faBatteryThreeQuarters,
 	faBinoculars,
 	faBuilding,
+	faBullhorn,
 	faBurst,
 	faCalendar,
 	faCheck,
@@ -24,6 +24,8 @@ import {
 	faEllipsisH,
 	faEllipsisV,
 	faEnvelope,
+	faFilePen,
+	faGauge,
 	faGear,
 	faHelicopter,
 	faHome,
@@ -31,7 +33,6 @@ import {
 	faPlane,
 	faPlaneSlash,
 	faPlus,
-	faFilePen,
 	faQuestion,
 	faShareNodes,
 	faSlash,
@@ -66,6 +67,7 @@ class Icons {
 	BATTERY_EMPTY = <FontAwesomeIcon icon={faBatteryEmpty}/>
 	BATTERY_DESTROYED = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faBatteryEmpty}/><FontAwesomeIcon icon={faSlash}/></span>
 	CALENDAR = <FontAwesomeIcon icon={faCalendar}/>
+	CALLOUT =  <FontAwesomeIcon icon={faBullhorn}/>
 	CANCEL = <FontAwesomeIcon icon={faBan}/>
 	CLOCK = <FontAwesomeIcon icon={faClock}/>
 	CLOSE = <CloseIcon/>
