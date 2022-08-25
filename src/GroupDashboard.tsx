@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {FlightStats, FlightStatsHeader} from "./part/FlightStats";
 import GroupService from "./api/GroupService";
+import {Link} from "react-router-dom";
+import AppPath from "./AppPath";
+import Times from "./util/Times";
 
 export default function GroupDashboard(props) {
 
@@ -39,15 +42,28 @@ export default function GroupDashboard(props) {
 
 			{/*<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>Log a Flight</button>*/}
 
-			{/*{!!dashboard.aircraftStats ?*/}
-			{/*	<table className='stats'>*/}
-			{/*		<tbody>*/}
-			{/*		{dashboard.aircraftStats.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}*/}
-			{/*		</tbody>*/}
-			{/*	</table>*/}
-			{/*	: null}*/}
+			{!!dashboard.memberStats ?
+				<table className='stats'>
+					<tbody>
+					{dashboard.memberStats.map((member) => <MemberRow key={member.id} value={member.id} member={member}/>)}
+					</tbody>
+				</table>
+				: null}
 
 			{/*<LastFlight timestamp={dashboard.lastPilotFlightTimestamp}/>*/}
 		</div>
+	)
+}
+
+function MemberRow(props) {
+	let name = props.member.name
+	if( props.member.publicDashboardEnabled ) name = <Link to={AppPath.DASHBOARD + "/" + props.member.id}>{props.member.name}</Link>
+
+	return (
+		<tr>
+			<td>{name}</td>
+			<td>{props.member.flightCount}</td>
+			<td>{Times.toHourMinSec(props.member.flightTime)}</td>
+		</tr>
 	)
 }
