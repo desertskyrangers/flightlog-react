@@ -1,5 +1,17 @@
 class Times {
 
+	toDetailedFlightTime(seconds) {
+		return this.toHourMinSec(seconds)
+	}
+
+	toSummaryFlightTime(seconds) {
+		return this.toHourMin(seconds)
+	}
+
+	toFlightTime(seconds) {
+		return this.toMinSec(seconds)
+	}
+
 	toHourMinSec(seconds) {
 		let duration = seconds
 
@@ -9,7 +21,7 @@ class Times {
 		duration = Math.floor(duration / 60)
 		let hh = duration
 
-		return String(hh).padStart(2, '0') + ":" + String(mm).padStart(2, '0') + ":" + String(ss).padStart(2, '0')
+		return String(hh).padStart(2, '0') + ":" + String(mm).padStart(2, '0') + ":" + String(ss).padStart(2, '0') + "s"
 	}
 
 	toHourMin(seconds) {
@@ -19,7 +31,7 @@ class Times {
 		duration = Math.floor(duration / 60)
 		let hh = duration
 
-		return String(hh).padStart(2, '0') + ":" + String(mm).padStart(2, '0')
+		return String(hh).padStart(2, '0') + ":" + String(mm).padStart(2, '0') +"m"
 	}
 
 	toMinSec(seconds) {
@@ -29,7 +41,7 @@ class Times {
 		duration = Math.floor(duration / 60)
 		let mm = duration
 
-		return String(mm).padStart(2, '0') + ":" + String(ss).padStart(2, '0')
+		return String(mm).padStart(2, '0') + ":" + String(ss).padStart(2, '0') + "s"
 	}
 
 	toAgo(timestamp, now) {

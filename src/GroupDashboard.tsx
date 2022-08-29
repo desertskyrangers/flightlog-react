@@ -75,9 +75,9 @@ function MemberRow(props) {
 
 	return (
 		<tr>
-			<td>{name}</td>
+			<td className='no-wrap'>{name}</td>
 			<td>{props.member.flightCount}</td>
-			<td>{Times.toHourMinSec(props.member.flightTime)}</td>
+			<td>{Times.toSummaryFlightTime(props.member.flightTime)}</td>
 		</tr>
 	)
 }

@@ -88,7 +88,7 @@ function FlightRow(props) {
 	return (
 		<tr onClick={open}>
 			<td>{Icons.fromUserFlightRole(props.flight.userFlightRole)} {props.flight.name}</td>
-			<td>{Times.toMinSec(props.flight.duration)}</td>
+			<td>{Times.toFlightTime(props.flight.duration)}</td>
 			<td><Ago timestamp={props.flight.timestamp}/></td>
 		</tr>
 	)

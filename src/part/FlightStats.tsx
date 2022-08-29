@@ -17,7 +17,7 @@ export function FlightStats(props) {
 	return (
 		<tr>
 			<td className='page-metric'>{props.count}</td>
-			<td className='page-metric'>{Times.toHourMinSec(props.time)}</td>
+			<td className='page-metric'>{Times.toSummaryFlightTime(props.time)}</td>
 		</tr>
 	)
 }
