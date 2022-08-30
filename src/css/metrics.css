@@ -17,3 +17,11 @@ table.stats td:nth-child(2) {
 table.stats td:nth-child(3) {
 	text-align: end;
 }
+
+table.records {
+	width: 100%;
+}
+
+table.records td:nth-child(2) {
+	text-align: end;
+}

@@ -93,7 +93,7 @@ function RecordRow(props) {
 	return (
 		<div>
 			<div className='page-label'>{props.item.name}</div>
-			<table>
+			<table className='records'>
 				<tbody>
 				<tr>
 					<td>{props.item.owner}</td>
