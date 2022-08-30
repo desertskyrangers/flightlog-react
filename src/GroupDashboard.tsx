@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import AppPath from "./AppPath";
 import Times from "./util/Times";
 import Icons from "./util/Icons";
+import Dates from "./util/Dates";
 
 export default function GroupDashboard(props) {
 
@@ -12,7 +13,8 @@ export default function GroupDashboard(props) {
 		pilotFlightCount: 0,
 		pilotFlightTime: 0,
 		pilotWithHighestTotalFlightCount: {name: "", description: "", value: "", owner: ""},
-		pilotWithHighestTotalFlightTime: {name: "", description: "", value: "", owner: ""}
+		pilotWithHighestTotalFlightTime: {name: "", description: "", value: "", owner: ""},
+		pilotWithMostRecentFlightDate: {name: "", description: "", value: "", owner: ""}
 	})
 
 	function loadDashboards() {
@@ -61,6 +63,11 @@ export default function GroupDashboard(props) {
 			{!!dashboard.memberStats ?
 				<table className='stats'>
 					<tbody>
+					<tr>
+						<td>Pilot</td>
+						<td>Flights</td>
+						<td>Time</td>
+					</tr>
 					{dashboard.memberStats.map((member) => <MemberRow key={member.id} value={member.id} member={member}/>)}
 					</tbody>
 				</table>
@@ -68,7 +75,8 @@ export default function GroupDashboard(props) {
 
 			<div className='page-header'>Current Records</div>
 			<RecordRow item={dashboard.pilotWithHighestTotalFlightCount}/>
-			<RecordRow item={dashboard.pilotWithHighestTotalFlightTime} value={Times.toSummaryFlightTime(dashboard.pilotWithHighestTotalFlightTime.value)}/>
+			<RecordRow item={dashboard.pilotWithHighestTotalFlightTime}/>
+			<RecordRow item={dashboard.pilotWithMostRecentFlightDate}/>
 		</div>
 	)
 }
@@ -89,6 +97,9 @@ function MemberRow(props) {
 function RecordRow(props) {
 
 	/* Record values can have types that indicate the value format */
+	let value = props.item.value
+	if (props.item.type === 'flight-time') value = Times.toSummaryFlightTime(props.item.value)
+	if (props.item.type === 'timestamp') value = Dates.isoDate(new Date(Number.parseInt(props.item.value)))
 
 	return (
 		<div>
@@ -97,7 +108,7 @@ function RecordRow(props) {
 				<tbody>
 				<tr>
 					<td>{props.item.owner}</td>
-					<td>{props.value ? props.value : props.item.value}</td>
+					<td>{value}</td>
 				</tr>
 				</tbody>
 			</table>
