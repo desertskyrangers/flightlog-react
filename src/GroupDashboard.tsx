@@ -10,7 +10,9 @@ export default function GroupDashboard(props) {
 
 	const [dashboard, setDashboard] = useState(props.dashboard || {
 		pilotFlightCount: 0,
-		pilotFlightTime: 0
+		pilotFlightTime: 0,
+		pilotWithHighestTotalFlightCount: {name: "", description: "", value: "", owner: ""},
+		pilotWithHighestTotalFlightTime: {name: "", description: "", value: "", owner: ""}
 	})
 
 	function loadDashboards() {
@@ -64,14 +66,16 @@ export default function GroupDashboard(props) {
 				</table>
 				: null}
 
-			{/*<LastFlight timestamp={dashboard.lastPilotFlightTimestamp}/>*/}
+			<div className='page-header'>Current Records</div>
+			<RecordRow item={dashboard.pilotWithHighestTotalFlightCount}/>
+			<RecordRow item={dashboard.pilotWithHighestTotalFlightTime} value={Times.toFlightTime(dashboard.pilotWithHighestTotalFlightTime.value)}/>
 		</div>
 	)
 }
 
 function MemberRow(props) {
 	let name = props.member.name
-	if( props.member.publicDashboardEnabled ) name = <Link to={AppPath.DASHBOARD + "/" + props.member.id}>{props.member.name}</Link>
+	if (props.member.publicDashboardEnabled) name = <Link to={AppPath.DASHBOARD + "/" + props.member.id}>{props.member.name}</Link>
 
 	return (
 		<tr>
@@ -79,5 +83,24 @@ function MemberRow(props) {
 			<td>{props.member.flightCount}</td>
 			<td>{Times.toSummaryFlightTime(props.member.flightTime)}</td>
 		</tr>
+	)
+}
+
+function RecordRow(props) {
+
+	/* Record values can have types that indicate the value format */
+
+	return (
+		<div>
+			<div className='page-label'>{props.item.name}</div>
+			<table>
+				<tbody>
+				<tr>
+					<td>{props.item.owner}</td>
+					<td>{props.value ? props.value : props.item.value}</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
 	)
 }
