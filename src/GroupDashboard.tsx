@@ -68,7 +68,7 @@ export default function GroupDashboard(props) {
 
 			<div className='page-header'>Current Records</div>
 			<RecordRow item={dashboard.pilotWithHighestTotalFlightCount}/>
-			<RecordRow item={dashboard.pilotWithHighestTotalFlightTime} value={Times.toFlightTime(dashboard.pilotWithHighestTotalFlightTime.value)}/>
+			<RecordRow item={dashboard.pilotWithHighestTotalFlightTime} value={Times.toSummaryFlightTime(dashboard.pilotWithHighestTotalFlightTime.value)}/>
 		</div>
 	)
 }
