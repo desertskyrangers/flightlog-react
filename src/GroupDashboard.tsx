@@ -14,7 +14,8 @@ export default function GroupDashboard(props) {
 		pilotFlightTime: 0,
 		pilotWithHighestTotalFlightCount: {name: "", description: "", value: "", owner: ""},
 		pilotWithHighestTotalFlightTime: {name: "", description: "", value: "", owner: ""},
-		pilotWithMostRecentFlightDate: {name: "", description: "", value: "", owner: ""}
+		pilotWithMostRecentFlightDate: {name: "", description: "", value: "", owner: ""},
+		pilotWithLongestSingleFlightTime: {name: "", description: "", value: "", owner: ""}
 	})
 
 	function loadDashboards() {
@@ -77,6 +78,7 @@ export default function GroupDashboard(props) {
 			<RecordRow item={dashboard.pilotWithHighestTotalFlightCount}/>
 			<RecordRow item={dashboard.pilotWithHighestTotalFlightTime}/>
 			<RecordRow item={dashboard.pilotWithMostRecentFlightDate}/>
+			<RecordRow item={dashboard.pilotWithLongestSingleFlightTime}/>
 		</div>
 	)
 }
@@ -98,7 +100,7 @@ function RecordRow(props) {
 
 	/* Record values can have types that indicate the value format */
 	let value = props.item.value
-	if (props.item.type === 'flight-time') value = Times.toSummaryFlightTime(props.item.value)
+	if (props.item.type === 'duration') value = Times.toSummaryFlightTime(props.item.value)
 	if (props.item.type === 'timestamp') value = Dates.isoDate(new Date(Number.parseInt(props.item.value)))
 
 	return (
