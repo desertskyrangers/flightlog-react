@@ -11,8 +11,7 @@ import Ago from "./part/Ago";
 
 export default function UserFlights() {
 
-	const [flights, setFlights] = useState()
-	const [page] = useState(0)
+	const [page, setPage] = useState()
 	const [messages, setMessages] = useState([])
 
 	function clearMessages() {
@@ -20,15 +19,15 @@ export default function UserFlights() {
 	}
 
 	let list;
-	if (!!flights) {
-		list = <FlightList flights={flights}/>
+	if (!!page) {
+		list = <FlightList page={page} loadFlightPage={loadFlightPage}/>
 	} else {
 		list = <Loading/>
 	}
 
 	function loadFlightPage(page) {
 		UserService.getFlightPage(page, (success) => {
-			setFlights(success.page.content)
+			setPage(success.page)
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -36,7 +35,7 @@ export default function UserFlights() {
 		})
 	}
 
-	useEffect(() => loadFlightPage(page), [page])
+	useEffect(() => loadFlightPage(0), [])
 
 	return (
 		<div className='page-container'>
@@ -54,12 +53,12 @@ function FlightList(props) {
 	const navigate = useNavigate();
 
 	let page
-	if (props.flights.length === 0) {
+	if (props.page.content.length === 0) {
 		page = <NoResults message='No flights'/>
 	} else {
 		page = <table className='flight-list'>
 			<tbody>
-			{props.flights.map((flight) => <FlightRow key={flight.id} value={flight.id} flight={flight}/>)}
+			{props.page.content.map((flight) => <FlightRow key={flight.id} value={flight.id} flight={flight}/>)}
 			</tbody>
 		</table>
 	}
@@ -68,9 +67,21 @@ function FlightList(props) {
 		navigate(AppPath.FLIGHT + "/new")
 	}
 
+	function prior() {
+		props.loadFlightPage(props.page.number - 1)
+	}
+
+	function next() {
+		props.loadFlightPage(props.page.number + 1)
+	}
+
 	return (
 		<div className='vbox'>
-			<button className='page-action' onClick={add}>Log a Flight</button>
+			<div className='hbox'>
+				<button className='page-action icon' onClick={prior} disabled={props.page.first}>{Icons.PAGE_PRIOR}</button>
+				<button className='page-action' onClick={add}>Log a Flight</button>
+				<button className='page-action icon' onClick={next} disabled={props.page.last}>{Icons.PAGE_NEXT}</button>
+			</div>
 			{page}
 		</div>
 	)

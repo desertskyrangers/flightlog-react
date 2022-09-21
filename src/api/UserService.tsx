@@ -121,7 +121,7 @@ class UserService extends ApiService {
   }
 
   getFlightPage(page, successCallback, failureCallback) {
-    this.fetch(Config.API_URL + ApiPath.USER_FLIGHT + "?pg=" + page + "&pz=100", {
+    this.fetch(Config.API_URL + ApiPath.USER_FLIGHT + "?pg=" + page + "&pz=10", {
       method: 'GET',
     }).then((response) => {
       successCallback(response)
