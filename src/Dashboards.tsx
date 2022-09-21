@@ -6,10 +6,11 @@ import GroupDashboard from "./GroupDashboard";
 
 export default function Dashboards(props) {
 
+	const [noticePriority, setNoticePriority] = useState(props.noticePriority || 'error')
 	const [messages, setMessages] = useState(props.messages || [])
 	const [user, setUser] = useState(props.user || {})
 	const [memberships, setMemberships] = useState(props.memberships || [])
-	const [dashboard, setDashboard] = useState(props.dashboard || <Dashboard messages={messages}/>)
+	const [dashboard, setDashboard] = useState(props.dashboard || <Dashboard messages={messages} setMessages={setNotices}/>)
 
 	function loadProfile() {
 		UserService.profile((result) => {
@@ -32,7 +33,13 @@ export default function Dashboards(props) {
 	}
 
 	function clearMessages() {
+		setNoticePriority('error')
 		setMessages([])
+	}
+
+	function setNotices(messages, priority) {
+		setNoticePriority(priority || 'error')
+		setMessages(messages)
 	}
 
 	function changeDashboard(event) {
@@ -41,14 +48,14 @@ export default function Dashboards(props) {
 
 		clearMessages()
 
-		if (index === 0) {
-			setDashboard(<Dashboard setMessages={setMessages}/>)
-		} else {
-			setDashboard(<GroupDashboard id={id} setMessages={setMessages}/>)
-		}
+		console.log( "setNotices=" + setNotices )
 
-		console.log("dashboard change...")
-		console.log("dashboard id=" + id)
+
+		if (index === 0) {
+			setDashboard(<Dashboard setMessages={setNotices}/>)
+		} else {
+			setDashboard(<GroupDashboard id={id} setMessages={setNotices}/>)
+		}
 	}
 
 	useEffect(loadProfile, [])
@@ -64,7 +71,7 @@ export default function Dashboards(props) {
 						{memberships.map((membership) => <option key={membership.group.id} value={membership.group.id}>{membership.group.name}</option>)}
 					</select>
 
-					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
+					<Notice priority={noticePriority} messages={messages} clearMessages={clearMessages}/>
 
 					{dashboard}
 

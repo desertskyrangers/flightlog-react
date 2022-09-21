@@ -8,6 +8,7 @@ import './css/dashboard.css'
 import Ago from "./part/Ago";
 import {FlightStats, FlightStatsHeader} from "./part/FlightStats"
 import Icons from "./util/Icons";
+import GroupService from "./api/GroupService";
 
 export default function Dashboard(props) {
 	const navigate = useNavigate()
@@ -27,35 +28,50 @@ export default function Dashboard(props) {
 		})
 	}
 
+	function groupCallout() {
+		GroupService.callout(props.id, (result) => {
+			let messages = result.messages
+			if (!!!messages) messages = [result.message]
+			props.setMessages(messages,'info')
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			props.setMessages(messages)
+		})
+	}
+
 	useEffect(loadDashboard, [props])
 
 	return (
-				<div className='page-form-content'>
+		<div className='page-form-content'>
 
-					<table className='dashboard'>
-						<tbody>
-						<FlightStatsHeader/>
-						<FlightStats count={dashboard.pilotFlightCount} time={dashboard.pilotFlightTime}/>
-						{!!dashboard.observerFlightCount ? <ObserverStatsHeader/> : null}
-						{!!dashboard.observerFlightCount ? <ObserverStats count={dashboard.observerFlightCount} time={dashboard.observerFlightTime}/> : null}
-						</tbody>
-					</table>
+			<table className='dashboard'>
+				<tbody>
+				<FlightStatsHeader/>
+				<FlightStats count={dashboard.pilotFlightCount} time={dashboard.pilotFlightTime}/>
+				{!!dashboard.observerFlightCount ? <ObserverStatsHeader/> : null}
+				{!!dashboard.observerFlightCount ? <ObserverStats count={dashboard.observerFlightCount} time={dashboard.observerFlightTime}/> : null}
+				</tbody>
+			</table>
 
-					<div className='hbox'>
-						<button className='page-action' onClick={() => navigate(ApiPath.FLIGHT_TIMER)}>{Icons.TIMER}</button>
-						<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>{Icons.LOG}</button>
-					</div>
+			<div className='hbox'>
+				<button className='page-action' onClick={groupCallout}>{Icons.CALLOUT} Callout</button>
+			</div>
+			<div className='hbox'>
+				<button className='page-action' onClick={() => navigate(ApiPath.FLIGHT_TIMER)}>{Icons.TIMER}</button>
+				<button className='page-action' onClick={() => navigate(AppPath.FLIGHT + "/new")}>{Icons.LOG}</button>
+			</div>
 
-					{!!dashboard.aircraftStats ?
-						<table className='stats'>
-							<tbody>
-							{dashboard.aircraftStats.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}
-							</tbody>
-						</table>
-						: null}
+			{!!dashboard.aircraftStats ?
+				<table className='stats'>
+					<tbody>
+					{dashboard.aircraftStats.map((craft) => <AircraftRow key={craft.id} value={craft.id} aircraft={craft}/>)}
+					</tbody>
+				</table>
+				: null}
 
-					<LastFlight timestamp={dashboard.lastPilotFlightTimestamp}/>
-				</div>
+			<LastFlight timestamp={dashboard.lastPilotFlightTimestamp}/>
+		</div>
 	)
 }
 
