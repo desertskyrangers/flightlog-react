@@ -156,14 +156,6 @@ export default function Preferences(props) {
 						/>
 					</PreferenceSection>
 					<PreferenceSection preferences={preferences} title='Flights'>
-						<EntrySelect id='flight-list-view' text='Flight list' value={preferences.flightListView} onChange={(event) => updatePreference('flightListView', event.target.value)}>
-							<option key='month' value='month'>Show last month of flights</option>
-							<option key='week' value='week'>Show last week of flights</option>
-							<option key='day' value='day'>Show last day of flights</option>
-							<option key='20' value='20'>Show last 20 flights</option>
-							<option key='10' value='10'>Show last 10 flights</option>
-							<option key='1' value='1'>Show last 1 flight</option>
-						</EntrySelect>
 						<EntryCheck
 							id='show-observer-flights'
 							text='Show observer flights'
