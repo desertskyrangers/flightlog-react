@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Icons from "../util/Icons";
 import {useNavigate} from "react-router-dom";
-import EntrySelect from "../part/EntrySelect";
 import EntryCheck from "../part/EntryCheck";
 import AppPath from "../AppPath";
 import UserService from "../api/UserService";
