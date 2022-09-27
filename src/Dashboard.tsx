@@ -28,11 +28,11 @@ export default function Dashboard(props) {
 		})
 	}
 
-	function groupCallout() {
-		GroupService.callout(props.id, (result) => {
+	function groupCallout(groupId) {
+		GroupService.callout(groupId, (result) => {
 			let messages = result.messages
 			if (!!!messages) messages = [result.message]
-			props.setMessages(messages,'info')
+			props.setMessages(messages, 'info')
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]
@@ -40,7 +40,20 @@ export default function Dashboard(props) {
 		})
 	}
 
+	function groupCalloutChange(event) {
+		if (event.target.value === 'callout') return
+		groupCallout(event.target.value)
+	}
+
 	useEffect(loadDashboard, [props])
+
+	const groupCount = !!!dashboard.groups ? 0 : dashboard.groups.length
+
+	let callout = <button className='page-action' disabled={groupCount === 0} onClick={groupCallout}>{Icons.CALLOUT} Callout</button>
+	if (groupCount > 1) callout = <select id='groupCallout' name='groupCallout' className='page-field' onChange={groupCalloutChange} onKeyDown={props.onKeyDown}>
+		<option key='callout' value='callout'>Callout</option>
+		{dashboard.groups.map((group) => <option key={group.id} value={group.id}>{group.name}</option>)}
+	</select>
 
 	return (
 		<div className='page-form-content'>
@@ -55,7 +68,7 @@ export default function Dashboard(props) {
 			</table>
 
 			<div className='hbox'>
-				<button className='page-action' onClick={groupCallout}>{Icons.CALLOUT} Callout</button>
+				{callout}
 			</div>
 			<div className='hbox'>
 				<button className='page-action' onClick={() => navigate(ApiPath.FLIGHT_TIMER)}>{Icons.TIMER}</button>
@@ -70,7 +83,7 @@ export default function Dashboard(props) {
 				</table>
 				: null}
 
-			<LastFlight timestamp={dashboard.lastPilotFlightTimestamp}/>
+			<LastFlight timestamp={dashboard.pilotLastFlightTimestamp}/>
 		</div>
 	)
 }

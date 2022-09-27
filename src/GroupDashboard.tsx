@@ -32,7 +32,7 @@ export default function GroupDashboard(props) {
 		GroupService.callout(props.id, (result) => {
 			let messages = result.messages
 			if (!!!messages) messages = [result.message]
-			props.setMessages(messages)
+			props.setMessages(messages, 'info')
 		}, (failure) => {
 			let messages = failure.messages
 			if (!!!messages) messages = [failure.message]

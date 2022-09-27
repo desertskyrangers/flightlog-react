@@ -51,19 +51,34 @@
 	color: yellow;
 }
 
+
 .notice-info {
-	color: #c0c0ff;
-	background: #303040;
-	border: 1px solid #9090c0;
+	color: #c0ffc0;
+	background: #304030;
+	border: 1px solid #90c090;
 }
 
 .notice-info .icon {
-	color: #6060c0;
+	color: #60c060;
 }
 
 .notice-info .icon:hover {
-	color: #c0c0ff;
+	color: #c0ffc0;
 }
+
+/*.notice-info {*/
+/*	color: #c0c0ff;*/
+/*	background: #303040;*/
+/*	border: 1px solid #9090c0;*/
+/*}*/
+
+/*.notice-info .icon {*/
+/*	color: #6060c0;*/
+/*}*/
+
+/*.notice-info .icon:hover {*/
+/*	color: #c0c0ff;*/
+/*}*/
 
 .notice-messages {
 	background: transparent;
