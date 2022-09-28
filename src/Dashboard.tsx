@@ -49,7 +49,7 @@ export default function Dashboard(props) {
 
 	const groupCount = !!!dashboard.groups ? 0 : dashboard.groups.length
 
-	let callout = <button className='page-action' disabled={groupCount === 0} onClick={groupCallout}>{Icons.CALLOUT} Callout</button>
+	let callout = <button className='page-action' disabled={groupCount === 0} onClick={()=>groupCallout(dashboard.groups[0].id)}>{Icons.CALLOUT} Callout</button>
 	if (groupCount > 1) callout = <select id='groupCallout' name='groupCallout' className='page-field' onChange={groupCalloutChange} onKeyDown={props.onKeyDown}>
 		<option key='callout' value='callout'>Callout</option>
 		{dashboard.groups.map((group) => <option key={group.id} value={group.id}>{group.name}</option>)}
