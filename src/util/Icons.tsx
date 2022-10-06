@@ -57,6 +57,7 @@ class Icons {
 	AIRCRAFT_DECOMMISSIONED = <FontAwesomeIcon icon={faBurst}/>
 	AIRCRAFT_INOPERATIVE = <FontAwesomeIcon icon={faPlaneSlash}/>
 	AIRCRAFT_DESTROYED = <FontAwesomeIcon icon={faBurst}/>
+	BACK = <FontAwesomeIcon icon={faChevronLeft}/>
 	BARS = <FontAwesomeIcon icon={faBars}/>
 	BATTERY = <FontAwesomeIcon icon={faBatteryFull}/>
 	BATTERY_NEW = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faBatteryFull}/><FontAwesomeIcon icon={faAsterisk} transform='shrink-4 up-5 left-7'/></span>

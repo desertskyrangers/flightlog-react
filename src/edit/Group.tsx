@@ -135,6 +135,9 @@ export default function Group(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
+
+					<div className='hbox'><button className='icon' onClick={close}>{Icons.BACK}</button><span className='page-header'>{name}</span></div>
+
 					<EntryField id='name' text='Name' type='text' value={name} required={true} autoFocus='autofocus' onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown}
 											labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
 

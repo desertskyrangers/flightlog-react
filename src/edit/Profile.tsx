@@ -139,6 +139,8 @@ export default function Profile(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
+					<div className='hbox'><button className='icon' onClick={close}>{Icons.BACK}</button><span className='page-header'>User Profile</span></div>
+
 					<EntryField id='username'
 											text='Username'
 											type='text'

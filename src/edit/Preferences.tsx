@@ -81,10 +81,8 @@ export default function Preferences(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
-					<div className='hbox'>
-						<div className='page-header'>Preferences</div>
-						<span className='icon' onClick={close}>{Icons.CLOSE}</span>
-					</div>
+
+					<div className='hbox'><button className='icon' onClick={close}>{Icons.BACK}</button><span className='page-header'>Preferences</span></div>
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 

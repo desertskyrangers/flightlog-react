@@ -14,10 +14,7 @@ export default function About(props) {
 			<div className='page-body'>
 				<div className='page-form'>
 					<div>
-						<div className='page-header-row'>
-							<h1>About</h1>
-							<span className='icon' onClick={close}>{Icons.CLOSE}</span>
-						</div>
+						<div className='hbox'><button className='icon' onClick={close}>{Icons.BACK}</button><h1>About</h1></div>
 						<div><span className='page-label'>app version</span> {props.appVersion}</div>
 						<div><span className='page-label'>api version</span> {props.apiVersion}</div>
 						<hr/>

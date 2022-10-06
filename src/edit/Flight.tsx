@@ -307,6 +307,9 @@ export default function Flight(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
+
+					<div className='hbox'><button className='icon' onClick={close}>{Icons.BACK}</button><span className='page-header'>Flight Record</span></div>
+
 					<EntrySelect id='pilot' text='Pilot/Student' value={pilot} required onChange={(event) => setPilot(event.target.value)} labelActionIcon={Icons.CLOSE} onLabelAction={close}>
 						{pilotOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>

@@ -201,7 +201,7 @@ export default function Battery(props) {
 			<div className='page-body'>
 				<div className='page-form'>
 
-					<div className='page-label-row'><span>{name}</span><span className='icon right' onClick={close}>{Icons.CLOSE}</span></div>
+					<div className='hbox'><button className='icon' onClick={close}>{Icons.BACK}</button><span className='page-header'>{name}</span></div>
 
 					{/* Aircraft information */}
 					<div className='vbox'>

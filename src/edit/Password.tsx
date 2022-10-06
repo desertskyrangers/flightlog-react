@@ -68,6 +68,8 @@ export default function Password(props) {
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
+					<div className='hbox'><button className='icon' onClick={close}>{Icons.BACK}</button><span className='page-header'>Change Password</span></div>
+
 					<EntryField id='current-password'
 											text='Current Password'
 											type='password'
