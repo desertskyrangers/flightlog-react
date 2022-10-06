@@ -10,6 +10,7 @@ import DeleteWithConfirm from "../part/DeleteWithConfirm";
 import EntrySelect from "../part/EntrySelect";
 import EntryCheck from "../part/EntryCheck";
 import {Option} from "./Option";
+import EntryColor from "../part/EntryColor";
 
 export function calcAspectRatio(wingspan, wingarea) {
 	return (wingspan * wingspan) / (wingarea * 100)
@@ -72,8 +73,8 @@ export default function Aircraft(props) {
 			wingarea,
 			weight,
 			nightLights,
-			baseColor: String,
-			trimColor: String
+			baseColor,
+			trimColor
 		}, () => {
 			close()
 		}, (failure) => {
@@ -175,12 +176,19 @@ export default function Aircraft(props) {
 	useEffect(() => loadAircraftTypeOptions(), [])
 	useEffect(() => loadAircraft(), [])
 
+	function wrapSetBaseColor(color) {
+		console.log("Base color=" + JSON.stringify( color ))
+		setBaseColor(color)
+	}
+
 	return (
 		<div className='page-container'>
 			<div className='page-body'>
 				<div className='page-form'>
 
-					<div className='hbox'><button className='icon' onClick={close}>{Icons.BACK}</button><span className='page-header'>{name}</span></div>
+					<div className='hbox'>
+						<button className='icon' onClick={close}>{Icons.BACK}</button>
+						<span className='page-header'>{name}</span></div>
 
 					{/* Aircraft information */}
 					<div className='vbox'>
@@ -197,7 +205,7 @@ export default function Aircraft(props) {
 							{!!wingAspect ? <MetricRow label='Aspect Ratio:' metric={wingAspect} unit='' decimal={1}/> : null}
 							{!!wingMac ? <MetricRow label='Wing MAC:' metric={wingMac} unit='mm' decimal={1}/> : null}
 							{!!wingLoading ? <MetricRow label='Wing Loading:' metric={wingLoading} unit='g/cm²' decimal={2}/> : null}
-							{!!nightLights ? <DataRow label='Night flying lights:' data={nightLights ? "yes" : "no"}/> : null }
+							{!!nightLights ? <DataRow label='Night flying lights:' data={nightLights ? "yes" : "no"}/> : null}
 							{!!baseColor ? <ColorRow label='Base color:' color={baseColor}/> : null}
 							{!!trimColor ? <ColorRow label='Trim color:' color={trimColor}/> : null}
 							</tbody>
@@ -228,6 +236,9 @@ export default function Aircraft(props) {
 							<EntryField id='length' text='Length (mm)' type='text' value={length} onChange={(event) => setLength(event.target.value)} onKeyDown={onKeyDown}/>
 							<EntryField id='wingarea' text='Wing Area (cm²)' type='text' value={wingarea} onChange={(event) => setWingarea(event.target.value)} onKeyDown={onKeyDown}/>
 							<EntryField id='weight' text='Weight (g)' type='text' value={weight} onChange={(event) => setWeight(event.target.value)} onKeyDown={onKeyDown}/>
+
+							<EntryColor id='baseColor' text='Base Color' value={baseColor} onChange={(event) => wrapSetBaseColor(event.target.value)}/>
+							<EntryColor id='trimColor' text='Trim Color' value={trimColor} onChange={(event) => setTrimColor(event.target.value)}/>
 
 							<EntryCheck id='nightlights' text='Lights for night flying' checked={nightLights} onChange={() => setNightLights(!nightLights)}/>
 
