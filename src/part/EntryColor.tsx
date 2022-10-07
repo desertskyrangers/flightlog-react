@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {SketchPicker} from 'react-color'
+import {TwitterPicker} from 'react-color'
 import Numbers from '../util/Numbers'
 
 export default function EntryColor(props) {
@@ -35,6 +35,12 @@ export default function EntryColor(props) {
 		return "#" + r + g + b + a;
 	}
 
+	const colors = [
+		"#800000","#804000","#808000","#008000","#000080","#400080","#000000",
+		"#ff0000","#ff8000","#ffff00","#00ff00","#0000ff","#8000ff","#808080",
+		"#ffa0a0","#ffd0a0","#ffffa0","#a0ffa0","#a0a0ff","#d0a0ff","#ffffff"
+	]
+
 	return (
 		<div>
 			{
@@ -55,7 +61,7 @@ export default function EntryColor(props) {
 				<span style={{'backgroundColor': props.value, 'width': '100%'}} onClick={openColorPicker}>&nbsp;</span>
 				{props.fieldActionIcon ? <button className='icon page-field-action-button' title={props.fieldActionTitle} onClick={props.onFieldAction}>{props.fieldActionIcon}</button> : null}
 			</div>
-			{colorPickerVisible ? <div className='hbox'><SketchPicker color={toReactColor(props.value)} onChangeComplete={changeColor}/></div> : null}
+			{colorPickerVisible ? <div className='hbox'><TwitterPicker triangle='hide' background='#204080' style={{'backgroundColor':'#204080'}} colors={colors} color={toReactColor(props.value)} onChangeComplete={changeColor}/></div> : null}
 		</div>
 	)
 
