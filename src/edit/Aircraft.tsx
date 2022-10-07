@@ -177,7 +177,7 @@ export default function Aircraft(props) {
 	useEffect(() => loadAircraft(), [])
 
 	function wrapSetBaseColor(color) {
-		console.log("Base color=" + JSON.stringify( color ))
+		console.log("Base color=" + JSON.stringify(color))
 		setBaseColor(color)
 	}
 
