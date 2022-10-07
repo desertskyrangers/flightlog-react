@@ -75,6 +75,10 @@ function FlightList(props) {
 		props.loadFlightPage(props.page.number + 1)
 	}
 
+	function exportData() {
+		navigate(AppPath.EXPORT)
+	}
+
 	return (
 		<div className='vbox'>
 			<div className='hbox'>
@@ -83,6 +87,9 @@ function FlightList(props) {
 				<button className='page-action icon' onClick={next} disabled={props.page.last}>{Icons.PAGE_NEXT}</button>
 			</div>
 			{page}
+			<div className='hbox'>
+				<button className='page-action icon' onClick={exportData}>{Icons.EXPORT}</button>
+			</div>
 		</div>
 	)
 

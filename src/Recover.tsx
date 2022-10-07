@@ -1,3 +1,4 @@
+import React from "react";
 import EntryField from "./part/EntryField";
 import {useState} from "react";
 import Notice from "./part/Notice";

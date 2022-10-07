@@ -23,6 +23,8 @@ class AppPath {
 	BATTERY = this.ROOT + "/battery"
 	USER_BATTERIES = this.BATTERY + "/user"
 
+	EXPORT = this.ROOT + "/export"
+
 	FLIGHT = this.ROOT + "/flight"
 	FLIGHT_TIMER = this.FLIGHT + "/timer"
 

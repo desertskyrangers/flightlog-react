@@ -34,6 +34,7 @@ import Group from "./edit/Group";
 import Preferences from "./edit/Preferences";
 import PublicDashboard from "./PublicDashboard";
 import Dashboards from "./Dashboards";
+import DataExport from "./DataExport";
 
 const manifest = require('./manifest.json')
 
@@ -90,6 +91,7 @@ function App() {
             {/* Entry */}
             <Route path={AppPath.AIRCRAFT + "/:id"} element={<Protect children={<Aircraft/>}/>}/>
             <Route path={AppPath.BATTERY + "/:id"} element={<Protect children={<Battery/>}/>}/>
+            <Route path={AppPath.EXPORT} element={<Protect children={<DataExport/>}/>}/>
             <Route path={AppPath.FLIGHT + "/:id"} element={<Protect children={<Flight/>}/>}/>
             <Route path={AppPath.FLIGHT_TIMER} element={<Protect children={<FlightTimer/>}/>}/>
             <Route path={AppPath.FLIGHT + "/:id/:timestamp/:duration"} element={<Protect children={<Flight/>}/>}/>

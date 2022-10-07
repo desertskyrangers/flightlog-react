@@ -21,6 +21,7 @@ import {
 	faChevronRight,
 	faClock,
 	faCopy,
+	faDownload,
 	faEllipsisH,
 	faEllipsisV,
 	faEnvelope,
@@ -83,6 +84,7 @@ class Icons {
 	DRONE = <DroneIcon/>
 	ENVELOPE = <FontAwesomeIcon icon={faEnvelope}/>
 	EXPAND = <FontAwesomeIcon icon={faAngleDown}/>
+	EXPORT = <FontAwesomeIcon icon={faDownload}/>
 	FLIGHTS = <FontAwesomeIcon icon={faBars}/>
 	GUAGE = <FontAwesomeIcon icon={faGauge}/>
 	GROUP = <FontAwesomeIcon icon={faUsers}/>
