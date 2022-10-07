@@ -11,10 +11,14 @@ table.stats {
 }
 
 table.stats td:nth-child(2) {
-	text-align: end;
+	text-align: start;
 }
 
 table.stats td:nth-child(3) {
+	text-align: end;
+}
+
+table.stats td:nth-child(4) {
 	text-align: end;
 }
 

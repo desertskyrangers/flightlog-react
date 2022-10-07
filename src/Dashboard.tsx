@@ -112,6 +112,9 @@ function ObserverStats(props) {
 function AircraftRow(props) {
 	return (
 		<tr>
+			<td>
+				<span style={{'color':props.aircraft.trimColor, 'backgroundColor':props.aircraft.baseColor,'padding':'0.2rem', 'borderRadius':'0.2rem','display':'inline-block'}}>{Icons.fromAircraftTypeAndStatus(props.aircraft.type, props.aircraft.status)}</span>
+			</td>
 			<td><Link to={AppPath.AIRCRAFT + "/" + props.aircraft.id}>{props.aircraft.name}</Link></td>
 			<td>{props.aircraft.flightCount}</td>
 			<td>{Times.toSummaryFlightTime(props.aircraft.flightTime)}</td>
