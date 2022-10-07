@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {TwitterPicker} from 'react-color'
 import Numbers from '../util/Numbers'
+import '../css/react-color.css'
 
 export default function EntryColor(props) {
 
@@ -10,8 +11,12 @@ export default function EntryColor(props) {
 
 	const [colorPickerVisible, setColorPickerVisible] = useState<boolean>(props.colorPickerVisibile || false)
 
-	function openColorPicker() {
+	function toggleColorPicker() {
 		setColorPickerVisible(!colorPickerVisible)
+	}
+
+	function closeColorPicker() {
+		setColorPickerVisible(false)
 	}
 
 	function changeColor(color) {
@@ -20,11 +25,11 @@ export default function EntryColor(props) {
 	}
 
 	function toReactColor(color) {
-		const r = Number.parseInt(color.substring(0,2), 16);
-		const g = Number.parseInt(color.substring(2,2), 16);
-		const b = Number.parseInt(color.substring(4,2), 16);
-		const a = Number.parseInt(color.substring(6,2), 16);
-		return { r: r, g: g, b: b, a: a };
+		const r = Number.parseInt(color.substring(0, 2), 16);
+		const g = Number.parseInt(color.substring(2, 2), 16);
+		const b = Number.parseInt(color.substring(4, 2), 16);
+		const a = Number.parseInt(color.substring(6, 2), 16);
+		return {r: r, g: g, b: b, a: a};
 	}
 
 	function fromReactColor(reactColor) {
@@ -36,9 +41,9 @@ export default function EntryColor(props) {
 	}
 
 	const colors = [
-		"#800000","#804000","#808000","#008000","#000080","#400080","#000000",
-		"#ff0000","#ff8000","#ffff00","#00ff00","#0000ff","#8000ff","#808080",
-		"#ffa0a0","#ffd0a0","#ffffa0","#a0ffa0","#a0a0ff","#d0a0ff","#ffffff"
+		"#800000", "#804000", "#808000", "#008000", "#000080", "#400080", "#000000",
+		"#ff0000", "#ff8000", "#ffff00", "#00ff00", "#0000ff", "#8000ff", "#808080",
+		"#ffa0a0", "#ffd0a0", "#ffffa0", "#a0ffa0", "#a0a0ff", "#d0a0ff", "#ffffff"
 	]
 
 	return (
@@ -57,11 +62,19 @@ export default function EntryColor(props) {
 						<label className='page-label'>{help}</label>
 					</div> : null
 			}
-			<div className='hbox'>
-				<span style={{'backgroundColor': props.value, 'width': '100%'}} onClick={openColorPicker}>&nbsp;</span>
+
+			<div className='hbox swatch' onClick={toggleColorPicker}>
+				<span style={{'background': props.value}} className='swatch-color'>&nbsp;</span>
 				{props.fieldActionIcon ? <button className='icon page-field-action-button' title={props.fieldActionTitle} onClick={props.onFieldAction}>{props.fieldActionIcon}</button> : null}
 			</div>
-			{colorPickerVisible ? <div className='hbox'><TwitterPicker triangle='hide' background='#204080' style={{'backgroundColor':'#204080'}} colors={colors} color={toReactColor(props.value)} onChangeComplete={changeColor}/></div> : null}
+
+			{colorPickerVisible ?
+				<div className='popover'>
+					<div className='popover-cover' onClick={closeColorPicker}/>
+					<div className='hbox'><TwitterPicker itemStyle={{'background':'red'}} triangle='hide' colors={colors} color={toReactColor(props.value)} onChangeComplete={changeColor}/></div>
+				</div>
+				: null
+			}
 		</div>
 	)
 

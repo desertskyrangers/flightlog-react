@@ -236,6 +236,32 @@
 	border: 1px solid var(--border-0);
 }
 
+.swatch {
+	cursor: pointer;
+	border-radius: 5px;
+	border: 1px solid var(--border-1);
+	padding: 0.5rem 1rem;
+	margin-top: 0.5rem;
+}
+
+.swatch-color {
+	width: 100%;
+	transition: ease all 500ms;
+}
+
+.popover {
+	z-index: 2;
+	margin-top: 0.2rem;
+}
+
+.popover-cover {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
 .v-separator {
 	border-left: 1px solid currentColor;
 	height: 3.5rem;
