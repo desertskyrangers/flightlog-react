@@ -105,7 +105,11 @@ function FlightRow(props) {
 
 	return (
 		<tr onClick={open}>
-			<td>{Icons.fromUserFlightRole(props.flight.userFlightRole)} {props.flight.name}</td>
+			<td>{Icons.fromUserFlightRole(props.flight.userFlightRole)}</td>
+			<td>
+				<span style={{'color':props.flight.trimColor, 'backgroundColor':props.flight.baseColor,'padding':'0.2rem', 'borderRadius':'0.2rem'}}>{Icons.fromAircraftTypeAndStatus(props.flight.type, props.flight.status)}</span>
+			</td>
+			<td>{props.flight.name}</td>
 			<td>{Times.toFlightTime(props.flight.duration)}</td>
 			<td><Ago timestamp={props.flight.timestamp}/></td>
 		</tr>
