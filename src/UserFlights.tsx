@@ -111,7 +111,7 @@ function FlightRow(props) {
 			</td>
 			<td>{props.flight.name}</td>
 			<td>{Times.toFlightTime(props.flight.duration)}</td>
-			<td><Ago timestamp={props.flight.timestamp}/></td>
+			<td className='no-wrap'><Ago timestamp={props.flight.timestamp}/></td>
 		</tr>
 	)
 
