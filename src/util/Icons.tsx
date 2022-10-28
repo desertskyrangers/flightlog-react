@@ -19,6 +19,7 @@ import {
 	faCheck,
 	faChevronLeft,
 	faChevronRight,
+	faCircle,
 	faClock,
 	faCopy,
 	faDownload,
@@ -69,10 +70,10 @@ class Icons {
 	BATTERY_EMPTY = <FontAwesomeIcon icon={faBatteryEmpty}/>
 	BATTERY_DESTROYED = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faBatteryEmpty}/><FontAwesomeIcon icon={faSlash}/></span>
 	CALENDAR = <FontAwesomeIcon icon={faCalendar}/>
-	CALLOUT =  <FontAwesomeIcon icon={faBullhorn}/>
+	CALLOUT = <FontAwesomeIcon icon={faBullhorn}/>
 	CANCEL = <FontAwesomeIcon icon={faBan}/>
 	CLOCK = <FontAwesomeIcon icon={faClock}/>
-	CLOSE = <CloseIcon/>
+	CLOSE = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faCircle} transform='shrink-16'/><CloseIcon/></span>
 	CLUB = <FontAwesomeIcon icon={faUserFriends}/>
 	COLLAPSE = <FontAwesomeIcon icon={faAngleUp}/>
 	COMPANY = <FontAwesomeIcon icon={faBuilding}/>
@@ -81,7 +82,7 @@ class Icons {
 	DASHBOARD_USER = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faTv}/></span>
 	DASHBOARD_GROUP = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faTv}/><FontAwesomeIcon icon={faUsers} transform='shrink-9 up-1'/></span>
 	DELETE = <FontAwesomeIcon icon={faTrash}/>
-	DRONE = <DroneIcon/>
+	DRONE = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faCircle} transform='shrink-16'/><DroneIcon/></span>
 	ENVELOPE = <FontAwesomeIcon icon={faEnvelope}/>
 	EXPAND = <FontAwesomeIcon icon={faAngleDown}/>
 	EXPORT = <FontAwesomeIcon icon={faDownload}/>
@@ -89,7 +90,7 @@ class Icons {
 	GUAGE = <FontAwesomeIcon icon={faGauge}/>
 	GROUP = <FontAwesomeIcon icon={faUsers}/>
 	GROUP_ADD = <FontAwesomeIcon icon={faPlus}/>
-	HELICOPTER = <FontAwesomeIcon icon={faHelicopter}/>
+	HELICOPTER = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faHelicopter}/></span>
 	HOME = <FontAwesomeIcon icon={faHome}/>
 	INVITE = <FontAwesomeIcon icon={faPlus}/>
 	KEY = <FontAwesomeIcon icon={faKey}/>
@@ -102,13 +103,13 @@ class Icons {
 	PAGE_NEXT = <FontAwesomeIcon icon={faChevronRight}/>
 	PAGE_PRIOR = <FontAwesomeIcon icon={faChevronLeft}/>
 	PILOT = <FontAwesomeIcon icon={faUserAlt}/>
-	PLANE = <FontAwesomeIcon icon={faPlane}/>
+	PLANE = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faPlane} transform='rotate--90'/></span>
 	REVOKE = <FontAwesomeIcon icon={faBan}/>
 	SEND = <FontAwesomeIcon icon={faAngleDoubleRight}/>
 	SETUP = <FontAwesomeIcon icon={faGear}/>
 	SHARE = <FontAwesomeIcon icon={faShareNodes}/>
 	TIMER = <FontAwesomeIcon icon={faStopwatch}/>
-	UNKNOWN = <FontAwesomeIcon icon={faQuestion}/>
+	UNKNOWN = <span className='fa-layers fa-fw'><FontAwesomeIcon icon={faQuestion}/></span>
 	USER = <FontAwesomeIcon icon={faUserAlt}/>
 	WAIT = <FontAwesomeIcon icon={faSpinner}/>
 
@@ -147,7 +148,7 @@ class Icons {
 	}
 
 	fromAircraftType(type) {
-		console.log('type='+type)
+		console.log('type=' + type)
 		let icon = instance.aircraftTypeIcons[type]
 		if (!icon) icon = instance.PLANE
 		return icon
@@ -172,11 +173,10 @@ class Icons {
 	}
 
 	fromAircraftTypeAndStatus(type, status) {
-		if( !!! status ) return instance.UNKNOWN
-		if (status === 'airworthy' || status === 'preflight') {
-			return this.fromAircraftType(type)
-		} else {
+		if (status !== 'airworthy' && status !== 'preflight') {
 			return this.fromAircraftStatus(status);
+		} else {
+			return this.fromAircraftType(type)
 		}
 	}
 

@@ -4,9 +4,9 @@
 
 	fill: currentColor;
 
-	display: inline-block;
-	box-sizing: border-box;
+	/*display: inline-block;*/
+	/*box-sizing: border-box;*/
 
 	text-align: center;
-	vertical-align: text-bottom;
+	vertical-align: center;
 }
