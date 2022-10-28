@@ -147,6 +147,7 @@ class Icons {
 	}
 
 	fromAircraftType(type) {
+		console.log('type='+type)
 		let icon = instance.aircraftTypeIcons[type]
 		if (!icon) icon = instance.PLANE
 		return icon
@@ -171,6 +172,7 @@ class Icons {
 	}
 
 	fromAircraftTypeAndStatus(type, status) {
+		if( !!! status ) return instance.UNKNOWN
 		if (status === 'airworthy' || status === 'preflight') {
 			return this.fromAircraftType(type)
 		} else {

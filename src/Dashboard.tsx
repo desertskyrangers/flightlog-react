@@ -49,7 +49,7 @@ export default function Dashboard(props) {
 
 	const groupCount = !!!dashboard.groups ? 0 : dashboard.groups.length
 
-	let callout = <button className='page-action' disabled={groupCount === 0} onClick={()=>groupCallout(dashboard.groups[0].id)}>{Icons.CALLOUT} Callout</button>
+	let callout = <button className='page-action' disabled={groupCount === 0} onClick={() => groupCallout(dashboard.groups[0].id)}>{Icons.CALLOUT} Callout</button>
 	if (groupCount > 1) callout = <select id='groupCallout' name='groupCallout' className='page-field' onChange={groupCalloutChange} onKeyDown={props.onKeyDown}>
 		<option key='callout' value='callout'>Callout</option>
 		{dashboard.groups.map((group) => <option key={group.id} value={group.id}>{group.name}</option>)}
@@ -113,7 +113,9 @@ function AircraftRow(props) {
 	return (
 		<tr>
 			<td>
-				<span style={{'color':props.aircraft.trimColor, 'backgroundColor':props.aircraft.baseColor,'padding':'0.2rem', 'borderRadius':'0.2rem','display':'inline-block'}}>{Icons.fromAircraftTypeAndStatus(props.aircraft.type, props.aircraft.status)}</span>
+				<span style={{'color': props.aircraft.trimColor, 'backgroundColor': props.aircraft.baseColor, 'padding': '0.2rem', 'borderRadius': '0.2rem', 'display': 'inline-block'}}>
+					{Icons.fromAircraftTypeAndStatus(props.aircraft.type, props.aircraft.status)}
+				</span>
 			</td>
 			<td><Link to={AppPath.AIRCRAFT + "/" + props.aircraft.id}>{props.aircraft.name}</Link></td>
 			<td>{props.aircraft.flightCount}</td>
