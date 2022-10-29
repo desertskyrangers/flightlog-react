@@ -6,6 +6,7 @@ import AuthService from "./api/AuthService";
 import {Link, useNavigate} from 'react-router-dom';
 import ApiPath from "./AppPath";
 import AppPath from "./AppPath";
+import Header from "./Header";
 
 export default function Login(props) {
 
@@ -44,6 +45,7 @@ export default function Login(props) {
 
 	return (
 		<div className='page-container'>
+			<Header/>
 			<div className='page-body'>
 				<div className='page-form'>
 					<Username onChange={updateUsername} onKeyDown={onKeyDown}/>

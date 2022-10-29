@@ -65,7 +65,6 @@ function App() {
 
     <div className="app">
       <Router>
-        <Header/>
         <div className='content'>
           <Routes>
             {/* Public */}

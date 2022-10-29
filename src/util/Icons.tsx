@@ -86,6 +86,7 @@ class Icons {
 	ENVELOPE = <FontAwesomeIcon icon={faEnvelope}/>
 	EXPAND = <FontAwesomeIcon icon={faAngleDown}/>
 	EXPORT = <FontAwesomeIcon icon={faDownload}/>
+	FLIGHTDECK = <img src='/logo.png' alt='FlightDeck Icon' className="nav-icon"/>
 	FLIGHTS = <FontAwesomeIcon icon={faBars}/>
 	GUAGE = <FontAwesomeIcon icon={faGauge}/>
 	GROUP = <FontAwesomeIcon icon={faUsers}/>

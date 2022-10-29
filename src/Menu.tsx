@@ -8,7 +8,7 @@ export default function Menu(props) {
 
   return (
     <div className='nav-bar'>
-      <NavButton to={AppPath.HOME} icon={Icons.DASHBOARD}/>
+      <NavButton to={AppPath.HOME} icon={Icons.FLIGHTDECK}/>
       <NavButton to={AppPath.USER_FLIGHTS} icon={Icons.FLIGHTS}/>
       <NavButton to={AppPath.SETUP} icon={Icons.SETUP}/>
       <NavButton to={AppPath.USER} icon={Icons.USER}/>
