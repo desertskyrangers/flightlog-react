@@ -83,6 +83,8 @@ export default function Dashboard(props) {
 				</table>
 				: null}
 
+			<Location/>
+
 			<LastFlight timestamp={dashboard.pilotLastFlightTimestamp}/>
 		</div>
 	)
@@ -121,6 +123,50 @@ function AircraftRow(props) {
 			<td>{props.aircraft.flightCount}</td>
 			<td>{Times.toSummaryFlightTime(props.aircraft.flightTime)}</td>
 		</tr>
+	)
+}
+
+function Location(props) {
+
+	const [message, setMessage] = useState(props.message || "")
+	const [latitude, setLatitude] = useState(props.latitude || "")
+	const [accuracy, setAccuracy] = useState(props.accuracy || "")
+	const [longitude, setLongitude] = useState(props.longitude || "")
+	const [altitude, setAltitude] = useState(props.altitude || "")
+	const [altitudeAccuracy, setAltitudeAccuracy] = useState(props.altitudeAccuracy || "")
+
+	function onSuccess(position) {
+		// const {
+		// 	latitude,
+		// 	longitude
+		// } = position.coords
+		//const coords = position.coords
+		setLatitude(position.coords.latitude)
+		setLongitude( position.coords.longitude)
+		setAccuracy( position.coords.accuracy)
+		setAltitude( position.coords.altitude)
+		setAltitudeAccuracy( position.coords.altitudeAccuracy)
+		setMessage(`Your current location: ${latitude},${longitude}@${altitude}`)
+	}
+
+	function onError() {
+		setMessage('Your browser doesn\'t support Geolocation')
+	}
+
+	function setup() {
+		navigator.geolocation.getCurrentPosition(onSuccess, onError)
+	}
+
+	useEffect(setup)
+
+	return (
+		<div>
+			<div>Lat: {latitude}</div>
+			<div>Lon: {longitude}</div>
+			<div>Acc: {accuracy} m</div>
+			<div>Alt: {altitude}</div>
+			<div>Acc: {altitudeAccuracy} m</div>
+		</div>
 	)
 }
 
