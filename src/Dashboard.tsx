@@ -128,7 +128,6 @@ function AircraftRow(props) {
 
 function Location(props) {
 
-	const [message, setMessage] = useState(props.message || "")
 	const [latitude, setLatitude] = useState(props.latitude || "")
 	const [accuracy, setAccuracy] = useState(props.accuracy || "")
 	const [longitude, setLongitude] = useState(props.longitude || "")
@@ -136,21 +135,14 @@ function Location(props) {
 	const [altitudeAccuracy, setAltitudeAccuracy] = useState(props.altitudeAccuracy || "")
 
 	function onSuccess(position) {
-		// const {
-		// 	latitude,
-		// 	longitude
-		// } = position.coords
-		//const coords = position.coords
 		setLatitude(position.coords.latitude)
-		setLongitude( position.coords.longitude)
-		setAccuracy( position.coords.accuracy)
-		setAltitude( position.coords.altitude)
-		setAltitudeAccuracy( position.coords.altitudeAccuracy)
-		setMessage(`Your current location: ${latitude},${longitude}@${altitude}`)
+		setLongitude(position.coords.longitude)
+		setAccuracy(position.coords.accuracy)
+		setAltitude(position.coords.altitude)
+		setAltitudeAccuracy(position.coords.altitudeAccuracy)
 	}
 
 	function onError() {
-		setMessage('Your browser doesn\'t support Geolocation')
 	}
 
 	function setup() {
