@@ -138,8 +138,7 @@ export default function Group(props) {
 
 					<div className='hbox'><button className='icon' onClick={close}>{Icons.BACK}</button><span className='page-header'>{name}</span></div>
 
-					<EntryField id='name' text='Name' type='text' value={name} required={true} autoFocus='autofocus' onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown}
-											labelActionIcon={Icons.CLOSE} onLabelAction={close}/>
+					<EntryField id='name' text='Name' type='text' value={name} required={true} autoFocus='autofocus' onChange={(event) => setName(event.target.value)} onKeyDown={onKeyDown}/>
 
 					<EntrySelect id='type' text='Type' value={type} required defaultValue='unspecified' onChange={(event) => setType(event.target.value)}>
 						<option key='unspecified' hidden>Select a group type</option>
