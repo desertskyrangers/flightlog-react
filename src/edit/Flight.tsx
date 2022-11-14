@@ -87,15 +87,22 @@ export default function Flight(props) {
 	}
 
 	const doInitializePosition = useCallback((position) => {
-		if (locations.length === 0) return
+		if (!isNewRef.current || locations.length === 0) return
 
+		var found;
 		for (const location of locations) {
 			if (Locations.contains(position.coords.latitude, position.coords.longitude, location)) {
-				setLocation(location.id)
-				setLatitude(location.latitude)
-				setLongitude(location.longitude)
-				return
+				found = location
+				break
 			}
+		}
+
+		if (!!found) {
+			setLocation(found.id)
+			setLatitude(position.coords.latitude)
+			setLongitude(position.coords.longitude)
+		} else {
+			setLocation('')
 		}
 
 	}, [locations])
@@ -182,6 +189,9 @@ export default function Flight(props) {
 				setBatteries(result.flight.batteries || [])
 				setTimestampRef.current(result.flight.timestamp ? new Date(result.flight.timestamp) : new Date())
 				updateDurationSecondsRef.current(result.flight.duration)
+				setLocation(result.flight.location)
+				setLatitude(result.flight.latitude)
+				setLongitude(result.flight.longitude)
 				setNotes(result.flight.notes || '')
 			}, (failure) => {
 				let messages = failure.messages
@@ -212,6 +222,9 @@ export default function Flight(props) {
 			batteries: batteries,
 			timestamp: timestamp.current.getTime(),
 			duration: duration,
+			location: location,
+			latitude: latitude,
+			longitude: longitude,
 			notes: notes,
 		}, () => {
 			goToUserFlights()
@@ -338,7 +351,7 @@ export default function Flight(props) {
 			setLongitude(0)
 		} else if (location === 'device') {
 			requestPositionUpdate()
-		} else {
+		} else if (!!location) {
 			locationService.getLocation(location, (location) => {
 				setLatitude(location.latitude)
 				setLongitude(location.longitude)
