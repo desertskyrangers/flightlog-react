@@ -32,6 +32,7 @@ import {
 	faHelicopter,
 	faHome,
 	faKey,
+	faLocationDot,
 	faPlane,
 	faPlaneSlash,
 	faPlus,
@@ -95,6 +96,8 @@ class Icons {
 	HOME = <FontAwesomeIcon icon={faHome}/>
 	INVITE = <FontAwesomeIcon icon={faPlus}/>
 	KEY = <FontAwesomeIcon icon={faKey}/>
+	LOCATION = <FontAwesomeIcon icon={faLocationDot}/>
+	LOCATION_REMOVED = <FontAwesomeIcon icon={faBan}/>
 	LOG = <FontAwesomeIcon icon={faFilePen}/>
 	MEMBER = <FontAwesomeIcon icon={faUserAlt}/>
 	MEMBERSHIP = <FontAwesomeIcon icon={faUserAlt}/>
@@ -148,6 +151,11 @@ class Icons {
 		destroyed: this.BATTERY_DESTROYED
 	}
 
+	private locationStatusIcons = {
+		active: this.LOCATION,
+		deleted: this.LOCATION_REMOVED
+	}
+
 	fromAircraftType(type) {
 		console.log('type=' + type)
 		let icon = instance.aircraftTypeIcons[type]
@@ -198,6 +206,13 @@ class Icons {
 			return this.BATTERY_EMPTY;
 		}
 	}
+
+	fromLocationStatus(status) {
+		let icon = instance.locationStatusIcons[status]
+		if (!icon) icon = instance.LOCATION
+		return icon
+	}
+
 }
 
 const instance = new Icons()

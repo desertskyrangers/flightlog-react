@@ -30,10 +30,12 @@ import Reset from "./Reset";
 import Password from "./edit/Password";
 import UserGroups from "./UserGroups";
 import Group from "./edit/Group";
+import Location from "./edit/Location";
 import Preferences from "./edit/Preferences";
 import PublicDashboard from "./PublicDashboard";
 import Dashboards from "./Dashboards";
 import DataExport from "./DataExport";
+import UserLocations from "./UserLocations";
 
 const manifest = require('./manifest.json')
 
@@ -94,6 +96,7 @@ function App() {
 						<Route path={AppPath.FLIGHT_TIMER} element={<Protect children={<FlightTimer/>}/>}/>
 						<Route path={AppPath.FLIGHT + "/:id/:timestamp/:duration"} element={<Protect children={<Flight/>}/>}/>
 						<Route path={AppPath.GROUP + "/:id"} element={<Protect children={<Group/>}/>}/>
+						<Route path={AppPath.LOCATION + "/:id"} element={<Protect children={<Location/>}/>}/>
 						<Route path={AppPath.PASSWORD} element={<Protect children={<Password/>}/>}/>
 						<Route path={AppPath.PREFERENCES} element={<Protect children={<Preferences/>}/>}/>
 						<Route path={AppPath.PROFILE} element={<Protect children={<Profile/>}/>}/>
@@ -101,6 +104,7 @@ function App() {
 						{/*<Route path={AppPath.ORG + "/:id"} element={<Protect children={<Org/>}/>}/>*/}
 						<Route path={AppPath.USER_AIRCRAFT} element={<Protect children={<UserAircraft/>}/>}/>
 						<Route path={AppPath.USER_BATTERIES} element={<Protect children={<UserBatteries/>}/>}/>
+						<Route path={AppPath.USER_LOCATIONS} element={<Protect children={<UserLocations/>}/>}/>
 						<Route path={AppPath.USER_FLIGHTS} element={<Protect children={<UserFlights/>}/>}/>
 						<Route path={AppPath.USER_GROUPS} element={<Protect children={<UserGroups/>}/>}/>
 

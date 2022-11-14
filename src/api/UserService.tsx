@@ -140,6 +140,16 @@ class UserService extends ApiService {
     })
   }
 
+  getLocationPage(page, successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_LOCATION + "?pg=" + page + "&pz=10", {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
+
   getMemberships(successCallback, failureCallback) {
     this.fetch(Config.API_URL + ApiPath.USER_MEMBERSHIP, {
       method: 'GET',
