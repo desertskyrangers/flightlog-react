@@ -2,7 +2,7 @@ import EntryField from "../part/EntryField";
 import Notice from "../part/Notice";
 import Icons from "../util/Icons";
 import DeleteWithConfirm from "../part/DeleteWithConfirm";
-import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import UserService from "../api/UserService";
 import EntrySelect from "../part/EntrySelect";
@@ -13,6 +13,8 @@ import Dates from "../util/Dates";
 import AppPath from "../AppPath";
 import TokenService from "../api/TokenService";
 import EntryData from "../part/EntryData";
+import locationService from "../api/LocationService";
+import Locations from "../util/Locations";
 
 export default function Flight(props) {
 
@@ -33,8 +35,13 @@ export default function Flight(props) {
 	const [durationHH, setDurationHH] = useState('0')
 	const [durationMM, setDurationMM] = useState('0')
 	const [durationSS, setDurationSS] = useState('0')
+	const [location, setLocation] = useState(props.location || '')
+	const [latitude, setLatitude] = useState(props.latitude || 0)
+	const [longitude, setLongitude] = useState(props.longitude || 0)
 	const [notes, setNotes] = useState(props.notes || '')
-	//const [locationOptions, setLocationOptions] = useState([])
+	const [locations, setLocations] = useState(props.locations || [])
+
+	// Messages
 	const [messages, setMessages] = useState([])
 
 	// Options
@@ -42,6 +49,7 @@ export default function Flight(props) {
 	const [observerOptions, setObserverOptions] = useState([])
 	const [aircraftOptions, setAircraftOptions] = useState([])
 	const [batteryOptions, setBatteryOptions] = useState([])
+	const [locationOptions, setLocationOptions] = useState([])
 
 	// Actions
 	const [requestDelete, setRequestDelete] = useState(false)
@@ -76,6 +84,37 @@ export default function Flight(props) {
 
 	function toggleDelete() {
 		setRequestDelete(!requestDelete)
+	}
+
+	const doInitializePosition = useCallback((position) => {
+		if (locations.length === 0) return
+
+		for (const location of locations) {
+			if (Locations.contains(position.coords.latitude, position.coords.longitude, location)) {
+				setLocation(location.id)
+				setLatitude(location.latitude)
+				setLongitude(location.longitude)
+				return
+			}
+		}
+
+	}, [locations])
+
+	const initializePosition = useCallback(() => {
+		navigator.geolocation.getCurrentPosition(doInitializePosition, currentPositionError)
+	}, [doInitializePosition])
+
+	const requestPositionUpdate = useCallback(() => {
+		navigator.geolocation.getCurrentPosition(doUpdatePosition, currentPositionError)
+	}, [])
+
+	function doUpdatePosition(position) {
+		setLatitude(position.coords.latitude)
+		setLongitude(position.coords.longitude)
+	}
+
+	function currentPositionError(error) {
+		setMessages([error.message])
 	}
 
 	function loadPilotOptions() {
@@ -118,6 +157,17 @@ export default function Flight(props) {
 		})
 	}
 
+	const loadLocationOptions = useCallback(() => {
+		UserService.getLocationOptions((result) => {
+			setLocationOptions(result)
+			initializePosition()
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			if (!!messages) setMessages(messages)
+		})
+	}, [initializePosition])
+
 	function loadFlight() {
 		if (isNewRef.current) {
 			setTimestampRef.current(Dates.isValidDate(paramTimestampRef.current) ? paramTimestampRef.current : new Date())
@@ -139,6 +189,16 @@ export default function Flight(props) {
 				if (!!messages) setMessages(messages)
 			})
 		}
+	}
+
+	function loadLocations() {
+		UserService.getLocations((result) => {
+			setLocations(result)
+		}, (failure) => {
+			let messages = failure.messages
+			if (!!!messages) messages = [failure.message]
+			if (!!messages) setMessages(messages)
+		})
 	}
 
 	function update() {
@@ -272,6 +332,24 @@ export default function Flight(props) {
 		setBatteries(newBatteries)
 	}
 
+	useEffect(() => {
+		if (location === '') {
+			setLatitude(0)
+			setLongitude(0)
+		} else if (location === 'device') {
+			requestPositionUpdate()
+		} else {
+			locationService.getLocation(location, (location) => {
+				setLatitude(location.latitude)
+				setLongitude(location.longitude)
+			}, (failure) => {
+				let messages = failure.messages
+				if (!!!messages) messages = [failure.message]
+				if (!!messages) setMessages(messages)
+			})
+		}
+	}, [location, requestPositionUpdate])
+
 	useLayoutEffect(() => {
 		const validPilot = !!pilot && pilot !== ''
 		const validObserver = !!observer && observer !== ''
@@ -297,10 +375,12 @@ export default function Flight(props) {
 	}, [pilot, unlistedPilot, observer, unlistedObserver, aircraft, startTime, duration])
 
 	useEffect(() => updateDurationSeconds(paramDuration), [paramDuration])
+	useEffect(() => loadLocations(), [])
 	useEffect(() => loadPilotOptions(), [])
 	useEffect(() => loadObserverOptions(), [])
 	useEffect(() => loadAircraftOptions(), [])
 	useEffect(() => loadBatteryOptions(), [])
+	useEffect(() => loadLocationOptions(), [loadLocationOptions])
 	useEffect(() => loadFlight(), [])
 
 	return (
@@ -308,9 +388,11 @@ export default function Flight(props) {
 			<div className='page-body'>
 				<div className='page-form'>
 
-					<div className='hbox'><button className='icon' onClick={close}>{Icons.BACK}</button><span className='page-header'>Flight Record</span></div>
+					<div className='hbox'>
+						<button className='icon' onClick={close}>{Icons.BACK}</button>
+						<span className='page-header'>Flight Record</span></div>
 
-					<EntrySelect id='pilot' text='Pilot/Student' value={pilot} required onChange={(event) => setPilot(event.target.value)} labelActionIcon={Icons.CLOSE} onLabelAction={close}>
+					<EntrySelect id='pilot' text='Pilot/Student' value={pilot} required onChange={(event) => setPilot(event.target.value)}>
 						{pilotOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
 					{pilot === AppConfig.UNLISTED_USER_ID ?
@@ -357,6 +439,23 @@ export default function Flight(props) {
 							<button className='icon page-field-action-button' onClick={updateDurationFromStartTime}>{Icons.CLOCK}</button>
 						</div>
 					</div>
+
+					<EntrySelect id='location' text='Location' value={location} onChange={(event) => setLocation(event.target.value)}>
+						{locationOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
+					</EntrySelect>
+
+					<table>
+						<tbody>
+						<tr>
+							<td className='page-label'>Latitude:</td>
+							<td className='page-text'>{latitude}</td>
+						</tr>
+						<tr>
+							<td className='page-label'>Longitude:</td>
+							<td className='page-text'>{longitude}</td>
+						</tr>
+						</tbody>
+					</table>
 
 					<EntryField id='notes' text='Notes' type='area' value={notes} onChange={(event) => setNotes(event.target.value)} onKeyDown={onKeyDown}/>
 

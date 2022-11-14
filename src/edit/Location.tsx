@@ -42,6 +42,15 @@ export default function Location(props) {
 		navigator.geolocation.getCurrentPosition(doUpdatePosition, doUpdatePositionError)
 	},[])
 
+	function doUpdatePosition(position) {
+		setLatitude(position.coords.latitude)
+		setLongitude(position.coords.longitude)
+	}
+
+	function doUpdatePositionError(error) {
+		setMessages([error.message])
+	}
+
 	const loadLocation = useCallback(() => {
 		if (isNewRef.current) {
 			requestPositionUpdate()
@@ -60,15 +69,6 @@ export default function Location(props) {
 			if (!!messages) setMessages(messages)
 		})
 	}, [requestPositionUpdate])
-
-	function doUpdatePosition(position) {
-		setLatitude(position.coords.latitude)
-		setLongitude(position.coords.longitude)
-	}
-
-	function doUpdatePositionError(error) {
-		setMessages([error.message])
-	}
 
 	function update() {
 		LocationService.updateLocation({

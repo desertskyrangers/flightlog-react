@@ -180,6 +180,26 @@ class UserService extends ApiService {
     })
   }
 
+  getLocations(successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_LOCATION + "?pz=100", {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response.page.content)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
+
+  getLocationOptions(successCallback, failureCallback) {
+    this.fetch(Config.API_URL + ApiPath.USER_LOCATION_LOOKUP, {
+      method: 'GET',
+    }).then((response) => {
+      successCallback(response)
+    }).catch((error) => {
+      failureCallback(error)
+    })
+  }
+
   getObserverOptions(successCallback, failureCallback) {
     this.fetch(Config.API_URL + ApiPath.USER_OBSERVER_LOOKUP, {
       method: 'GET',

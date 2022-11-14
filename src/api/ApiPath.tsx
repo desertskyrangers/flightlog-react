@@ -58,6 +58,8 @@ class ApiPath {
 
 	USER_BATTERY_LOOKUP = this.USER_LOOKUP + "/battery"
 
+	USER_LOCATION_LOOKUP = this.USER_LOOKUP + "/location"
+
 	USER_OBSERVER_LOOKUP = this.USER_LOOKUP + "/observer"
 
 	USER_PILOT_LOOKUP = this.USER_LOOKUP + "/pilot"
