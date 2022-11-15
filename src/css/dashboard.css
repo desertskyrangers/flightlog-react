@@ -12,3 +12,7 @@ table.dashboard {
 table.dashboard td:first-child {
 	width: 20%;
 }
+
+table.location td:nth-child(2) {
+	text-align: right;
+}

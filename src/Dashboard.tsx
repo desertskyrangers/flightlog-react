@@ -83,9 +83,9 @@ export default function Dashboard(props) {
 				</table>
 				: null}
 
-			<Location/>
-
 			<LastFlight timestamp={dashboard.pilotLastFlightTimestamp}/>
+
+			<Location/>
 		</div>
 	)
 }
@@ -129,17 +129,13 @@ function AircraftRow(props) {
 function Location(props) {
 
 	const [latitude, setLatitude] = useState(props.latitude || "")
-	const [accuracy, setAccuracy] = useState(props.accuracy || "")
 	const [longitude, setLongitude] = useState(props.longitude || "")
 	const [altitude, setAltitude] = useState(props.altitude || "")
-	const [altitudeAccuracy, setAltitudeAccuracy] = useState(props.altitudeAccuracy || "")
 
 	function onSuccess(position) {
 		setLatitude(position.coords.latitude)
 		setLongitude(position.coords.longitude)
-		setAccuracy(position.coords.accuracy)
 		setAltitude(position.coords.altitude)
-		setAltitudeAccuracy(position.coords.altitudeAccuracy)
 	}
 
 	function onError() {
@@ -152,13 +148,22 @@ function Location(props) {
 	useEffect(setup)
 
 	return (
-		<div>
-			<div>Lat: {latitude}</div>
-			<div>Lon: {longitude}</div>
-			<div>Acc: {accuracy} m</div>
-			<div>Alt: {altitude}</div>
-			<div>Acc: {altitudeAccuracy} m</div>
-		</div>
+		<table className='location'>
+			<tbody>
+			<tr>
+				<td>Lat:</td>
+				<td>{latitude}</td>
+			</tr>
+			<tr>
+				<td>Lon:</td>
+				<td>{longitude}</td>
+			</tr>
+			<tr>
+				<td>Alt:</td>
+				<td>{altitude}</td>
+			</tr>
+			</tbody>
+		</table>
 	)
 }
 
