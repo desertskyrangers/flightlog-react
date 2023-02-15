@@ -1,7 +1,7 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
 import Footer from './Footer';
-import {MemoryRouter as Router} from "react-router";
+import {MemoryRouter as Router} from "react-router-dom";
 
 test('renders copyright notice with current year', () => {
 	render(<Router><Footer/></Router>);
