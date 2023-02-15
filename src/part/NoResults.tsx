@@ -1,4 +1,5 @@
 import Icons from "../util/Icons";
+import React from "react";
 
 export default function NoResults(props) {
 
