@@ -1,5 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import CopyrightNotice from './CopyrightNotice';
+import React from "react";
 
 test('renders copyright notice', () => {
 	render(<CopyrightNotice year={2022}/>);

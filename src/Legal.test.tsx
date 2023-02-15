@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
-import {MemoryRouter as Router} from "react-router";
+import {MemoryRouter as Router} from "react-router-dom";
 import Legal from "./Legal";
 
 test('renders copyright header', () => {
