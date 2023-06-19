@@ -15,7 +15,7 @@
 		"@types/lodash": "^4.14.195",
 		"@types/node": "^20.3.1",
 		"@types/react": "^18.2.11",
-		"@types/react-dom": "^18.2.4",
+		"@types/react-dom": "^18.2.5",
 		"history": "^5.2.0",
 		"jwt-decode": "^3.1.2",
 		"nth-check": "^2.1",
