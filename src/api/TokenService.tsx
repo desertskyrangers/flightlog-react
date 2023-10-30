@@ -1,4 +1,4 @@
-import decode, {JwtPayload} from "jwt-decode";
+import {jwtDecode, JwtPayload} from "jwt-decode";
 
 const TOKEN_KEY = 'jwt-token';
 
@@ -16,7 +16,7 @@ class TokenService {
 
 	isTokenExpired(token) {
 		try {
-			const decoded = decode<AppToken>(token);
+			const decoded = jwtDecode<AppToken>(token);
 			return decoded.exp < Date.now() / 1000;
 		} catch (err) {
 			return false;
@@ -37,7 +37,7 @@ class TokenService {
 
 	getUserId() {
 		try {
-			return decode<AppToken>(this.getToken()).uid;
+			return jwtDecode<AppToken>(this.getToken()).uid;
 		} catch (error) {
 			console.log(error.message);
 			return '';
