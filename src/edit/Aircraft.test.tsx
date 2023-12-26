@@ -1,6 +1,6 @@
 import React from "react";
 import {MemoryRouter as Router, Route, Routes} from "react-router-dom";
-import Aircraft, {calcAspectRatio, calcMeanAirfoilChord, calcWingLoading} from "./Aircraft";
+import Aircraft, {calcAspectRatio, calcMeanAirfoilChord, calcWingCubeLoading, calcWingLoading} from "./Aircraft";
 import AppPath from "../AppPath";
 import {render, screen} from "@testing-library/react";
 
@@ -14,6 +14,10 @@ test('calculate mean airfoil chord', () => {
 
 test('calculate wing loading', () => {
 	expect(calcWingLoading(750, 3000)).toBe(0.25)
+})
+
+test('calculate wing cube loading', () => {
+	expect(calcWingCubeLoading(750, 3000)).toBe(4.564354645876384)
 })
 
 test('renders name field', () => {

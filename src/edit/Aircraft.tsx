@@ -21,7 +21,15 @@ export function calcMeanAirfoilChord(wingspan, wingarea) {
 }
 
 export function calcWingLoading(weight, wingarea) {
+	// Weight must be in grams
+	// Wingarea must be in cmsq
 	return weight / wingarea
+}
+
+export function calcWingCubeLoading(weight, wingarea) {
+	// Weight must be in grams
+	// Wingarea must be in cmsq
+	return weight / Math.pow(wingarea/100, 1.5)
 }
 
 export default function Aircraft(props) {
@@ -47,6 +55,7 @@ export default function Aircraft(props) {
 	const [wingAspect, setWingAspect] = useState<number>(props.wingAspect || '')
 	const [wingMac, setWingMac] = useState<number>(props.wingMac || '');
 	const [wingLoading, setWingLoading] = useState<number>(props.wingLoading || '');
+	const [wingCubeLoading, setWingCubeLoading] = useState<number>(props.wingCubeLoading || '');
 
 	// Messages
 	const [notices, setNotices] = useState([])
@@ -171,6 +180,7 @@ export default function Aircraft(props) {
 	useEffect(() => setWingAspect(calcAspectRatio(wingspan, wingarea)), [wingspan, wingarea])
 	useEffect(() => setWingMac(calcMeanAirfoilChord(wingspan, wingarea)), [wingspan, wingarea])
 	useEffect(() => setWingLoading(calcWingLoading(weight, wingarea)), [weight, wingarea])
+	useEffect(() => setWingCubeLoading(calcWingCubeLoading(weight, wingarea)), [weight, wingarea])
 
 	useEffect(() => loadAircraftStatusOptions(), [])
 	useEffect(() => loadAircraftTypeOptions(), [])
@@ -204,7 +214,8 @@ export default function Aircraft(props) {
 							{!!weight ? <MetricRow label='Weight:' metric={weight} unit='g'/> : null}
 							{!!wingAspect ? <MetricRow label='Aspect Ratio:' metric={wingAspect} unit='' decimal={1}/> : null}
 							{!!wingMac ? <MetricRow label='Wing MAC:' metric={wingMac} unit='mm' decimal={1}/> : null}
-							{!!wingLoading ? <MetricRow label='Wing Loading:' metric={wingLoading} unit='g/cm²' decimal={2}/> : null}
+							{!!wingLoading ? <MetricRow label='Wing² Loading:' metric={wingLoading} unit='g/cm²' decimal={2}/> : null}
+							{!!wingCubeLoading ? <MetricRow label='Wing³ Loading:' metric={wingCubeLoading} unit='g/dm³' decimal={2}/> : null}
 							{!!nightLights ? <DataRow label='Night flying lights:' data={nightLights ? "yes" : "no"}/> : null}
 							{!!baseColor ? <ColorRow label='Base color:' color={baseColor}/> : null}
 							{!!trimColor ? <ColorRow label='Trim color:' color={trimColor}/> : null}
