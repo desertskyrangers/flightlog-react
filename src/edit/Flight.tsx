@@ -457,26 +457,32 @@ export default function Flight(props) {
 						{locationOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
 
-					<table>
-						<tbody>
-						<tr>
-							<td className='page-label'>Latitude:</td>
-							{location === 'custom' ?
-								<td className='page-text'>
-									<input id='locationLatitude' data-testid='locationLatitude' className='page-field' type='number' value={latitude}/>
-								</td> : <td className='page-text'>{latitude}</td>
-							}
-						</tr>
-						<tr>
-							<td className='page-label'>Longitude:</td>
-							{location === 'custom' ?
-								<td className='page-text'>
-									<input id='locationLongitude' data-testid='locationLongitude' className='page-field' type='number' value={longitude}/>
-								</td> : <td className='page-text'>{longitude}</td>
-							}
-						</tr>
-					</tbody>
-				</table>
+					{location === 'custom' ?
+						<EntryField id='latitude' text='Latitude' type='text' value={latitude} onChange={(event) => setLatitude(event.target.value)}/>
+						:
+						<td className='page-text'>{latitude}</td>
+					}
+
+				{/*	<table>*/}
+				{/*		<tbody>*/}
+				{/*		<tr>*/}
+				{/*			<td className='page-label'>Latitude:</td>*/}
+				{/*			{location === 'custom' ?*/}
+				{/*				<td className='page-text'>*/}
+				{/*					<input id='locationLatitude' data-testid='locationLatitude' className='page-field' type='number' value={latitude}/>*/}
+				{/*				</td> : <td className='page-text'>{latitude}</td>*/}
+				{/*			}*/}
+				{/*		</tr>*/}
+				{/*		<tr>*/}
+				{/*			<td className='page-label'>Longitude:</td>*/}
+				{/*			{location === 'custom' ?*/}
+				{/*				<td className='page-text'>*/}
+				{/*					<input id='locationLongitude' data-testid='locationLongitude' className='page-field' type='number' value={longitude}/>*/}
+				{/*				</td> : <td className='page-text'>{longitude}</td>*/}
+				{/*			}*/}
+				{/*		</tr>*/}
+				{/*	</tbody>*/}
+				{/*</table>*/}
 
 				<EntryField id='notes' text='Notes' type='area' value={notes} onChange={(event) => setNotes(event.target.value)} onKeyDown={onKeyDown}/>
 
