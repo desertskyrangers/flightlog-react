@@ -102,6 +102,7 @@ export default function Flight(props) {
 			setLocation(found.id)
 			setLatitude(position.coords.latitude)
 			setLongitude(position.coords.longitude)
+			setAltitude(position.coords.altitude)
 		} else {
 			setLocation('')
 		}
@@ -119,6 +120,7 @@ export default function Flight(props) {
 	function doUpdatePosition(position) {
 		setLatitude(position.coords.latitude)
 		setLongitude(position.coords.longitude)
+		setAltitude(position.coords.altitude)
 	}
 
 	function currentPositionError(error) {
@@ -193,6 +195,7 @@ export default function Flight(props) {
 				setLocation(result.flight.location)
 				setLatitude(result.flight.latitude)
 				setLongitude(result.flight.longitude)
+				setAltitude(result.flight.altitude)
 				setNotes(result.flight.notes || '')
 			}, (failure) => {
 				let messages = failure.messages
@@ -226,6 +229,7 @@ export default function Flight(props) {
 			location: location,
 			latitude: latitude,
 			longitude: longitude,
+			altitude: altitude,
 			notes: notes,
 		}, () => {
 			goToUserFlights()
@@ -350,12 +354,14 @@ export default function Flight(props) {
 		if (location === '') {
 			setLatitude(0)
 			setLongitude(0)
+			setAltitude(0)
 		} else if (location === 'device') {
 			requestPositionUpdate()
 		} else if (!!location) {
 			locationService.getLocation(location, (location) => {
 				setLatitude(location.latitude)
 				setLongitude(location.longitude)
+				setAltitude(location.altitude)
 			}, (failure) => {
 				let messages = failure.messages
 				if (!!!messages) messages = [failure.message]
