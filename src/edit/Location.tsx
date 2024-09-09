@@ -13,6 +13,7 @@ export default function Location(props) {
 	const [name, setName] = useState(props.name || '')
 	const [latitude, setLatitude] = useState(props.latitude || 0.0)
 	const [longitude, setLongitude] = useState(props.longitude || 0.0)
+	const [altitude, setAltitude] = useState(props.altitude || 0.0)
 	const [size, setSize] = useState(props.size || 100)
 	const [status, setStatus] = useState(props.status || 'active')
 
@@ -42,9 +43,14 @@ export default function Location(props) {
 		navigator.geolocation.getCurrentPosition(doUpdatePosition, doUpdatePositionError)
 	},[])
 
+	const requestAltitudeUpdate = useCallback(() => {
+		navigator.geolocation.getCurrentPosition(doUpdatePosition, doUpdatePositionError)
+	},[])
+
 	function doUpdatePosition(position) {
 		setLatitude(position.coords.latitude)
 		setLongitude(position.coords.longitude)
+		setAltitude(position.coords.altitude)
 	}
 
 	function doUpdatePositionError(error) {
@@ -61,6 +67,7 @@ export default function Location(props) {
 			setName(location.name)
 			setLatitude(location.latitude)
 			setLongitude(location.longitude)
+			setAltitude(location.altitude)
 			setSize(location.size)
 			setStatus(location.status)
 		}, (failure) => {
@@ -76,6 +83,7 @@ export default function Location(props) {
 			name: name,
 			latitude: latitude,
 			longitude: longitude,
+			altitude: altitude,
 			size: size,
 			status: status
 		}, (location) => {
@@ -97,6 +105,7 @@ export default function Location(props) {
 			name: name,
 			latitude: latitude,
 			longitude: longitude,
+			altitude: altitude,
 			size: size,
 			status: 'removed'
 		}, (location) => {
@@ -125,6 +134,8 @@ export default function Location(props) {
 											onFieldAction={requestPositionUpdate}/>
 					<EntryField id='longitude' text='Latitude' type='text' value={longitude} onChange={(event) => setLongitude(event.target.value)} onKeyDown={onKeyDown}
 											fieldActionIcon={Icons.LOCATION} onFieldAction={requestPositionUpdate}/>
+					<EntryField id='altitude' text='Altitude' type='text' value={altitude} onChange={(event) => setAltitude(event.target.value)} onKeyDown={onKeyDown}
+											fieldActionIcon={Icons.LOCATION} onFieldAction={requestAltitudeUpdate}/>
 					<EntryField id='size' text='Size (m)' type='number' value={size} required={true} onChange={(event) => setSize(event.target.value)} onKeyDown={onKeyDown}/>
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
