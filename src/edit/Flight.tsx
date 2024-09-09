@@ -460,14 +460,15 @@ export default function Flight(props) {
 					{location === 'custom' ?
 						<EntryField id='latitude' text='Latitude' type='text' value={latitude} onChange={(event) => setLatitude(event.target.value)}/>
 						:
-						<div>
-							<div className='page-label-row'>
-								<label className='page-label'>Latitude</label>
-							</div>
-							<div className='page-label-row'>
-								<label className='page-text'>{latitude}</label>
-							</div>
-						</div>
+						<EntryData id='latitude' value={latitude}/>
+						// <div>
+						// 	<div className='page-label-row'>
+						// 		<label className='page-label'>Latitude</label>
+						// 	</div>
+						// 	<div className='page-label-row'>
+						// 		<label className='page-text'>{latitude}</label>
+						// 	</div>
+						// </div>
 					}
 
 					{location === 'custom' ?
@@ -548,11 +549,9 @@ function ExtraBatteryField(props) {
 		<EntryData id='battery'
 							 value={props.batteryOptions.find(item => item.id === props.battery).name}
 							 onChange={(event) => props.setBattery(event.target.value)}
-							 fieldActionTitle='Add another battery'
+							 fieldActionTitle='Remove this battery'
 							 onFieldAction={props.removeBattery}
-							 fieldActionIcon={Icons.DELETE}>
-			{props.batteryOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
-		</EntryData>
+							 fieldActionIcon={Icons.DELETE}/>
 	)
 
 }
