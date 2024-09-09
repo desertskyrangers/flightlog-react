@@ -6,7 +6,12 @@ const rE = 6.3781e6;
 
 const RADIANS_PER_DEGREE = Math.PI / 180.0;
 
+
 class Locations {
+
+	CUSTOM_LOCATION_ID = 'f2f59a1b-d8eb-442d-a124-a1490b527e75'
+	DEVICE_LOCATION_ID = '313d9657-abbd-4f5c-a9c3-9618a2574e18'
+	NO_LOCATION_ID = 'a65a59cb-45f5-43c0-94c8-d6489d1ca19f'
 
 	contains(latitude, longitude, location) {
 		return this.containsByDiameter(latitude, longitude, location)

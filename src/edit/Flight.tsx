@@ -351,9 +351,9 @@ export default function Flight(props) {
 	}
 
 	useEffect(() => {
-		if (location === 'custom') {
+		if (location === Locations.CUSTOM_LOCATION_ID) {
 			// Use the specified lat, lon, alt
-		} else if (location === 'device') {
+		} else if (location === Locations.DEVICE_LOCATION_ID) {
 			requestPositionUpdate()
 		} else if (!!location) {
 			locationService.getLocation(location, (location) => {
