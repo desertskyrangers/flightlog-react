@@ -463,7 +463,13 @@ export default function Flight(props) {
 						<td className='page-text'>{latitude}</td>
 					}
 
-				{/*	<table>*/}
+					{location === 'custom' ?
+						<EntryField id='longitude' text='Longitude' type='text' value={longitude} onChange={(event) => setLongitude(event.target.value)}/>
+						:
+						<td className='page-text'>{longitude}</td>
+					}
+
+					{/*	<table>*/}
 				{/*		<tbody>*/}
 				{/*		<tr>*/}
 				{/*			<td className='page-label'>Latitude:</td>*/}
