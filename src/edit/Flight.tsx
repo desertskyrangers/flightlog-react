@@ -38,6 +38,7 @@ export default function Flight(props) {
 	const [location, setLocation] = useState(props.location || '')
 	const [latitude, setLatitude] = useState(props.latitude || 0)
 	const [longitude, setLongitude] = useState(props.longitude || 0)
+	const [altitude, setAltitude] = useState(props.altitude || 0)
 	const [notes, setNotes] = useState(props.notes || '')
 	const [locations, setLocations] = useState(props.locations || [])
 
@@ -461,52 +462,21 @@ export default function Flight(props) {
 						<EntryField id='latitude' text='Latitude' type='text' value={latitude} onChange={(event) => setLatitude(event.target.value)}/>
 						:
 						<EntryData id='latitude' text='Latitude' value={latitude}/>
-						// <div>
-						// 	<div className='page-label-row'>
-						// 		<label className='page-label'>Latitude</label>
-						// 	</div>
-						// 	<div className='page-label-row'>
-						// 		<label className='page-text'>{latitude}</label>
-						// 	</div>
-						// </div>
 					}
 
 					{location === 'custom' ?
 						<EntryField id='longitude' text='Longitude' type='text' value={longitude} onChange={(event) => setLongitude(event.target.value)}/>
 						:
-						<div>
-							<div className='page-label-row'>
-								<label className='page-label'>Longitude</label>
-							</div>
-							<div className='page-label-row'>
-								<label className='page-text'>{longitude}</label>
-							</div>
-						</div>
-
+						<EntryData id='longitude' text='Longitude' value={longitude}/>
 					}
 
-					{/*	<table>*/}
-					{/*		<tbody>*/}
-					{/*		<tr>*/}
-					{/*			<td className='page-label'>Latitude:</td>*/}
-					{/*			{location === 'custom' ?*/}
-				{/*				<td className='page-text'>*/}
-				{/*					<input id='locationLatitude' data-testid='locationLatitude' className='page-field' type='number' value={latitude}/>*/}
-				{/*				</td> : <td className='page-text'>{latitude}</td>*/}
-				{/*			}*/}
-				{/*		</tr>*/}
-				{/*		<tr>*/}
-				{/*			<td className='page-label'>Longitude:</td>*/}
-				{/*			{location === 'custom' ?*/}
-				{/*				<td className='page-text'>*/}
-				{/*					<input id='locationLongitude' data-testid='locationLongitude' className='page-field' type='number' value={longitude}/>*/}
-				{/*				</td> : <td className='page-text'>{longitude}</td>*/}
-				{/*			}*/}
-				{/*		</tr>*/}
-				{/*	</tbody>*/}
-				{/*</table>*/}
+					{location === 'custom' ?
+						<EntryField id='altitude' text='Altitude' type='text' value={altitude} onChange={(event) => setAltitude(event.target.value)}/>
+						:
+						<EntryData id='altitude' text='Altitude' value={altitude}/>
+					}
 
-				<EntryField id='notes' text='Notes' type='area' value={notes} onChange={(event) => setNotes(event.target.value)} onKeyDown={onKeyDown}/>
+					<EntryField id='notes' text='Notes' type='area' value={notes} onChange={(event) => setNotes(event.target.value)} onKeyDown={onKeyDown}/>
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>
 					<div className='hbox'>
