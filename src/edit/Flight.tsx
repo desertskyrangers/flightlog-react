@@ -355,6 +355,10 @@ export default function Flight(props) {
 			// Use the specified lat, lon, alt
 		} else if (location === Locations.DEVICE_LOCATION_ID) {
 			requestPositionUpdate()
+		} else if (location === Locations.NO_LOCATION_ID) {
+			setLatitude('')
+			setLongitude('')
+			setAltitude('')
 		} else if (!!location) {
 			locationService.getLocation(location, (location) => {
 				setLatitude(location.latitude)
@@ -365,10 +369,6 @@ export default function Flight(props) {
 				if (!!!messages) messages = [failure.message]
 				if (!!messages) setMessages(messages)
 			})
-		} else {
-			setLatitude('')
-			setLongitude('')
-			setAltitude('')
 		}
 	}, [location, requestPositionUpdate])
 
@@ -466,19 +466,19 @@ export default function Flight(props) {
 						{locationOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
 
-					{location === 'custom' ?
+					{location === Locations.CUSTOM_LOCATION_ID ?
 						<EntryField id='latitude' text='Latitude (deg)' type='text' value={latitude} onChange={(event) => setLatitude(event.target.value)}/>
 						:
 						<EntryData id='latitude' text='Latitude' value={latitude}/>
 					}
 
-					{location === 'custom' ?
+					{location === Locations.CUSTOM_LOCATION_ID ?
 						<EntryField id='longitude' text='Longitude (deg)' type='text' value={longitude} onChange={(event) => setLongitude(event.target.value)}/>
 						:
 						<EntryData id='longitude' text='Longitude (deg)' value={longitude}/>
 					}
 
-					{location === 'custom' ?
+					{location === Locations.CUSTOM_LOCATION_ID ?
 						<EntryField id='altitude' text='Altitude (m)' type='text' value={altitude} onChange={(event) => setAltitude(event.target.value)}/>
 						:
 						<EntryData id='altitude' text='Altitude (m)' value={altitude}/>
