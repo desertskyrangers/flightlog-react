@@ -43,10 +43,6 @@ export default function Location(props) {
 		navigator.geolocation.getCurrentPosition(doUpdatePosition, doUpdatePositionError)
 	},[])
 
-	const requestAltitudeUpdate = useCallback(() => {
-		navigator.geolocation.getCurrentPosition(doUpdatePosition, doUpdatePositionError)
-	},[])
-
 	function doUpdatePosition(position) {
 		setLatitude(position.coords.latitude)
 		setLongitude(position.coords.longitude)
@@ -135,7 +131,7 @@ export default function Location(props) {
 					<EntryField id='longitude' text='Latitude' type='text' value={longitude} onChange={(event) => setLongitude(event.target.value)} onKeyDown={onKeyDown}
 											fieldActionIcon={Icons.LOCATION} onFieldAction={requestPositionUpdate}/>
 					<EntryField id='altitude' text='Altitude' type='text' value={altitude} onChange={(event) => setAltitude(event.target.value)} onKeyDown={onKeyDown}
-											fieldActionIcon={Icons.LOCATION} onFieldAction={requestAltitudeUpdate}/>
+											fieldActionIcon={Icons.LOCATION} onFieldAction={requestPositionUpdate}/>
 					<EntryField id='size' text='Size (m)' type='number' value={size} required={true} onChange={(event) => setSize(event.target.value)} onKeyDown={onKeyDown}/>
 
 					<Notice priority='error' messages={messages} clearMessages={clearMessages}/>

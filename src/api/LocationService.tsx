@@ -14,11 +14,11 @@ class LocationService extends ApiService {
 		})
 	}
 
-	updateLocation(aircraft, successCallback, failureCallback) {
-		const method = aircraft.id === 'new' ? 'POST' : 'PUT'
+	updateLocation(location, successCallback, failureCallback) {
+		const method = location.id === 'new' ? 'POST' : 'PUT'
 		this.fetch(Config.API_URL + ApiPath.LOCATION, {
 			method: method,
-			body: JSON.stringify(aircraft)
+			body: JSON.stringify(location)
 		}).then((response) => {
 			successCallback(response.data)
 		}).catch((error) => {
