@@ -463,15 +463,15 @@ export default function Flight(props) {
 							<td className='page-label'>Latitude:</td>
 							{location === 'custom' ?
 								<td className='page-text'>
-									<input id='locationLongitude' data-testid='durationLongitude' className='page-field' type='number' value={longitude}/>
+									<input id='locationLatitude' data-testid='locationLatitude' className='page-field' type='number' value={latitude}/>
 								</td> : <td className='page-text'>{latitude}</td>
 							}
 						</tr>
 						<tr>
 							<td className='page-label'>Longitude:</td>
 							{location === 'custom' ?
-								<td className='page-text'>{latitude}
-									<input id='locationLatitude' data-testid='locationLatitude' className='page-field' type='number' value={latitude}/>
+								<td className='page-text'>
+									<input id='locationLongitude' data-testid='locationLongitude' className='page-field' type='number' value={longitude}/>
 								</td> : <td className='page-text'>{longitude}</td>
 							}
 						</tr>
