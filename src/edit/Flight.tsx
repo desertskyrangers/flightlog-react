@@ -460,7 +460,14 @@ export default function Flight(props) {
 					{location === 'custom' ?
 						<EntryField id='latitude' text='Latitude' type='text' value={latitude} onChange={(event) => setLatitude(event.target.value)}/>
 						:
-						<td className='page-text'>{latitude}</td>
+						<div>
+							<div className='page-label-row'>
+								<label className='page-label'>Latitude</label>
+							</div>
+							<div className='page-label-row'>
+								<label className='page-text'>{latitude}</label>
+							</div>
+						</div>
 					}
 
 					{location === 'custom' ?
@@ -468,10 +475,10 @@ export default function Flight(props) {
 						:
 						<div>
 							<div className='page-label-row'>
-								<label className='page-label'>Latitude</label>
+								<label className='page-label'>Longitude</label>
 							</div>
 							<div className='page-label-row'>
-								<label className='page-text'>{latitude}</label>
+								<label className='page-text'>{longitude}</label>
 							</div>
 						</div>
 
