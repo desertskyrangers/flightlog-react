@@ -465,21 +465,21 @@ export default function Flight(props) {
 					</EntrySelect>
 
 					{location === 'custom' ?
-						<EntryField id='latitude' text='Latitude' type='text' value={latitude} onChange={(event) => setLatitude(event.target.value)}/>
+						<EntryField id='latitude' text='Latitude (deg)' type='text' value={latitude} onChange={(event) => setLatitude(event.target.value)}/>
 						:
 						<EntryData id='latitude' text='Latitude' value={latitude}/>
 					}
 
 					{location === 'custom' ?
-						<EntryField id='longitude' text='Longitude' type='text' value={longitude} onChange={(event) => setLongitude(event.target.value)}/>
+						<EntryField id='longitude' text='Longitude (deg)' type='text' value={longitude} onChange={(event) => setLongitude(event.target.value)}/>
 						:
-						<EntryData id='longitude' text='Longitude' value={longitude}/>
+						<EntryData id='longitude' text='Longitude (deg)' value={longitude}/>
 					}
 
 					{location === 'custom' ?
-						<EntryField id='altitude' text='Altitude' type='text' value={altitude} onChange={(event) => setAltitude(event.target.value)}/>
+						<EntryField id='altitude' text='Altitude (m)' type='text' value={altitude} onChange={(event) => setAltitude(event.target.value)}/>
 						:
-						<EntryData id='altitude' text='Altitude' value={altitude}/>
+						<EntryData id='altitude' text='Altitude (m)' value={altitude}/>
 					}
 
 					<EntryField id='notes' text='Notes' type='area' value={notes} onChange={(event) => setNotes(event.target.value)} onKeyDown={onKeyDown}/>
