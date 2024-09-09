@@ -352,7 +352,7 @@ export default function Flight(props) {
 
 	useEffect(() => {
 		if (location === 'custom') {
-			//requestPositionUpdate()
+			// Use the specified lat, lon, alt
 		} else if (location === 'device') {
 			requestPositionUpdate()
 		} else if (!!location) {
