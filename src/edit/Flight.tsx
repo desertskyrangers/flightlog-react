@@ -351,11 +351,7 @@ export default function Flight(props) {
 	}
 
 	useEffect(() => {
-		if (location === '') {
-			setLatitude('')
-			setLongitude('')
-			setAltitude('')
-		} else if (location === 'custom') {
+		if (location === 'custom') {
 			//requestPositionUpdate()
 		} else if (location === 'device') {
 			requestPositionUpdate()
@@ -369,6 +365,10 @@ export default function Flight(props) {
 				if (!!!messages) messages = [failure.message]
 				if (!!messages) setMessages(messages)
 			})
+		} else {
+			setLatitude('')
+			setLongitude('')
+			setAltitude('')
 		}
 	}, [location, requestPositionUpdate])
 
