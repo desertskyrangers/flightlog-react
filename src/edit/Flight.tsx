@@ -457,15 +457,19 @@ export default function Flight(props) {
 						{locationOptions.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
 					</EntrySelect>
 
+					{/*
+					If the user selects 'custom' location, show the latitude and longitude fields.
+					*/}
+
 					<table>
 						<tbody>
 						<tr>
 							<td className='page-label'>Latitude:</td>
-							<td className='page-text'>{latitude}</td>
+							{location === 'custom' ? <td className='page-text'>Using custom location</td> : <td className='page-text'>{latitude}</td>}
 						</tr>
 						<tr>
 							<td className='page-label'>Longitude:</td>
-							<td className='page-text'>{longitude}</td>
+							{location === 'custom' ? <td className='page-text'>Using custom location</td> : <td className='page-text'>{longitude}</td>}
 						</tr>
 						</tbody>
 					</table>
