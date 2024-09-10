@@ -14,11 +14,11 @@ class FlightService extends ApiService {
 		})
 	}
 
-	updateFlight(aircraft, successCallback, failureCallback) {
-		const method = aircraft.id === 'new' ? 'POST' : 'PUT'
+	updateFlight(flight, successCallback, failureCallback) {
+		const method = flight.id === 'new' ? 'POST' : 'PUT'
 		this.fetch(Config.API_URL + ApiPath.FLIGHT, {
 			method: method,
-			body: JSON.stringify(aircraft)
+			body: JSON.stringify(flight)
 		}).then((response) => {
 			successCallback(response)
 		}).catch((error) => {
