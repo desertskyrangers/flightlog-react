@@ -105,6 +105,9 @@ export default function Flight(props) {
 			setAltitude(position.coords.altitude)
 		} else {
 			setLocation('')
+			setLatitude('')
+			setLongitude('')
+			setAltitude('')
 		}
 
 	}, [locations])
@@ -354,7 +357,9 @@ export default function Flight(props) {
 		if (location === Locations.CUSTOM_LOCATION_ID) {
 			// Use the specified lat, lon, alt
 		} else if (location === Locations.DEVICE_LOCATION_ID) {
-			requestPositionUpdate()
+			// FIXME Not sure this is the best way to handle this
+			//  The device location should only be update at the time it is selected
+			//requestPositionUpdate()
 		} else if (location === Locations.NO_LOCATION_ID) {
 			setLatitude('')
 			setLongitude('')
