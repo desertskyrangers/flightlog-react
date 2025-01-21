@@ -2,8 +2,8 @@
 	"name": "flightdeck",
 	"private": true,
 	"engines": {
-		"node": ">=16.13",
-		"npm": ">=8"
+		"node": ">=22",
+		"npm": ">=10"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^6.7",
